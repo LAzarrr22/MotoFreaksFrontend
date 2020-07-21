@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "MotoFreaksFrontend"
+    }
+  },
+  "defaultProject": "MotoFreaksFrontend",
+  "cli": {
+    "analytics": "25e62daf-9809-4cc4-9074-cea202033acf"
+  }
 }
