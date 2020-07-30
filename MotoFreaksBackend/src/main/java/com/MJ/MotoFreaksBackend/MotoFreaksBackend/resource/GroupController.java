@@ -9,12 +9,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/group")
-public class GroupResource implements Resources {
+public class GroupController implements Controller {
 
 
     private final GroupRepository groupRepository;
 
-    public GroupResource(GroupRepository groupRepository) {
+    public GroupController(GroupRepository groupRepository) {
         this.groupRepository = groupRepository;
     }
 

@@ -9,11 +9,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/event")
-public class EventResource implements Resources {
+public class EventController implements Controller {
 
     private final EventRepository eventRepository;
 
-    public EventResource(EventRepository eventRepository) {
+    public EventController(EventRepository eventRepository) {
         this.eventRepository = eventRepository;
     }
 

@@ -8,11 +8,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/cars")
-public class CarCompanyResource implements Resources {
+public class CarCompanyController implements Controller {
 
     private final CarCompanyRepository carCompanyRepository;
 
-    public CarCompanyResource(CarCompanyRepository carCompanyRepository) {
+    public CarCompanyController(CarCompanyRepository carCompanyRepository) {
         this.carCompanyRepository = carCompanyRepository;
     }
 

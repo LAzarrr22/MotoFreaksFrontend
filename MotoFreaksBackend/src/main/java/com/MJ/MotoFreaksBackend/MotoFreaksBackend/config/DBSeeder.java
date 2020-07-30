@@ -5,7 +5,6 @@ import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.*;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.*;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.repository.*;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.data.mongodb.core.aggregation.ArithmeticOperators;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -13,7 +12,7 @@ import java.util.*;
 @Component
 public class DBSeeder implements CommandLineRunner {
 
-    private final UserRepository userRepository;
+    private final AccountRepository accountRepository;
     private final CarCompanyRepository carCompanyRepository;
     private final EventRepository eventRepository;
     private final GroupRepository groupRepository;
@@ -22,9 +21,9 @@ public class DBSeeder implements CommandLineRunner {
     private final AdvertisementRepository advertisementRepository;
 
 
-    public DBSeeder(UserRepository userRepository, CarCompanyRepository carCompanyRepository, EventRepository eventRepository,
+    public DBSeeder(AccountRepository accountRepository, CarCompanyRepository carCompanyRepository, EventRepository eventRepository,
                     GroupRepository groupRepository, ChallengeRepository challengeRepository, RecomencdationRepository recomencdationRepository, AdvertisementRepository advertisementRepository) {
-        this.userRepository = userRepository;
+        this.accountRepository = accountRepository;
         this.carCompanyRepository = carCompanyRepository;
         this.eventRepository = eventRepository;
         this.groupRepository = groupRepository;
@@ -72,8 +71,8 @@ Contact contact = new Contact("maciek.janik24@gmail.com","43534","test","test","
         HistoryLogin historyLogin= new HistoryLogin(date,date,"test");
         hist.add(historyLogin);
         Level level = new Level("admin", Levels.ADMINISTATOR,date,date);
-        User user = new User("Maciek","Janik","lazar123",
-                "querty12345",date,date, UsersState.ENABLED,cars, contact, address,
+        Account account = new Account("Maciek","Janik","lazar123",
+                "querty12345",date,date, AccountState.ENABLED,cars, contact, address,
                 hist,level,324,friends);
 
 

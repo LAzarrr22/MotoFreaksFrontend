@@ -9,11 +9,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/recommendation")
-public class RecommendationResource implements Resources {
+public class RecommendationController implements Controller {
 
     private final RecomencdationRepository recomencdationRepository;
 
-    public RecommendationResource(RecomencdationRepository recomencdationRepository) {
+    public RecommendationController(RecomencdationRepository recomencdationRepository) {
         this.recomencdationRepository = recomencdationRepository;
     }
 

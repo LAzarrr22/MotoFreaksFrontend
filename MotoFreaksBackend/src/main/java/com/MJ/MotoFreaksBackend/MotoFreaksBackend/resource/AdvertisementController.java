@@ -3,17 +3,19 @@ package com.MJ.MotoFreaksBackend.MotoFreaksBackend.resource;
 
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections.Advertisement;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.repository.AdvertisementRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/advertisement")
-public class AdvertisementSource implements Resources {
+@Slf4j
+public class AdvertisementController implements Controller {
 
     private final AdvertisementRepository advertisementRepository;
 
-    public AdvertisementSource(AdvertisementRepository advertisementRepository) {
+    public AdvertisementController(AdvertisementRepository advertisementRepository) {
         this.advertisementRepository = advertisementRepository;
     }
 

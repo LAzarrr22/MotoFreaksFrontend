@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-public interface Resources {
+public interface Controller {
 
     @DeleteMapping("/{id}")
     void delete(@PathVariable("id") String id);

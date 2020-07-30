@@ -8,11 +8,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/challenge")
-public class ChallengeResource implements Resources {
+public class ChallengeController implements Controller {
 
     private final ChallengeRepository challengeRepository;
 
-    public ChallengeResource(ChallengeRepository challengeRepository) {
+    public ChallengeController(ChallengeRepository challengeRepository) {
         this.challengeRepository = challengeRepository;
     }
 
