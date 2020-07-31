@@ -1,18 +1,17 @@
 package com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections;
 
-import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.UserRole;
+
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.AccountState;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.*;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.constraints.Size;
-import java.util.*;
+import java.util.Date;
+import java.util.List;
 
-@Document(collection = "Users")
+@Document(collection = "Accounts")
 @Data
 public class Account {
 
