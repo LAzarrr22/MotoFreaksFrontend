@@ -23,7 +23,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
     private RoleRepository roleRepository;
 
-    @Autowired(required = false)
+    @Autowired
     private PasswordEncoder bCryptPasswordEncoder;
 
     public User findUserByEmail(String email) {
