@@ -11,7 +11,6 @@ import java.util.Set;
 public class User {
     @Id
     private String id;
-    @Indexed(unique = true, direction = IndexDirection.DESCENDING, dropDups = true)
     private String email;// TODO email
     private String password;
     private String fullname;

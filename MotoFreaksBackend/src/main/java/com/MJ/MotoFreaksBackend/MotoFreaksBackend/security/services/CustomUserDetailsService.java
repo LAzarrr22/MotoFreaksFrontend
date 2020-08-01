@@ -4,6 +4,7 @@ import com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections.UserRoles;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections.User;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.repository.RoleRepository;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.repository.UserRepository;
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.request.RegisterBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -30,12 +31,14 @@ public class CustomUserDetailsService implements UserDetailsService {
         return userRepository.findByEmail(email);
     }
 
-    public void saveUser(User user) {
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setEnabled(true);
+    public void saveUser(RegisterBody user) {
+        User newUser = new User();
+        newUser.setPassword(user.getPassword());
+        newUser.setEnabled(true);
+        newUser.setFullname(user.getFullname());
         UserRoles userUserRoles = roleRepository.findByRole("ADMIN");
-        user.setUserRoles(new HashSet<>(Arrays.asList(userUserRoles)));
-        userRepository.save(user);
+        newUser.setUserRoles(new HashSet<>(Arrays.asList(userUserRoles)));
+        userRepository.save(newUser);
     }
 
     @Override

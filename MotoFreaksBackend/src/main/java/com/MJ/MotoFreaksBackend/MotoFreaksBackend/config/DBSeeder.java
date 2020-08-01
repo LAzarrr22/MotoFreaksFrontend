@@ -118,6 +118,9 @@ public class DBSeeder implements CommandLineRunner {
         UserRoles userRoles = new UserRoles();
         userRoles.setRole("ADMIN");//todo DATA
 
+        this.roleRepository.deleteAll();
+        this.roleRepository.save(userRoles);
+
         User user = new User();
         user.setEmail("maciek.janik");
         user.setEnabled(true);
@@ -136,8 +139,7 @@ public class DBSeeder implements CommandLineRunner {
      this.challengeRepository.deleteAll();
      this.recomencdationRepository.deleteAll();
      this.advertisementRepository.deleteAll();
-     this.roleRepository.deleteAll();
-     this.roleRepository.save(userRoles);
+
      this.carCompanyRepository.save(audi);
      this.accountRepository.save(account);
      this.eventRepository.save(event);
