@@ -11,7 +11,9 @@ import com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.configs.JwtTokenProvi
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.request.AuthBody;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.request.RegisterBody;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.services.CustomUserDetailsService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -26,17 +28,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(origins = "*")
 @RestController
+@Slf4j
 @RequestMapping("/api/auth")
 public class AuthController {
 
+    @Qualifier("authenticationManagerBean")
     @Autowired
     AuthenticationManager authenticationManager;
 
     @Autowired
     JwtTokenProvider jwtTokenProvider;
-
-    @Autowired
-    UserRepository users;
 
     @Autowired
     private CustomUserDetailsService userService;
@@ -47,10 +48,10 @@ public class AuthController {
         try {
             String username = data.getEmail();
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, data.getPassword()));
-            String token = jwtTokenProvider.createToken(username, this.users.findByEmail(username).getUserRoles());
+            String token = jwtTokenProvider.createToken(username, userService.findUserByEmail(username).getUserRoles());
             Map<Object, Object> model = new HashMap<>();
             model.put("username", username);
-            model.put("token", token);
+            model.put("token", "Bearer "+token);
             return ok(model);
         } catch (AuthenticationException e) {
             throw new BadCredentialsException("Invalid email/password supplied");

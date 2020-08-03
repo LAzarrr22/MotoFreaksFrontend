@@ -118,17 +118,13 @@ public class DBSeeder implements CommandLineRunner {
         UserRoles userRoles = new UserRoles();
         userRoles.setRole("ADMIN");//todo DATA
 
-        this.roleRepository.deleteAll();
-        this.roleRepository.save(userRoles);
+        //this.roleRepository.deleteAll();
+       // this.roleRepository.save(userRoles);
 
-        User user = new User();
-        user.setEmail("maciek.janik");
-        user.setEnabled(true);
-        user.setFullname("MAciej");
-        user.setPassword("test1");
 
-        this.userRepository.deleteAll();
-        this.userRepository.save(user);
+
+       // this.userRepository.deleteAll();
+        //this.userRepository.save(user);
 
 
         //only one time run - to init database collection

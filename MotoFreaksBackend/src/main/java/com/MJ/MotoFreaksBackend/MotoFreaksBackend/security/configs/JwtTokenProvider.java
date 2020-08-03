@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections.UserRoles;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.services.CustomUserDetailsService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -22,6 +23,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 
 @Component
+@Slf4j
 public class JwtTokenProvider {
 
     @Value("${security.jwt.token.secret-key:secret}")

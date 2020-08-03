@@ -33,7 +33,8 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     public void saveUser(RegisterBody user) {
         User newUser = new User();
-        newUser.setPassword(user.getPassword());
+        newUser.setEmail(user.getEmail());
+        newUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         newUser.setEnabled(true);
         newUser.setFullname(user.getFullname());
         UserRoles userUserRoles = roleRepository.findByRole("ADMIN");
