@@ -38,7 +38,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         newUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         newUser.setEnabled(true);
         newUser.setFullName(user.getFullname());
-        UserRoles userUserRoles = roleRepository.findByRole(Role.ADMIN);
+        UserRoles userUserRoles = roleRepository.findByRole(Role.USER);
         newUser.setUserRoles(new HashSet<>(Arrays.asList(userUserRoles)));
         userRepository.save(newUser);
     }

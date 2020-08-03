@@ -116,19 +116,20 @@ public class DBSeeder implements CommandLineRunner {
         Advertisement advertisement = new Advertisement("TEST", "test", date, "Audi", "tt", "8n", "12344");
 
         UserRoles userRoles = new UserRoles();
+        UserRoles userRoles2 = new UserRoles();
         userRoles.setRole(Role.ADMIN);//todo DATA
-
-        //this.roleRepository.deleteAll();
-       // this.roleRepository.save(userRoles);
+        userRoles2.setRole(Role.USER);//todo DATA
 
 
 
-       // this.userRepository.deleteAll();
-        //this.userRepository.save(user);
 
 
         //only one time run - to init database collection
-     /*this.carCompanyRepository.deleteAll();
+     /*
+     this.roleRepository.deleteAll();
+        this.roleRepository.save(userRoles);
+        this.roleRepository.save(userRoles2);
+        this.carCompanyRepository.deleteAll();
      this.accountRepository.deleteAll();
      this.eventRepository.deleteAll();
      this.groupRepository.deleteAll();
