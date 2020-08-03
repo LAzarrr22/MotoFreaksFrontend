@@ -19,10 +19,12 @@ public class DBSeeder implements CommandLineRunner {
     private final ChallengeRepository challengeRepository;
     private final RecomencdationRepository recomencdationRepository;
     private final AdvertisementRepository advertisementRepository;
+    private final RoleRepository roleRepository;
+    private final UserRepository userRepository;
 
 
     public DBSeeder(AccountRepository accountRepository, CarCompanyRepository carCompanyRepository, EventRepository eventRepository,
-                    GroupRepository groupRepository, ChallengeRepository challengeRepository, RecomencdationRepository recomencdationRepository, AdvertisementRepository advertisementRepository) {
+                    GroupRepository groupRepository, ChallengeRepository challengeRepository, RecomencdationRepository recomencdationRepository, AdvertisementRepository advertisementRepository, RoleRepository roleRepository, UserRepository userRepository) {
         this.accountRepository = accountRepository;
         this.carCompanyRepository = carCompanyRepository;
         this.eventRepository = eventRepository;
@@ -31,6 +33,8 @@ public class DBSeeder implements CommandLineRunner {
         this.recomencdationRepository = recomencdationRepository;
         this.advertisementRepository = advertisementRepository;
 
+        this.roleRepository = roleRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -111,22 +115,34 @@ public class DBSeeder implements CommandLineRunner {
 
         Advertisement advertisement = new Advertisement("TEST", "test", date, "Audi", "tt", "8n", "12344");
 
+        UserRoles userRoles = new UserRoles();
+        userRoles.setRole("ADMIN");//todo DATA
+
+        //this.roleRepository.deleteAll();
+       // this.roleRepository.save(userRoles);
+
+
+
+       // this.userRepository.deleteAll();
+        //this.userRepository.save(user);
+
 
         //only one time run - to init database collection
-     this.carCompanyRepository.deleteAll();
+     /*this.carCompanyRepository.deleteAll();
      this.accountRepository.deleteAll();
      this.eventRepository.deleteAll();
      this.groupRepository.deleteAll();
      this.challengeRepository.deleteAll();
      this.recomencdationRepository.deleteAll();
      this.advertisementRepository.deleteAll();
+
      this.carCompanyRepository.save(audi);
      this.accountRepository.save(account);
      this.eventRepository.save(event);
      this.groupRepository.save(group);
      this.challengeRepository.save(challenge);
      this.recomencdationRepository.save(recommendation);
-     this.advertisementRepository.save(advertisement);
+     this.advertisementRepository.save(advertisement);*/
 
 
     }
