@@ -2,6 +2,7 @@ package com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.services;
 
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections.UserRoles;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections.User;
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.Role;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.repository.RoleRepository;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.repository.UserRepository;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.request.RegisterBody;
@@ -36,8 +37,8 @@ public class CustomUserDetailsService implements UserDetailsService {
         newUser.setEmail(user.getEmail());
         newUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         newUser.setEnabled(true);
-        newUser.setFullname(user.getFullname());
-        UserRoles userUserRoles = roleRepository.findByRole("ADMIN");
+        newUser.setFullName(user.getFullname());
+        UserRoles userUserRoles = roleRepository.findByRole(Role.ADMIN);
         newUser.setUserRoles(new HashSet<>(Arrays.asList(userUserRoles)));
         userRepository.save(newUser);
     }
@@ -57,7 +58,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     private List<GrantedAuthority> getUserAuthority(Set<UserRoles> userRoles) {
         Set<GrantedAuthority> roles = new HashSet<>();
         userRoles.forEach((role) -> {
-            roles.add(new SimpleGrantedAuthority(role.getRole()));
+            roles.add(new SimpleGrantedAuthority(role.getRole().toString()));
         });
 
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>(roles);

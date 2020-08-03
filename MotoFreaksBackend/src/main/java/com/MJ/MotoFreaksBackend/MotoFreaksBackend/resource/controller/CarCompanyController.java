@@ -1,4 +1,4 @@
-package com.MJ.MotoFreaksBackend.MotoFreaksBackend.resource;
+package com.MJ.MotoFreaksBackend.MotoFreaksBackend.resource.controller;
 
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections.CarCompany;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.repository.CarCompanyRepository;

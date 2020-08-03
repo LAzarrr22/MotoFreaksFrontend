@@ -1,19 +1,20 @@
 package com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.IndexDirection;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.constraints.Email;
 import java.util.Set;
 
 @Document(collection = "UsersLogins")
 public class User {
     @Id
     private String id;
-    private String email;// TODO email
+
+    @Email
+    private String email;
     private String password;
-    private String fullname;
+    private String fullName;
     private boolean enabled;
 
     private Set<UserRoles> userRoles;
@@ -36,11 +37,11 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-    public String getFullname() {
-        return fullname;
+    public String getFullName() {
+        return fullName;
     }
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
     public boolean isEnabled() {
         return enabled;

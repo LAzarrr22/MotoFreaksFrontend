@@ -116,7 +116,7 @@ public class DBSeeder implements CommandLineRunner {
         Advertisement advertisement = new Advertisement("TEST", "test", date, "Audi", "tt", "8n", "12344");
 
         UserRoles userRoles = new UserRoles();
-        userRoles.setRole("ADMIN");//todo DATA
+        userRoles.setRole(Role.ADMIN);//todo DATA
 
         //this.roleRepository.deleteAll();
        // this.roleRepository.save(userRoles);

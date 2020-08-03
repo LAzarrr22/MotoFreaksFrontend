@@ -1,4 +1,4 @@
-package com.MJ.MotoFreaksBackend.MotoFreaksBackend.resource;
+package com.MJ.MotoFreaksBackend.MotoFreaksBackend.resource.controller;
 
 import org.springframework.web.bind.annotation.*;
 
