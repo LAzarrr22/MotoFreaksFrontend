@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections.User;
-import com.MJ.MotoFreaksBackend.MotoFreaksBackend.repository.UserRepository;
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.Role;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.configs.JwtTokenProvider;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.request.AuthBody;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.request.RegisterBody;
@@ -19,11 +19,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @CrossOrigin(origins = "*")
@@ -51,7 +47,7 @@ public class AuthController {
             String token = jwtTokenProvider.createToken(username, userService.findUserByEmail(username).getUserRoles());
             Map<Object, Object> model = new HashMap<>();
             model.put("username", username);
-            model.put("token", "Bearer "+token);
+            model.put("token", "Bearer " + token);
             return ok(model);
         } catch (AuthenticationException e) {
             throw new BadCredentialsException("Invalid email/password supplied");
@@ -65,9 +61,33 @@ public class AuthController {
         if (userExists != null) {
             throw new BadCredentialsException("User with username: " + user.getEmail() + " already exists");
         }
-        userService.saveUser(user);
+        userService.saveUser(user, Role.USER);
         Map<Object, Object> model = new HashMap<>();
         model.put("message", "User registered successfully");
+        return ok(model);
+    }
+
+    @PostMapping("/set-role/moderator/{userEmail}")
+    public ResponseEntity addModeratorRole(@PathVariable String userEmail) {
+        User userExists = userService.findUserByEmail(userEmail);
+        if (userExists != null) {
+            userService.addRole(userExists, Role.MODERATOR);
+        }
+        Map<Object, Object> model = new HashMap<>();
+        model.put("userEmail:", userEmail);
+        model.put("newRole", Role.MODERATOR);
+        return ok(model);
+    }
+
+    @PostMapping("/set-role/admin/{userEmail}")
+    public ResponseEntity addAdminRole(@PathVariable String userEmail) {
+        User userExists = userService.findUserByEmail(userEmail);
+        if (userExists != null) {
+            userService.addRole(userExists, Role.ADMIN);
+        }
+        Map<Object, Object> model = new HashMap<>();
+        model.put("userEmail:", userEmail);
+        model.put("newRole", Role.ADMIN);
         return ok(model);
     }
 }

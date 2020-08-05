@@ -2,10 +2,12 @@ package com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.configs;
 
 import javax.servlet.http.HttpServletResponse;
 
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.Role;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.services.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -37,7 +39,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.httpBasic().disable().csrf().disable().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
                 .antMatchers("/api/auth/login","/api/auth/register","/webjars/**","/swagger-ui.html","/swagger-resources/**","/v2/api-docs").permitAll()
-                .antMatchers("/cars/**").hasAuthority("ADMIN").anyRequest().authenticated().and().csrf()
+                .antMatchers("/recommendation/all").hasAuthority(Role.USER.toString())
+                .antMatchers("/cars/all").hasAuthority(Role.MODERATOR.toString())
+                .antMatchers(HttpMethod.POST,"/group/**").hasAuthority(Role.MODERATOR.toString())
+                .antMatchers("/**").hasAuthority(Role.ADMIN.toString()).anyRequest().authenticated()
+                .and().csrf()
                 .disable().exceptionHandling().authenticationEntryPoint(unauthorizedEntryPoint()).and()
                 .apply(new JwtConfigurer(jwtTokenProvider));
         http.cors();

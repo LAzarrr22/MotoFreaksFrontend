@@ -6,6 +6,7 @@ import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.Role;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.repository.RoleRepository;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.repository.UserRepository;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.request.RegisterBody;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
+@Slf4j
 public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
@@ -32,13 +34,13 @@ public class CustomUserDetailsService implements UserDetailsService {
         return userRepository.findByEmail(email);
     }
 
-    public void saveUser(RegisterBody user) {
+    public void saveUser(RegisterBody user, Role role) {
         User newUser = new User();
         newUser.setEmail(user.getEmail());
         newUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         newUser.setEnabled(true);
         newUser.setFullName(user.getFullname());
-        UserRoles userUserRoles = roleRepository.findByRole(Role.USER);
+        UserRoles userUserRoles = roleRepository.findByRole(role);
         newUser.setUserRoles(new HashSet<>(Arrays.asList(userUserRoles)));
         userRepository.save(newUser);
     }
@@ -67,5 +69,11 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     private UserDetails buildUserForAuthentication(User user, List<GrantedAuthority> authorities) {
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorities);
+    }
+
+    public void addRole(User userExists, Role role) {
+        log.error(userExists.toString());
+        userExists.getUserRoles().add(roleRepository.findByRole(role));
+        this.userRepository.save(userExists);
     }
 }

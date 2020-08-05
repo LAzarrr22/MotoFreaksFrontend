@@ -4,6 +4,9 @@ import com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections.*;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.*;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.*;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.repository.*;
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.request.RegisterBody;
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.services.CustomUserDetailsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -22,6 +25,9 @@ public class DBSeeder implements CommandLineRunner {
     private final RoleRepository roleRepository;
     private final UserRepository userRepository;
 
+    @Autowired
+    private CustomUserDetailsService userService;
+
 
     public DBSeeder(AccountRepository accountRepository, CarCompanyRepository carCompanyRepository, EventRepository eventRepository,
                     GroupRepository groupRepository, ChallengeRepository challengeRepository, RecomencdationRepository recomencdationRepository, AdvertisementRepository advertisementRepository, RoleRepository roleRepository, UserRepository userRepository) {
@@ -39,6 +45,30 @@ public class DBSeeder implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+
+
+//only at first start
+        /*this.roleRepository.deleteAll();
+        UserRoles userRoles = new UserRoles();
+        userRoles.setRole(Role.ADMIN);
+        this.roleRepository.save(userRoles);
+
+        UserRoles userRoles2 = new UserRoles();
+        userRoles2.setRole(Role.USER);
+        this.roleRepository.save(userRoles2);
+
+        UserRoles userRoles3 = new UserRoles();
+        userRoles3.setRole(Role.SUPER_ADMIN);
+        this.roleRepository.save(userRoles3);
+
+
+        this.userRepository.deleteAll();//todo to delete
+        RegisterBody user = new RegisterBody();
+        user.setEmail("admin@admin.com");
+        user.setFullname("Super Admin");
+        user.setPassword("admin_mtfr");
+        userService.saveUser(user,Role.SUPER_ADMIN);*/
+
 
         Generation tt1 = new Generation("8N");
         Generation tt2 = new Generation("8J");
@@ -114,14 +144,6 @@ public class DBSeeder implements CommandLineRunner {
 
 
         Advertisement advertisement = new Advertisement("TEST", "test", date, "Audi", "tt", "8n", "12344");
-
-        UserRoles userRoles = new UserRoles();
-        UserRoles userRoles2 = new UserRoles();
-        userRoles.setRole(Role.ADMIN);//todo DATA
-        userRoles2.setRole(Role.USER);//todo DATA
-
-
-
 
 
         //only one time run - to init database collection
