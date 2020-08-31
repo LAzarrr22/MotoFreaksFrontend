@@ -2,6 +2,7 @@ package com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.controller;
 
 import static org.springframework.http.ResponseEntity.ok;
 
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,9 +15,9 @@ import com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.services.CustomUserDe
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.*;
@@ -38,37 +39,36 @@ public class AuthController {
     @Autowired
     private CustomUserDetailsService userService;
 
-    @SuppressWarnings("rawtypes")
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody AuthBody data) {
-        try {
+    public Object login(@RequestBody AuthBody data) {
+        {
             String username = data.getEmail();
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, data.getPassword()));
-            String token = jwtTokenProvider.createToken(username, userService.findUserByEmail(username).getUserRoles());
+            User currentUser = userService.findUserByEmail(username);
+            String token = jwtTokenProvider.createToken(username, currentUser.getUserRoles());
             Map<Object, Object> model = new HashMap<>();
             model.put("username", username);
             model.put("token", "Bearer " + token);
+            userService.addLoginHistory(currentUser);
             return ok(model);
-        } catch (AuthenticationException e) {
-            throw new BadCredentialsException("Invalid email/password supplied");
         }
     }
 
-    @SuppressWarnings("rawtypes")
     @PostMapping("/register")
-    public ResponseEntity register(@RequestBody RegisterBody user) {
+    public Object register(@RequestBody RegisterBody user) {
+        Map<Object, Object> model = new HashMap<>();
         User userExists = userService.findUserByEmail(user.getEmail());
         if (userExists != null) {
-            throw new BadCredentialsException("User with username: " + user.getEmail() + " already exists");
+            model.put("message", "User with " + user.getEmail() + " is already exists!");
+            return new ResponseEntity<Object>(model, HttpStatus.FORBIDDEN);
         }
-        userService.saveUser(user, Role.USER);
-        Map<Object, Object> model = new HashMap<>();
+        userService.saveNewUser(user, Role.USER);
         model.put("message", "User registered successfully");
         return ok(model);
     }
 
     @PostMapping("/set-role/moderator/{userEmail}")
-    public ResponseEntity addModeratorRole(@PathVariable String userEmail) {
+    public Object addModeratorRole(@PathVariable String userEmail) {
         User userExists = userService.findUserByEmail(userEmail);
         if (userExists != null) {
             userService.addRole(userExists, Role.MODERATOR);
@@ -80,7 +80,7 @@ public class AuthController {
     }
 
     @PostMapping("/set-role/admin/{userEmail}")
-    public ResponseEntity addAdminRole(@PathVariable String userEmail) {
+    public Object addAdminRole(@PathVariable String userEmail) {
         User userExists = userService.findUserByEmail(userEmail);
         if (userExists != null) {
             userService.addRole(userExists, Role.ADMIN);

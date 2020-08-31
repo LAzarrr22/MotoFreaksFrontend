@@ -4,7 +4,6 @@ import com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections.*;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.*;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.*;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.repository.*;
-import com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.request.RegisterBody;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.services.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -15,7 +14,6 @@ import java.util.*;
 @Component
 public class DBSeeder implements CommandLineRunner {
 
-    private final AccountRepository accountRepository;
     private final CarCompanyRepository carCompanyRepository;
     private final EventRepository eventRepository;
     private final GroupRepository groupRepository;
@@ -29,9 +27,8 @@ public class DBSeeder implements CommandLineRunner {
     private CustomUserDetailsService userService;
 
 
-    public DBSeeder(AccountRepository accountRepository, CarCompanyRepository carCompanyRepository, EventRepository eventRepository,
+    public DBSeeder( CarCompanyRepository carCompanyRepository, EventRepository eventRepository,
                     GroupRepository groupRepository, ChallengeRepository challengeRepository, RecomencdationRepository recomencdationRepository, AdvertisementRepository advertisementRepository, RoleRepository roleRepository, UserRepository userRepository) {
-        this.accountRepository = accountRepository;
         this.carCompanyRepository = carCompanyRepository;
         this.eventRepository = eventRepository;
         this.groupRepository = groupRepository;
@@ -89,22 +86,22 @@ public class DBSeeder implements CommandLineRunner {
 
         Date date = new Date();
 
-        List<Cars> cars = new ArrayList<>();
-        List<HistoryLogin> hist = new ArrayList<>();
+        List<CarModel> cars = new ArrayList<>();
+//        List<HistoryLogin> hist = new ArrayList<>();
         List<String> friends = new ArrayList<>();
         friends.add("12124214");
         friends.add("121242sada14");
         friends.add("121242sadasda14");
-        Cars cars1 = new Cars("czarneAudi", "Audi", "TT", "8N", 1999, "black", "test");
-        cars.add(cars1);
-        Contact contact = new Contact("maciek.janik24@gmail.com", "43534", "test", "test", "test");
+        CarModel carModel1 = new CarModel("czarneAudi", "Audi", "TT", "8N", 1999, "black", "test");
+        cars.add(carModel1);
+//        Contact contact = new Contact("maciek.janik24@gmail.com", "43534", "test", "test", "test");
         Address address = new Address("PL", "test", "test");
-        HistoryLogin historyLogin = new HistoryLogin(date, date, "test");
-        hist.add(historyLogin);
+//        HistoryLogin historyLogin = new HistoryLogin(date, date, "test");
+//        hist.add(historyLogin);
         Level level = new Level("admin", Levels.ADMINISTATOR, date, date);
-        Account account = new Account("Maciek", "Janik", "lazar123",
-                "querty12345", date, date, AccountState.ENABLED, cars, contact, address,
-                hist, level, 324, friends);
+//        Account account = new Account("Maciek", "Janik", "lazar123",
+//                "querty12345", date, date, AccountState.ENABLED, cars, contact, address,
+//                hist, level, 324, friends);
 
 
         Map<MemberState, List<String>> memberStateMap = new HashMap<>();

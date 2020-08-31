@@ -7,6 +7,7 @@ public class RegisterBody {
 
     private  String email;
     private String password;
-    private String fullname;
+    private String name;
+    private String lastName;
 
 }
