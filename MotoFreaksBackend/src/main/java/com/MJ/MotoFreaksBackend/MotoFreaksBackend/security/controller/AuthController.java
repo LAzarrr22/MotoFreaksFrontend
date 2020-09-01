@@ -1,14 +1,9 @@
 package com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.controller;
 
-import static org.springframework.http.ResponseEntity.ok;
-
-import java.text.ParseException;
-import java.util.HashMap;
-import java.util.Map;
-
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections.User;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.Role;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.configs.JwtTokenProvider;
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.consts.AuthorizationHeader;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.request.AuthBody;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.request.RegisterBody;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.services.CustomUserDetailsService;
@@ -19,8 +14,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.springframework.http.ResponseEntity.ok;
 
 
 @CrossOrigin(origins = "*")
@@ -48,7 +47,7 @@ public class AuthController {
             String token = jwtTokenProvider.createToken(username, currentUser.getUserRoles());
             Map<Object, Object> model = new HashMap<>();
             model.put("username", username);
-            model.put("token", "Bearer " + token);
+            model.put("token", AuthorizationHeader.TOKEN_PREFIX + token);
             userService.addLoginHistory(currentUser);
             return ok(model);
         }
