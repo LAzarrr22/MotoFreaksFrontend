@@ -47,7 +47,7 @@ public class UserService {
         return new ResponseEntity<>(model, HttpStatus.OK);
     }
 
-    public Object addFriend(String id, String friendId, CarModel car) {
+    public Object addFriend(String id, String friendId) {
         Map<Object, Object> model = new HashMap<>();
         Optional<User> optionalUser = userRepository.findById(id);
         User existUser = optionalUser.orElseThrow(RuntimeException::new);//todo our exception
@@ -56,5 +56,9 @@ public class UserService {
 
         }
         return new ResponseEntity<>(model, HttpStatus.OK);
+    }
+
+    public Object getProfile(String id) {
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

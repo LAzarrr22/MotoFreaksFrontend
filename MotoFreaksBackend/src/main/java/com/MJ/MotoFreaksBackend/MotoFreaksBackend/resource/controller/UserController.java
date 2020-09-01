@@ -32,14 +32,14 @@ public class UserController {
 
 
     @RequestMapping(path = "/{id}/add/friend/{friendId}", method = RequestMethod.POST)
-    public Object addFriend(@RequestBody CarModel car, @PathVariable("id") String id, @PathVariable("friendId") String friendId) {
-        return userService.addFriend(id, friendId, car);
+    public Object addFriend(@PathVariable("id") String id, @PathVariable("friendId") String friendId) {
+        return userService.addFriend(id, friendId);
     }
 
 
     @RequestMapping(path = "/show/profile/{id}", method = RequestMethod.GET)
-    public Object showProfile(@RequestBody CarModel car, @PathVariable("id") String id, @PathVariable("friendid") String friendid) {
-        return userService.addFriend(id, friendid, car);
+    public Object showProfile(@PathVariable("id") String id) {
+        return userService.getProfile(id);
     }
 }
 
