@@ -2,15 +2,18 @@ package com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections;
 
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.QuestionAnswer;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
-import java.util.List;
 
 @Data
 @Document(collection = "Challenges")
+@Getter
+@Setter
 public class Challenge {
 
     @Id
@@ -42,46 +45,5 @@ public class Challenge {
         this.groupId = groupId;
         this.creatorId = creatorId;
         this.QAList = QAList;
-    }
-
-
-    public String getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public Date getUpdatedDate() {
-        return updatedDate;
-    }
-
-    public String getCompany() {
-        return company;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public String getGeneration() {
-        return generation;
-    }
-
-    public String getGroupId() {
-        return groupId;
-    }
-
-    public String getCreatorId() {
-        return creatorId;
-    }
-
-    public QuestionAnswer getQAList() {
-        return QAList;
     }
 }

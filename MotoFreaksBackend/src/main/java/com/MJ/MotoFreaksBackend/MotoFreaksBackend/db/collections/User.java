@@ -1,6 +1,9 @@
 package com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections;
 
-import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.*;
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.Address;
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.CarDataModel;
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.Contact;
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.Level;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -28,12 +31,12 @@ public class User {
     private Date updatedDate;
     private List<Date> loginsHistory;
     private Set<UserRoles> userRoles;
-    private List<CarModel> carsList;
+    private List<CarDataModel> carsList;
     private Contact contact;
     private Address address;
     private Level levels;
     private Integer points;
-    private List<String> friendIdList;
+    private List<String> friendsEmails;
 
 
 }

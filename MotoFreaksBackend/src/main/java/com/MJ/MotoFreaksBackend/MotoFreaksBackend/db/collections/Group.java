@@ -2,9 +2,10 @@ package com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections;
 
 
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.MemberState;
-import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.TopicState;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.Topic;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -15,6 +16,8 @@ import java.util.Map;
 
 @Data
 @Document(collection = "Groups")
+@Getter
+@Setter
 public class Group {
 
     @Id
@@ -49,44 +52,4 @@ public class Group {
         this.creatorId = creatorId;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public Date getUpdatedDate() {
-        return updatedDate;
-    }
-
-    public List<Topic> getTopics() {
-        return topics;
-    }
-
-    public Map<MemberState, List<String>>  getMembersUsersId() {
-        return membersUsersId;
-    }
-
-    public String getCreatorId() {
-        return creatorId;
-
-    }
-
-    public String getCompany() {
-        return company;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public String getGeneration() {
-        return generation;
-    }
 }

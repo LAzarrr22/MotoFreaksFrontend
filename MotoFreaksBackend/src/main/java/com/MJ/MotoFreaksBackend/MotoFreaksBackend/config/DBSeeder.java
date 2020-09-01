@@ -1,7 +1,10 @@
 package com.MJ.MotoFreaksBackend.MotoFreaksBackend.config;
 
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections.*;
-import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.*;
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.Levels;
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.MemberState;
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.TypeEvents;
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.TypeRecomendation;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.*;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.repository.*;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.services.CustomUserDetailsService;
@@ -86,14 +89,14 @@ public class DBSeeder implements CommandLineRunner {
 
         Date date = new Date();
 
-        List<CarModel> cars = new ArrayList<>();
+        List<CarDataModel> cars = new ArrayList<>();
 //        List<HistoryLogin> hist = new ArrayList<>();
         List<String> friends = new ArrayList<>();
         friends.add("12124214");
         friends.add("121242sada14");
         friends.add("121242sadasda14");
-        CarModel carModel1 = new CarModel("czarneAudi", "Audi", "TT", "8N", 1999, "black", "test");
-        cars.add(carModel1);
+        CarDataModel carDataModel1 = new CarDataModel("czarneAudi", "Audi", "TT", "8N", 1999, "black", "test");
+        cars.add(carDataModel1);
 //        Contact contact = new Contact("maciek.janik24@gmail.com", "43534", "test", "test", "test");
         Address address = new Address("PL", "test", "test");
 //        HistoryLogin historyLogin = new HistoryLogin(date, date, "test");

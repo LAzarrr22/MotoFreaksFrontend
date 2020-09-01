@@ -3,7 +3,8 @@ package com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.TypeRecomendation;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.Review;
 import lombok.Data;
-import org.hibernate.validator.constraints.URL;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -13,6 +14,8 @@ import java.util.List;
 
 @Data
 @Document(collection = "Recommendations")
+@Getter
+@Setter
 public class Recommendation {
 
     @Id
@@ -33,30 +36,5 @@ public class Recommendation {
         this.createdDate = createdDate;
         this.creatorId = creatorId;
         this.reviewList = reviewList;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public TypeRecomendation getType() {
-        return type;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-
-    public String getCreatorId() {
-        return creatorId;
-    }
-
-    public List<Review> getReviewList() {
-        return reviewList;
     }
 }

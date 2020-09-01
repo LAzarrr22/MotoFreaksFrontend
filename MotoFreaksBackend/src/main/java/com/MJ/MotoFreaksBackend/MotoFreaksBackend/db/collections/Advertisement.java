@@ -1,6 +1,8 @@
 package com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -9,6 +11,8 @@ import java.util.Date;
 
 @Data
 @Document(collection = "Advertisements")
+@Getter
+@Setter
 public class Advertisement {
 
     @Id
@@ -33,37 +37,5 @@ public class Advertisement {
         this.model = model;
         this.generation = generation;
         this.ownerId = ownerId;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getDescriptionAdv() {
-        return descriptionAdv;
-    }
-
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public String getCompany() {
-        return company;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public String getGeneration() {
-        return generation;
-    }
-
-    public String getOwnerId() {
-        return ownerId;
     }
 }

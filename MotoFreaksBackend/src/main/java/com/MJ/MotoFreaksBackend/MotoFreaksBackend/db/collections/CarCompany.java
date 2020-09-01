@@ -1,11 +1,18 @@
 package com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections;
 
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.Model;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.util.List;
 
-@Document(collection="CarsCompany")
+@Document(collection = "CarsCompany")
+@Data
+@Getter
+@Setter
 public class CarCompany {
 
     @Id
@@ -18,15 +25,4 @@ public class CarCompany {
         this.modelList = modelList;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public List<Model> getModelList() {
-        return modelList;
-    }
 }

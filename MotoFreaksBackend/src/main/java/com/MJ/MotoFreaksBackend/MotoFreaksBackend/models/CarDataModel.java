@@ -7,7 +7,7 @@ import lombok.Getter;
 @Data
 @Getter
 @AllArgsConstructor
-public class CarModel {
+public class CarDataModel {
 
     private String name;
     private String company;
