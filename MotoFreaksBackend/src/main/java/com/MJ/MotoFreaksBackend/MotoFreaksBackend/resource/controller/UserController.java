@@ -20,18 +20,26 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-
-    @RequestMapping(path = "/{email}/add/address", method = RequestMethod.POST)
-    public void addAddress(@RequestBody Address address, @PathVariable("email") String email) {
-
+    @RequestMapping(path = "/{id}/merge/address", method = RequestMethod.POST)
+    public Object addAddress(@RequestBody Address address, @PathVariable("id") String id) {
+        return userService.mergeAddress(id, address);
     }
 
-    @RequestMapping(path = "/{email}/add/car", method = RequestMethod.POST)
-    public Object addCar(@RequestBody CarModel car, @PathVariable("email") String email) {
-        Map<Object, Object> model = new HashMap<>();
-log.error(email);
-log.error(car.getName());
-        return userService.addCar(email, car);
+    @RequestMapping(path = "/{id}/add/car", method = RequestMethod.POST)
+    public Object addCar(@RequestBody CarModel car, @PathVariable("id") String id) {
+        return userService.addCar(id, car);
+    }
+
+
+    @RequestMapping(path = "/{id}/add/friend/{friendId}", method = RequestMethod.POST)
+    public Object addFriend(@RequestBody CarModel car, @PathVariable("id") String id, @PathVariable("friendId") String friendId) {
+        return userService.addFriend(id, friendId, car);
+    }
+
+
+    @RequestMapping(path = "/show/profile/{id}", method = RequestMethod.GET)
+    public Object showProfile(@RequestBody CarModel car, @PathVariable("id") String id, @PathVariable("friendid") String friendid) {
+        return userService.addFriend(id, friendid, car);
     }
 }
 

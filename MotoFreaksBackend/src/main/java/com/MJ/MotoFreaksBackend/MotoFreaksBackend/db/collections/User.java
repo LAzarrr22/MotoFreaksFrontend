@@ -28,7 +28,7 @@ public class User {
     private Date updatedDate;
     private List<Date> loginsHistory;
     private Set<UserRoles> userRoles;
-    private List<CarModel> carModelList;
+    private List<CarModel> carsList;
     private Contact contact;
     private Address address;
     private Level levels;
