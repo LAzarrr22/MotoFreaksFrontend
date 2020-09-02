@@ -1,9 +1,9 @@
 package com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.services;
 
-import com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections.UserRoles;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections.User;
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections.UserRoles;
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.Levels;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.Role;
-import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.Account;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.repository.RoleRepository;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.repository.UserRepository;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.request.RegisterBody;
@@ -17,10 +17,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Service
@@ -45,7 +41,10 @@ public class CustomUserDetailsService implements UserDetailsService {
         newUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         newUser.setEnabled(true);
         newUser.setName(user.getName());
+        newUser.setLastName(user.getLastName());
         newUser.setCreatedDate(new Date());
+        newUser.setPoints(0);
+        newUser.setLevels(Levels.BEGGINER);
         UserRoles userUserRoles = roleRepository.findByRole(role);
         newUser.setUserRoles(new HashSet<>(Arrays.asList(userUserRoles)));
         userRepository.save(newUser);

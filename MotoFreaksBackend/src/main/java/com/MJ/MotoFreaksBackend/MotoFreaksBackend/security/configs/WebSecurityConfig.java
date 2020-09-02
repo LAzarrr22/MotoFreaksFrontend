@@ -1,7 +1,5 @@
 package com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.configs;
 
-import javax.servlet.http.HttpServletResponse;
-
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.Role;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.services.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +17,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
+
+import javax.servlet.http.HttpServletResponse;
 
 @Configuration
 @EnableWebSecurity
@@ -38,8 +38,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.httpBasic().disable().csrf().disable().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
-                .antMatchers("/api/auth/login","/api/auth/register","/webjars/**","/swagger-ui.html","/swagger-resources/**","/v2/api-docs").permitAll()
-                .antMatchers("/recommendation/all").hasAuthority(Role.USER.toString())
+                .antMatchers("/api/auth/login", "/api/auth/register", "/webjars/**", "/swagger-ui.html", "/swagger-resources/**", "/v2/api-docs").permitAll()
+                .antMatchers("/recommendation/all", "/user/**").hasAuthority(Role.USER.toString())
                 .antMatchers("/cars/all").hasAuthority(Role.MODERATOR.toString())
                 .antMatchers(HttpMethod.POST,"/group/**").hasAuthority(Role.MODERATOR.toString())
                 .antMatchers("/**").hasAuthority(Role.ADMIN.toString()).anyRequest().authenticated()
