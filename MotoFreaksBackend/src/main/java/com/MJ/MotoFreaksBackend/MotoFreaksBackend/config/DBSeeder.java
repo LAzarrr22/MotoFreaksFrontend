@@ -1,7 +1,8 @@
 package com.MJ.MotoFreaksBackend.MotoFreaksBackend.config;
 
-import com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections.*;
-import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.Levels;
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections.Advertisement;
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections.Event;
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections.Recommendation;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.MemberState;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.TypeEvents;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.TypeRecomendation;
@@ -70,21 +71,21 @@ public class DBSeeder implements CommandLineRunner {
         userService.saveUser(user,Role.SUPER_ADMIN);*/
 
 
-        Generation tt1 = new Generation("8N");
-        Generation tt2 = new Generation("8J");
-        Generation tt3 = new Generation("8P");
+//        Generation tt1 = new Generation("8N");
+//        Generation tt2 = new Generation("8J");
+//        Generation tt3 = new Generation("8P");
+//
+//        List<Generation> gentt = new ArrayList<>();
+//
+//        gentt.add(tt1);
+//        gentt.add(tt2);
+//        gentt.add(tt3);
 
-        List<Generation> gentt = new ArrayList<>();
-
-        gentt.add(tt1);
-        gentt.add(tt2);
-        gentt.add(tt3);
-
-        Model tt = new Model("TT", gentt);
-
-        List<Model> audiModels = new ArrayList<>();
-        audiModels.add(tt);
-        CarCompany audi = new CarCompany("Audi", audiModels);
+//        Model tt = new Model("TT", gentt);
+//
+//        List<Model> audiModels = new ArrayList<>();
+//        audiModels.add(tt);
+//        CarCompany audi = new CarCompany("Audi", audiModels);
 
 
         Date date = new Date();
@@ -95,13 +96,13 @@ public class DBSeeder implements CommandLineRunner {
         friends.add("12124214");
         friends.add("121242sada14");
         friends.add("121242sadasda14");
-        CarDataModel carDataModel1 = new CarDataModel("czarneAudi", "Audi", "TT", "8N", 1999, "black", "test");
-        cars.add(carDataModel1);
+//        CarDataModel carDataModel1 = new CarDataModel("czarneAudi", "Audi", "TT", "8N", 1999, "black", "test");
+//        cars.add(carDataModel1);
 //        Contact contact = new Contact("maciek.janik24@gmail.com", "43534", "test", "test", "test");
-        Address address = new Address("PL", "test", "test");
+//        Address address = new Address("PL", "test", "test");
 //        HistoryLogin historyLogin = new HistoryLogin(date, date, "test");
 //        hist.add(historyLogin);
-        Level level = new Level("admin", Levels.ADMINISTATOR, date, date);
+//        Level level = new Level("admin", Levels.ADMINISTATOR, date, date);
 //        Account account = new Account("Maciek", "Janik", "lazar123",
 //                "querty12345", date, date, AccountState.ENABLED, cars, contact, address,
 //                hist, level, 324, friends);
@@ -114,12 +115,12 @@ public class DBSeeder implements CommandLineRunner {
 
         List<Topic> topics = new ArrayList<>();
         List<Post> posts = new ArrayList<>();
-        Post post = new Post("jak naprawic kolo", "potrzebujesz kluczy", date, date, friends, "1234");
-        posts.add(post);
-
-        Topic topic = new Topic("jak naprawic kolo", date, date, "1234", "naprawa", posts);
-        topics.add(topic);
-        Group group = new Group("my group", date, date, "Audi", "test", "test", topics, memberStateMap, "1234");
+//        Post post = new Post("jak naprawic kolo", "potrzebujesz kluczy", date, date, friends, "1234");
+//        posts.add(post);
+//
+//        Topic topic = new Topic("jak naprawic kolo", date, date, "1234", "naprawa", posts);
+//        topics.add(topic);
+//        Group group = new Group("my group", date, date, "Audi", "test", "test", topics, memberStateMap, "1234");
 
 
         List<QuestionAnswer> QA = new ArrayList<>();
@@ -131,14 +132,14 @@ public class DBSeeder implements CommandLineRunner {
         mapQA.put("DDDDD", Boolean.FALSE);
         listQA.add(mapQA);
 
-        QuestionAnswer questionAnswer = new QuestionAnswer("kto zalozył audi", listQA);
+//        QuestionAnswer questionAnswer = new QuestionAnswer("kto zalozył audi", listQA);
 
-        Challenge challenge = new Challenge("Audi test", date, date, "Audi", "test", "test", "test", "1234", questionAnswer);
+//        Challenge challenge = new Challenge("Audi test", date, date, "Audi", "test", "test", "test", "1234", questionAnswer);
 
 
         List<Review> reviews = new ArrayList<>();
-        Review review = new Review("Polecam", 8, date, date, "1234");
-        reviews.add(review);
+//        Review review = new Review("Polecam", 8, date, date, "1234");
+//        reviews.add(review);
 
         Recommendation recommendation = new Recommendation(TypeRecomendation.MECHANIC, "test", date, date, "1234", reviews);
 
