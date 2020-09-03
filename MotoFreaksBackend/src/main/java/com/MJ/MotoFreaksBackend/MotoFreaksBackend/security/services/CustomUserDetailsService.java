@@ -2,7 +2,6 @@ package com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.services;
 
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections.User;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections.UserRoles;
-import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.Levels;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.Role;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.repository.RoleRepository;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.repository.UserRepository;
@@ -44,7 +43,6 @@ public class CustomUserDetailsService implements UserDetailsService {
         newUser.setLastName(user.getLastName());
         newUser.setCreatedDate(new Date());
         newUser.setPoints(0);
-        newUser.setLevels(Levels.BEGGINER);
         UserRoles userUserRoles = roleRepository.findByRole(role);
         newUser.setUserRoles(new HashSet<>(Arrays.asList(userUserRoles)));
         userRepository.save(newUser);

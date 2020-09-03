@@ -8,5 +8,5 @@ public class Contact {
     private String facebook;
     private String instagram;
     private String twitter;
-
+    private String skype;
 }

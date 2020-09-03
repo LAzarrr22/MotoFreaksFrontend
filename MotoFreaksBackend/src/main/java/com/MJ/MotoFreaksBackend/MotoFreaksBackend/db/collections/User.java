@@ -1,6 +1,5 @@
 package com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections;
 
-import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.Levels;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.Address;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.CarDataModel;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.Contact;
@@ -14,7 +13,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
-@Document(collection = "UsersLogins")
+@Document(collection = "Users")
 @Data
 public class User {
     @Id
@@ -34,7 +33,6 @@ public class User {
     private List<CarDataModel> carsList;
     private Contact contact;
     private Address address;
-    private Levels levels;
     private Integer points;
     private List<String> friendsEmails;
 
