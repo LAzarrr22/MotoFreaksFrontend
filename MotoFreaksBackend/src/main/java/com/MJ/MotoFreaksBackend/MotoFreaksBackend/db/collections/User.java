@@ -19,7 +19,7 @@ public class User {
     @Id
     private String id;
     @Email
-    private String email;
+    private String userName;
     private String password;
     private String name;
     private String lastName;

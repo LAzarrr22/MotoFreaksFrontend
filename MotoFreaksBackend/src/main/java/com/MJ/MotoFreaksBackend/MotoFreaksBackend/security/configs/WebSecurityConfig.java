@@ -42,7 +42,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/**").hasAuthority(Role.USER.toString())
                 .antMatchers(HttpMethod.GET, "/cars/all").hasAuthority(Role.MODERATOR.toString())
                 .antMatchers(HttpMethod.POST, "/api/auth/set-role/moderator/**").hasAuthority(Role.MODERATOR.toString())
-                .antMatchers("/**").hasAuthority(Role.ADMIN.toString()).anyRequest().authenticated()
+                .antMatchers("/**", "/user/**").hasAuthority(Role.ADMIN.toString())
+                .anyRequest().authenticated()
                 .and().csrf()
                 .disable().exceptionHandling().authenticationEntryPoint(unauthorizedEntryPoint()).and()
                 .apply(new JwtConfigurer(jwtTokenProvider));

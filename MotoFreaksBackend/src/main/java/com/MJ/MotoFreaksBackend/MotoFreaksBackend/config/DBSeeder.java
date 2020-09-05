@@ -4,10 +4,12 @@ import com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections.Advertisement;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections.Event;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections.Recommendation;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.MemberState;
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.Role;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.TypeEvents;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.TypeRecomendation;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.*;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.repository.*;
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.request.RegisterBody;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.services.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -47,29 +49,20 @@ public class DBSeeder implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
+        userService.registerUser(new RegisterBody("admin_mtfr", "admin_mtfr", "Admin", "Admin"), Role.ADMIN);
+        userService.addRole("admin_mtfr", Role.MODERATOR);
+        userService.addRole("admin_mtfr", Role.USER);
 
 //only at first start
-        /*this.roleRepository.deleteAll();
-        UserRoles userRoles = new UserRoles();
-        userRoles.setRole(Role.ADMIN);
-        this.roleRepository.save(userRoles);
-
-        UserRoles userRoles2 = new UserRoles();
-        userRoles2.setRole(Role.USER);
-        this.roleRepository.save(userRoles2);
-
-        UserRoles userRoles3 = new UserRoles();
-        userRoles3.setRole(Role.SUPER_ADMIN);
-        this.roleRepository.save(userRoles3);
-
-
-        this.userRepository.deleteAll();//todo to delete
-        RegisterBody user = new RegisterBody();
-        user.setEmail("admin@admin.com");
-        user.setFullname("Super Admin");
-        user.setPassword("admin_mtfr");
-        userService.saveUser(user,Role.SUPER_ADMIN);*/
-
+//        this.roleRepository.deleteAll();
+//        UserRoles userRoles = new UserRoles(Role.ADMIN);
+//        this.roleRepository.save(userRoles);
+//
+//        UserRoles userRoles2 = new UserRoles(Role.USER);
+//        this.roleRepository.save(userRoles2);
+//
+//        UserRoles userRoles3 = new UserRoles(Role.MODERATOR);
+//        this.roleRepository.save(userRoles3);
 
 //        Generation tt1 = new Generation("8N");
 //        Generation tt2 = new Generation("8J");

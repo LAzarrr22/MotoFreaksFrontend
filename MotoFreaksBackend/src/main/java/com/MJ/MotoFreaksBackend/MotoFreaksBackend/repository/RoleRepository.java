@@ -5,8 +5,11 @@ import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.Role;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 
 @Repository
 public interface RoleRepository extends MongoRepository<UserRoles, String> {
-    UserRoles findByRole(Role role);
+    Optional<UserRoles> findByRole(Role role);
+
 }
