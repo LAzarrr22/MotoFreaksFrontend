@@ -17,28 +17,25 @@ public class Event {
 
     @Id
     private String id;
-
     private TypeEvents type;
     private String name;
-
     @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private Date createdDate;
-
     @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private Date eventDate;
     private String place;
     private String description;
-    private String creatorId;
-    private Map<MemberState, List<String>> membersId;
+    private String creatorUserName;
+    private Map<MemberState, List<String>> membersUserName;
 
-    public Event(TypeEvents type, String name, Date createdDate, Date eventDate, String place, String description, String creatorId, Map<MemberState, List<String>> membersId) {
+    public Event(TypeEvents type, String name, Date createdDate, Date eventDate, String place, String description, String creatorUserName, Map<MemberState, List<String>> membersUserName) {
         this.type = type;
         this.name = name;
         this.createdDate = createdDate;
         this.eventDate = eventDate;
         this.place = place;
         this.description = description;
-        this.creatorId = creatorId;
-        this.membersId = membersId;
+        this.creatorUserName = creatorUserName;
+        this.membersUserName = membersUserName;
     }
 }

@@ -1,39 +1,26 @@
 package com.MJ.MotoFreaksBackend.MotoFreaksBackend.resource.controller;
 
-import com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections.Challenge;
-import com.MJ.MotoFreaksBackend.MotoFreaksBackend.repository.ChallengeRepository;
-import org.springframework.web.bind.annotation.*;
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.resource.requests.NewChallengeModel;
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.consts.AuthorizationHeader;
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.services.ChallengeService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/challenge")
-public class ChallengeController implements Controller {
+public class ChallengeController {
 
-    private final ChallengeRepository challengeRepository;
+    @Autowired
+    private ChallengeService challengeService;
 
-    public ChallengeController(ChallengeRepository challengeRepository) {
-        this.challengeRepository = challengeRepository;
-    }
-
-    @Override
-    public void delete(String id) {
-        this.challengeRepository.deleteById(id);
-    }
-
-    @Override
-    public List<Challenge> getAll() {
-        return challengeRepository.findAll();
-    }
-
-
-    @PutMapping
-    public void insert(@RequestBody Challenge challenge) {
-        this.challengeRepository.insert(challenge);
-    }
-
-    @PostMapping
-    public void update(@RequestBody Challenge challenge) {
-        this.challengeRepository.save(challenge);
+    @RequestMapping(path = "/create", method = RequestMethod.PUT, produces = "application/json")
+    public Object createChallenge(HttpServletRequest req, @RequestBody NewChallengeModel challenge) {
+        String token = req.getHeader(AuthorizationHeader.HEADER_NAME).replace(AuthorizationHeader.TOKEN_PREFIX, "");
+        return challengeService.createChallenge(token, challenge);
     }
 }

@@ -2,9 +2,9 @@ package com.MJ.MotoFreaksBackend.MotoFreaksBackend.services;
 
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections.UserRoles;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.Role;
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.exceptions.RoleNotFoundException;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -17,6 +17,6 @@ public class RoleService {
 
     public UserRoles getRoleByName(Role role) {
         Optional<UserRoles> optionalRole = roleRepository.findByRole(role);
-        return optionalRole.orElseThrow(() -> new UsernameNotFoundException("Role not found"));
+        return optionalRole.orElseThrow(() -> new RoleNotFoundException("Role not found"));
     }
 }

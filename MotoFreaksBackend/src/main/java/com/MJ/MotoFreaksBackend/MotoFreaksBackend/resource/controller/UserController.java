@@ -31,14 +31,14 @@ public class UserController {
         return userService.mergeContact(token, contact);
     }
 
-    @RequestMapping(path = "/add/car", method = RequestMethod.POST, produces = "application/json")
+    @RequestMapping(path = "/add/car", method = RequestMethod.PUT, produces = "application/json")
     public Object addCar(HttpServletRequest req, @RequestBody CarDataModel car) {
         String token = req.getHeader(AuthorizationHeader.HEADER_NAME).replace(AuthorizationHeader.TOKEN_PREFIX, "");
         return userService.addCar(token, car);
     }
 
 
-    @RequestMapping(path = "/add/friend/{friendEmail}", method = RequestMethod.POST, produces = "application/json")
+    @RequestMapping(path = "/add/friend/{friendEmail}", method = RequestMethod.PUT, produces = "application/json")
     public Object addFriend(HttpServletRequest req, @PathVariable("friendEmail") String friendEmail) {
         String token = req.getHeader(AuthorizationHeader.HEADER_NAME).replace(AuthorizationHeader.TOKEN_PREFIX, "");
         return userService.addFriend(token, friendEmail);
@@ -58,13 +58,13 @@ public class UserController {
     }
 
 
-    @RequestMapping(path = "/add/points/{value}", method = RequestMethod.POST, produces = "application/json")
+    @RequestMapping(path = "/add/points/{value}", method = RequestMethod.PUT, produces = "application/json")
     public Object addPoints(HttpServletRequest req, @PathVariable("value") int points) {
         String token = req.getHeader(AuthorizationHeader.HEADER_NAME).replace(AuthorizationHeader.TOKEN_PREFIX, "");
         return userService.addPoints(token, points);
     }
 
-    @RequestMapping(path = "/remove/points/{value}", method = RequestMethod.POST, produces = "application/json")
+    @RequestMapping(path = "/remove/points/{value}", method = RequestMethod.PUT, produces = "application/json")
     public Object removePoints(HttpServletRequest req, @PathVariable("value") int points) {
         String token = req.getHeader(AuthorizationHeader.HEADER_NAME).replace(AuthorizationHeader.TOKEN_PREFIX, "");
         return userService.removePoints(token, points);

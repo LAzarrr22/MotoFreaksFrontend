@@ -138,7 +138,7 @@ public class UserService {
     }
 
 
-    private User getUserByToken(String token) {
+    public User getUserByToken(String token) {
         Optional<User> optionalUser = userRepository.findByUserNameOptional(jwtService.getUsername(token));
         return optionalUser.orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
