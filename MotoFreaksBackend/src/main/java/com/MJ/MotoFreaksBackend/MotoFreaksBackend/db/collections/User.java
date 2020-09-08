@@ -34,7 +34,7 @@ public class User {
     private Contact contact;
     private Address address;
     private Integer points;
-    private List<String> friendsEmails;
+    private List<String> friendsList;
 
 
 }

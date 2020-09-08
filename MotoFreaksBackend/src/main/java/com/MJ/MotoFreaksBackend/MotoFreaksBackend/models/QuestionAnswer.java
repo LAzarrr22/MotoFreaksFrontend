@@ -9,6 +9,7 @@ import java.util.Map;
 public class QuestionAnswer {
 
     private String question;
+    private int points;
     private List<Map<String, Boolean>> answers;
 }
 

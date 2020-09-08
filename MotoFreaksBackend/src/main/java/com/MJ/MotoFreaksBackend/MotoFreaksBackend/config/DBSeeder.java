@@ -4,12 +4,10 @@ import com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections.Advertisement;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections.Event;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections.Recommendation;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.MemberState;
-import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.Role;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.TypeEvents;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.TypeRecomendation;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.*;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.repository.*;
-import com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.request.RegisterBody;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.services.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -49,9 +47,9 @@ public class DBSeeder implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        userService.registerUser(new RegisterBody("admin_mtfr", "admin_mtfr", "Admin", "Admin"), Role.ADMIN);
-        userService.addRole("admin_mtfr", Role.MODERATOR);
-        userService.addRole("admin_mtfr", Role.USER);
+//        userService.registerUser(new RegisterBody("admin_mtfr", "admin_mtfr", "Admin", "Admin"), Role.ADMIN);
+//        userService.addRole("admin_mtfr", Role.MODERATOR);
+//        userService.addRole("admin_mtfr", Role.USER);
 
 //only at first start
 //        this.roleRepository.deleteAll();

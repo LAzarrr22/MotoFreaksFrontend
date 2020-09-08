@@ -26,15 +26,4 @@ public class Challenge {
     private String creatorUserName;
     private QuestionAnswer QAList;
 
-    public Challenge(String name, Date createdDate, Date updatedDate, String company, String model, String generation, String groupId, String creatorUserName, QuestionAnswer QAList) {
-        this.name = name;
-        this.createdDate = createdDate;
-        this.updatedDate = updatedDate;
-        this.company = company;
-        this.model = model;
-        this.generation = generation;
-        this.groupId = groupId;
-        this.creatorUserName = creatorUserName;
-        this.QAList = QAList;
-    }
 }

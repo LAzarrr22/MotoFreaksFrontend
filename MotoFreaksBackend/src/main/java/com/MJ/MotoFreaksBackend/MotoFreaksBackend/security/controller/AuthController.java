@@ -28,13 +28,13 @@ public class AuthController {
         return customUserAuthService.registerUser(user, Role.USER);
     }
 
-    @PostMapping("/set-role/moderator/{userEmail}")
-    public Object addModeratorRole(@PathVariable String userEmail) {
-        return customUserAuthService.addRole(userEmail, Role.MODERATOR);
+    @PostMapping("/set-role/moderator/{username}")
+    public Object addModeratorRole(@PathVariable String username) {
+        return customUserAuthService.addRole(username, Role.MODERATOR);
     }
 
-    @PostMapping("/set-role/admin/{userEmail}")
-    public Object addAdminRole(@PathVariable String userEmail) {
-        return customUserAuthService.addRole(userEmail, Role.ADMIN);
+    @PostMapping("/set-role/admin/{username}")
+    public Object addAdminRole(@PathVariable String username) {
+        return customUserAuthService.addRole(username, Role.ADMIN);
     }
 }

@@ -11,8 +11,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.*;
 
@@ -72,19 +72,19 @@ public class UserService {
     public Object addFriend(String token, String friendEmail) {
         Map<Object, Object> model = new HashMap<>();
         User currentUser = getUserByToken(token);
-        User userFriend = getUserByEmail(friendEmail);
+        User userFriend = getUserByUserName(friendEmail);
 
-        if (Objects.isNull(currentUser.getFriendsEmails()) && !currentUser.getUserName().equals(friendEmail)) {
+        if (Objects.isNull(currentUser.getFriendsList()) && !currentUser.getUserName().equals(friendEmail)) {
             List<String> newFriends = new ArrayList<>();
             newFriends.add(userFriend.getUserName());
-            currentUser.setFriendsEmails(newFriends);
+            currentUser.setFriendsList(newFriends);
             currentUser.setUpdatedDate(new Date());
         } else if (isYourFriend(currentUser, friendEmail) || currentUser.getUserName().equals(friendEmail)) {
             model.put("message", "Cannot add " + userFriend.getUserName() + " to friends " + currentUser.getUserName() + " user.");
             log.warn("Cannot add " + userFriend.getId() + " to friends " + currentUser.getId() + " user.");
-            return new ResponseEntity<>(model, HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>(model, HttpStatus.BAD_REQUEST);
         } else {
-            currentUser.getFriendsEmails().add(userFriend.getUserName());
+            currentUser.getFriendsList().add(userFriend.getUserName());
             currentUser.setUpdatedDate(new Date());
         }
         userRepository.save(currentUser);
@@ -95,7 +95,7 @@ public class UserService {
 
     public Object getProfile(String email, String currentToken) {
         User currentUser = getUserByToken(currentToken);
-        User userToShow = getUserByEmail(email);
+        User userToShow = getUserByUserName(email);
 
         ProfileModelDto profile = new ProfileModelDto(userToShow.getName(), userToShow.getLastName(), userToShow.getCarsList(),
                 userToShow.getPoints(), userToShow.isEnabled()
@@ -130,8 +130,8 @@ public class UserService {
     }
 
     private boolean isYourFriend(User currentUser, String email) {
-        if (currentUser.getFriendsEmails() != null) {
-            String emailCommon = currentUser.getFriendsEmails().stream().filter(email::equals).findAny().orElse("");
+        if (currentUser.getFriendsList() != null) {
+            String emailCommon = currentUser.getFriendsList().stream().filter(email::equals).findAny().orElse("");
             return !emailCommon.isEmpty();
         }
         return false;
@@ -140,11 +140,11 @@ public class UserService {
 
     public User getUserByToken(String token) {
         Optional<User> optionalUser = userRepository.findByUserNameOptional(jwtService.getUsername(token));
-        return optionalUser.orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        return optionalUser.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
     }
 
-    public User getUserByEmail(String email) {
-        Optional<User> optionalUserFriend = userRepository.findByUserNameOptional(email);
-        return optionalUserFriend.orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    public User getUserByUserName(String username) {
+        Optional<User> optionalUserFriend = userRepository.findByUserNameOptional(username);
+        return optionalUserFriend.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
     }
 }

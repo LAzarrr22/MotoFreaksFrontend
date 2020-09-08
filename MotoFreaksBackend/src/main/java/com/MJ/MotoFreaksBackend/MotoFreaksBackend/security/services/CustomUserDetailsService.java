@@ -24,6 +24,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.*;
 
@@ -54,27 +55,27 @@ public class CustomUserDetailsService implements UserDetailsService {
     public Object loginUser(AuthBody data) {
         String username = data.getUserName();
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, data.getPassword()));
-        User currentUser = userService.getUserByEmail(username);
+        User currentUser = userService.getUserByUserName(username);
         String token = jwtTokenProvider.createToken(username, currentUser.getUserRoles());
         addLoginHistory(currentUser);
         Map<Object, Object> model = new HashMap<>();
         model.put("username", username);
         model.put("token", AuthorizationHeader.TOKEN_PREFIX + token);
-        log.info("User " + currentUser.getId() + "was logged correctly.");
+        log.info("User " + currentUser.getId() + " was logged correctly.");
         return ok(model);
     }
 
     public Object registerUser(RegisterBody data, Role role) {
         Map<Object, Object> model = new HashMap<>();
         try {
-            userService.getUserByEmail(data.getUserName());
+            userService.getUserByUserName(data.getUserName());
             model.put("message", "User with " + data.getUserName() + " is already exists!");
             log.warn("Cannot register user: " + data.getUserName() + ". User is already exists");
-            return new ResponseEntity<Object>(model, HttpStatus.FORBIDDEN);
-        } catch (UsernameNotFoundException e) {
+            return new ResponseEntity<Object>(model, HttpStatus.NOT_FOUND);
+        } catch (ResponseStatusException e) {
             saveNewUser(data, role);
             model.put("message", "User registered successfully");
-            log.info("User " + data.getUserName() + "was register correctly.");
+            log.info("User " + data.getUserName() + " was register correctly.");
             return ok(model);
         }
     }
@@ -95,7 +96,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userService.getUserByEmail(email);
+        User user = userService.getUserByUserName(email);
         List<GrantedAuthority> authorities = getUserAuthority(user.getUserRoles());
         return buildUserForAuthentication(user, authorities);
     }
@@ -114,19 +115,19 @@ public class CustomUserDetailsService implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(), authorities);
     }
 
-    public Object addRole(String userEmail, Role role) {
+    public Object addRole(String username, Role role) {
         Map<Object, Object> model = new HashMap<>();
-        User userExists = userService.getUserByEmail(userEmail);
-        model.put("userEmail:", userEmail);
+        User userExists = userService.getUserByUserName(username);
+        model.put("userEmail:", username);
         if (role == Role.ADMIN) {
             userExists.getUserRoles().add(this.roleService.getRoleByName(Role.MODERATOR));
             model.put("newRole", Role.MODERATOR.toString());
-            log.info("Added " + Role.MODERATOR + " role to " + userEmail + " user.");
+            log.info("Added " + Role.MODERATOR + " role to " + username + " user.");
         }
         userExists.getUserRoles().add(this.roleService.getRoleByName(role));
         model.put("newRole", role);
         this.userRepository.save(userExists);
-        log.info("Added " + role + " role to " + userEmail + " user.");
+        log.info("Added " + role + " role to " + username + " user.");
         return ok(model);
     }
 
