@@ -1,7 +1,7 @@
 package com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.configs;
 
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.Role;
-import com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.services.CustomUserDetailsService;
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.services.AuthUserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -41,7 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.httpBasic().disable().csrf().disable().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
                 .antMatchers("/api/auth/login", "/api/auth/register", "/webjars/**", "/swagger-ui.html", "/swagger-resources/**", "/v2/api-docs").permitAll()
-                .antMatchers("/user/**", "/challenge/**", "/cars/all").hasAuthority(Role.USER.toString())
+                .antMatchers("/user/**", "/challenge/**", "/cars/all", "/message/**").hasAuthority(Role.USER.toString())
                 .antMatchers(HttpMethod.GET, "/cars/add/**", "/cars/delete/**").hasAuthority(Role.MODERATOR.toString())
                 .antMatchers(HttpMethod.POST, "/api/auth/set-role/moderator/**").hasAuthority(Role.MODERATOR.toString())
                 .antMatchers("/**").hasAuthority(Role.ADMIN.toString())
@@ -76,6 +76,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public UserDetailsService mongoUserDetails() {
-        return new CustomUserDetailsService();
+        return new AuthUserService();
     }
 }

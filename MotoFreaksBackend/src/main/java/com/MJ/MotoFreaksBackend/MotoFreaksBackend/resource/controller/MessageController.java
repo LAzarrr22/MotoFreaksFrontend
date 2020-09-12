@@ -13,12 +13,22 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 public class MessageController {
 
-    @Autowired
-    private MessageService messageService;
+    private final MessageService messageService;
 
-    @RequestMapping(path = "/send/{receiver}", method = RequestMethod.POST, produces = "application/json")
-    public Object addCar(HttpServletRequest req, @RequestBody String messageContent, @PathVariable("receiver") String receiver) {
+    @Autowired
+    public MessageController(MessageService messageService) {
+        this.messageService = messageService;
+    }
+
+    @RequestMapping(path = "/send/{receiverId}", method = RequestMethod.POST, produces = "application/json")
+    public Object addCar(HttpServletRequest req, @RequestBody String messageContent, @PathVariable String receiverId) {
         String token = req.getHeader(AuthorizationHeader.HEADER_NAME).replace(AuthorizationHeader.TOKEN_PREFIX, "");
-        return messageService.sendMessage(token, receiver, messageContent);
+        return messageService.sendMessage(token, receiverId, messageContent);
+    }
+
+    @RequestMapping(path = "/read/last/{receiverId}", method = RequestMethod.POST, produces = "application/json")
+    public Object getReadLastById(HttpServletRequest req, @PathVariable String receiverId) {
+        String token = req.getHeader(AuthorizationHeader.HEADER_NAME).replace(AuthorizationHeader.TOKEN_PREFIX, "");
+        return messageService.readMessage(token, receiverId);
     }
 }
