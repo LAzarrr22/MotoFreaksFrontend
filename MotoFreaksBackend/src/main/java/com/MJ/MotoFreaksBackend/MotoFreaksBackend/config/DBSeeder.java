@@ -1,6 +1,5 @@
 package com.MJ.MotoFreaksBackend.MotoFreaksBackend.config;
 
-import com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections.Advertisement;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections.Event;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections.Recommendation;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.MemberState;
@@ -23,7 +22,6 @@ public class DBSeeder implements CommandLineRunner {
     private final GroupRepository groupRepository;
     private final ChallengeRepository challengeRepository;
     private final RecomencdationRepository recomencdationRepository;
-    private final AdvertisementRepository advertisementRepository;
     private final RoleRepository roleRepository;
     private final UserRepository userRepository;
 
@@ -31,14 +29,14 @@ public class DBSeeder implements CommandLineRunner {
     private CustomUserDetailsService userService;
 
 
-    public DBSeeder( CarCompanyRepository carCompanyRepository, EventRepository eventRepository,
-                    GroupRepository groupRepository, ChallengeRepository challengeRepository, RecomencdationRepository recomencdationRepository, AdvertisementRepository advertisementRepository, RoleRepository roleRepository, UserRepository userRepository) {
+    public DBSeeder(CarCompanyRepository carCompanyRepository, EventRepository eventRepository,
+                    GroupRepository groupRepository, ChallengeRepository challengeRepository, RecomencdationRepository recomencdationRepository, RoleRepository roleRepository, UserRepository userRepository) {
         this.carCompanyRepository = carCompanyRepository;
         this.eventRepository = eventRepository;
         this.groupRepository = groupRepository;
         this.challengeRepository = challengeRepository;
         this.recomencdationRepository = recomencdationRepository;
-        this.advertisementRepository = advertisementRepository;
+
 
         this.roleRepository = roleRepository;
         this.userRepository = userRepository;
@@ -135,7 +133,6 @@ public class DBSeeder implements CommandLineRunner {
         Recommendation recommendation = new Recommendation(TypeRecomendation.MECHANIC, "test", date, date, "1234", reviews);
 
 
-        Advertisement advertisement = new Advertisement("TEST", "test", date, "Audi", "tt", "8n", "12344");
 
 
         //only one time run - to init database collection

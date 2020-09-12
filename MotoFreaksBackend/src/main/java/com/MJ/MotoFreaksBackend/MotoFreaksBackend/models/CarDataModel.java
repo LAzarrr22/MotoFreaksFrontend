@@ -6,6 +6,7 @@ import lombok.Data;
 public class CarDataModel {
 
     private String name;
+    private String registration;
     private String company;
     private String model;
     private String generation;
