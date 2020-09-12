@@ -25,7 +25,6 @@ public class ChallengeController {
         String token = req.getHeader(AuthorizationHeader.HEADER_NAME).replace(AuthorizationHeader.TOKEN_PREFIX, "");
         return challengeService.createChallenge(token, challenge);
     }
-
     @RequestMapping(path = "/findBy/car", method = RequestMethod.GET, produces = "application/json")
     public Object findByCar(@RequestParam Map<String, String> carParam) {
         return challengeService.findByCar(carParam);

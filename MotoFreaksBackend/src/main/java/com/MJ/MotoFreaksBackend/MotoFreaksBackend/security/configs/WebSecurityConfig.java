@@ -42,7 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
                 .antMatchers("/api/auth/login", "/api/auth/register", "/webjars/**", "/swagger-ui.html", "/swagger-resources/**", "/v2/api-docs").permitAll()
                 .antMatchers("/user/**", "/challenge/**", "/cars/all", "/message/**").hasAuthority(Role.USER.toString())
-                .antMatchers(HttpMethod.GET, "/cars/add/**", "/cars/delete/**").hasAuthority(Role.MODERATOR.toString())
+                .antMatchers(HttpMethod.GET, "/cars/merge/**", "/cars/delete/**").hasAuthority(Role.MODERATOR.toString())
                 .antMatchers(HttpMethod.POST, "/api/auth/set-role/moderator/**").hasAuthority(Role.MODERATOR.toString())
                 .antMatchers("/**").hasAuthority(Role.ADMIN.toString())
                 .anyRequest().authenticated()
