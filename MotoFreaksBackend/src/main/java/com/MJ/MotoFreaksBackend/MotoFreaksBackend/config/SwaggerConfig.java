@@ -11,8 +11,6 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 
-import javax.servlet.ServletContext;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -20,9 +18,9 @@ import java.util.List;
 public class SwaggerConfig {
 
     @Bean
-    public Docket api(ServletContext servletContext) {
+    public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .securitySchemes(Arrays.asList(apiKey()))
+                .securitySchemes(Collections.singletonList(apiKey()))
                 .securityContexts(Collections.singletonList(securityContext()));
     }
 

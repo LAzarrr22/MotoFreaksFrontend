@@ -20,14 +20,16 @@ import static org.springframework.http.ResponseEntity.ok;
 @Slf4j
 public class ChallengeService {
 
-    @Autowired
-    private ChallengeRepository challengeRepository;
+    private final ChallengeRepository challengeRepository;
+    private final UserService userService;
+    private final MongoTemplate mongoTemplate;
 
     @Autowired
-    private UserService userService;
-
-    @Autowired
-    private MongoTemplate mongoTemplate;
+    public ChallengeService(ChallengeRepository challengeRepository, UserService userService, MongoTemplate mongoTemplate) {
+        this.challengeRepository = challengeRepository;
+        this.userService = userService;
+        this.mongoTemplate = mongoTemplate;
+    }
 
 
     public Object createChallenge(String token, NewChallengeModel challenge) {

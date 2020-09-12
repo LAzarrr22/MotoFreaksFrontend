@@ -90,7 +90,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         newUser.setCreatedDate(new Date());
         newUser.setPoints(0);
         UserRoles userUserRoles = roleService.getRoleByName(role);
-        newUser.setUserRoles(new HashSet<>(Arrays.asList(userUserRoles)));
+        newUser.setUserRoles(new HashSet<>(Collections.singletonList(userUserRoles)));
         userRepository.save(newUser);
     }
 
@@ -103,12 +103,8 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     private List<GrantedAuthority> getUserAuthority(Set<UserRoles> userRoles) {
         Set<GrantedAuthority> roles = new HashSet<>();
-        userRoles.forEach((role) -> {
-            roles.add(new SimpleGrantedAuthority(role.getRole().toString()));
-        });
-
-        List<GrantedAuthority> grantedAuthorities = new ArrayList<>(roles);
-        return grantedAuthorities;
+        userRoles.forEach((role) -> roles.add(new SimpleGrantedAuthority(role.getRole().toString())));
+        return new ArrayList<>(roles);
     }
 
     private UserDetails buildUserForAuthentication(User user, List<GrantedAuthority> authorities) {

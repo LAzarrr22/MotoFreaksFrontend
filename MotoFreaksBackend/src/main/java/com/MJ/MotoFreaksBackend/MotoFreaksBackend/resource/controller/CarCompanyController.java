@@ -14,8 +14,12 @@ import java.util.List;
 @RequestMapping("/cars")
 public class CarCompanyController {
 
+    private final CarsService carsService;
+
     @Autowired
-    private CarsService carsService;
+    public CarCompanyController(CarsService carsService) {
+        this.carsService = carsService;
+    }
 
 
     @RequestMapping(path = "/merge/company/{company}/model/{model}/generation/{generation}", method = RequestMethod.POST, produces = "application/json")

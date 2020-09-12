@@ -15,8 +15,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/auth")
 public class AuthController {
 
+    private final CustomUserDetailsService customUserAuthService;
+
     @Autowired
-    private CustomUserDetailsService customUserAuthService;
+    public AuthController(CustomUserDetailsService customUserAuthService) {
+        this.customUserAuthService = customUserAuthService;
+    }
 
     @PostMapping("/login")
     public Object login(@RequestBody AuthBody data) {

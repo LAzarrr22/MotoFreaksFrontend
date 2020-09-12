@@ -22,11 +22,14 @@ import static org.springframework.http.ResponseEntity.ok;
 @Slf4j
 public class UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final JwtTokenProvider jwtService;
 
     @Autowired
-    private JwtTokenProvider jwtService;
+    public UserService(UserRepository userRepository, JwtTokenProvider jwtService) {
+        this.userRepository = userRepository;
+        this.jwtService = jwtService;
+    }
 
 
     public Object addCar(String token, CarDataModel car) {
@@ -36,11 +39,10 @@ public class UserService {
             List<CarDataModel> newCarList = new ArrayList<>();
             newCarList.add(car);
             currentUser.setCarsList(newCarList);
-            currentUser.setUpdatedDate(new Date());
         } else {
             currentUser.getCarsList().add(car);
-            currentUser.setUpdatedDate(new Date());
         }
+        currentUser.setUpdatedDate(new Date());
         userRepository.save(currentUser);
         model.put("message", "Car " + car.getName() + " added to " + currentUser.getUserName() + " user.");
         log.info("Car " + car.getName() + " added to " + currentUser.getId() + " user.");

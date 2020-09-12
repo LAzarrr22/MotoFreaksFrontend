@@ -16,8 +16,12 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 public class UserController {
 
+    private final UserService userService;
+
     @Autowired
-    private UserService userService;
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @RequestMapping(path = "/merge/address", method = RequestMethod.POST, produces = "application/json")
     public Object addAddress(HttpServletRequest req, @RequestBody Address address) {
@@ -38,13 +42,13 @@ public class UserController {
     }
 
     @RequestMapping(path = "/add/friend/{friendUsername}", method = RequestMethod.POST, produces = "application/json")
-    public Object addFriend(HttpServletRequest req, @PathVariable("friendUsername") String friendUsername) {
+    public Object addFriend(HttpServletRequest req, @PathVariable String friendUsername) {
         String token = req.getHeader(AuthorizationHeader.HEADER_NAME).replace(AuthorizationHeader.TOKEN_PREFIX, "");
         return userService.addFriend(token, friendUsername);
     }
 
     @RequestMapping(path = "/show/profile/{id}", method = RequestMethod.GET, produces = "application/json")
-    public Object showProfile(@PathVariable("id") String id, HttpServletRequest req) {
+    public Object showProfile(@PathVariable String id, HttpServletRequest req) {
         String token = req.getHeader(AuthorizationHeader.HEADER_NAME).replace(AuthorizationHeader.TOKEN_PREFIX, "");
         return userService.getProfile(id, token);
     }
@@ -56,15 +60,15 @@ public class UserController {
     }
 
     @RequestMapping(path = "/add/points/{value}", method = RequestMethod.POST, produces = "application/json")
-    public Object addPoints(HttpServletRequest req, @PathVariable("value") int points) {
+    public Object addPoints(HttpServletRequest req, @PathVariable int value) {
         String token = req.getHeader(AuthorizationHeader.HEADER_NAME).replace(AuthorizationHeader.TOKEN_PREFIX, "");
-        return userService.addPoints(token, points);
+        return userService.addPoints(token, value);
     }
 
     @RequestMapping(path = "/remove/points/{value}", method = RequestMethod.POST, produces = "application/json")
-    public Object removePoints(HttpServletRequest req, @PathVariable("value") int points) {
+    public Object removePoints(HttpServletRequest req, @PathVariable int value) {
         String token = req.getHeader(AuthorizationHeader.HEADER_NAME).replace(AuthorizationHeader.TOKEN_PREFIX, "");
-        return userService.removePoints(token, points);
+        return userService.removePoints(token, value);
     }
 
 }

@@ -13,8 +13,12 @@ import java.util.Map;
 @RequestMapping("/challenge")
 public class ChallengeController {
 
+    private final ChallengeService challengeService;
+
     @Autowired
-    private ChallengeService challengeService;
+    public ChallengeController(ChallengeService challengeService) {
+        this.challengeService = challengeService;
+    }
 
     @RequestMapping(path = "/create", method = RequestMethod.PUT, produces = "application/json")
     public Object createChallenge(HttpServletRequest req, @RequestBody NewChallengeModel challenge) {

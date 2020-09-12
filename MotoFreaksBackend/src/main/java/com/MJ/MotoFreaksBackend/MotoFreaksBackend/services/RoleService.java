@@ -13,8 +13,12 @@ import java.util.Optional;
 @Service
 public class RoleService {
 
+    private final RoleRepository roleRepository;
+
     @Autowired
-    private RoleRepository roleRepository;
+    public RoleService(RoleRepository roleRepository) {
+        this.roleRepository = roleRepository;
+    }
 
     public UserRoles getRoleByName(Role role) {
         Optional<UserRoles> optionalRole = roleRepository.findByRole(role);

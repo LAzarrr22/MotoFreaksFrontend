@@ -11,8 +11,12 @@ import java.util.stream.Collectors;
 @Service
 public class CarsService {
 
+    private final CarCompanyRepository carRepository;
+
     @Autowired
-    private CarCompanyRepository carRepository;
+    public CarsService(CarCompanyRepository carRepository) {
+        this.carRepository = carRepository;
+    }
 
 
     public void mergeCarModel(String company, String model, String generation) {
