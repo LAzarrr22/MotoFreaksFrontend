@@ -1,7 +1,7 @@
 package com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.configs;
 
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections.UserRoles;
-import com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.services.CustomUserDetailsService;
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.services.AuthUserService;
 import io.jsonwebtoken.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +28,10 @@ public class JwtTokenProvider {
     @Value("${security.jwt.token.expire-length:3600000}")
     private final long validityInMilliseconds = 3600000; // 1h
 
-    private final CustomUserDetailsService userDetailsService;
+    private final AuthUserService userDetailsService;
 
     @Autowired
-    public JwtTokenProvider(CustomUserDetailsService userDetailsService) {
+    public JwtTokenProvider(AuthUserService userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
 

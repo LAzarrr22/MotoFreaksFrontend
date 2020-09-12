@@ -3,7 +3,7 @@ package com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.controller;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.Role;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.request.AuthBody;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.request.RegisterBody;
-import com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.services.CustomUserDetailsService;
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.services.AuthUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/auth")
 public class AuthController {
 
-    private final CustomUserDetailsService customUserAuthService;
+    private final AuthUserService customUserAuthService;
 
     @Autowired
-    public AuthController(CustomUserDetailsService customUserAuthService) {
+    public AuthController(AuthUserService customUserAuthService) {
         this.customUserAuthService = customUserAuthService;
     }
 

@@ -14,7 +14,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 import static org.springframework.http.ResponseEntity.ok;
 
@@ -35,13 +38,7 @@ public class UserService {
     public Object addCar(String token, CarDataModel car) {
         Map<Object, Object> model = new HashMap<>();
         User currentUser = getUserByToken(token);
-        if (Objects.isNull(currentUser.getCarsList())) {
-            List<CarDataModel> newCarList = new ArrayList<>();
-            newCarList.add(car);
-            currentUser.setCarsList(newCarList);
-        } else {
-            currentUser.getCarsList().add(car);
-        }
+        currentUser.getCarsList().add(car);
         currentUser.setUpdatedDate(new Date());
         userRepository.save(currentUser);
         model.put("message", "Car " + car.getName() + " added to " + currentUser.getUserName() + " user.");
@@ -71,22 +68,16 @@ public class UserService {
         return ok(model);
     }
 
-    public Object addFriend(String token, String friendUsername) {
+    public Object addFriend(String token, String friendId) {
         Map<Object, Object> model = new HashMap<>();
         User currentUser = getUserByToken(token);
-        User userFriend = getUserByUserName(friendUsername);
-
-        if (Objects.isNull(currentUser.getFriendsList()) && !currentUser.getUserName().equals(friendUsername)) {
-            List<String> newFriends = new ArrayList<>();
-            newFriends.add(userFriend.getUserName());
-            currentUser.setFriendsList(newFriends);
-            currentUser.setUpdatedDate(new Date());
-        } else if (isYourFriend(currentUser, friendUsername) || currentUser.getUserName().equals(friendUsername)) {
+        User userFriend = getUserById(friendId);
+        if (isYourFriend(currentUser, friendId) || currentUser.getId().equals(friendId)) {
             model.put("message", "Cannot add " + userFriend.getUserName() + " to friends " + currentUser.getUserName() + " user.");
             log.warn("Cannot add " + userFriend.getId() + " to friends " + currentUser.getId() + " user.");
             return new ResponseEntity<>(model, HttpStatus.BAD_REQUEST);
         } else {
-            currentUser.getFriendsList().add(userFriend.getUserName());
+            currentUser.getFriendsList().add(userFriend.getId());
             currentUser.setUpdatedDate(new Date());
         }
         userRepository.save(currentUser);
@@ -131,12 +122,9 @@ public class UserService {
         return ok(model);
     }
 
-    private boolean isYourFriend(User currentUser, String username) {
-        if (currentUser.getFriendsList() != null) {
-            String commonFriends = currentUser.getFriendsList().stream().filter(username::equals).findAny().orElse("");
-            return !commonFriends.isEmpty();
-        }
-        return false;
+    private boolean isYourFriend(User currentUser, String id) {
+        String commonFriends = currentUser.getFriendsList().stream().filter(id::equals).findAny().orElse("");
+        return !commonFriends.isEmpty();
     }
 
 

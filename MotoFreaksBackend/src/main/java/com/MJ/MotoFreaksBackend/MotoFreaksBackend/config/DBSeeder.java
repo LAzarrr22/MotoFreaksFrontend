@@ -7,7 +7,7 @@ import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.TypeEvents;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.TypeRecomendation;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.*;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.repository.*;
-import com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.services.CustomUserDetailsService;
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.services.AuthUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -26,7 +26,7 @@ public class DBSeeder implements CommandLineRunner {
     private final UserRepository userRepository;
 
     @Autowired
-    private CustomUserDetailsService userService;
+    private AuthUserService userService;
 
 
     public DBSeeder(CarCompanyRepository carCompanyRepository, EventRepository eventRepository,

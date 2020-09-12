@@ -32,7 +32,7 @@ import static org.springframework.http.ResponseEntity.ok;
 
 @Service
 @Slf4j
-public class CustomUserDetailsService implements UserDetailsService {
+public class AuthUserService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
@@ -57,7 +57,8 @@ public class CustomUserDetailsService implements UserDetailsService {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, data.getPassword()));
         User currentUser = userService.getUserByUserName(username);
         String token = jwtTokenProvider.createToken(username, currentUser.getUserRoles());
-        addLoginHistory(currentUser);
+        currentUser.getLoginsHistory().add(new Date());
+        userRepository.save(currentUser);
         Map<Object, Object> model = new HashMap<>();
         model.put("username", username);
         model.put("token", AuthorizationHeader.TOKEN_PREFIX + token);
@@ -89,6 +90,10 @@ public class CustomUserDetailsService implements UserDetailsService {
         newUser.setLastName(user.getLastName());
         newUser.setCreatedDate(new Date());
         newUser.setPoints(0);
+        newUser.setFriendsList(new ArrayList<>());
+        newUser.setMessages(new HashMap<>());
+        newUser.setLoginsHistory(new ArrayList<>());
+        newUser.setCarsList(new ArrayList<>());
         UserRoles userUserRoles = roleService.getRoleByName(role);
         newUser.setUserRoles(new HashSet<>(Collections.singletonList(userUserRoles)));
         userRepository.save(newUser);
@@ -125,17 +130,5 @@ public class CustomUserDetailsService implements UserDetailsService {
         this.userRepository.save(userExists);
         log.info("Added " + role + " role to " + username + " user.");
         return ok(model);
-    }
-
-    public void addLoginHistory(User currentUser) {
-        Date currentDate = new Date();
-        if (Objects.isNull(currentUser.getLoginsHistory())) {
-            List<Date> historyLogins = new ArrayList<>();
-            historyLogins.add(currentDate);
-            currentUser.setLoginsHistory(historyLogins);
-        } else {
-            currentUser.getLoginsHistory().add(currentDate);
-        }
-        userRepository.save(currentUser);
     }
 }

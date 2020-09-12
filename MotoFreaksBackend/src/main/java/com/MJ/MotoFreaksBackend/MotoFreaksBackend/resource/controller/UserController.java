@@ -41,10 +41,10 @@ public class UserController {
         return userService.addCar(token, car);
     }
 
-    @RequestMapping(path = "/add/friend/{friendUsername}", method = RequestMethod.POST, produces = "application/json")
-    public Object addFriend(HttpServletRequest req, @PathVariable String friendUsername) {
+    @RequestMapping(path = "/add/friend/{friendId}", method = RequestMethod.POST, produces = "application/json")
+    public Object addFriend(HttpServletRequest req, @PathVariable String friendId) {
         String token = req.getHeader(AuthorizationHeader.HEADER_NAME).replace(AuthorizationHeader.TOKEN_PREFIX, "");
-        return userService.addFriend(token, friendUsername);
+        return userService.addFriend(token, friendId);
     }
 
     @RequestMapping(path = "/show/profile/{id}", method = RequestMethod.GET, produces = "application/json")
