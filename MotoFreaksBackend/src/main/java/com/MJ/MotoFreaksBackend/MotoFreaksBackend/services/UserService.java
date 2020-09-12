@@ -69,17 +69,17 @@ public class UserService {
         return ok(model);
     }
 
-    public Object addFriend(String token, String friendEmail) {
+    public Object addFriend(String token, String friendUsername) {
         Map<Object, Object> model = new HashMap<>();
         User currentUser = getUserByToken(token);
-        User userFriend = getUserByUserName(friendEmail);
+        User userFriend = getUserByUserName(friendUsername);
 
-        if (Objects.isNull(currentUser.getFriendsList()) && !currentUser.getUserName().equals(friendEmail)) {
+        if (Objects.isNull(currentUser.getFriendsList()) && !currentUser.getUserName().equals(friendUsername)) {
             List<String> newFriends = new ArrayList<>();
             newFriends.add(userFriend.getUserName());
             currentUser.setFriendsList(newFriends);
             currentUser.setUpdatedDate(new Date());
-        } else if (isYourFriend(currentUser, friendEmail) || currentUser.getUserName().equals(friendEmail)) {
+        } else if (isYourFriend(currentUser, friendUsername) || currentUser.getUserName().equals(friendUsername)) {
             model.put("message", "Cannot add " + userFriend.getUserName() + " to friends " + currentUser.getUserName() + " user.");
             log.warn("Cannot add " + userFriend.getId() + " to friends " + currentUser.getId() + " user.");
             return new ResponseEntity<>(model, HttpStatus.BAD_REQUEST);
@@ -93,13 +93,13 @@ public class UserService {
         return ok(model);
     }
 
-    public Object getProfile(String email, String currentToken) {
+    public Object getProfile(String id, String currentToken) {
         User currentUser = getUserByToken(currentToken);
-        User userToShow = getUserByUserName(email);
+        User userToShow = getUserById(id);
 
         ProfileModelDto profile = new ProfileModelDto(userToShow.getName(), userToShow.getLastName(), userToShow.getCarsList(),
                 userToShow.getPoints(), userToShow.isEnabled()
-                , userToShow.getContact(), isYourFriend(currentUser, email));
+                , userToShow.getContact(), isYourFriend(currentUser, userToShow.getUserName()));
         return ok(profile);
     }
 
@@ -129,10 +129,10 @@ public class UserService {
         return ok(model);
     }
 
-    private boolean isYourFriend(User currentUser, String email) {
+    private boolean isYourFriend(User currentUser, String username) {
         if (currentUser.getFriendsList() != null) {
-            String emailCommon = currentUser.getFriendsList().stream().filter(email::equals).findAny().orElse("");
-            return !emailCommon.isEmpty();
+            String commonFriends = currentUser.getFriendsList().stream().filter(username::equals).findAny().orElse("");
+            return !commonFriends.isEmpty();
         }
         return false;
     }
@@ -145,6 +145,11 @@ public class UserService {
 
     public User getUserByUserName(String username) {
         Optional<User> optionalUserFriend = userRepository.findByUserNameOptional(username);
+        return optionalUserFriend.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+    }
+
+    public User getUserById(String id) {
+        Optional<User> optionalUserFriend = userRepository.findById(id);
         return optionalUserFriend.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
     }
 }

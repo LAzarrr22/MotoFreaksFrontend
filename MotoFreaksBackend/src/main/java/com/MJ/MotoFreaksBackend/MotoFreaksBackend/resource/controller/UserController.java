@@ -37,16 +37,16 @@ public class UserController {
         return userService.addCar(token, car);
     }
 
-    @RequestMapping(path = "/add/friend/{friendEmail}", method = RequestMethod.POST, produces = "application/json")
-    public Object addFriend(HttpServletRequest req, @PathVariable("friendEmail") String friendEmail) {
+    @RequestMapping(path = "/add/friend/{friendUsername}", method = RequestMethod.POST, produces = "application/json")
+    public Object addFriend(HttpServletRequest req, @PathVariable("friendUsername") String friendUsername) {
         String token = req.getHeader(AuthorizationHeader.HEADER_NAME).replace(AuthorizationHeader.TOKEN_PREFIX, "");
-        return userService.addFriend(token, friendEmail);
+        return userService.addFriend(token, friendUsername);
     }
 
-    @RequestMapping(path = "/show/profile/{email}", method = RequestMethod.GET, produces = "application/json")
-    public Object showProfile(@PathVariable("email") String email, HttpServletRequest req) {
+    @RequestMapping(path = "/show/profile/{id}", method = RequestMethod.GET, produces = "application/json")
+    public Object showProfile(@PathVariable("id") String id, HttpServletRequest req) {
         String token = req.getHeader(AuthorizationHeader.HEADER_NAME).replace(AuthorizationHeader.TOKEN_PREFIX, "");
-        return userService.getProfile(email, token);
+        return userService.getProfile(id, token);
     }
 
     @RequestMapping(path = "/show/profile", method = RequestMethod.GET, produces = "application/json")
