@@ -14,7 +14,7 @@ import {
   UserRegister,
   UserRegisterSuccess
 } from '../actions/authentication.actions';
-import {catchError, map, switchMap} from 'rxjs/operators';
+import {catchError, map, switchMap, tap} from 'rxjs/operators';
 import {AuthenticationState} from '../store';
 import {LoginSuccessfulDto} from "../dto/response/login-successful.model";
 
@@ -41,6 +41,7 @@ export class AuthenticationEffects {
       switchMap((action: UserLogin) => {
         return this.authService.login(action.payload);
       }),
+      tap((userData: LoginSuccessfulDto) => localStorage.setItem('token', userData.token)),
       switchMap((userData: LoginSuccessfulDto) => [
         new UserLoginSuccess(userData),
       ]),
