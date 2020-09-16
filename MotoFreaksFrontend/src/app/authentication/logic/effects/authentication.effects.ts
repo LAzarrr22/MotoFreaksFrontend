@@ -6,10 +6,13 @@ import {Action, Store} from '@ngrx/store';
 import {
   USER_LOGIN,
   USER_LOGOUT,
+  USER_REGISTER,
   UserLogin,
   UserLoginFail,
   UserLoginSuccess,
-  UserLogout
+  UserLogout,
+  UserRegister,
+  UserRegisterSuccess
 } from '../actions/authentication.actions';
 import {catchError, map, switchMap} from 'rxjs/operators';
 import {AuthenticationState} from '../store';
@@ -26,6 +29,7 @@ export class AuthenticationEffects {
       ofType(USER_LOGOUT),
       map(_ => {
         this.authService.logout();
+        localStorage.removeItem('token')
       }),
       map(_ => new UserLogout())
     );
@@ -39,6 +43,22 @@ export class AuthenticationEffects {
       }),
       switchMap((userData: LoginSuccessfulDto) => [
         new UserLoginSuccess(userData),
+      ]),
+      catchError((error, caught) => {
+        this.store$.dispatch(new UserLoginFail(error));
+        return caught;
+      })
+    );
+
+  @Effect()
+  register$: Observable<Action> = this.actions$
+    .pipe(
+      ofType(USER_REGISTER),
+      switchMap((action: UserRegister) => {
+        return this.authService.register(action.payload);
+      }),
+      switchMap((userData: string) => [
+        new UserRegisterSuccess(userData),
       ]),
       catchError((error, caught) => {
         this.store$.dispatch(new UserLoginFail(error));
