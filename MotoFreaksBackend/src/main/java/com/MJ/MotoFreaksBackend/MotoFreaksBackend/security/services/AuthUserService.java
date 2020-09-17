@@ -53,7 +53,7 @@ public class AuthUserService implements UserDetailsService {
     private RoleService roleService;
 
     public Object loginUser(AuthBody data) {
-        String username = data.getUserName();
+        String username = data.getUsername();
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, data.getPassword()));
         User currentUser = userService.getUserByUserName(username);
         String token = jwtTokenProvider.createToken(username, currentUser.getUserRoles());

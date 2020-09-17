@@ -28,9 +28,7 @@ export function reducer(state: State = INITIAL_STATE, action) {
       };
 
     case USER_LOGIN_FAIL:
-      return {
-        ...state
-      };
+      return INITIAL_STATE;
 
     case USER_LOGOUT:
       return INITIAL_STATE;
