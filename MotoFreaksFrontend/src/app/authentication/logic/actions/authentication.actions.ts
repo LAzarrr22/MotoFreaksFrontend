@@ -57,9 +57,6 @@ export class UserRegisterFail implements Action {
 
 export class UserLogout implements Action {
   readonly type = USER_LOGOUT;
-
-  constructor() {
-  }
 }
 
 

@@ -25,7 +25,4 @@ export class AuthenticationService {
       {username: register.username, password: register.password, name: register.name, lastName: register.lastName});
   }
 
-  logout(): Observable<any> {
-    return this.httpClient.post(`${environment.apiUrl}/api/auth/logout`, {});
-  }
 }

@@ -10,11 +10,10 @@ import {
   UserLogin,
   UserLoginFail,
   UserLoginSuccess,
-  UserLogout,
   UserRegister,
   UserRegisterSuccess
 } from '../actions/authentication.actions';
-import {catchError, map, switchMap, tap} from 'rxjs/operators';
+import {catchError, switchMap, tap} from 'rxjs/operators';
 import {AuthenticationState} from '../store';
 import {LoginSuccessfulDto} from "../dto/response/login-successful.model";
 
@@ -23,15 +22,11 @@ export class AuthenticationEffects {
   constructor(private actions$: Actions, private store$: Store<AuthenticationState>, private authService: AuthenticationService) {
   }
 
-  @Effect()
-  logout$: Observable<Action> = this.actions$
+  @Effect({dispatch: false})
+  public logout$: Observable<Action> = this.actions$
     .pipe(
       ofType(USER_LOGOUT),
-      map(_ => {
-        this.authService.logout();
-        localStorage.removeItem('token')
-      }),
-      map(_ => new UserLogout())
+      tap((user) => localStorage.removeItem('token'))
     );
 
   @Effect()

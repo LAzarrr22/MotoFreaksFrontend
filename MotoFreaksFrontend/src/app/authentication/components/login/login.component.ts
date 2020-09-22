@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
 import {isUserLoggedIn} from "../../logic/store";
 import {LoginModel} from "../../logic/dto/request/login.model";
-import {UserLogin} from "../../logic/actions/authentication.actions";
+import {UserLogin, UserLogout} from "../../logic/actions/authentication.actions";
 
 @Component({
   selector: 'app-login',
@@ -11,8 +11,9 @@ import {UserLogin} from "../../logic/actions/authentication.actions";
 })
 export class LoginComponent implements OnInit {
 
+  isLogged: boolean;
   constructor(private readonly store: Store) {
-
+    this.store.select(isUserLoggedIn).subscribe(isLogged => this.isLogged = (isLogged.valueOf()))
   }
 
   ngOnInit(): void {
@@ -26,9 +27,7 @@ export class LoginComponent implements OnInit {
     this.store.dispatch(new UserLogin(new LoginModel('admin_mtfrewt', 'admin_mtwettfr')))//tODO
   }
 
-  state() {
-    this.store.select(isUserLoggedIn).subscribe(isLogged => console.log(isLogged.valueOf()))
+  logout() {
+    this.store.dispatch(new UserLogout);
   }
-
-
 }
