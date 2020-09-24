@@ -12,17 +12,19 @@ import {StoreModule} from "@ngrx/store";
 import {reducers} from "./logic/store";
 import {AuthenticationService} from "./logic/services/authentication.service";
 import {HttpClientModule} from "@angular/common/http";
+import {AuthenticationRoutingModule} from "./authentication-routing.module";
 
 
 @NgModule({
   declarations: [LoginComponent, RegisterComponent, LogoutComponent, LogoutPageComponent, RegisterPageComponent, LoginPageComponent],
   exports: [
-    LoginComponent
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     CommonModule,
     HttpClientModule,
-
+    AuthenticationRoutingModule,
     StoreModule.forFeature('authentication', reducers),
     EffectsModule.forFeature([AuthenticationEffects]),
 

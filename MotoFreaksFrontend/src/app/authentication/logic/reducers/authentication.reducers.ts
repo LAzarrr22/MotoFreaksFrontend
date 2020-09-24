@@ -21,6 +21,7 @@ export function reducer(state: State = INITIAL_STATE, action) {
         loggedIn: true
       };
     case USER_LOGIN_SUCCESS:
+      console.log(action.payload.token)
       return {
         loggedIn: true,
         token: action.payload.token,

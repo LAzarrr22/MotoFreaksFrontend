@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
-import {isUserLoggedIn} from "../../logic/store";
+import {getAuthToken, isUserLoggedIn} from "../../logic/store";
 import {LoginModel} from "../../logic/dto/request/login.model";
 import {UserLogin, UserLogout} from "../../logic/actions/authentication.actions";
 
@@ -12,8 +12,10 @@ import {UserLogin, UserLogout} from "../../logic/actions/authentication.actions"
 export class LoginComponent implements OnInit {
 
   isLogged: boolean;
+  token: string;
   constructor(private readonly store: Store) {
     this.store.select(isUserLoggedIn).subscribe(isLogged => this.isLogged = (isLogged.valueOf()))
+    this.store.select(getAuthToken).subscribe(token => this.token = token)
   }
 
   ngOnInit(): void {
