@@ -13,6 +13,7 @@ import {reducers} from "./logic/store";
 import {AuthenticationService} from "./logic/services/authentication.service";
 import {HttpClientModule} from "@angular/common/http";
 import {AuthenticationRoutingModule} from "./authentication-routing.module";
+import {AuthService} from "./logic/services/auth.service";
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import {AuthenticationRoutingModule} from "./authentication-routing.module";
 
   ],
   providers: [
-    AuthenticationService
+    AuthenticationService,
+    AuthService
   ]
 
 })

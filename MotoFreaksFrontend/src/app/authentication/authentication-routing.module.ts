@@ -4,19 +4,19 @@ import {LoginPageComponent} from './pages/login-page/login-page.component';
 import {RegisterPageComponent} from './pages/register-page/register-page.component';
 import {LogoutPageComponent} from './pages/logout-page/logout-page.component';
 import {AppPath} from "../common/enums/app-path.enum";
-import {AuthPath} from "./logic/enums/auth-path.enum";
+import {AppRoute} from "../common/enums/app-route.enum";
 
 export const routes: Routes = [
   {
-    path: AuthPath.LOGIN_PATH,
+    path: AppRoute.LOGIN,
     component: LoginPageComponent
   },
   {
-    path: AuthPath.LOGOUT_PATH,
+    path: AppRoute.LOGOUT,
     component: LogoutPageComponent
   },
   {
-    path: AuthPath.REGISTER_PATH,
+    path: AppRoute.REGISTER,
     component: RegisterPageComponent
   },
   {

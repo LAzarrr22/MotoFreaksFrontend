@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
-import {getAuthToken, isUserLoggedIn} from "../../logic/store";
+import {AuthenticationState, getAuthToken} from "../../logic/store";
 import {LoginModel} from "../../logic/dto/request/login.model";
 import {UserLogin, UserLogout} from "../../logic/actions/authentication.actions";
+import {Router} from "@angular/router";
+import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-login',
@@ -11,10 +13,14 @@ import {UserLogin, UserLogout} from "../../logic/actions/authentication.actions"
 })
 export class LoginComponent implements OnInit {
 
+  form = new FormGroup({
+    username: new FormControl(''),
+    password: new FormControl('')
+  });
   isLogged: boolean;
   token: string;
-  constructor(private readonly store: Store) {
-    this.store.select(isUserLoggedIn).subscribe(isLogged => this.isLogged = (isLogged.valueOf()))
+
+  constructor(private readonly store: Store<AuthenticationState>, private router: Router) {
     this.store.select(getAuthToken).subscribe(token => this.token = token)
   }
 

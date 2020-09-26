@@ -16,10 +16,12 @@ import {
 import {catchError, switchMap, tap} from 'rxjs/operators';
 import {AuthenticationState} from '../store';
 import {LoginSuccessfulDto} from "../dto/response/login-successful.model";
+import {AppPath} from "../../../common/enums/app-path.enum";
+import {Router} from "@angular/router";
 
 @Injectable()
 export class AuthenticationEffects {
-  constructor(private actions$: Actions, private store$: Store<AuthenticationState>, private authService: AuthenticationService) {
+  constructor(private actions$: Actions, private store$: Store<AuthenticationState>, private authService: AuthenticationService, private router: Router) {
   }
 
   @Effect({dispatch: false})
@@ -36,10 +38,14 @@ export class AuthenticationEffects {
       switchMap((action: UserLogin) => {
         return this.authService.login(action.payload);
       }),
-      tap((userData: LoginSuccessfulDto) => localStorage.setItem('token', userData.token)),
+      tap((userData: LoginSuccessfulDto) => {
+        localStorage.setItem('token', userData.token)
+        this.router.navigate([AppPath.HOME_PATH])
+      }),
       switchMap((userData: LoginSuccessfulDto) => [
         new UserLoginSuccess(userData),
       ]),
+
       catchError((error, caught) => {
         this.store$.dispatch(new UserLoginFail(error));
         return caught;
