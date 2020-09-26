@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {AuthService} from "../../logic/services/auth.service";
 
 @Component({
   selector: 'app-register',
@@ -7,7 +8,12 @@ import {Component, OnInit} from '@angular/core';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor() {
+  isAdmin: boolean;
+  isModerator: boolean;
+
+  constructor(private auth: AuthService) {
+    this.isAdmin = this.auth.isAdmin();
+    this.isModerator = this.auth.isModerator();
   }
 
   ngOnInit(): void {

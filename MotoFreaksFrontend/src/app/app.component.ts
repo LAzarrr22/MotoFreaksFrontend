@@ -1,8 +1,9 @@
 import {Component} from '@angular/core';
 import {Router} from "@angular/router";
 import {AppPath} from "./common/enums/app-path.enum";
-import {getAuthToken} from "./authentication/logic/store";
+import {getAuthToken, getRoles} from "./authentication/logic/store";
 import {Store} from "@ngrx/store";
+import {RolesEnum} from "./authentication/logic/enums/roles.enum";
 import {AuthService} from "./authentication/logic/services/auth.service";
 
 @Component({
@@ -14,11 +15,15 @@ export class AppComponent {
   title = 'MotoFreaksFrontend';
   isLogged: boolean;
   token: string;
+  roles: [RolesEnum];
+  isAdmin: boolean;
 
   constructor(private router: Router, private store: Store, private authService: AuthService) {
 
 
-    this.store.select(getAuthToken).subscribe(token => this.token = token)
+    this.store.select(getAuthToken).subscribe(token => this.token = token);
+    this.store.select(getRoles).subscribe(roles => this.roles = roles);
+
   }
 
   openLogin() {
@@ -31,5 +36,9 @@ export class AppComponent {
 
   LOGUOT() {
     this.router.navigate([AppPath.AUTH_LOGOUT_PATH]);
+  }
+
+  isAdmintest() {
+    this.authService.isAdmin();
   }
 }

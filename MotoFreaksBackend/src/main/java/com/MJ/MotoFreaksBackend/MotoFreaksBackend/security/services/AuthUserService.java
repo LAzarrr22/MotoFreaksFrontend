@@ -59,9 +59,12 @@ public class AuthUserService implements UserDetailsService {
         String token = jwtTokenProvider.createToken(username, currentUser.getUserRoles());
         currentUser.getLoginsHistory().add(new Date());
         userRepository.save(currentUser);
+        List<Role> roles = new ArrayList<>();
+        currentUser.getUserRoles().forEach(userRoles -> roles.add(userRoles.getRole()));
         Map<Object, Object> model = new HashMap<>();
         model.put("username", username);
         model.put("token", AuthorizationHeader.TOKEN_PREFIX + token);
+        model.put("roles", roles);
         log.info("User " + currentUser.getId() + " was logged correctly.");
         return ok(model);
     }

@@ -1,7 +1,13 @@
 Hello World its a app component
 <div>State: {{isLogged}}</div>
 <div>Token: {{token}}</div>
-<div></div>
+<div>ROLES:</div>
+<div *ngFor="let role of roles">
+  <div>{{role}}</div>
+</div>
+<div>------------------------------------------------</div>
+<div (click)="isAdmintest()">Admin: {{isAdmin}}</div>
+<div>------------------------------------------------</div>
 <div (click)="openLogin()">LOGIN</div>
 <div (click)="openREG()">REGISTER</div>
 <div (click)="LOGUOT()">LOGOUT</div>
