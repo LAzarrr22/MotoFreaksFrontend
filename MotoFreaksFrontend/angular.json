@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "MotoFreaksFrontend": {
+    "frontend": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -24,6 +24,7 @@
               "src/assets"
             ],
             "styles": [
+              "src/my-theme.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -62,18 +63,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "MotoFreaksFrontend:build"
+            "browserTarget": "frontend:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "MotoFreaksFrontend:build:production"
+              "browserTarget": "frontend:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "MotoFreaksFrontend:build"
+            "browserTarget": "frontend:build"
           }
         },
         "test": {
@@ -88,6 +89,7 @@
               "src/assets"
             ],
             "styles": [
+              "src/my-theme.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -114,14 +116,14 @@
           },
           "configurations": {
             "production": {
-              "devServerTarget": "MotoFreaksFrontend:serve:production"
+              "devServerTarget": "frontend:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "MotoFreaksFrontend",
+  "defaultProject": "frontend",
   "cli": {
     "analytics": "25e62daf-9809-4cc4-9074-cea202033acf"
   },
