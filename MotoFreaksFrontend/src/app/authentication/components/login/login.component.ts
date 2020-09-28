@@ -1,10 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
-import {AuthenticationState, getAuthToken} from "../../logic/store";
+import {AuthenticationState} from "../../logic/store";
 import {LoginModel} from "../../logic/dto/request/login.model";
-import {UserLogin, UserLogout} from "../../logic/actions/authentication.actions";
-import {Router} from "@angular/router";
+import {USER_LOGIN_FAIL, UserLogin, UserLoginFail} from "../../logic/actions/authentication.actions";
 import {FormControl, FormGroup} from "@angular/forms";
+import {Observable} from "rxjs";
+import {Actions, ofType} from "@ngrx/effects";
+import {map} from "rxjs/operators";
 
 @Component({
   selector: 'app-login',
@@ -17,25 +19,18 @@ export class LoginComponent implements OnInit {
     username: new FormControl(''),
     password: new FormControl('')
   });
-  isLogged: boolean;
-  token: string;
+  errorMessage: Observable<string>
 
-  constructor(private readonly store: Store<AuthenticationState>, private router: Router) {
-    this.store.select(getAuthToken).subscribe(token => this.token = token)
+  constructor(private readonly store: Store<AuthenticationState>, private actions: Actions) {
+    this.errorMessage = this.actions.pipe(ofType(USER_LOGIN_FAIL), map((action: UserLoginFail) => action.payload));
+
   }
 
   ngOnInit(): void {
   }
 
   login() {
-    this.store.dispatch(new UserLogin(new LoginModel('admin_mtfr', 'admin_mtfr')))//tODO
+    this.store.dispatch(new UserLogin(new LoginModel(this.form.controls.username.value, this.form.controls.password.value)))//tODO
   }
 
-  fail() {
-    this.store.dispatch(new UserLogin(new LoginModel('admin_mtfrewt', 'admin_mtwettfr')))//tODO
-  }
-
-  logout() {
-    this.store.dispatch(new UserLogout);
-  }
 }

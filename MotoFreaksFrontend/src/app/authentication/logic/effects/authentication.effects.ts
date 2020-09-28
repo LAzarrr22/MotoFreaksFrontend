@@ -47,7 +47,7 @@ export class AuthenticationEffects {
       ]),
 
       catchError((error, caught) => {
-        this.store$.dispatch(new UserLoginFail(error));
+        this.store$.dispatch(new UserLoginFail(error.message));
         return caught;
       })
     );

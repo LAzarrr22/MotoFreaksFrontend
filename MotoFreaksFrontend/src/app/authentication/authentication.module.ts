@@ -14,6 +14,11 @@ import {AuthenticationService} from "./logic/services/authentication.service";
 import {HttpClientModule} from "@angular/common/http";
 import {AuthenticationRoutingModule} from "./authentication-routing.module";
 import {AuthService} from "./logic/services/auth.service";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {ReactiveFormsModule} from "@angular/forms";
+import {MatButtonModule} from "@angular/material/button";
+import {MatDividerModule} from "@angular/material/divider";
 
 
 @NgModule({
@@ -28,6 +33,11 @@ import {AuthService} from "./logic/services/auth.service";
     AuthenticationRoutingModule,
     StoreModule.forFeature('authentication', reducers),
     EffectsModule.forFeature([AuthenticationEffects]),
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatDividerModule,
 
   ],
   providers: [
