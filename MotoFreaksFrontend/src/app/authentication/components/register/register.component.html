@@ -1,4 +1,59 @@
-<p>register works!</p>
+<div class="context">
+  <div class="container">
 
-<div *ngIf="isAdmin">ADMIN ADMIN ADMIN ADMIN</div>
-<div *ngIf="isModerator">MODERATOR</div>
+    <div class="row title">
+      Registration
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <form class="login-form" [formGroup]="form" (ngSubmit)="register()">
+          <mat-form-field class="full-width">
+            <mat-label>Name</mat-label>
+            <input matInput placeholder="Name" formControlName="name">
+          </mat-form-field>
+
+          <mat-form-field class="full-width">
+            <mat-label>Last Name</mat-label>
+            <input matInput placeholder="Last Name" formControlName="lastName">
+          </mat-form-field>
+
+          <mat-form-field class="full-width">
+            <mat-label>Username</mat-label>
+            <input matInput placeholder="Username" formControlName="username">
+          </mat-form-field>
+
+          <mat-form-field class="full-width">
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="Password" type="password" formControlName="password">
+          </mat-form-field>
+
+          <mat-form-field class="full-width">
+            <mat-label>Repeat password</mat-label>
+            <input matInput placeholder="Repeat your password" type="password" formControlName="repeatPassword">
+          </mat-form-field>
+
+
+          <div class="row error-message" *ngIf="notConfirmPassword">
+            <div class="col">
+              Passwords invalid
+            </div>
+          </div>
+          <div class="row error-message" *ngIf="errorMessage | async as errorMessage">
+            <div class="col">
+              {{errorMessage}}
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <button mat-flat-button type="submit" color="primary">Register</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
