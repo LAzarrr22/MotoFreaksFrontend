@@ -72,21 +72,20 @@ public class AuthUserService implements UserDetailsService {
     public Object registerUser(RegisterBody data, Role role) {
         Map<Object, Object> model = new HashMap<>();
         try {
-            userService.getUserByUserName(data.getUserName());
-            model.put("message", "User with " + data.getUserName() + " is already exists!");
-            log.warn("Cannot register user: " + data.getUserName() + ". User is already exists");
-            return new ResponseEntity<Object>(model, HttpStatus.NOT_FOUND);
+            userService.getUserByUserName(data.getUsername());
+            log.warn("Cannot register user: " + data.getUsername() + ". User is already exists");
+            return new ResponseEntity<Object>("User  '" + data.getUsername() + "' is already exists!", HttpStatus.NOT_FOUND);
         } catch (ResponseStatusException e) {
             saveNewUser(data, role);
             model.put("message", "User registered successfully");
-            log.info("User " + data.getUserName() + " was register correctly.");
+            log.info("User " + data.getUsername() + " was register correctly.");
             return ok(model);
         }
     }
 
     public void saveNewUser(RegisterBody user, Role role) {
         User newUser = new User();
-        newUser.setUserName(user.getUserName());
+        newUser.setUserName(user.getUsername());
         newUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         newUser.setEnabled(true);
         newUser.setName(user.getName());

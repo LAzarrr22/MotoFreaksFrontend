@@ -11,6 +11,7 @@ import {
   UserLoginFail,
   UserLoginSuccess,
   UserRegister,
+  UserRegisterFail,
   UserRegisterSuccess
 } from '../actions/authentication.actions';
 import {catchError, switchMap, tap} from 'rxjs/operators';
@@ -47,7 +48,7 @@ export class AuthenticationEffects {
       ]),
 
       catchError((error, caught) => {
-        this.store$.dispatch(new UserLoginFail(error.message));
+        this.store$.dispatch(new UserLoginFail(error.error.message));
         return caught;
       })
     );
@@ -59,11 +60,14 @@ export class AuthenticationEffects {
       switchMap((action: UserRegister) => {
         return this.authService.register(action.payload);
       }),
+      tap(() => {
+        this.router.navigate([AppPath.HOME_PATH])
+      }),
       switchMap((userData: string) => [
         new UserRegisterSuccess(userData),
       ]),
       catchError((error, caught) => {
-        this.store$.dispatch(new UserLoginFail(error));
+        this.store$.dispatch(new UserRegisterFail(error.error));
         return caught;
       })
     );
