@@ -135,7 +135,7 @@ public class UserService {
 
     public User getUserByUserName(String username) {
         Optional<User> optionalUserFriend = userRepository.findByUserNameOptional(username);
-        return optionalUserFriend.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+        return optionalUserFriend.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User '" + username + "' not found"));
     }
 
     public User getUserById(String id) {
