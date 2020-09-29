@@ -1,7 +1,8 @@
 @import "~bootstrap";
+@import "src/styles";
 
 .error-message {
-  color: #ef3727;
+  color: $custom-warn;
 }
 
 .context {
@@ -16,4 +17,9 @@
 
 .login-full-width {
   width: 100%;
+}
+
+.title {
+  color: $custom-blue;
+  font-size: $font-size-big;
 }
