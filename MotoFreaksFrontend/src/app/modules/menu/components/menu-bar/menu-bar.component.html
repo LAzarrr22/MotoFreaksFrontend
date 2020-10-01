@@ -1,0 +1,49 @@
+<div class="top-bar"></div>
+
+<div class="side-menu__container">
+  <div class="side-menu__title--container">
+    <p class="side-menu__title--a">MotoFreaks</p>
+    <p class="side-menu__title--b">MJ</p>
+
+  </div>
+
+  <div
+    class="side-menu__item" (click)="goToHome()" [ngClass]="{'side-menu__item--active': activeRoute == '[Active] HOME'}">
+    <i class="material-icons md-18 side-menu__icon">home</i>
+    <div class="side_menu__text">
+      Home
+    </div>
+  </div>
+
+  <div *ngIf="!isLogged"
+    class="side-menu__item" (click)="goToLogin()" [ngClass]="{'side-menu__item--active': activeRoute == '[Active] LOGIN'}">
+    <i class="material-icons md-18 side-menu__icon">login</i>
+    <div class="side_menu__text">
+      Login
+    </div>
+  </div>
+
+  <div *ngIf="!isLogged"
+    class="side-menu__item" (click)="goToRegister()" [ngClass]="{'side-menu__item--active': activeRoute == '[Active] REGISTER'}">
+    <i class="material-icons md-18 side-menu__icon">person_add</i>
+    <div class="side_menu__text">
+      Register
+    </div>
+  </div>
+
+  <div *ngIf="isLogged"
+    class="side-menu__item" (click)="goToMeProfile()" [ngClass]="{'side-menu__item--active': activeRoute == '[Active] MY_PROFILE'}">
+    <i class="material-icons md-18 side-menu__icon">person</i>
+    <div class="side_menu__text">
+      My Profile
+    </div>
+  </div>
+
+
+  <div *ngIf="isLogged" class="side-menu__item" (click)="logOut()">
+    <i class="material-icons md-18 side-menu__icon">power_settings_new</i>
+    <div class="side_menu__text">
+      Logout
+    </div>
+  </div>
+</div>
