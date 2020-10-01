@@ -5,6 +5,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatDividerModule} from "@angular/material/divider";
 import {MatIconModule} from "@angular/material/icon";
+import {MenuService} from "./logic/services/menu.service";
 
 
 @NgModule({
@@ -18,7 +19,11 @@ import {MatIconModule} from "@angular/material/icon";
     MatMenuModule,
     MatDividerModule,
     MatIconModule
+  ],
+  providers: [
+    MenuService
   ]
+
 })
 export class MenuModule {
 }

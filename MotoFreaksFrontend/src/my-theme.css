@@ -1115,7 +1115,7 @@ textarea.cdk-textarea-autosize-measuring-firefox {
 }
 
 .mat-button, .mat-icon-button, .mat-stroked-button {
-  color: inherit;
+  color: #188cc2;
   background: transparent
 }
 

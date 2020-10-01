@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {ActiveRoute} from "../../../../shared/enums/active-route.enum";
+import {MenuService} from "../../../menu/logic/services/menu.service";
 
 @Component({
   selector: 'app-register-page',
@@ -7,10 +9,12 @@ import {Component, OnInit} from '@angular/core';
 })
 export class RegisterPageComponent implements OnInit {
 
-  constructor() {
+  constructor(private menuService: MenuService) {
   }
 
   ngOnInit(): void {
+    this.menuService.activeRoute.next(ActiveRoute.REGISTER)
+
   }
 
 }
