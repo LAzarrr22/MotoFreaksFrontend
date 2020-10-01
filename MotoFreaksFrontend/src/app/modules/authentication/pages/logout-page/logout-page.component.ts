@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {MenuService} from "../../../menu/logic/services/menu.service";
 
 @Component({
   selector: 'app-logout-page',
@@ -7,10 +8,11 @@ import {Component, OnInit} from '@angular/core';
 })
 export class LogoutPageComponent implements OnInit {
 
-  constructor() {
+  constructor(private menuService: MenuService) {
   }
 
   ngOnInit(): void {
+    this.menuService.activeRoute.next('')
   }
 
 }

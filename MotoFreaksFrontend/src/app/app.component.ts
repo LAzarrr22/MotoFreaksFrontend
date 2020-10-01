@@ -1,10 +1,10 @@
 import {Component} from '@angular/core';
 import {Router} from "@angular/router";
-import {AppPath} from "./common/enums/app-path.enum";
-import {getAuthToken, getRoles} from "./authentication/logic/store";
+import {AppPath} from "./shared/enums/app-path.enum";
+import {getAuthToken, getRoles} from "./modules/authentication/logic/store";
 import {Store} from "@ngrx/store";
-import {RolesEnum} from "./authentication/logic/enums/roles.enum";
-import {AuthService} from "./authentication/logic/services/auth.service";
+import {RolesEnum} from "./modules/authentication/logic/enums/roles.enum";
+import {AuthService} from "./modules/authentication/logic/services/auth.service";
 
 @Component({
   selector: 'app-root',

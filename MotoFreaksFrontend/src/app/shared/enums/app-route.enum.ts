@@ -5,4 +5,6 @@ export enum AppRoute {
   LOGOUT = 'logout',
 
   HOME = 'moto-freaks',
+
+  PROFILE = 'profile'
 }

@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {MenuService} from "../../../menu/logic/services/menu.service";
+import {ActiveRoute} from "../../../../shared/enums/active-route.enum";
 
 @Component({
   selector: 'app-home-page',
@@ -7,10 +9,12 @@ import {Component, OnInit} from '@angular/core';
 })
 export class HomePageComponent implements OnInit {
 
-  constructor() {
+  constructor(private menuService: MenuService) {
+
   }
 
   ngOnInit(): void {
+    this.menuService.activeRoute.next(ActiveRoute.HOME)
   }
 
 }

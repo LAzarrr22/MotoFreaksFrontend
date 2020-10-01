@@ -1,6 +1,6 @@
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from "@angular/router";
 import {Observable} from "rxjs";
-import {AppPath} from "../../../common/enums/app-path.enum";
+import {AppPath} from "../../../../shared/enums/app-path.enum";
 import {Injectable} from "@angular/core";
 import {AuthService} from "../services/auth.service";
 

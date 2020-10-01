@@ -17,7 +17,7 @@ import {
 import {catchError, switchMap, tap} from 'rxjs/operators';
 import {AuthenticationState} from '../store';
 import {LoginSuccessfulDto} from "../dto/response/login-successful.model";
-import {AppPath} from "../../../common/enums/app-path.enum";
+import {AppPath} from "../../../../shared/enums/app-path.enum";
 import {Router} from "@angular/router";
 
 @Injectable()

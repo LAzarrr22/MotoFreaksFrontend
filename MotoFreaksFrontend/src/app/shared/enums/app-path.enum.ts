@@ -5,4 +5,6 @@ export enum AppPath {
   AUTH_LOGOUT_PATH = '/auth/logout',
 
   HOME_PATH = '/moto-freaks',
+
+  MY_PROFILE = '/profile/me',
 }
