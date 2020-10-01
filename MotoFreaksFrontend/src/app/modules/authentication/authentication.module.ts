@@ -19,6 +19,7 @@ import {MatInputModule} from "@angular/material/input";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatButtonModule} from "@angular/material/button";
 import {MatDividerModule} from "@angular/material/divider";
+import {AppCommonModule} from "../common/common.module";
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import {MatDividerModule} from "@angular/material/divider";
     ReactiveFormsModule,
     MatButtonModule,
     MatDividerModule,
+    AppCommonModule,
 
   ],
   providers: [

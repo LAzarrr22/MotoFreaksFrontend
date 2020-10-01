@@ -7,6 +7,7 @@ import {RegisterModel} from "../../logic/dto/request/register.model";
 import {Actions, ofType} from "@ngrx/effects";
 import {map} from "rxjs/operators";
 import {Observable} from "rxjs";
+import {ValidationMessageMap} from "../../../../shared/interfaces/validation-message-map";
 
 @Component({
   selector: 'app-register',
@@ -16,11 +17,9 @@ import {Observable} from "rxjs";
 export class RegisterComponent implements OnInit {
 
   form: FormGroup;
-
-
   notConfirmPassword = false;
-  userExists: Observable<string>;
   errorMessage: Observable<string>
+  validationFormatMessage: ValidationMessageMap;
 
   constructor(private readonly store: Store<AuthenticationState>, private formBuilder: FormBuilder, private actions: Actions) {
     this.errorMessage = this.actions.pipe(ofType(USER_REGISTER_FAIL), map((action: UserLoginFail) => action.payload));
@@ -33,29 +32,24 @@ export class RegisterComponent implements OnInit {
       username: new FormControl('', [Validators.required, Validators.minLength(6),]),
       password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.pattern(new RegExp('(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\\W)'))]),
       repeatPassword: new FormControl('')
-    }, {validators: this.checkConfirmPassword('password', 'repeatPassword')});
-  }
-
-  checkConfirmPassword(passwordKey: string, passwordConfirmationKey: string) {
-    return (formGroup: FormGroup) => {
-      const control = formGroup.controls[passwordKey];
-      const matchingControl = formGroup.controls[passwordConfirmationKey];
-
-      if (matchingControl.errors && !matchingControl.errors.mustMatch) {
-        // return if another validator has already found an error on the matchingControl
-        return;
-      }
-
-      // set error on matchingControl if validation fails
-      if (control.value !== matchingControl.value) {
-        matchingControl.setErrors({mustMatch: true});
-        this.notConfirmPassword = true;
-      } else {
-        matchingControl.setErrors(null);
-        this.notConfirmPassword = false;
+    }, {validators: [this.passwordMatchValidator]});
+    this.validationFormatMessage = {
+      repeatPassword: {
+        notMatchingPassword: 'Passwords not equals'
       }
     }
+  }
 
+  passwordMatchValidator(group: FormGroup): any {
+    if (group) {
+      if (group.get('password').value !== group.get('repeatPassword').value) {
+        group.controls['repeatPassword'].setErrors({notMatchingPassword: true});
+        return {notMatchingPassword: true};
+      } else {
+        group.controls['repeatPassword'].setErrors(null);
+      }
+    }
+    return null;
   }
 
   getName() {

@@ -34,11 +34,9 @@
           </mat-form-field>
 
 
-          <div class="row error-message" *ngIf="notConfirmPassword">
-            <div class="col">
-              Passwords not equals
-            </div>
-          </div>
+          <error-form [control]="'repeatPassword'" [form]="form" [allMessages]="validationFormatMessage"></error-form>
+
+
           <div class="row error-message" *ngIf="errorMessage | async as errorMessage">
             <div class="col">
               {{errorMessage}}
