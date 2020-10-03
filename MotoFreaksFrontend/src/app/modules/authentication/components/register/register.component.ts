@@ -17,7 +17,6 @@ import {ValidationMessageMap} from "../../../../shared/interfaces/validation-mes
 export class RegisterComponent implements OnInit {
 
   form: FormGroup;
-  notConfirmPassword = false;
   errorMessage: Observable<string>
   validationFormatMessage: ValidationMessageMap;
 
@@ -30,13 +29,14 @@ export class RegisterComponent implements OnInit {
       name: new FormControl('', [Validators.required]),
       lastName: new FormControl('', [Validators.required]),
       username: new FormControl('', [Validators.required, Validators.minLength(6),]),
+      email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.pattern(new RegExp('(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\\W)'))]),
       repeatPassword: new FormControl('')
     }, {validators: [this.passwordMatchValidator]});
     this.validationFormatMessage = {
       repeatPassword: {
         notMatchingPassword: 'Passwords not equals'
-      }
+      },
     }
   }
 
@@ -68,7 +68,13 @@ export class RegisterComponent implements OnInit {
     return this.form.controls.username.value;
   }
 
+  getEmail() {
+    return this.form.controls.email.value;
+  }
+
   register() {
-    this.store.dispatch(new UserRegister(new RegisterModel(this.getName(), this.getLastName(), this.getPassword(), this.getUsername())));
+    this.store.dispatch(
+      new UserRegister(
+        new RegisterModel(this.getName(), this.getLastName(), this.getPassword(), this.getUsername(), this.getEmail())));
   }
 }

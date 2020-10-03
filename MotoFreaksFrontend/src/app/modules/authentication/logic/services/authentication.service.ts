@@ -22,7 +22,13 @@ export class AuthenticationService {
 
   register(register: RegisterModel): Observable<any> {
     return this.httpClient.post(`${environment.apiUrl}/api/auth/register`,
-      {username: register.username, password: register.password, name: register.name, lastName: register.lastName});
+      {
+        username: register.username,
+        password: register.password,
+        name: register.name,
+        lastName: register.lastName,
+        email: register.email
+      });
   }
 
 }
