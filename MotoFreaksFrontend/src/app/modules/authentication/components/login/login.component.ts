@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.store.dispatch(new UserLogin(new LoginModel(this.form.controls.username.value, this.form.controls.password.value)))//tODO
+    this.store.dispatch(new UserLogin(new LoginModel(this.form.controls.username.value, this.form.controls.password.value)))
   }
 
 }
