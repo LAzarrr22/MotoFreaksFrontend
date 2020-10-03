@@ -18,7 +18,7 @@ export class RegisterComponent implements OnInit {
 
   form: FormGroup;
   errorMessage: Observable<string>
-  validationFormatMessage: ValidationMessageMap;
+  validationMessages: ValidationMessageMap;
 
   constructor(private readonly store: Store<AuthenticationState>, private formBuilder: FormBuilder, private actions: Actions) {
     this.errorMessage = this.actions.pipe(ofType(USER_REGISTER_FAIL), map((action: UserLoginFail) => action.payload));
@@ -33,10 +33,18 @@ export class RegisterComponent implements OnInit {
       password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.pattern(new RegExp('(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\\W)'))]),
       repeatPassword: new FormControl('')
     }, {validators: [this.passwordMatchValidator]});
-    this.validationFormatMessage = {
+    this.validationMessages = {
       repeatPassword: {
         notMatchingPassword: 'Passwords not equals'
       },
+      password: {
+        pattern: 'Password must contain at least one uppercase,\n' +
+          'one lowercase, one number, and one symbol',
+        minlength: 'Username must be at least 6 characters long'
+      },
+      username: {
+        minlength: 'Username must be at least 6 characters long'
+      }
     }
   }
 
