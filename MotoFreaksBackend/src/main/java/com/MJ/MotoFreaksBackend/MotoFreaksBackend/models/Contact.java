@@ -1,8 +1,12 @@
 package com.MJ.MotoFreaksBackend.MotoFreaksBackend.models;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Contact {
     private String email;
     private String phone;
@@ -10,4 +14,8 @@ public class Contact {
     private String instagram;
     private String twitter;
     private String skype;
+
+    public Contact(String email) {
+        this.email = email;
+    }
 }

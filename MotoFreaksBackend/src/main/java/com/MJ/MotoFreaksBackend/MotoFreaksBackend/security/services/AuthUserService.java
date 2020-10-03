@@ -3,6 +3,7 @@ package com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.services;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections.User;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections.UserRoles;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.Role;
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.Contact;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.repository.UserRepository;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.configs.JwtTokenProvider;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.consts.AuthorizationHeader;
@@ -98,6 +99,7 @@ public class AuthUserService implements UserDetailsService {
         newUser.setCarsList(new ArrayList<>());
         UserRoles userUserRoles = roleService.getRoleByName(role);
         newUser.setUserRoles(new HashSet<>(Collections.singletonList(userUserRoles)));
+        newUser.setContact(new Contact(user.getEmail()));
         userRepository.save(newUser);
     }
 
