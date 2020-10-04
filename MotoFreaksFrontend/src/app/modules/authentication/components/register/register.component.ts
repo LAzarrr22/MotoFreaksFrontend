@@ -91,7 +91,7 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    if (this.passwordMatchValidator(this.form) == null) {
+    if (this.form.valid) {
       this.store.dispatch(
         new UserRegister(
           new RegisterModel(this.getName(), this.getLastName(), this.getPassword(), this.getUsername(), this.getEmail())));
