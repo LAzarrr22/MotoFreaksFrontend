@@ -1,4 +1,4 @@
-<div class="top-bar"></div>
+<app-top-bar></app-top-bar>
 
 <div class="side-menu__container">
   <div class="side-menu__title--container">
@@ -40,7 +40,7 @@
   </div>
 
 
-  <div *ngIf="isLogged" class="side-menu__item" (click)="logOut()">
+  <div *ngIf="isLogged" class="side-menu__item--logout" (click)="logOut()">
     <i class="material-icons md-18 side-menu__icon">power_settings_new</i>
     <div class="side_menu__text">
       Logout

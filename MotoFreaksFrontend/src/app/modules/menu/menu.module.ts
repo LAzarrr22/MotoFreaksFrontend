@@ -6,10 +6,11 @@ import {MatMenuModule} from "@angular/material/menu";
 import {MatDividerModule} from "@angular/material/divider";
 import {MatIconModule} from "@angular/material/icon";
 import {MenuService} from "./logic/services/menu.service";
+import {TopBarComponent} from './components/top-bar/top-bar.component';
 
 
 @NgModule({
-  declarations: [MenuBarComponent],
+  declarations: [MenuBarComponent, TopBarComponent],
   exports: [
     MenuBarComponent
   ],
