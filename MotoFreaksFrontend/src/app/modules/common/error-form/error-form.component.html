@@ -2,7 +2,7 @@
   <ng-container *ngIf="message == null">
     <ng-container *ngFor="let err of formUtils.getErrorMsgs(control, form, allMessages)">
       <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mt-1 w-100 error-message" style="font-size: inherit">
-        {{err}}
+       <div [innerHTML]="err"></div>
       </div>
     </ng-container>
   </ng-container>

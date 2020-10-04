@@ -28,9 +28,9 @@ export class RegisterComponent implements OnInit {
     this.form = this.formBuilder.group({
       name: new FormControl('', [Validators.required]),
       lastName: new FormControl('', [Validators.required]),
-      username: new FormControl('', [Validators.required, Validators.minLength(6),]),
+      username: new FormControl('', [Validators.required, Validators.pattern(new RegExp('(?=.*[a-z])(?=.*[A-Z])')), Validators.minLength(6),]),
       email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.pattern(new RegExp('(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\\W)'))]),
+      password: new FormControl('', [Validators.required, Validators.pattern(new RegExp('(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\\W)')), Validators.minLength(6)]),
       repeatPassword: new FormControl('')
     }, {validators: [this.passwordMatchValidator]});
     this.validationMessages = {
@@ -38,12 +38,22 @@ export class RegisterComponent implements OnInit {
         notMatchingPassword: 'Passwords not equals'
       },
       password: {
-        pattern: 'Password must contain at least one uppercase,\n' +
-          'one lowercase, one number, and one symbol',
-        minlength: 'Username must be at least 6 characters long'
+        pattern: '<p>Password must contain: </p>' +
+          '<ul>' +
+          '<li>Have at least one uppercase</li>' +
+          '<li>Have at least one lowercase</li>' +
+          '<li>Have at least one number</li>' +
+          '<li>Have at least one symbol</li>' +
+          '</ul>',
+        minlength: 'Password must be at least 6 characters long'
       },
       username: {
-        minlength: 'Username must be at least 6 characters long'
+        minlength: 'Username must be at least 6 characters long',
+        pattern: '<p>Username must contain: </p>' +
+          '<ul>' +
+          '<li>Have at least one uppercase</li>' +
+          '<li>Have at least one lowercase</li>' +
+          '</ul>'
       }
     }
   }
@@ -81,8 +91,10 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    this.store.dispatch(
-      new UserRegister(
-        new RegisterModel(this.getName(), this.getLastName(), this.getPassword(), this.getUsername(), this.getEmail())));
+    if (this.passwordMatchValidator(this.form) == null) {
+      this.store.dispatch(
+        new UserRegister(
+          new RegisterModel(this.getName(), this.getLastName(), this.getPassword(), this.getUsername(), this.getEmail())));
+    }
   }
 }
