@@ -6,5 +6,7 @@ export enum AppRoute {
 
   HOME = 'moto-freaks',
 
-  PROFILE = 'profile'
+  PROFILE = 'profile',
+  ME = 'me',
+  FRIENDS = 'friends',
 }
