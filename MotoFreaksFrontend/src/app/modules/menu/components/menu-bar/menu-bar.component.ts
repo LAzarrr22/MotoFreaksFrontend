@@ -13,6 +13,7 @@ import {AuthenticationState, isUserLoggedIn} from "../../../authentication/logic
 export class MenuBarComponent implements OnInit {
 
   activeRoute: string = '';
+  enabled: string = 'true';
   isLogged: boolean;
 
   constructor(private router: Router, private changeDetector: ChangeDetectorRef, private menuService: MenuService, private authStore: Store<AuthenticationState>) {
@@ -22,6 +23,10 @@ export class MenuBarComponent implements OnInit {
   ngOnInit() {
     this.menuService.activeRoute.subscribe(activeElement => {
       this.activeRoute = activeElement;
+      this.changeDetector.detectChanges();
+    })
+    this.menuService.enabled.subscribe(enabled => {
+      this.enabled = enabled;
       this.changeDetector.detectChanges();
     })
   }

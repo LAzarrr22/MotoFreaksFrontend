@@ -6,18 +6,19 @@
     <p class="side-menu__title--b">MJ</p>
 
   </div>
-
-  <div
-    class="side-menu__item" (click)="goToHome()" [ngClass]="{'side-menu__item--active': activeRoute == '[Active] HOME'}">
-    <i class="material-icons md-18 side-menu__icon">home</i>
-    <div class="side_menu__text">
-      Home
+  <div *ngIf="enabled == 'true'">
+    <div
+      class="side-menu__item" (click)="goToHome()" [ngClass]="{'side-menu__item--active': activeRoute == '[Active] HOME'}">
+      <i class="material-icons side-menu__icon">home</i>
+      <div class="side_menu__text">
+        Home
+      </div>
     </div>
-  </div>
 
-  <div *ngIf="!isLogged"
+
+    <div *ngIf="!isLogged"
     class="side-menu__item" (click)="goToLogin()" [ngClass]="{'side-menu__item--active': activeRoute == '[Active] LOGIN'}">
-    <i class="material-icons md-18 side-menu__icon">login</i>
+      <i class="material-icons  side-menu__icon">login</i>
     <div class="side_menu__text">
       Login
     </div>
@@ -25,7 +26,7 @@
 
   <div *ngIf="!isLogged"
     class="side-menu__item" (click)="goToRegister()" [ngClass]="{'side-menu__item--active': activeRoute == '[Active] REGISTER'}">
-    <i class="material-icons md-18 side-menu__icon">person_add</i>
+    <i class="material-icons  side-menu__icon">person_add</i>
     <div class="side_menu__text">
       Register
     </div>
@@ -40,10 +41,12 @@
   </div>
 
 
-  <div *ngIf="isLogged" class="side-menu__item--logout" (click)="logOut()">
-    <i class="material-icons md-18 side-menu__icon">power_settings_new</i>
-    <div class="side_menu__text">
-      Logout
+    <div *ngIf="isLogged" class="side-menu__item--logout" (click)="logOut()">
+      <i class="material-icons md-18 side-menu__icon">power_settings_new</i>
+      <div class="side_menu__text">
+        Logout
+      </div>
     </div>
+
   </div>
 </div>

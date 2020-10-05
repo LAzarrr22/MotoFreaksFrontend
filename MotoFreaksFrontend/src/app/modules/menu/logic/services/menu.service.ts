@@ -6,4 +6,5 @@ import {Injectable} from "@angular/core";
 })
 export class MenuService {
   activeRoute: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  enabled: BehaviorSubject<string> = new BehaviorSubject<string>('true');
 }
