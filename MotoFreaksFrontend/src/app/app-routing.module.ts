@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {AppRoute} from "./shared/enums/app-route.enum";
 import {AuthGuard} from "./modules/authentication/logic/guards/auth-guard.service";
 import {AppPath} from "./shared/enums/app-path.enum";
+import {ConnectionRefusedComponent} from "./modules/common/connection-refused/connection-refused.component";
 
 
 const routes: Routes = [
@@ -19,6 +20,10 @@ const routes: Routes = [
     path: AppRoute.PROFILE,
     canActivate: [AuthGuard],
     loadChildren: () => import('./modules/users/users.module').then(m => m.UsersModule)
+  },
+  {
+    path: AppRoute.SERVICE_NOT_AVAILABLE,
+    component: ConnectionRefusedComponent,
   },
   {
     path: '**',

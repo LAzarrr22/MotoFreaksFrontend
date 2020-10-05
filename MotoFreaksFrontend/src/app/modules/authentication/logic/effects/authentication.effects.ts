@@ -19,10 +19,13 @@ import {AuthenticationState} from '../store';
 import {LoginSuccessfulDto} from "../dto/response/login-successful.model";
 import {AppPath} from "../../../../shared/enums/app-path.enum";
 import {Router} from "@angular/router";
+import {CommonComponentsService} from "../../../common/common.service";
 
 @Injectable()
 export class AuthenticationEffects {
-  constructor(private actions$: Actions, private store$: Store<AuthenticationState>, private authService: AuthenticationService, private router: Router) {
+  constructor(private actions$: Actions, private store$: Store<AuthenticationState>
+    , private authService: AuthenticationService, private router: Router
+    , private errorService: CommonComponentsService) {
   }
 
   @Effect({dispatch: false})
@@ -49,6 +52,7 @@ export class AuthenticationEffects {
 
       catchError((error, caught) => {
         this.store$.dispatch(new UserLoginFail(error.error.message));
+        this.errorService.error(error);
         return caught;
       })
     );
@@ -68,6 +72,7 @@ export class AuthenticationEffects {
       ]),
       catchError((error, caught) => {
         this.store$.dispatch(new UserRegisterFail(error.error));
+        this.errorService.error(error);
         return caught;
       })
     );

@@ -7,4 +7,6 @@ export enum AppPath {
   HOME_PATH = '/moto-freaks',
 
   MY_PROFILE = '/profile/me',
+
+  SERVICE_NOT_AVAILABLE = '/service-not-available',
 }

@@ -1,0 +1,18 @@
+@import "src/styles";
+@import "~bootstrap";
+
+.main-text {
+  color: $custom-warn;
+  font-size: $font-size-Xbig;
+  padding-bottom: 35px;
+}
+
+.subtext {
+  padding-bottom: 20px;
+  color: $custom-white;
+  font-size: $font-size-big;
+}
+
+.context {
+  padding-top: 60px;
+}
