@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {Store} from "@ngrx/store";
+import {AuthenticationState, isUserLoggedIn} from "../../../authentication/logic/store";
 
 @Component({
   selector: 'app-top-bar',
@@ -7,7 +9,10 @@ import {Component, OnInit} from '@angular/core';
 })
 export class TopBarComponent implements OnInit {
 
-  constructor() {
+  isLogged: boolean;
+
+  constructor(private authStore: Store<AuthenticationState>) {
+    this.authStore.select(isUserLoggedIn).subscribe(isLoggedState => this.isLogged = isLoggedState)
   }
 
   ngOnInit(): void {
