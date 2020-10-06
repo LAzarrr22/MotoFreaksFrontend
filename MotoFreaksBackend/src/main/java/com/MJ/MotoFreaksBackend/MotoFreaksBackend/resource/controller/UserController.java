@@ -23,6 +23,12 @@ public class UserController {
         this.userService = userService;
     }
 
+    @RequestMapping(path = "/get", method = RequestMethod.GET, produces = "application/json")
+    public Object getAll(HttpServletRequest req) {
+        String token = req.getHeader(AuthorizationHeader.HEADER_NAME).replace(AuthorizationHeader.TOKEN_PREFIX, "");
+        return userService.getAllUsers(token);
+    }
+
     @RequestMapping(path = "/merge/address", method = RequestMethod.POST, produces = "application/json")
     public Object addAddress(HttpServletRequest req, @RequestBody Address address) {
         String token = req.getHeader(AuthorizationHeader.HEADER_NAME).replace(AuthorizationHeader.TOKEN_PREFIX, "");

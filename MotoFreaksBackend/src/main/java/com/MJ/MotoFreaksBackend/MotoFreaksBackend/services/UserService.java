@@ -5,7 +5,8 @@ import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.Address;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.CarDataModel;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.Contact;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.repository.UserRepository;
-import com.MJ.MotoFreaksBackend.MotoFreaksBackend.resource.response.ProfileModelDto;
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.resource.response.MyUserDto;
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.resource.response.UserDto;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.configs.JwtTokenProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 import static org.springframework.http.ResponseEntity.ok;
 
@@ -90,14 +88,20 @@ public class UserService {
         User currentUser = getUserByToken(currentToken);
         User userToShow = getUserById(id);
 
-        ProfileModelDto profile = new ProfileModelDto(userToShow.getName(), userToShow.getLastName(), userToShow.getCarsList(),
-                userToShow.getPoints(), userToShow.isEnabled()
-                , userToShow.getContact(), isYourFriend(currentUser, userToShow.getUserName()));
+        UserDto profile = new UserDto(userToShow.getId(), userToShow.getName(), userToShow.getLastName(), userToShow.isEnabled()
+                , userToShow.getCarsList(), userToShow.getContact(), userToShow.getAddress(),
+                userToShow.getPoints(), userToShow.getFriendsList(), isYourFriend(currentUser, userToShow.getUserName()));
         return ok(profile);
     }
 
     public Object getMyProfile(String token) {
-        return new ResponseEntity<>(getUserByToken(token), HttpStatus.OK);
+        User currentUser = getUserByToken(token);
+        MyUserDto myProfile
+                = new MyUserDto(currentUser.getId(), currentUser.getName(), currentUser.getLastName(), currentUser.isEnabled(),
+                currentUser.getCreatedDate(), currentUser.getUpdatedDate(), currentUser.getLoginsHistory(), currentUser.getCarsList(),
+                currentUser.getContact(), currentUser.getAddress(), currentUser.getPoints(), currentUser.getFriendsList(), currentUser.getMessages());
+
+        return new ResponseEntity<>(myProfile, HttpStatus.OK);
     }
 
     public Object addPoints(String token, int points) {
@@ -141,5 +145,16 @@ public class UserService {
     public User getUserById(String id) {
         Optional<User> optionalUserFriend = userRepository.findById(id);
         return optionalUserFriend.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+    }
+
+    public Object getAllUsers(String token) {
+        User currentUser = getUserByToken(token);
+        List<UserDto> allUsers = new ArrayList<>();
+        userRepository.findAll().forEach(user -> {
+            allUsers.add(new UserDto(user.getId(), user.getName(), user.getLastName(), user.isEnabled(), user.getCarsList(),
+                    user.getContact(), user.getAddress(), user.getPoints(), user.getFriendsList(), isYourFriend(currentUser, user.getUserName()))
+            );
+        });
+        return new ResponseEntity<>(allUsers, HttpStatus.OK);
     }
 }
