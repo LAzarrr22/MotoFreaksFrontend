@@ -16,8 +16,6 @@ export class MyProfilePersonalDataComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.dir(this.profile)
-    console.dir(this.profile.messages.values)
-  }
+     }
 
 }
