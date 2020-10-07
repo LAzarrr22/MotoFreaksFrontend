@@ -1,0 +1,13 @@
+<ng-container *ngIf="profile">
+  <div class="row">
+    <div class="col"></div>
+    <div class="col-md-auto col-sm-auto personal-data">
+
+      <button mat-icon-button color="primary" aria-label="Example icon button with a home icon">
+        <mat-icon>email</mat-icon>
+      </button>
+      <button mat-button color="primary" (click)="goToProfile()">{{profile.name}} {{profile.lastName}}</button>
+
+    </div>
+  </div>
+</ng-container>

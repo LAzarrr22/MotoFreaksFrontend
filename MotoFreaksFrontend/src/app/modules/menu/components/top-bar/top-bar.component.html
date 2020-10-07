@@ -1,15 +1,7 @@
 <div class="top-bar">
   <div class="context">
     <ng-container *ngIf="isLogged">
-      <div class="row">
-        <div class="col-md-9 col-sm-9"></div>
-        <div class="col-md-2 col-sm-2 personal-data">
-          <button mat-icon-button color="primary" aria-label="Example icon button with a home icon">
-            <mat-icon>email</mat-icon>
-          </button>
-          <button mat-button color="primary">Primary</button>
-        </div>
-      </div>
+      <app-top-bar-user-info></app-top-bar-user-info>
     </ng-container>
   </div>
 </div>
