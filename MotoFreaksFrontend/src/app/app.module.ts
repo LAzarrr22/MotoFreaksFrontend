@@ -11,6 +11,8 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {HomeModule} from "./modules/home/home.module";
 import {MenuModule} from "./modules/menu/menu.module";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {HTTPCustomInterceptor} from "./modules/authentication/interceptor/http.interceptor";
 
 @NgModule({
   declarations: [
@@ -28,7 +30,13 @@ import {MenuModule} from "./modules/menu/menu.module";
     MatProgressSpinnerModule,
     MenuModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HTTPCustomInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

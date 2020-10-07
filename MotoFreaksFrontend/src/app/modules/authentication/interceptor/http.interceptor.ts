@@ -12,6 +12,7 @@ export class HTTPCustomInterceptor implements HttpInterceptor {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    console.log("test Interceptor")
     return this.store.pipe(
       select(getAuthToken),
       first(),
