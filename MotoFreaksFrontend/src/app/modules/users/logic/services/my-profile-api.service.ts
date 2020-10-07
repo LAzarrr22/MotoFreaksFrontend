@@ -6,7 +6,7 @@ import {environment} from "../../../../../environments/environment";
 import {map} from "rxjs/operators";
 
 @Injectable()
-export class MyProfileService {
+export class MyProfileApiService {
   constructor(private readonly httpClient: HttpClient) {
   }
 

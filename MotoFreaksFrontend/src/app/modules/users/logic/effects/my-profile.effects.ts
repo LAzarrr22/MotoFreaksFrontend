@@ -6,14 +6,14 @@ import {Observable} from "rxjs";
 import {MyProfileModel} from "../dto/response/my-profile.model";
 import {GET_MY_PROFILE, GetMyProfileFail, GetMyProfileSuccess} from "../action/my-profile.action";
 import {catchError, switchMap} from "rxjs/operators";
-import {MyProfileService} from "../services/my-profile.service";
+import {MyProfileApiService} from "../services/my-profile-api.service";
 import {Injectable} from "@angular/core";
 
 
 @Injectable()
 export class MyProfileEffects {
   constructor(private actions$: Actions, private store$: Store
-    , private router: Router, private myProfileService: MyProfileService
+    , private router: Router, private myProfileService: MyProfileApiService
     , private errorService: CommonComponentsService) {
   }
 
