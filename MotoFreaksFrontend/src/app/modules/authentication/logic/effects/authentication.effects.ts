@@ -20,6 +20,7 @@ import {LoginSuccessfulDto} from "../dto/response/login-successful.model";
 import {AppPath} from "../../../../shared/enums/app-path.enum";
 import {Router} from "@angular/router";
 import {CommonComponentsService} from "../../../common/common.service";
+import {GetMyProfile} from "../../../users/logic/action/my-profile.action";
 
 @Injectable()
 export class AuthenticationEffects {
@@ -48,6 +49,7 @@ export class AuthenticationEffects {
       }),
       switchMap((userData: LoginSuccessfulDto) => [
         new UserLoginSuccess(userData),
+        new GetMyProfile()
       ]),
 
       catchError((error, caught) => {

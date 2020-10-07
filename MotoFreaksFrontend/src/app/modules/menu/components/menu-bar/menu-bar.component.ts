@@ -49,7 +49,6 @@ export class MenuBarComponent implements OnInit {
   }
 
   goToMeProfile() {
-    console.log('TEST_MY_PROFILE')
     this.router.navigate([AppPath.MY_PROFILE])
   }
 }

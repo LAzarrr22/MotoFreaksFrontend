@@ -1,17 +1,19 @@
 import {MyProfileModel} from "../dto/response/my-profile.model";
-import {createEntityAdapter, EntityAdapter, EntityState} from '@ngrx/entity';
+import {createEntityAdapter, EntityAdapter} from '@ngrx/entity';
 import {GET_MY_PROFILE, GET_MY_PROFILE_FAIL, GET_MY_PROFILE_SUCCESS} from "../action/my-profile.action";
 import {createFeatureSelector, createSelector} from "@ngrx/store";
 
-export interface MyProfileState extends EntityState<MyProfileModel> {
+export interface MyProfileState {
+  profile: MyProfileModel;
   loading: boolean;
 }
 
 export const adapter: EntityAdapter<MyProfileModel> = createEntityAdapter<MyProfileModel>();
 
-export const INITIAL_STATE: MyProfileState = adapter.getInitialState({
+export const INITIAL_STATE: MyProfileState = {
+  profile: null,
   loading: false
-});
+};
 
 export function reducer(state: MyProfileState = INITIAL_STATE, action) {
   switch (action.type) {
@@ -21,7 +23,10 @@ export function reducer(state: MyProfileState = INITIAL_STATE, action) {
         loading: true
       };
     case GET_MY_PROFILE_SUCCESS:
-      return adapter.updateOne(action.payload, {...state, loading: false});
+      return {
+        profile: action.payload,
+        loading: false,
+      }
 
     case GET_MY_PROFILE_FAIL:
       return {
@@ -35,7 +40,9 @@ export function reducer(state: MyProfileState = INITIAL_STATE, action) {
 }
 
 
-export const getProfile = (state) => state;
+export const isLoading = (state) => state.loading;
+export const getProfile = (state) => state.profile;
 
 const fromMyProfileState = createFeatureSelector<MyProfileState>('my-profile');
 export const getMyProfile = createSelector(fromMyProfileState, getProfile)
+export const getLoading = createSelector(fromMyProfileState, isLoading)
