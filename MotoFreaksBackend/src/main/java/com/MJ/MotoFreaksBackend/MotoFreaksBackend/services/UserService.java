@@ -101,7 +101,7 @@ public class UserService {
                 currentUser.getCreatedDate(), currentUser.getUpdatedDate(), currentUser.getLoginsHistory(), currentUser.getCarsList(),
                 currentUser.getContact(), currentUser.getAddress(), currentUser.getPoints(), currentUser.getFriendsList(), currentUser.getMessages());
 
-        return new ResponseEntity<>(myProfile, HttpStatus.OK);
+        return ok(myProfile);
     }
 
     public Object addPoints(String token, int points) {
