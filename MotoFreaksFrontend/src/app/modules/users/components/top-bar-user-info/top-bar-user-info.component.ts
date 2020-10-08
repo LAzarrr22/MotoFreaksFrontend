@@ -21,6 +21,7 @@ export class TopBarUserInfoComponent implements AfterViewInit {
 
   profile: MyProfileModel;
   newMessages: number = 0;
+  findAnyMessages: boolean = true;
 
   constructor(private router: Router, private profileService: ProfileService) {
     this.profileService.getMyProfile().subscribe(profile => this.profile = profile);
@@ -35,6 +36,7 @@ export class TopBarUserInfoComponent implements AfterViewInit {
     Object.keys(this.profile.messages).forEach(key => {
       this.profile.messages[key].forEach(message => {
           if (!message.read) {
+            this.findAnyMessages = false;
             this.newMessages++;
           }
         }
