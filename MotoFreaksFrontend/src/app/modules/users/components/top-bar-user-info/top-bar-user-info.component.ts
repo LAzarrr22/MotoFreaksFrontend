@@ -13,17 +13,18 @@ export class TopBarUserInfoComponent implements AfterViewInit {
 
 
   ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.countUnReadMessages();
+    }, 0)
 
-    this.countUnReadMessages();
   }
 
   profile: MyProfileModel;
-  newMessages: number;
+  newMessages: number = 0;
 
   constructor(private router: Router, private profileService: ProfileService) {
     this.profileService.getMyProfile().subscribe(profile => this.profile = profile);
   }
-
 
 
   goToProfile() {
@@ -34,12 +35,11 @@ export class TopBarUserInfoComponent implements AfterViewInit {
     Object.keys(this.profile.messages).forEach(key => {
       this.profile.messages[key].forEach(message => {
           if (!message.read) {
-            this.newMessages = this.newMessages + 1;
+            this.newMessages++;
           }
         }
       )
     });
-    console.log(this.newMessages)
   }
 
 }
