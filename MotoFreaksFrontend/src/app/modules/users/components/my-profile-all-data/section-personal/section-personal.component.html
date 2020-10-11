@@ -52,15 +52,21 @@
   </div>
 
 
-  <div class="col-md-4 property-column">
+  <div class="col-md-4 property-column" [ngClass]="{'edit-blur': isEditable}">
     <div class="row">
       <div class="col label">
-        Enabled
+        Account status
       </div>
     </div>
     <div class="row">
       <div class="col data">
-        <mat-checkbox [color]="'primary'" [checked]="profile.enabled" (change)="changeUserState()"></mat-checkbox>
+        <div *ngIf="profile.enabled">
+          ON
+        </div>
+        <div *ngIf="profile.enabled==false">
+          OFF
+        </div>
+
       </div>
     </div>
   </div>
@@ -120,6 +126,11 @@
         <mat-label>Last Name</mat-label>
         <input matInput placeholder="Last Name" formControlName="lastName">
       </mat-form-field>
+
+      <div class="mat-form-field-flex pb-4">
+        <mat-label class="pr-3">Account status:</mat-label>
+        <input type="checkbox" placeholder="Last Name" formControlName="enabled">
+      </div>
 
       <button class="mat-flat-button save-button" mat-flat-button type="submit" color="primary">Save</button>
 
