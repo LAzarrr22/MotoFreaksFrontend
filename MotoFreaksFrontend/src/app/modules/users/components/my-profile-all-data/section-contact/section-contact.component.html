@@ -1,17 +1,28 @@
-<div class="title">Contact</div>
-<ng-container *ngIf="contact ; else notFound">
-  <div class="row">
+<div class="container">
+  <div class="row align-items-center">
+    <div class="col-md-2">
+      <div class="title">Contact</div>
+    </div>
 
-    <div class="col-md-4 property-column">
-      <div class="row">
-        <div class="col label">
-          Email
-        </div>
+    <div class="col offset-md-8">
+      <button mat-button color="primary" style="height: 40%;font-size: 18px" (click)="editData()">Edit</button>
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+
+  <div class="col-md-4 property-column">
+    <div class="row">
+      <div class="col label">
+        Email
       </div>
-      <div class="row">
-        <div class="col data">
-          {{contact.email}}
-        </div>
+    </div>
+    <div class="row">
+      <div class="col data">
+        {{contact.email | empty}}
+      </div>
       </div>
     </div>
 
@@ -23,7 +34,7 @@
       </div>
       <div class="row">
         <div class="col data">
-          {{contact.phone}}
+          {{contact.phone | empty}}
         </div>
       </div>
     </div>
@@ -36,7 +47,7 @@
       </div>
       <div class="row">
         <div class="col data">
-          {{contact.facebook}}
+          {{contact.facebook | empty}}
         </div>
       </div>
     </div>
@@ -49,7 +60,7 @@
       </div>
       <div class="row">
         <div class="col data">
-          {{contact.instagram}}
+          {{contact.instagram | empty}}
         </div>
       </div>
     </div>
@@ -63,7 +74,7 @@
       </div>
       <div class="row">
         <div class="col data">
-          {{contact.twitter}}
+          {{contact.twitter | empty}}
         </div>
       </div>
     </div>
@@ -76,18 +87,10 @@
       </div>
       <div class="row">
         <div class="col data">
-          {{contact.skype}}
+          {{contact.skype | empty}}
         </div>
       </div>
     </div>
 
   </div>
-</ng-container>
 
-<ng-template #notFound>
-  <div class="row">
-    <div class="col label">
-      Please create contact data
-    </div>
-  </div>
-</ng-template>

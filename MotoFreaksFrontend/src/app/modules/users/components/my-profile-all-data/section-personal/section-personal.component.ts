@@ -34,7 +34,7 @@ export class SectionPersonalComponent implements OnInit {
     console.dir(this.formMerge)
   }
 
-  editPersonalData() {
+  editData() {
     this.isEditable = !this.isEditable;
   }
 }

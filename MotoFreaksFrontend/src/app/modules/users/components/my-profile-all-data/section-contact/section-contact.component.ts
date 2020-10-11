@@ -10,6 +10,7 @@ export class SectionContactComponent implements OnInit {
 
   @Input()
   contact: ContactModel;
+  isEditable: boolean = false;
 
   constructor() {
   }
@@ -17,4 +18,7 @@ export class SectionContactComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  editData() {
+    this.isEditable = !this.isEditable;
+  }
 }

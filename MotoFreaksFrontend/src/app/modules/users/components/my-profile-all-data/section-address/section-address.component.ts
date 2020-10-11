@@ -9,6 +9,7 @@ import {AddressModel} from "../../../logic/dto/models/address.model";
 export class SectionAddressComponent implements OnInit {
   @Input()
   address: AddressModel
+  isEditable: boolean = false;
 
   constructor() {
   }
@@ -16,4 +17,7 @@ export class SectionAddressComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  editData() {
+    this.isEditable = !this.isEditable;
+  }
 }
