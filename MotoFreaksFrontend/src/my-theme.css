@@ -1115,7 +1115,7 @@ textarea.cdk-textarea-autosize-measuring-firefox {
 }
 
 .mat-button, .mat-icon-button, .mat-stroked-button {
-  color: #188cc2;
+  color: rgba(255, 248, 248, 0.51);
   background: transparent;
   border-radius: 10px;
   height: 100%;
