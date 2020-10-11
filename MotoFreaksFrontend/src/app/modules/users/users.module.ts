@@ -21,11 +21,12 @@ import {MyProfileAllDataComponent} from './components/my-profile-all-data/my-pro
 import {MatBadgeModule} from "@angular/material/badge";
 import {MatDividerModule} from "@angular/material/divider";
 import {MatCheckboxModule} from "@angular/material/checkbox";
-import {DataShowEditComponent} from './components/my-profile-all-data/data-show-edit/data-show-edit.component';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
 
 
 @NgModule({
-  declarations: [ProfileMeComponent, ProfileFriendsComponent, TopBarUserInfoComponent, SectionPersonalComponent, SectionCarsComponent, SectionAddressComponent, SectionContactComponent, SectionFriendsComponent, MyProfileAllDataComponent, DataShowEditComponent],
+  declarations: [ProfileMeComponent, ProfileFriendsComponent, TopBarUserInfoComponent, SectionPersonalComponent, SectionCarsComponent, SectionAddressComponent, SectionContactComponent, SectionFriendsComponent, MyProfileAllDataComponent],
   imports: [
     CommonModule,
     UsersRoutingModule,
@@ -35,7 +36,9 @@ import {DataShowEditComponent} from './components/my-profile-all-data/data-show-
     MatIconModule,
     MatBadgeModule,
     MatDividerModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   exports: [
     ProfileMeComponent, ProfileFriendsComponent, TopBarUserInfoComponent
