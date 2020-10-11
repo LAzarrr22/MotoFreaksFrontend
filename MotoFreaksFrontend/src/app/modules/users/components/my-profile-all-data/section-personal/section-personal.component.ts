@@ -2,6 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {MyProfileModel} from "../../../logic/dto/response/my-profile.model";
 import {MergeUserModel} from "../../../logic/dto/request/merge-user.model";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {MatDialog} from "@angular/material/dialog";
+import {ChangeStatusDiaglogComponent} from "../change-status-diaglog/change-status-diaglog.component";
 
 @Component({
   selector: 'app-section-personal',
@@ -17,7 +19,7 @@ export class SectionPersonalComponent implements OnInit {
 
   formMerge: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -29,7 +31,14 @@ export class SectionPersonalComponent implements OnInit {
   }
 
   changeUserState() {
-    console.log("TEST - change")
+    const dialogRef = this.dialog.open(ChangeStatusDiaglogComponent, {
+      width: '450px',
+      data: this.profile.enabled
+    });
+    dialogRef.afterClosed().subscribe(result => {
+
+      console.log('The dialog was closed');
+    });
   }
 
   mergeUser() {
