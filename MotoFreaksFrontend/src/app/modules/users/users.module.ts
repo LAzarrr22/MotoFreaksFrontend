@@ -19,10 +19,13 @@ import {SectionContactComponent} from './components/my-profile-all-data/section-
 import {SectionFriendsComponent} from './components/my-profile-all-data/section-friends/section-friends.component';
 import {MyProfileAllDataComponent} from './components/my-profile-all-data/my-profile-all-data.component';
 import {MatBadgeModule} from "@angular/material/badge";
+import {MatDividerModule} from "@angular/material/divider";
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import {DataShowEditComponent} from './components/my-profile-all-data/data-show-edit/data-show-edit.component';
 
 
 @NgModule({
-  declarations: [ProfileMeComponent, ProfileFriendsComponent, TopBarUserInfoComponent, SectionPersonalComponent, SectionCarsComponent, SectionAddressComponent, SectionContactComponent, SectionFriendsComponent, MyProfileAllDataComponent],
+  declarations: [ProfileMeComponent, ProfileFriendsComponent, TopBarUserInfoComponent, SectionPersonalComponent, SectionCarsComponent, SectionAddressComponent, SectionContactComponent, SectionFriendsComponent, MyProfileAllDataComponent, DataShowEditComponent],
   imports: [
     CommonModule,
     UsersRoutingModule,
@@ -30,7 +33,9 @@ import {MatBadgeModule} from "@angular/material/badge";
     EffectsModule.forFeature([MyProfileEffects]),
     MatButtonModule,
     MatIconModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatDividerModule,
+    MatCheckboxModule
   ],
   exports: [
     ProfileMeComponent, ProfileFriendsComponent, TopBarUserInfoComponent

@@ -1,1 +1,97 @@
-<p>section-personal works!</p>
+<div class="title">Details</div>
+
+<div class="row">
+
+  <div class="col-md-4 property-column">
+    <div class="row">
+      <div class="col label">
+        Login
+      </div>
+    </div>
+    <div class="row">
+      <div class="col data">
+        {{profile.username}}
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4 property-column">
+    <div class="row">
+      <div class="col label">
+        Name
+      </div>
+    </div>
+    <div class="row">
+      <div class="col data">
+        <app-data-show-edit [value]="profile.name"></app-data-show-edit>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4 property-column">
+    <div class="row">
+      <div class="col label">
+        Last Name
+      </div>
+    </div>
+    <div class="row">
+      <div class="col data">
+        <app-data-show-edit [value]="profile.lastName"></app-data-show-edit>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4 property-column">
+    <div class="row">
+      <div class="col label">
+        Enabled
+      </div>
+    </div>
+    <div class="row">
+      <div class="col data">
+        <mat-checkbox [color]="'primary'" [checked]="profile.enabled" (change)="changeUserState()"></mat-checkbox>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-md-4 property-column">
+    <div class="row">
+      <div class="col label">
+        Points
+      </div>
+    </div>
+    <div class="row">
+      <div class="col data">
+        {{profile.points}}
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4 property-column">
+    <div class="row">
+      <div class="col label">
+        Exists from
+      </div>
+    </div>
+    <div class="row">
+      <div class="col data">
+        {{profile.createdDate}}
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4 property-column">
+    <div class="row">
+      <div class="col label">
+        Last login
+      </div>
+    </div>
+    <div class="row">
+      <div class="col data">
+        {{profile.loginsHistory[profile.loginsHistory.length - 2]}}
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-section-friends',
@@ -6,6 +6,8 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./section-friends.component.scss']
 })
 export class SectionFriendsComponent implements OnInit {
+  @Input()
+  friendsListId: string[];
 
   constructor() {
   }

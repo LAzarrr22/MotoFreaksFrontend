@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {AddressModel} from "../../../logic/dto/models/address.model";
 
 @Component({
   selector: 'app-section-address',
@@ -6,6 +7,8 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./section-address.component.scss']
 })
 export class SectionAddressComponent implements OnInit {
+  @Input()
+  address: AddressModel
 
   constructor() {
   }

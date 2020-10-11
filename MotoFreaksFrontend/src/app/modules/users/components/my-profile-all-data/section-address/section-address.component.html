@@ -1,1 +1,53 @@
-<p>section-address works!</p>
+<div class="title">Address</div>
+<ng-container *ngIf="address; else notFound">
+  <div class="row">
+
+    <div class="col-md-4 property-column">
+      <div class="row">
+        <div class="col label">
+          Country
+        </div>
+      </div>
+      <div class="row">
+        <div class="col data">
+          <app-data-show-edit [value]="address.country"></app-data-show-edit>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 property-column">
+      <div class="row">
+        <div class="col label">
+          City
+        </div>
+      </div>
+      <div class="row">
+        <div class="col data">
+          <app-data-show-edit [value]="address.city"></app-data-show-edit>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 property-column">
+      <div class="row">
+        <div class="col label">
+          Street
+        </div>
+      </div>
+      <div class="row">
+        <div class="col data">
+          <app-data-show-edit [value]="address.street"></app-data-show-edit>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</ng-container>
+
+<ng-template #notFound>
+  <div class="row">
+    <div class="col label">
+      Please create contact data
+    </div>
+  </div>
+</ng-template>

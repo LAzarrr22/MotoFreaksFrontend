@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {MyProfileModel} from "../../../logic/dto/response/my-profile.model";
 
 @Component({
   selector: 'app-section-personal',
@@ -6,6 +7,8 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./section-personal.component.scss']
 })
 export class SectionPersonalComponent implements OnInit {
+  @Input()
+  profile: MyProfileModel;
 
   constructor() {
   }
@@ -13,4 +16,7 @@ export class SectionPersonalComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  changeUserState() {
+
+  }
 }

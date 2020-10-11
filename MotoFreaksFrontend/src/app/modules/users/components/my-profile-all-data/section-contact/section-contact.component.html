@@ -1,1 +1,93 @@
-<p>section-contact works!</p>
+<div class="title">Contact</div>
+<ng-container *ngIf="contact ; else notFound">
+  <div class="row">
+
+    <div class="col-md-4 property-column">
+      <div class="row">
+        <div class="col label">
+          Email
+        </div>
+      </div>
+      <div class="row">
+        <div class="col data">
+          <app-data-show-edit [value]="contact.email"></app-data-show-edit>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 property-column">
+      <div class="row">
+        <div class="col label">
+          Phone number
+        </div>
+      </div>
+      <div class="row">
+        <div class="col data">
+          <app-data-show-edit [value]="contact.phone"></app-data-show-edit>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 property-column">
+      <div class="row">
+        <div class="col label">
+          Facebook
+        </div>
+      </div>
+      <div class="row">
+        <div class="col data">
+          <app-data-show-edit [value]="contact.facebook"></app-data-show-edit>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 property-column">
+      <div class="row">
+        <div class="col label">
+          Instagram
+        </div>
+      </div>
+      <div class="row">
+        <div class="col data">
+          <app-data-show-edit [value]="contact.instagram"></app-data-show-edit>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-md-4 property-column">
+      <div class="row">
+        <div class="col label">
+          Twitter
+        </div>
+      </div>
+      <div class="row">
+        <div class="col data">
+          <app-data-show-edit [value]="contact.twitter"></app-data-show-edit>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 property-column">
+      <div class="row">
+        <div class="col label">
+          Skype
+        </div>
+      </div>
+      <div class="row">
+        <div class="col data">
+          <app-data-show-edit [value]="contact.skype"></app-data-show-edit>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</ng-container>
+
+<ng-template #notFound>
+  <div class="row">
+    <div class="col label">
+      Please create contact data
+    </div>
+  </div>
+</ng-template>

@@ -1,5 +1,14 @@
-<p>my-profile-personal-data works!</p>
-<p>my-profile-personal-data works!</p>
-<ng-container *ngIf="!isLoading">
-  <p>my-profile-personal-data works! START {{profile.name}}  {{profile.lastName}}  {{profile.enabled}} END</p>
-</ng-container>
+<div class="context">
+  <div class="personal-title">Personal data</div>
+  <mat-divider></mat-divider>
+  <app-section-personal [profile]="profile"></app-section-personal>
+  <mat-divider></mat-divider>
+  <app-section-address [address]="profile.address"></app-section-address>
+  <mat-divider></mat-divider>
+  <app-section-contact [contact]="profile.contact"></app-section-contact>
+  <mat-divider></mat-divider>
+  <app-section-cars [cars]="profile.carsList"></app-section-cars>
+  <mat-divider></mat-divider>
+  <app-section-friends [friendsListId]="profile.friendsList"></app-section-friends>
+  <mat-divider></mat-divider>
+</div>

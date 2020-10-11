@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {CarModel} from "../../../logic/dto/models/car.model";
 
 @Component({
   selector: 'app-section-cars',
@@ -6,6 +7,8 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./section-cars.component.scss']
 })
 export class SectionCarsComponent implements OnInit {
+  @Input()
+  cars: CarModel[];
 
   constructor() {
   }

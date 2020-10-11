@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {ContactModel} from "../../../logic/dto/models/contact.model";
 
 @Component({
   selector: 'app-section-contact',
@@ -6,6 +7,9 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./section-contact.component.scss']
 })
 export class SectionContactComponent implements OnInit {
+
+  @Input()
+  contact: ContactModel;
 
   constructor() {
   }
