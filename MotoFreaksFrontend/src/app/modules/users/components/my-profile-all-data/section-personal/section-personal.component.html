@@ -1,7 +1,17 @@
-<div class="title">Details</div>
+<div class="container">
+  <div class="row align-items-center">
+    <div class="col-md-2">
+      <div class="title">Details</div>
+    </div>
+
+    <div class="col offset-md-8">
+      <button mat-button color="primary" style="height: 40%;font-size: 18px" (click)="editPersonalData()">Edit</button>
+    </div>
+
+  </div>
+</div>
 
 <div class="row">
-
   <div class="col-md-4 property-column">
     <div class="row">
       <div class="col label">
@@ -15,7 +25,7 @@
     </div>
   </div>
 
-  <div class="col-md-4 property-column">
+  <div class="col-md-4 property-column" [ngClass]="{'edit-blur': isEditable}">
     <div class="row">
       <div class="col label">
         Name
@@ -23,12 +33,12 @@
     </div>
     <div class="row">
       <div class="col data">
-        <app-data-show-edit [value]="profile.name"></app-data-show-edit>
+        {{profile.name}}
       </div>
     </div>
   </div>
 
-  <div class="col-md-4 property-column">
+  <div class="col-md-4 property-column" [ngClass]="{'edit-blur': isEditable}">
     <div class="row">
       <div class="col label">
         Last Name
@@ -36,10 +46,11 @@
     </div>
     <div class="row">
       <div class="col data">
-        <app-data-show-edit [value]="profile.lastName"></app-data-show-edit>
+        {{profile.lastName}}
       </div>
     </div>
   </div>
+
 
   <div class="col-md-4 property-column">
     <div class="row">
@@ -95,3 +106,23 @@
   </div>
 
 </div>
+
+
+<ng-container *ngIf="isEditable">
+  <div class="edit-form">
+    <form [formGroup]="formMerge" (ngSubmit)="mergeUser()">
+      <mat-form-field appearance="legacy" class="mat-form-field-flex">
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="Name" formControlName="name">
+      </mat-form-field>
+
+      <mat-form-field appearance="legacy" class="mat-form-field-flex">
+        <mat-label>Last Name</mat-label>
+        <input matInput placeholder="Last Name" formControlName="lastName">
+      </mat-form-field>
+
+      <button class="mat-flat-button save-button" mat-flat-button type="submit" color="primary">Save</button>
+
+    </form>
+  </div>
+</ng-container>
