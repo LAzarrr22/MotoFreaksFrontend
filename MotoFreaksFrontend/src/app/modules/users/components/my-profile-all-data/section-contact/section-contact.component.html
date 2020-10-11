@@ -13,7 +13,7 @@
 
 <div class="row">
 
-  <div class="col-md-4 property-column">
+  <div class="col-md-4 property-column" [ngClass]="{'edit-blur': isEditable}">
     <div class="row">
       <div class="col label">
         Email
@@ -23,73 +23,73 @@
       <div class="col data">
         {{contact.email | empty}}
       </div>
-      </div>
+    </div>
     </div>
 
-    <div class="col-md-4 property-column">
-      <div class="row">
-        <div class="col label">
-          Phone number
-        </div>
-      </div>
-      <div class="row">
-        <div class="col data">
-          {{contact.phone | empty}}
-        </div>
+  <div class="col-md-4 property-column" [ngClass]="{'edit-blur': isEditable}">
+    <div class="row">
+      <div class="col label">
+        Phone number
       </div>
     </div>
-
-    <div class="col-md-4 property-column">
-      <div class="row">
-        <div class="col label">
-          Facebook
-        </div>
-      </div>
-      <div class="row">
-        <div class="col data">
-          {{contact.facebook | empty}}
-        </div>
+    <div class="row">
+      <div class="col data">
+        {{contact.phone | empty}}
       </div>
     </div>
+    </div>
 
-    <div class="col-md-4 property-column">
-      <div class="row">
-        <div class="col label">
-          Instagram
-        </div>
+  <div class="col-md-4 property-column" [ngClass]="{'edit-blur': isEditable}">
+    <div class="row">
+      <div class="col label">
+        Facebook
       </div>
-      <div class="row">
-        <div class="col data">
-          {{contact.instagram | empty}}
-        </div>
+    </div>
+    <div class="row">
+      <div class="col data">
+        {{contact.facebook | empty}}
       </div>
+    </div>
+    </div>
+
+  <div class="col-md-4 property-column" [ngClass]="{'edit-blur': isEditable}">
+    <div class="row">
+      <div class="col label">
+        Instagram
+      </div>
+    </div>
+    <div class="row">
+      <div class="col data">
+        {{contact.instagram | empty}}
+      </div>
+    </div>
     </div>
 
 
-    <div class="col-md-4 property-column">
-      <div class="row">
-        <div class="col label">
-          Twitter
-        </div>
-      </div>
-      <div class="row">
-        <div class="col data">
-          {{contact.twitter | empty}}
-        </div>
+  <div class="col-md-4 property-column" [ngClass]="{'edit-blur': isEditable}">
+    <div class="row">
+      <div class="col label">
+        Twitter
       </div>
     </div>
+    <div class="row">
+      <div class="col data">
+        {{contact.twitter | empty}}
+      </div>
+    </div>
+    </div>
 
-    <div class="col-md-4 property-column">
-      <div class="row">
-        <div class="col label">
-          Skype
-        </div>
+  <div class="col-md-4 property-column" [ngClass]="{'edit-blur': isEditable}">
+    <div class="row">
+      <div class="col label">
+        Skype
       </div>
-      <div class="row">
-        <div class="col data">
-          {{contact.skype | empty}}
-        </div>
+    </div>
+    <div class="row">
+      <div class="col data">
+        {{contact.skype | empty}}
       </div>
+    </div>
     </div>
 
   </div>

@@ -14,7 +14,7 @@
 
 <div class="row">
 
-  <div class="col-md-4 property-column">
+  <div class="col-md-4 property-column" [ngClass]="{'edit-blur': isEditable}">
     <div class="row">
       <div class="col label">
         Country
@@ -24,33 +24,33 @@
       <div class="col data">
         {{address.country | empty}}
       </div>
-      </div>
+    </div>
     </div>
 
-    <div class="col-md-4 property-column">
-      <div class="row">
-        <div class="col label">
-          City
-        </div>
-      </div>
-      <div class="row">
-        <div class="col data">
-          {{address.city | empty}}
-        </div>
+  <div class="col-md-4 property-column" [ngClass]="{'edit-blur': isEditable}">
+    <div class="row">
+      <div class="col label">
+        City
       </div>
     </div>
+    <div class="row">
+      <div class="col data">
+        {{address.city | empty}}
+      </div>
+    </div>
+    </div>
 
-    <div class="col-md-4 property-column">
-      <div class="row">
-        <div class="col label">
-          Street
-        </div>
+  <div class="col-md-4 property-column" [ngClass]="{'edit-blur': isEditable}">
+    <div class="row">
+      <div class="col label">
+        Street
       </div>
-      <div class="row">
-        <div class="col data">
-          {{address.street | empty}}
-        </div>
+    </div>
+    <div class="row">
+      <div class="col data">
+        {{address.street | empty}}
       </div>
+    </div>
     </div>
 
   </div>
