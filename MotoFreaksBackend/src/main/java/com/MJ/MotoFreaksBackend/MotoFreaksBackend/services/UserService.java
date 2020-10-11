@@ -1,10 +1,9 @@
 package com.MJ.MotoFreaksBackend.MotoFreaksBackend.services;
 
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections.User;
-import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.Address;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.CarDataModel;
-import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.Contact;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.repository.UserRepository;
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.resource.requests.MergeUser;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.resource.response.MyUserDto;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.resource.response.UserDto;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.configs.JwtTokenProvider;
@@ -44,25 +43,18 @@ public class UserService {
         return ok(model);
     }
 
-    public Object mergeAddress(String token, Address address) {
+    public Object mergeUser(String token, MergeUser mergeUser) {
         Map<Object, Object> model = new HashMap<>();
         User currentUser = getUserByToken(token);
-        currentUser.setAddress(address);
+        currentUser.setName(mergeUser.getName());
+        currentUser.setLastName(mergeUser.getLastName());
+        currentUser.setEnabled(mergeUser.isEnabled());
+        currentUser.setAddress(mergeUser.getAddress());
+        currentUser.setContact(mergeUser.getContact());
         currentUser.setUpdatedDate(new Date());
         userRepository.save(currentUser);
-        model.put("message", "Address was merged for " + currentUser.getUserName() + " user.");
-        log.info("Address was merged for " + currentUser.getId() + " user.");
-        return ok(model);
-    }
-
-    public Object mergeContact(String token, Contact contact) {
-        Map<Object, Object> model = new HashMap<>();
-        User currentUser = getUserByToken(token);
-        currentUser.setContact(contact);
-        currentUser.setUpdatedDate(new Date());
-        userRepository.save(currentUser);
-        model.put("message", "Contacts was merged for " + currentUser.getUserName() + " user.");
-        log.info("Contacts was merged for " + currentUser.getId() + " user.");
+        model.put("message", "User " + currentUser.getUserName() + " was updated");
+        log.info("User " + currentUser.getId() + " was updated");
         return ok(model);
     }
 

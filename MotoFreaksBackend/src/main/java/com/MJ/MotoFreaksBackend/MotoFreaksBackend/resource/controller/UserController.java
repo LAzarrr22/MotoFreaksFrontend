@@ -1,8 +1,7 @@
 package com.MJ.MotoFreaksBackend.MotoFreaksBackend.resource.controller;
 
-import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.Address;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.CarDataModel;
-import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.Contact;
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.resource.requests.MergeUser;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.consts.AuthorizationHeader;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.services.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -30,16 +29,10 @@ public class UserController {
         return userService.getAllUsers(token);
     }
 
-    @RequestMapping(path = "/merge/address", method = RequestMethod.POST, produces = "application/json")
-    public Object addAddress(HttpServletRequest req, @RequestBody Address address) {
+    @RequestMapping(path = "/merge", method = RequestMethod.POST, produces = "application/json")
+    public Object addAddress(HttpServletRequest req, @RequestBody MergeUser user) {
         String token = req.getHeader(AuthorizationHeader.HEADER_NAME).replace(AuthorizationHeader.TOKEN_PREFIX, "");
-        return userService.mergeAddress(token, address);
-    }
-
-    @RequestMapping(path = "/merge/contact", method = RequestMethod.POST, produces = "application/json")
-    public Object addAddress(HttpServletRequest req, @RequestBody Contact contact) {
-        String token = req.getHeader(AuthorizationHeader.HEADER_NAME).replace(AuthorizationHeader.TOKEN_PREFIX, "");
-        return userService.mergeContact(token, contact);
+        return userService.mergeUser(token, user);
     }
 
     @RequestMapping(path = "/add/car", method = RequestMethod.POST, produces = "application/json")
