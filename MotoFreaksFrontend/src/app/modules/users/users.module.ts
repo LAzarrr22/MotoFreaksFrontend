@@ -26,6 +26,7 @@ import {MatInputModule} from "@angular/material/input";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatSelectModule} from "@angular/material/select";
 import {MatRadioModule} from "@angular/material/radio";
+import {PipesModule} from "../../shared/pipes/pipes.module";
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import {MatRadioModule} from "@angular/material/radio";
     ReactiveFormsModule,
     MatSelectModule,
     MatRadioModule,
-    FormsModule
+    FormsModule,
+    PipesModule
   ],
   exports: [
     ProfileMeComponent, ProfileFriendsComponent, TopBarUserInfoComponent
