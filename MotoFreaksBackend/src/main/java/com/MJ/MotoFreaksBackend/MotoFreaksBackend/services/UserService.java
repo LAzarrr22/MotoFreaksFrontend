@@ -97,7 +97,7 @@ public class UserService {
     public Object getMyProfile(String token) {
         User currentUser = getUserByToken(token);
         MyUserDto myProfile
-                = new MyUserDto(currentUser.getId(), currentUser.getName(), currentUser.getLastName(), currentUser.isEnabled(),
+                = new MyUserDto(currentUser.getId(), currentUser.getUserName(), currentUser.getName(), currentUser.getLastName(), currentUser.isEnabled(),
                 currentUser.getCreatedDate(), currentUser.getUpdatedDate(), currentUser.getLoginsHistory(), currentUser.getCarsList(),
                 currentUser.getContact(), currentUser.getAddress(), currentUser.getPoints(), currentUser.getFriendsList(), currentUser.getMessages());
 

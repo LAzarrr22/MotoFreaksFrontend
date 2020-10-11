@@ -12,7 +12,7 @@ export class MyProfileApiService {
 
   getMyProfile(): Observable<MyProfileModel> {
     return this.httpClient.get<MyProfileModel>(`${environment.apiUrl}/user/show/profile`)
-      .pipe(map(data => new MyProfileModel(data.id, data.name, data.lastName, data.enabled, data.createdDate,
+      .pipe(map(data => new MyProfileModel(data.id, data.username, data.name, data.lastName, data.enabled, data.createdDate,
         data.updatedDate, data.loginsHistory, data.carsList, data.contact, data.address, data.points, data.friendsList,
         data.messages)))
   }

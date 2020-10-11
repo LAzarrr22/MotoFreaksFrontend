@@ -16,6 +16,7 @@ import java.util.Map;
 public class MyUserDto {
 
     private String id;
+    private String username;
     private String name;
     private String lastName;
     private boolean enabled;
