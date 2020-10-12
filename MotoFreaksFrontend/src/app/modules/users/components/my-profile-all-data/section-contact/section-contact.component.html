@@ -94,3 +94,48 @@
 
   </div>
 
+<ng-container *ngIf="isEditable">
+  <div class="edit-form">
+
+    <form [formGroup]="formMerge" (ngSubmit)="mergeContact()">
+
+      <mat-form-field appearance="legacy" class="mat-form-field-flex">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Email" formControlName="email">
+      </mat-form-field>
+
+      <error-form [control]="'email'" [form]="formMerge"></error-form>
+
+      <mat-form-field appearance="legacy" class="mat-form-field-flex">
+        <mat-label>Phone number</mat-label>
+        <input matInput placeholder="Phone number" formControlName="phone">
+      </mat-form-field>
+
+
+      <mat-form-field appearance="legacy" class="mat-form-field-flex">
+        <mat-label>Skype</mat-label>
+        <input matInput placeholder="Skype" formControlName="skype">
+      </mat-form-field>
+
+
+      <mat-form-field appearance="legacy" class="mat-form-field-flex">
+        <mat-label>Facebook</mat-label>
+        <input matInput placeholder="Facebook" formControlName="facebook">
+      </mat-form-field>
+
+      <mat-form-field appearance="legacy" class="mat-form-field-flex">
+        <mat-label>Instagram</mat-label>
+        <input matInput placeholder="Instagram" formControlName="instagram">
+      </mat-form-field>
+
+      <mat-form-field appearance="legacy" class="mat-form-field-flex">
+        <mat-label>Twitter</mat-label>
+        <input matInput placeholder="Twitter" formControlName="twitter">
+      </mat-form-field>
+
+
+      <button class="mat-flat-button save-button" mat-flat-button type="submit" color="primary">Save</button>
+
+    </form>
+  </div>
+</ng-container>
