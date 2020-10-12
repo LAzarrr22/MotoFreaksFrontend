@@ -27,6 +27,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatSelectModule} from "@angular/material/select";
 import {MatRadioModule} from "@angular/material/radio";
 import {PipesModule} from "../../shared/pipes/pipes.module";
+import {AppCommonModule} from "../common/common.module";
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import {PipesModule} from "../../shared/pipes/pipes.module";
     MatSelectModule,
     MatRadioModule,
     FormsModule,
-    PipesModule
+    PipesModule,
+    AppCommonModule
   ],
   exports: [
     ProfileMeComponent, ProfileFriendsComponent, TopBarUserInfoComponent
