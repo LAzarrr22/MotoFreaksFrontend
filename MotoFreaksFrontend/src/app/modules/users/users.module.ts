@@ -50,6 +50,7 @@ import {AppCommonModule} from "../common/common.module";
     FormsModule,
     PipesModule,
     AppCommonModule
+
   ],
   exports: [
     ProfileMeComponent, ProfileFriendsComponent, TopBarUserInfoComponent
