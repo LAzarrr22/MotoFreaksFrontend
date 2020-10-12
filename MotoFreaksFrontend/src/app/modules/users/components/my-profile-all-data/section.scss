@@ -1,5 +1,6 @@
 @import "src/styles";
 @import "~bootstrap";
+@import "~@fortawesome/fontawesome-free/css/all.css";
 
 .title {
   color: $custom-white;
@@ -23,9 +24,10 @@
   font-size: $font-size-medium+4;
 }
 
-.icon-edit {
-  font-size: $font-size-medium;
-  color: $custom-white-dark;
+.icon-to-click {
+  padding-left: 30px;
+  font-size: $font-size-big;
+  color: $custom-blue;
   cursor: pointer;
 }
 

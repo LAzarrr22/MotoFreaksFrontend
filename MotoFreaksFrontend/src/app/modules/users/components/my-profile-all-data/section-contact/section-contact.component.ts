@@ -25,6 +25,7 @@ export class SectionContactComponent implements OnInit {
       facebook: new FormControl(this.contact.facebook),
       instagram: new FormControl(this.contact.instagram),
       twitter: new FormControl(this.contact.twitter),
+      youtube: new FormControl(this.contact.youtube),
     });
   }
 
