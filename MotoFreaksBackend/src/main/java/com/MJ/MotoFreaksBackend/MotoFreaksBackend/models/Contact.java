@@ -14,6 +14,7 @@ public class Contact {
     private String instagram;
     private String twitter;
     private String skype;
+    private String youtube;
 
     public Contact(String email) {
         this.email = email;
