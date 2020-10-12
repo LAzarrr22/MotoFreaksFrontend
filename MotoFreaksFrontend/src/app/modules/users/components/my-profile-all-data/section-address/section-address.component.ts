@@ -34,7 +34,9 @@ export class SectionAddressComponent implements OnInit {
     if (this.formMerge.valid) {
       this.profileService.mergeAddress(
         new AddressModel(this.getNewCountry(), this.getNewState(), this.getNewCity(), this.getNewStreet()))
-      this.profileService.getMyProfile();
+      setTimeout(() => {
+        this.profileService.getMyProfile()
+      }, 0);
       this.editData();
     }
   }

@@ -38,7 +38,9 @@ export class SectionContactComponent implements OnInit {
     if (this.formMerge.valid) {
       this.profileService.mergeContact(
         new ContactModel(this.getNewEmail(), this.getNewPhone(), this.getNewFacebook(), this.getNewInstagram(), this.getNewTwitter(), this.getNewSkype(), this.getNewYoutube()))
-      this.profileService.getMyProfile();
+      setTimeout(() => {
+        this.profileService.getMyProfile()
+      }, 0);
       this.editData();
     }
   }

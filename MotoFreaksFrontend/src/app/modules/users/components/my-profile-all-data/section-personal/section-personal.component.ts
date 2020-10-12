@@ -68,7 +68,9 @@ export class SectionPersonalComponent implements OnInit {
     if (this.formMerge.valid) {
       this.profileService.mergeProfile(
         new MergeUserModel(this.getNewName(), this.getNewLastName(), this.getNewGender(), this.getNewEnabled(), this.getNewPassword()))
-      this.profileService.getMyProfile();
+      setTimeout(() => {
+        this.profileService.getMyProfile();
+      }, 0)
       this.editData();
     }
   }
@@ -100,4 +102,5 @@ export class SectionPersonalComponent implements OnInit {
   getNewPassword() {
     return this.formMerge.controls.password.value;
   }
+
 }
