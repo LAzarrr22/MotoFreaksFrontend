@@ -3,6 +3,7 @@ import {MyProfileModel} from "../../../logic/dto/response/my-profile.model";
 import {MergeUserModel} from "../../../logic/dto/request/merge-user.model";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ValidationMessageMap} from "../../../../../shared/interfaces/validation-message-map";
+import {ProfileService} from "../../../logic/services/profile.service";
 
 @Component({
   selector: 'app-section-personal',
@@ -20,7 +21,7 @@ export class SectionPersonalComponent implements OnInit {
   formMerge: FormGroup;
   validationMessages: ValidationMessageMap;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private profileService: ProfileService) {
   }
 
   ngOnInit(): void {
@@ -64,9 +65,11 @@ export class SectionPersonalComponent implements OnInit {
 
 
   mergeUser() {
-    console.log("TEST")
     if (this.formMerge.valid) {
-      console.dir(this.formMerge)
+      this.profileService.mergeProfile(
+        new MergeUserModel(this.getNewName(), this.getNewLastName(), this.getNewGender(), this.getNewEnabled(), this.getNewPassword()))
+      this.profileService.getMyProfile();
+      this.editData();
     }
   }
 
@@ -76,5 +79,25 @@ export class SectionPersonalComponent implements OnInit {
 
   changePassword() {
     this.isPasswordChange = !this.isPasswordChange;
+  }
+
+  getNewName() {
+    return this.formMerge.controls.name.value;
+  }
+
+  getNewLastName() {
+    return this.formMerge.controls.lastName.value;
+  }
+
+  getNewGender() {
+    return this.formMerge.controls.gender.value;
+  }
+
+  getNewEnabled() {
+    return this.formMerge.controls.enabled.value;
+  }
+
+  getNewPassword() {
+    return this.formMerge.controls.password.value;
   }
 }

@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {AddressModel} from "../../../logic/dto/models/address.model";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {ProfileService} from "../../../logic/services/profile.service";
 
 @Component({
   selector: 'app-section-address',
@@ -13,7 +14,7 @@ export class SectionAddressComponent implements OnInit {
   isEditable: boolean = false;
   formMerge: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private profileService: ProfileService) {
   }
 
   ngOnInit(): void {
@@ -31,7 +32,27 @@ export class SectionAddressComponent implements OnInit {
 
   mergeAddress() {
     if (this.formMerge.valid) {
-      console.dir(this.formMerge)
+      this.profileService.mergeAddress(
+        new AddressModel(this.getNewCountry(), this.getNewState(), this.getNewCity(), this.getNewStreet()))
+      this.profileService.getMyProfile();
+      this.editData();
     }
   }
+
+  getNewCountry() {
+    return this.formMerge.controls.country.value;
+  }
+
+  getNewState() {
+    return this.formMerge.controls.state.value;
+  }
+
+  getNewCity() {
+    return this.formMerge.controls.city.value;
+  }
+
+  getNewStreet() {
+    return this.formMerge.controls.street.value;
+  }
+
 }
