@@ -27,6 +27,7 @@ export class SectionPersonalComponent implements OnInit {
     this.formMerge = this.formBuilder.group({
       name: new FormControl(this.profile.name, [Validators.required]),
       lastName: new FormControl(this.profile.lastName, [Validators.required]),
+      gender: new FormControl(this.profile.gender, [Validators.required]),
       enabled: new FormControl(this.profile.enabled),
       password: new FormControl('', [Validators.pattern(new RegExp('(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\\W)')), Validators.minLength(6)]),
       repeatPassword: new FormControl('')
