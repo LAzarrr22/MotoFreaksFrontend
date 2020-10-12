@@ -9,10 +9,12 @@ import com.MJ.MotoFreaksBackend.MotoFreaksBackend.resource.requests.MergeUser;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.resource.response.MyUserDto;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.resource.response.UserDto;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.configs.JwtTokenProvider;
+import com.google.common.base.Strings;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -26,11 +28,13 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final JwtTokenProvider jwtService;
+    private final PasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    public UserService(UserRepository userRepository, JwtTokenProvider jwtService) {
+    public UserService(UserRepository userRepository, JwtTokenProvider jwtService, PasswordEncoder bCryptPasswordEncoder) {
         this.userRepository = userRepository;
         this.jwtService = jwtService;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
 
@@ -52,6 +56,9 @@ public class UserService {
         currentUser.setLastName(mergeUser.getLastName());
         currentUser.setEnabled(mergeUser.isEnabled());
         currentUser.setUpdatedDate(new Date());
+        if (!Strings.isNullOrEmpty(mergeUser.getPassword())) {
+            currentUser.setPassword(bCryptPasswordEncoder.encode(mergeUser.getPassword()));
+        }
         userRepository.save(currentUser);
         model.put("message", "User " + currentUser.getUserName() + " was updated");
         log.info("User " + currentUser.getId() + " was updated");

@@ -10,4 +10,5 @@ public class MergeUser {
     private String name;
     private String lastName;
     private boolean enabled;
+    private String password;
 }
