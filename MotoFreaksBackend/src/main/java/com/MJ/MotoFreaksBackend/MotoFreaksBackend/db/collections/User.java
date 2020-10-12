@@ -1,5 +1,6 @@
 package com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections;
 
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.Gender;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.Address;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.CarDataModel;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.Contact;
@@ -23,6 +24,7 @@ public class User {
     private String password;
     private String name;
     private String lastName;
+    private Gender gender;
     private boolean enabled;
     @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private Date createdDate;

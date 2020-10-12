@@ -55,6 +55,7 @@ public class UserService {
         currentUser.setName(mergeUser.getName());
         currentUser.setLastName(mergeUser.getLastName());
         currentUser.setEnabled(mergeUser.isEnabled());
+        currentUser.setGender(mergeUser.getGender());
         currentUser.setUpdatedDate(new Date());
         if (!Strings.isNullOrEmpty(mergeUser.getPassword())) {
             currentUser.setPassword(bCryptPasswordEncoder.encode(mergeUser.getPassword()));
@@ -110,7 +111,7 @@ public class UserService {
         User currentUser = getUserByToken(currentToken);
         User userToShow = getUserById(id);
 
-        UserDto profile = new UserDto(userToShow.getId(), userToShow.getName(), userToShow.getLastName(), userToShow.isEnabled()
+        UserDto profile = new UserDto(userToShow.getId(), userToShow.getName(), userToShow.getLastName(), userToShow.getGender(), userToShow.isEnabled()
                 , userToShow.getCarsList(), userToShow.getContact(), userToShow.getAddress(),
                 userToShow.getPoints(), userToShow.getFriendsList(), isYourFriend(currentUser, userToShow.getUserName()));
         return ok(profile);
@@ -119,7 +120,7 @@ public class UserService {
     public Object getMyProfile(String token) {
         User currentUser = getUserByToken(token);
         MyUserDto myProfile
-                = new MyUserDto(currentUser.getId(), currentUser.getUserName(), currentUser.getName(), currentUser.getLastName(), currentUser.isEnabled(),
+                = new MyUserDto(currentUser.getId(), currentUser.getUserName(), currentUser.getName(), currentUser.getLastName(), currentUser.getGender(), currentUser.isEnabled(),
                 currentUser.getCreatedDate(), currentUser.getUpdatedDate(), currentUser.getLoginsHistory(), currentUser.getCarsList(),
                 currentUser.getContact(), currentUser.getAddress(), currentUser.getPoints(), currentUser.getFriendsList(), currentUser.getMessages());
 
@@ -173,7 +174,7 @@ public class UserService {
         User currentUser = getUserByToken(token);
         List<UserDto> allUsers = new ArrayList<>();
         userRepository.findAll().forEach(user -> {
-            allUsers.add(new UserDto(user.getId(), user.getName(), user.getLastName(), user.isEnabled(), user.getCarsList(),
+            allUsers.add(new UserDto(user.getId(), user.getName(), user.getLastName(), user.getGender(), user.isEnabled(), user.getCarsList(),
                     user.getContact(), user.getAddress(), user.getPoints(), user.getFriendsList(), isYourFriend(currentUser, user.getUserName()))
             );
         });

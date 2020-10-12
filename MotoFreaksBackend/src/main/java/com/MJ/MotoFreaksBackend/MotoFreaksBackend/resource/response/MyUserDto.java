@@ -1,5 +1,6 @@
 package com.MJ.MotoFreaksBackend.MotoFreaksBackend.resource.response;
 
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.Gender;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.Address;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.CarDataModel;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.Contact;
@@ -19,6 +20,7 @@ public class MyUserDto {
     private String username;
     private String name;
     private String lastName;
+    private Gender gender;
     private boolean enabled;
     private Date createdDate;
     private Date updatedDate;
