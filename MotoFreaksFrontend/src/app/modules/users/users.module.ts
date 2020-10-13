@@ -29,13 +29,13 @@ import {MatRadioModule} from "@angular/material/radio";
 import {PipesModule} from "../../shared/pipes/pipes.module";
 import {AppCommonModule} from "../common/common.module";
 import {CarItemComponent} from './components/my-profile-all-data/section-cars/car-item/car-item.component';
-import {AddCarComponent} from './components/my-profile-all-data/section-cars/add-car/add-car.component';
 import {MessageApiService} from "./logic/services/message-api.service";
 import {MatCardModule} from "@angular/material/card";
+import {AddEditCarComponent} from './components/my-profile-all-data/section-cars/add-edit-car/add-edit-car.component';
 
 
 @NgModule({
-  declarations: [ProfileMeComponent, ProfileFriendsComponent, TopBarUserInfoComponent, SectionPersonalComponent, SectionCarsComponent, SectionAddressComponent, SectionContactComponent, SectionFriendsComponent, MyProfileAllDataComponent, CarItemComponent, AddCarComponent],
+  declarations: [ProfileMeComponent, ProfileFriendsComponent, TopBarUserInfoComponent, SectionPersonalComponent, SectionCarsComponent, SectionAddressComponent, SectionContactComponent, SectionFriendsComponent, MyProfileAllDataComponent, CarItemComponent, AddEditCarComponent],
   imports: [
     CommonModule,
     UsersRoutingModule,
