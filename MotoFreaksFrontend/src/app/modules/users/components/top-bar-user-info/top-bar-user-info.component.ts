@@ -1,47 +1,48 @@
-import {AfterViewInit, Component} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MyProfileModel} from "../../logic/dto/response/my-profile.model";
 import {Router} from "@angular/router";
 import {ProfileService} from "../../logic/services/profile.service";
 import {AppPath} from "../../../../shared/enums/app-path.enum";
+import {Subscription, timer} from "rxjs";
+import {switchMap} from "rxjs/operators";
 
 @Component({
   selector: 'app-top-bar-user-info',
   templateUrl: './top-bar-user-info.component.html',
   styleUrls: ['./top-bar-user-info.component.scss']
 })
-export class TopBarUserInfoComponent implements AfterViewInit {
-
-
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      this.countUnReadMessages();
-    }, 0)
-
-  }
+export class TopBarUserInfoComponent implements OnInit, OnDestroy {
 
   profile: MyProfileModel;
   newMessages: number = 0;
-  findAnyMessages: boolean = true;
+  hiddenBadge: boolean = true;
+  unreadSubscription: Subscription;
 
   constructor(private router: Router, private profileService: ProfileService) {
-    this.profileService.getMyProfile().subscribe(profile => this.profile = profile);
+
   }
 
+  ngOnDestroy(): void {
+    this.unreadSubscription.unsubscribe();
+  }
+
+  ngOnInit(): void {
+    this.profileService.getMyProfile().subscribe(profile => this.profile = profile);
+    this.getMessageCount();
+  }
 
   goToProfile() {
     this.router.navigate([AppPath.PROFILE_ME_PATH])
   }
 
-  countUnReadMessages() {
-    Object.keys(this.profile.messages).forEach(key => {
-      this.profile.messages[key].forEach(message => {
-          if (!message.read) {
-            this.findAnyMessages = false;
-            this.newMessages++;
-          }
+  getMessageCount() {
+    this.unreadSubscription = timer(0, 10000).pipe(switchMap(() => this.profileService.getUnreadMessages()))
+      .subscribe(count => {
+        if (count > 0) {
+          this.newMessages = count
+          this.hiddenBadge = false;
         }
-      )
-    });
+      });
   }
 
 }

@@ -7,15 +7,20 @@ import {GetMyProfile, MergeMyAddress, MergeMyContact, MergeMyProfile} from "../a
 import {MergeUserModel} from "../dto/request/merge-user.model";
 import {AddressModel} from "../dto/models/address.model";
 import {ContactModel} from "../dto/models/contact.model";
+import {MyProfileApiService} from "./my-profile-api.service";
 
 @Injectable()
 export class ProfileService {
-  constructor(private store: Store<MyProfileState>) {
+  constructor(private store: Store<MyProfileState>, private apiMyProfile: MyProfileApiService) {
   }
 
   getMyProfile(): Observable<MyProfileModel> {
     this.store.dispatch(new GetMyProfile());
     return this.store.select(getMyProfile);
+  }
+
+  getUnreadMessages() {
+    return this.apiMyProfile.getMyUnreadMessagesCount();
   }
 
   mergeProfile(mergeData: MergeUserModel) {
