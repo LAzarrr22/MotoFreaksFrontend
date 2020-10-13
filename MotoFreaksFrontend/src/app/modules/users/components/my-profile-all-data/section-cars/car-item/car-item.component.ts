@@ -10,6 +10,7 @@ export class CarItemComponent implements OnInit {
 
   @Input()
   car: CarModel;
+  isEditing: boolean = false;
 
   constructor() {
   }
@@ -17,4 +18,7 @@ export class CarItemComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  editCar() {
+    this.isEditing = !this.isEditing;
+  }
 }

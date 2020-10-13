@@ -1,4 +1,11 @@
+@import "src/app/modules/users/components/my-profile-all-data/section";
+
 .car-card {
   max-width: 200px;
   min-width: 200px;
+}
+
+.icon-to-edit {
+  @extend .icon-to-click;
+  padding: 0;
 }

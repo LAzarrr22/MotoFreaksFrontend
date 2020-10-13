@@ -25,7 +25,7 @@
 }
 
 .icon-to-click {
-  padding-left: 30px;
+  padding-left: 20px;
   font-size: $font-size-big;
   color: $custom-blue;
   cursor: pointer;
@@ -38,5 +38,9 @@
 .edit-form {
   padding-top: 40px;
   padding-bottom: 50px;
+}
+
+.full-width {
+  width: 100%;
 }
 

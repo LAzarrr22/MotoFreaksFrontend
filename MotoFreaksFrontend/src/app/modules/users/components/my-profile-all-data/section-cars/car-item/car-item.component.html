@@ -1,9 +1,17 @@
-<mat-card class="car-card">
-  <mat-card-header>
-    <mat-card-title>{{car.name}}</mat-card-title>
-    <mat-card-subtitle>{{car.company}}, {{car.model}}, {{car.generation}}</mat-card-subtitle>
-    <mat-card-subtitle>{{car.year}}r, {{car.color}}</mat-card-subtitle>
-    <mat-card-subtitle>{{car.engine}}, {{car.horsepower}}KM, {{car.torque}}Nm</mat-card-subtitle>
-    <mat-card-subtitle>{{car.registration}}</mat-card-subtitle>
-  </mat-card-header>
-</mat-card>
+<ng-container *ngIf="!isEditing; else editTemplate">
+  <mat-card class="car-card">
+    <mat-card-header>
+      <mat-card-title>{{car.name}}
+        <mat-icon class="icon-to-edit" (click)="editCar()">edit</mat-icon>
+      </mat-card-title>
+      <mat-card-subtitle>{{car.company}}, {{car.model}}, {{car.generation}}</mat-card-subtitle>
+      <mat-card-subtitle>{{car.year}}r, {{car.color}}</mat-card-subtitle>
+      <mat-card-subtitle>{{car.engine}}, {{car.horsepower}}KM, {{car.torque}}Nm</mat-card-subtitle>
+      <mat-card-subtitle>{{car.registration}}</mat-card-subtitle>
+    </mat-card-header>
+  </mat-card>
+</ng-container>
+
+<ng-template #editTemplate>
+  <app-add-edit-car [car]="car"></app-add-edit-car>
+</ng-template>
