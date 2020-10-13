@@ -27,7 +27,7 @@ public class MessageController {
         return messageService.sendMessage(token, receiverId, messageContent);
     }
 
-    @RequestMapping(path = "/read/all/{receiverId}", method = RequestMethod.POST, produces = "application/json")
+    @RequestMapping(path = "/read/all/user/{receiverId}", method = RequestMethod.POST, produces = "application/json")
     public Object getReadLastById(HttpServletRequest req, @PathVariable String receiverId) {
         String token = req.getHeader(AuthorizationHeader.HEADER_NAME).replace(AuthorizationHeader.TOKEN_PREFIX, "");
         return messageService.readMessage(token, receiverId);

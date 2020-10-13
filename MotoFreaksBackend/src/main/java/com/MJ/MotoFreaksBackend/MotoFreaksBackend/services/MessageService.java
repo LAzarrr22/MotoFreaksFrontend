@@ -57,15 +57,13 @@ public class MessageService {
     public Object readMessage(String token, String receiverId) {
         Map<Object, Object> model = new HashMap<>();
         User user = userService.getUserByToken(token);
-        user.getMessages().get(receiverId).stream()
-                .filter(message -> !message.isRead())
-                .forEach(unreadMessage -> {
-                    unreadMessage.setRead(true);
-                    unreadMessage.setReadDate(new Date());
-                });
+        user.getMessages().get(receiverId).stream().filter(message -> !message.isRead()).forEach(unreadMessage -> {
+            unreadMessage.setRead(true);
+            unreadMessage.setReadDate(new Date());
+        });
         this.userRepository.save(user);
         model.put("message", "Messages to " + user.getId() + " user from " + receiverId + " user is read now.");
-        log.info("Messages to " + user.getId() + " user from " + receiverId + " user is read now.");
+        log.info("All messages to " + user.getId() + " user from " + receiverId + " user is read now.");
         return ok(model);
     }
 
