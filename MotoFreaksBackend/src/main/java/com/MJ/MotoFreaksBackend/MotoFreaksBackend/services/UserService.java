@@ -6,11 +6,13 @@ import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.CarDataModel;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.Contact;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.repository.UserRepository;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.resource.requests.MergeUser;
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.resource.requests.NewCar;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.resource.response.MyUserDto;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.resource.response.UserDto;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.configs.JwtTokenProvider;
 import com.google.common.base.Strings;
 import lombok.extern.slf4j.Slf4j;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -53,10 +55,14 @@ public class UserService {
     }
 
 
-    public Object addCar(String token, CarDataModel car) {
+    public Object addCar(String token, NewCar car) {
         Map<Object, Object> model = new HashMap<>();
         User currentUser = getUserByToken(token);
-        currentUser.getCarsList().add(car);
+        if (Objects.isNull(currentUser.getCarsList())) {
+            currentUser.setCarsList(new ArrayList<>());
+        }
+        currentUser.getCarsList().add(new CarDataModel(new ObjectId().toString(), new Date(), null, car.getName(), car.getRegistration().toUpperCase(), car.getCompany()
+                , car.getModel(), car.getGeneration(), car.getYear(), car.getColor(), car.getEngine(), car.getHorsepower(), car.getTorque()));
         currentUser.setUpdatedDate(new Date());
         userRepository.save(currentUser);
         model.put("message", "Car " + car.getName() + " added to " + currentUser.getUserName() + " user.");

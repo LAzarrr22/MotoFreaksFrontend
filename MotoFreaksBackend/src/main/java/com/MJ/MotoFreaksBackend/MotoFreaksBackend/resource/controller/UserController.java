@@ -1,9 +1,9 @@
 package com.MJ.MotoFreaksBackend.MotoFreaksBackend.resource.controller;
 
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.Address;
-import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.CarDataModel;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.Contact;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.resource.requests.MergeUser;
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.resource.requests.NewCar;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.consts.AuthorizationHeader;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.services.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -51,7 +51,7 @@ public class UserController {
     }
 
     @RequestMapping(path = "/add/car", method = RequestMethod.POST, produces = "application/json")
-    public Object addCar(HttpServletRequest req, @RequestBody CarDataModel car) {
+    public Object addCar(HttpServletRequest req, @RequestBody NewCar car) {
         String token = req.getHeader(AuthorizationHeader.HEADER_NAME).replace(AuthorizationHeader.TOKEN_PREFIX, "");
         return userService.addCar(token, car);
     }

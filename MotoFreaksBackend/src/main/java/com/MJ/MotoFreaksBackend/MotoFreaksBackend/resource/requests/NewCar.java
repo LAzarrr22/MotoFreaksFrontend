@@ -1,19 +1,11 @@
-package com.MJ.MotoFreaksBackend.MotoFreaksBackend.models;
+package com.MJ.MotoFreaksBackend.MotoFreaksBackend.resource.requests;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import java.util.Date;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
-public class CarDataModel {
-
-    private String id;
-    private Date createdDate;
-    private Date updatedDate;
+public class NewCar {
     private String name;
     private String registration;
     private String company;
@@ -24,6 +16,4 @@ public class CarDataModel {
     private String engine;
     private Integer horsepower;
     private Integer torque;
-
 }
-
