@@ -31,6 +31,7 @@ import {AppCommonModule} from "../common/common.module";
 import {CarItemComponent} from './components/my-profile-all-data/section-cars/car-item/car-item.component';
 import {AddCarComponent} from './components/my-profile-all-data/section-cars/add-car/add-car.component';
 import {MessageApiService} from "./logic/services/message-api.service";
+import {MatCardModule} from "@angular/material/card";
 
 
 @NgModule({
@@ -52,7 +53,8 @@ import {MessageApiService} from "./logic/services/message-api.service";
     MatRadioModule,
     FormsModule,
     PipesModule,
-    AppCommonModule
+    AppCommonModule,
+    MatCardModule
 
   ],
   exports: [

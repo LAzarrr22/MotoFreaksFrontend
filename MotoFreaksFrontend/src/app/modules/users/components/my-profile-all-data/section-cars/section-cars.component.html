@@ -1,1 +1,17 @@
-<p>section-cars works!</p>
+<div class="row align-items-center pb-4">
+  <div class="col-md-1 col-lg-1 ">
+    <div class="title">Cars</div>
+  </div>
+
+  <div class="col-md-1 col-lg-1 offset-md-9 offset-lg-9 ">
+    <button mat-button color="primary" style="height: 40%;font-size: 18px" (click)="addCar()">Add new car</button>
+  </div>
+</div>
+
+<div class="row">
+  <ng-container *ngFor="let car of cars">
+    <div class="col property-column">
+      <app-car-item [car]="car"></app-car-item>
+    </div>
+  </ng-container>
+</div>

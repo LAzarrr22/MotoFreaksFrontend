@@ -9,6 +9,7 @@ import {CarModel} from "../../../logic/dto/models/car.model";
 export class SectionCarsComponent implements OnInit {
   @Input()
   cars: CarModel[];
+  isAddingCar: boolean = false;
 
   constructor() {
   }
@@ -16,4 +17,7 @@ export class SectionCarsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  addCar() {
+    this.isAddingCar = !this.isAddingCar;
+  }
 }
