@@ -19,7 +19,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.*;
-import java.util.concurrent.atomic.AtomicReference;
 
 import static org.springframework.http.ResponseEntity.ok;
 
@@ -181,18 +180,4 @@ public class UserService {
         return new ResponseEntity<>(allUsers, HttpStatus.OK);
     }
 
-    public Object getUnreadMessage(String token) {
-        AtomicReference<Long> count = new AtomicReference<>((long) 0);
-
-        User currentUser = getUserByToken(token);
-        currentUser.getMessages().values().forEach(messages -> {
-            count.set(messages.stream().filter(message -> !message.isRead()).count());
-        });
-        return ok(count);
-    }
-
-    public Object getMessages(String token) {
-        User currentUser = getUserByToken(token);
-        return ok(currentUser.getMessages());
-    }
 }

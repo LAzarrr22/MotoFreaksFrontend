@@ -31,17 +31,6 @@ public class UserController {
         return userService.getAllUsers(token);
     }
 
-    @RequestMapping(path = "/unread/message", method = RequestMethod.GET, produces = "application/json")
-    public Object getUnreadMessage(HttpServletRequest req) {
-        String token = req.getHeader(AuthorizationHeader.HEADER_NAME).replace(AuthorizationHeader.TOKEN_PREFIX, "");
-        return userService.getUnreadMessage(token);
-    }
-
-    @RequestMapping(path = "/get/messages", method = RequestMethod.GET, produces = "application/json")
-    public Object getMessages(HttpServletRequest req) {
-        String token = req.getHeader(AuthorizationHeader.HEADER_NAME).replace(AuthorizationHeader.TOKEN_PREFIX, "");
-        return userService.getMessages(token);
-    }
 
     @RequestMapping(path = "/merge", method = RequestMethod.POST, produces = "application/json")
     public Object mergeUser(HttpServletRequest req, @RequestBody MergeUser user) {

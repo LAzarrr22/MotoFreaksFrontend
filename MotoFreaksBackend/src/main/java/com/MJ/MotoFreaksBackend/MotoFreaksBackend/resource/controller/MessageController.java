@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping("/message")
 @Slf4j
+@CrossOrigin(origins = "http://localhost:4200")
 public class MessageController {
 
     private final MessageService messageService;
@@ -26,9 +27,21 @@ public class MessageController {
         return messageService.sendMessage(token, receiverId, messageContent);
     }
 
-    @RequestMapping(path = "/read/last/{receiverId}", method = RequestMethod.POST, produces = "application/json")
+    @RequestMapping(path = "/read/all/{receiverId}", method = RequestMethod.POST, produces = "application/json")
     public Object getReadLastById(HttpServletRequest req, @PathVariable String receiverId) {
         String token = req.getHeader(AuthorizationHeader.HEADER_NAME).replace(AuthorizationHeader.TOKEN_PREFIX, "");
         return messageService.readMessage(token, receiverId);
+    }
+
+    @RequestMapping(path = "/unread/count", method = RequestMethod.GET, produces = "application/json")
+    public Object getUnreadMessage(HttpServletRequest req) {
+        String token = req.getHeader(AuthorizationHeader.HEADER_NAME).replace(AuthorizationHeader.TOKEN_PREFIX, "");
+        return messageService.getUnreadMessage(token);
+    }
+
+    @RequestMapping(path = "/get", method = RequestMethod.GET, produces = "application/json")
+    public Object getMessages(HttpServletRequest req) {
+        String token = req.getHeader(AuthorizationHeader.HEADER_NAME).replace(AuthorizationHeader.TOKEN_PREFIX, "");
+        return messageService.getMessages(token);
     }
 }

@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
 
 import static org.springframework.http.ResponseEntity.ok;
 
@@ -66,5 +67,20 @@ public class MessageService {
         model.put("message", "Messages to " + user.getId() + " user from " + receiverId + " user is read now.");
         log.info("Messages to " + user.getId() + " user from " + receiverId + " user is read now.");
         return ok(model);
+    }
+
+    public Object getUnreadMessage(String token) {
+        AtomicReference<Long> count = new AtomicReference<>((long) 0);
+
+        User currentUser = userService.getUserByToken(token);
+        currentUser.getMessages().values().forEach(messages -> {
+            count.set(messages.stream().filter(message -> !message.isRead()).count());
+        });
+        return ok(count);
+    }
+
+    public Object getMessages(String token) {
+        User currentUser = userService.getUserByToken(token);
+        return ok(currentUser.getMessages());
     }
 }
