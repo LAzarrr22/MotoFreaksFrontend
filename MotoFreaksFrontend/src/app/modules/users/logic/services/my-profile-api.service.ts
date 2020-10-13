@@ -16,8 +16,7 @@ export class MyProfileApiService {
   getMyProfile(): Observable<MyProfileModel> {
     return this.httpClient.get<MyProfileModel>(`${environment.apiUrl}/user/show/profile`)
       .pipe(map(data => new MyProfileModel(data.id, data.username, data.name, data.lastName, data.gender, data.enabled, data.createdDate,
-        data.updatedDate, data.loginsHistory, data.carsList, data.contact, data.address, data.points, data.friendsList,
-        data.messages)))
+        data.updatedDate, data.loginsHistory, data.carsList, data.contact, data.address, data.points, data.friendsList)))
   }
 
   mergeMyProfile(mergeUser: MergeUserModel): Observable<any> {

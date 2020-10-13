@@ -1,7 +1,6 @@
 import {CarModel} from "../models/car.model";
 import {ContactModel} from "../models/contact.model";
 import {AddressModel} from "../models/address.model";
-import {MessageModel} from "../models/message.model";
 import {Gender} from "../../enums/gender.enums";
 
 export class MyProfileModel {
@@ -19,10 +18,9 @@ export class MyProfileModel {
   address: AddressModel;
   points: number;
   friendsList: string[];
-  messages: Map<string, MessageModel[]>
 
 
-  constructor(id: string, username: string, name: string, lastName: string, gender: Gender, enabled: boolean, createdDate: Date, updatedDate: Date, loginsHistory: Date[], carsList: CarModel[], contact: ContactModel, address: AddressModel, points: number, friendsList: string[], messages: Map<string, MessageModel[]>) {
+  constructor(id: string, username: string, name: string, lastName: string, gender: Gender, enabled: boolean, createdDate: Date, updatedDate: Date, loginsHistory: Date[], carsList: CarModel[], contact: ContactModel, address: AddressModel, points: number, friendsList: string[]) {
     this.id = id;
     this.username = username;
     this.name = name;
@@ -37,6 +35,5 @@ export class MyProfileModel {
     this.address = address;
     this.points = points;
     this.friendsList = friendsList;
-    this.messages = messages;
   }
 }

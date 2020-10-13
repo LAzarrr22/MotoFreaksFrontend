@@ -138,7 +138,7 @@ public class UserService {
         MyUserDto myProfile
                 = new MyUserDto(currentUser.getId(), currentUser.getUserName(), currentUser.getName(), currentUser.getLastName(), currentUser.getGender(), currentUser.isEnabled(),
                 currentUser.getCreatedDate(), currentUser.getUpdatedDate(), currentUser.getLoginsHistory(), currentUser.getCarsList(),
-                currentUser.getContact(), currentUser.getAddress(), currentUser.getPoints(), currentUser.getFriendsList(), currentUser.getMessages());
+                currentUser.getContact(), currentUser.getAddress(), currentUser.getPoints(), currentUser.getFriendsList());
 
         return ok(myProfile);
     }
