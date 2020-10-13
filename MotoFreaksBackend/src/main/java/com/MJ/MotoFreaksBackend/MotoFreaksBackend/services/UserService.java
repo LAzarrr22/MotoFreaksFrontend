@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
 
 import static org.springframework.http.ResponseEntity.ok;
 
@@ -35,6 +36,21 @@ public class UserService {
         this.userRepository = userRepository;
         this.jwtService = jwtService;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    }
+
+    public User getUserByToken(String token) {
+        Optional<User> optionalUser = userRepository.findByUserNameOptional(jwtService.getUsername(token));
+        return optionalUser.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+    }
+
+    public User getUserByUserName(String username) {
+        Optional<User> optionalUserFriend = userRepository.findByUserNameOptional(username);
+        return optionalUserFriend.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User '" + username + "' not found"));
+    }
+
+    public User getUserById(String id) {
+        Optional<User> optionalUserFriend = userRepository.findById(id);
+        return optionalUserFriend.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
     }
 
 
@@ -154,22 +170,6 @@ public class UserService {
         return !commonFriends.isEmpty();
     }
 
-
-    public User getUserByToken(String token) {
-        Optional<User> optionalUser = userRepository.findByUserNameOptional(jwtService.getUsername(token));
-        return optionalUser.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
-    }
-
-    public User getUserByUserName(String username) {
-        Optional<User> optionalUserFriend = userRepository.findByUserNameOptional(username);
-        return optionalUserFriend.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User '" + username + "' not found"));
-    }
-
-    public User getUserById(String id) {
-        Optional<User> optionalUserFriend = userRepository.findById(id);
-        return optionalUserFriend.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
-    }
-
     public Object getAllUsers(String token) {
         User currentUser = getUserByToken(token);
         List<UserDto> allUsers = new ArrayList<>();
@@ -181,4 +181,18 @@ public class UserService {
         return new ResponseEntity<>(allUsers, HttpStatus.OK);
     }
 
+    public Object getUnreadMessage(String token) {
+        AtomicReference<Long> count = new AtomicReference<>((long) 0);
+
+        User currentUser = getUserByToken(token);
+        currentUser.getMessages().values().forEach(messages -> {
+            count.set(messages.stream().filter(message -> !message.isRead()).count());
+        });
+        return ok(count);
+    }
+
+    public Object getMessages(String token) {
+        User currentUser = getUserByToken(token);
+        return ok(currentUser.getMessages());
+    }
 }
