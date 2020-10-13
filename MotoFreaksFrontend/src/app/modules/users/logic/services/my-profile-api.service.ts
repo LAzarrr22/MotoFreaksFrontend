@@ -53,8 +53,4 @@ export class MyProfileApiService {
       });
   }
 
-  getMyUnreadMessagesCount(): Observable<any> {
-    return this.httpClient.get(`${environment.apiUrl}/user/unread/message`);
-  }
-
 }

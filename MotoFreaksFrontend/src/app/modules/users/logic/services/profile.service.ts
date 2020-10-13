@@ -19,10 +19,6 @@ export class ProfileService {
     return this.store.select(getMyProfile);
   }
 
-  getUnreadMessages() {
-    return this.apiMyProfile.getMyUnreadMessagesCount();
-  }
-
   mergeProfile(mergeData: MergeUserModel) {
     this.store.dispatch(new MergeMyProfile(mergeData));
   }
