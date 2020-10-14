@@ -32,6 +32,7 @@ import {CarItemComponent} from './components/my-profile-all-data/section-cars/ca
 import {MessageApiService} from "./logic/services/message-api.service";
 import {MatCardModule} from "@angular/material/card";
 import {AddEditCarComponent} from './components/my-profile-all-data/section-cars/add-edit-car/add-edit-car.component';
+import {CarsModule} from "../cars/cars.module";
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import {AddEditCarComponent} from './components/my-profile-all-data/section-cars
     FormsModule,
     PipesModule,
     AppCommonModule,
-    MatCardModule
+    MatCardModule,
+    CarsModule
 
   ],
   exports: [
