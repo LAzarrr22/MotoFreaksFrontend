@@ -3,11 +3,19 @@ import {Observable} from "rxjs";
 import {MyProfileModel} from "../dto/response/my-profile.model";
 import {Store} from "@ngrx/store";
 import {getMyProfile, MyProfileState} from "../reducers/my-profile.reducers";
-import {GetMyProfile, MergeMyAddress, MergeMyContact, MergeMyProfile} from "../action/my-profile.action";
+import {
+  AddMyCar,
+  GetMyProfile,
+  MergeMyAddress,
+  MergeMyCar,
+  MergeMyContact,
+  MergeMyProfile
+} from "../action/my-profile.action";
 import {MergeUserModel} from "../dto/request/merge-user.model";
 import {AddressModel} from "../dto/models/address.model";
 import {ContactModel} from "../dto/models/contact.model";
 import {MyProfileApiService} from "./my-profile-api.service";
+import {NewCarModel} from "../dto/request/new-car.model";
 
 @Injectable()
 export class ProfileService {
@@ -31,4 +39,11 @@ export class ProfileService {
     this.store.dispatch(new MergeMyContact(mergeData));
   }
 
+  addCar(newCar: NewCarModel) {
+    this.store.dispatch(new AddMyCar(newCar))
+  }
+
+  mergeCar(mergeCar: NewCarModel, id: string) {
+    this.store.dispatch(new MergeMyCar(mergeCar, id))
+  }
 }

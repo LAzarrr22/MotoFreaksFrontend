@@ -7,6 +7,7 @@ import {map} from "rxjs/operators";
 import {MergeUserModel} from "../dto/request/merge-user.model";
 import {AddressModel} from "../dto/models/address.model";
 import {ContactModel} from "../dto/models/contact.model";
+import {NewCarModel} from "../dto/request/new-car.model";
 
 @Injectable()
 export class MyProfileApiService {
@@ -53,4 +54,35 @@ export class MyProfileApiService {
       });
   }
 
+  addCar(newCar: NewCarModel): Observable<any> {
+    return this.httpClient.post(`${environment.apiUrl}/user/add/car`,
+      {
+        name: newCar.name,
+        company: newCar.company,
+        model: newCar.model,
+        generation: newCar.generation,
+        year: newCar.year,
+        color: newCar.color,
+        engine: newCar.engine,
+        horsepower: newCar.horsepower,
+        registration: newCar.registration,
+        torque: newCar.torque,
+      })
+  }
+
+  mergeCar(newCar: NewCarModel, id: string): Observable<any> {
+    return this.httpClient.post(`${environment.apiUrl}/user/merge/car/${id}`,
+      {
+        name: newCar.name,
+        company: newCar.company,
+        model: newCar.model,
+        generation: newCar.generation,
+        year: newCar.year,
+        color: newCar.color,
+        engine: newCar.engine,
+        horsepower: newCar.horsepower,
+        registration: newCar.registration,
+        torque: newCar.torque,
+      })
+  }
 }

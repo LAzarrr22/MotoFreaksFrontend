@@ -5,15 +5,23 @@ import {CommonComponentsService} from "../../../common/common.service";
 import {Observable} from "rxjs";
 import {MyProfileModel} from "../dto/response/my-profile.model";
 import {
+  ADD_MY_CAR,
+  AddMyCar,
+  AddMyCarFail,
+  AddMyCarSuccess,
   GET_MY_PROFILE,
   GetMyProfileFail,
   GetMyProfileSuccess,
   MERGE_MY_ADDRESS,
+  MERGE_MY_CAR,
   MERGE_MY_CONTACT,
   MERGE_MY_PROFILE,
   MergeMyAddress,
   MergeMyAddressFail,
   MergeMyAddressSuccess,
+  MergeMyCar,
+  MergeMyCarFail,
+  MergeMyCarSuccess,
   MergeMyContact,
   MergeMyContactFail,
   MergeMyContactSuccess,
@@ -95,6 +103,40 @@ export class MyProfileEffects {
       ]),
       catchError((error, caught) => {
         this.store$.dispatch(new MergeMyContactFail(error.error));
+        this.errorService.error(error);
+        return caught;
+      })
+    );
+
+  @Effect()
+  addCar$: Observable<Action> = this.actions$
+    .pipe(
+      ofType(ADD_MY_CAR),
+      switchMap((action: AddMyCar) => {
+        return this.myProfileService.addCar(action.payload);
+      }),
+      switchMap((carData: string) => [
+        new AddMyCarSuccess(carData)
+      ]),
+      catchError((error, caught) => {
+        this.store$.dispatch(new AddMyCarFail(error.error));
+        this.errorService.error(error);
+        return caught;
+      })
+    );
+
+  @Effect()
+  mergeCar$: Observable<Action> = this.actions$
+    .pipe(
+      ofType(MERGE_MY_CAR),
+      switchMap((action: MergeMyCar) => {
+        return this.myProfileService.mergeCar(action.payload, action.id);
+      }),
+      switchMap((carData: string) => [
+        new MergeMyCarSuccess(carData)
+      ]),
+      catchError((error, caught) => {
+        this.store$.dispatch(new MergeMyCarFail(error.error));
         this.errorService.error(error);
         return caught;
       })
