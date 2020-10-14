@@ -13,5 +13,5 @@
 </ng-container>
 
 <ng-template #editTemplate>
-  <app-add-edit-car [car]="car" (closeEditing)="editCar()"></app-add-edit-car>
+  <app-add-edit-car [car]="car" [isCarEdit]="true" (closeTemplate)="editCar()"></app-add-edit-car>
 </ng-template>

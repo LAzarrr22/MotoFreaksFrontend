@@ -8,6 +8,14 @@
   </div>
 </div>
 
+<ng-container *ngIf="isAddingCar">
+  <div class="row">
+    <div class="col-md-4 col-lg-4 offset-md-4 offset-lg-4 ">
+      <app-add-edit-car [isCarAdd]="true" (closeTemplate)="addCar()"></app-add-edit-car>
+    </div>
+  </div>
+</ng-container>
+
 <div class="row">
   <ng-container *ngFor="let car of cars">
     <div class="col property-column">
