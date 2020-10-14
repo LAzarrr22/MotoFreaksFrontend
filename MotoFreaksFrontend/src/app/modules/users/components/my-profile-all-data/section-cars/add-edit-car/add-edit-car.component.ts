@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CarModel} from "../../../../logic/dto/models/car.model";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
@@ -12,6 +12,10 @@ export class AddEditCarComponent implements OnInit {
   @Input()
   car: CarModel;
   formMerge: FormGroup;
+
+  @Output()
+  closeEditing = new EventEmitter();
+
 
   constructor(private formBuilder: FormBuilder) {
   }
@@ -33,5 +37,7 @@ export class AddEditCarComponent implements OnInit {
 
   mergeCar() {
     console.dir(this.formMerge)
+    this.closeEditing.emit();
   }
 }
+
