@@ -3,6 +3,7 @@ import {CarModel} from "../../../../logic/dto/models/car.model";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ProfileService} from "../../../../logic/services/profile.service";
 import {NewCarModel} from "../../../../logic/dto/request/new-car.model";
+import {ValidationMessageMap} from "../../../../../../shared/interfaces/validation-message-map";
 
 @Component({
   selector: 'app-add-edit-car',
@@ -20,37 +21,55 @@ export class AddEditCarComponent implements OnInit {
   isCarAdd: boolean = false;
   @Output()
   closeTemplate = new EventEmitter();
+  validationMessages: ValidationMessageMap;
 
 
   constructor(private formBuilder: FormBuilder, private profileService: ProfileService) {
+    this.validationMessages = {
+      year: {
+        pattern: 'Password must contain only number',
+        maxlength: 'Year must be at least 4 number long'
+      },
+      horsepower: {
+        pattern: 'Password must contain only number',
+        maxlength: 'Year must be at least 4 number long'
+      },
+      torque: {
+        pattern: 'Password must contain only number',
+        maxlength: 'Year must be at least 4 number long'
+      },
+      name: {
+        maxlength: 'Year must be at least 16 number long'
+      }
+    }
   }
 
   ngOnInit(): void {
     if (this.isCarEdit && this.car) {
       this.formMerge = this.formBuilder.group({
-        name: new FormControl(this.car.name, [Validators.required]),
+        name: new FormControl(this.car.name, [Validators.required, Validators.maxLength(16)]),
         registration: new FormControl(this.car.registration),
-        company: new FormControl(this.car.company),
-        model: new FormControl(this.car.model),
-        generation: new FormControl(this.car.generation),
-        year: new FormControl(this.car.year),
+        company: new FormControl(this.car.company, [Validators.required]),
+        model: new FormControl(this.car.model, [Validators.required]),
+        generation: new FormControl(this.car.generation, [Validators.required]),
+        year: new FormControl(this.car.year, [Validators.required, Validators.maxLength(4), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
         color: new FormControl(this.car.color),
         engine: new FormControl(this.car.engine),
-        horsepower: new FormControl(this.car.horsepower),
-        torque: new FormControl(this.car.torque),
+        horsepower: new FormControl(this.car.horsepower, [Validators.maxLength(4), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
+        torque: new FormControl(this.car.torque, [Validators.maxLength(4), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
       });
     } else {
       this.formMerge = this.formBuilder.group({
         name: new FormControl('', [Validators.required]),
         registration: new FormControl(''),
-        company: new FormControl(''),
-        model: new FormControl(''),
-        generation: new FormControl(''),
-        year: new FormControl(''),
+        company: new FormControl('', [Validators.required]),
+        model: new FormControl('', [Validators.required]),
+        generation: new FormControl('', [Validators.required]),
+        year: new FormControl('', [Validators.required, Validators.maxLength(4), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
         color: new FormControl(''),
         engine: new FormControl(''),
-        horsepower: new FormControl(''),
-        torque: new FormControl(''),
+        horsepower: new FormControl('', [Validators.maxLength(4), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
+        torque: new FormControl('', [Validators.maxLength(4), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
       });
     }
   }

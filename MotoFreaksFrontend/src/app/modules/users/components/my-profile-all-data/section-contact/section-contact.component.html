@@ -92,6 +92,7 @@
         <mat-label>Phone number</mat-label>
         <input matInput placeholder="Phone number" formControlName="phone">
       </mat-form-field>
+      <error-form [control]="'phone'" [form]="formMerge" [allMessages]="validationMessages"></error-form>
 
       <div class="padding-class">Please insert your link to pages:</div>
 

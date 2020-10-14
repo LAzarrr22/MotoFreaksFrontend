@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ContactModel} from "../../../logic/dto/models/contact.model";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ProfileService} from "../../../logic/services/profile.service";
+import {ValidationMessageMap} from "../../../../../shared/interfaces/validation-message-map";
 
 @Component({
   selector: 'app-section-contact',
@@ -14,14 +15,20 @@ export class SectionContactComponent implements OnInit {
   contact: ContactModel;
   isEditable: boolean = false;
   formMerge: FormGroup;
+  validationMessages: ValidationMessageMap;
 
   constructor(private formBuilder: FormBuilder, private profileService: ProfileService) {
+    this.validationMessages = {
+      phone: {
+        pattern: 'Password must contain only number',
+      }
+    }
   }
 
   ngOnInit(): void {
     this.formMerge = this.formBuilder.group({
       email: new FormControl(this.contact.email, [Validators.required, Validators.email]),
-      phone: new FormControl(this.contact.phone),
+      phone: new FormControl(this.contact.phone, [Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
       skype: new FormControl(this.contact.skype),
       facebook: new FormControl(this.contact.facebook),
       instagram: new FormControl(this.contact.instagram),
