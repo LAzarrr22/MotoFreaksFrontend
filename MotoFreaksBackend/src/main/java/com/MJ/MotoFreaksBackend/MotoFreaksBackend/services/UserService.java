@@ -65,8 +65,30 @@ public class UserService {
                 , car.getModel(), car.getGeneration(), car.getYear(), car.getColor(), car.getEngine(), car.getHorsepower(), car.getTorque()));
         currentUser.setUpdatedDate(new Date());
         userRepository.save(currentUser);
-        model.put("message", "Car " + car.getName() + " added to " + currentUser.getUserName() + " user.");
+        model.put("message", "Car added successful.");
         log.info("Car " + car.getName() + " added to " + currentUser.getId() + " user.");
+        return ok(model);
+    }
+
+    public Object mergeCar(String token, NewCar car, String carId) {
+        Map<Object, Object> model = new HashMap<>();
+        User currentUser = getUserByToken(token);
+        currentUser.getCarsList().stream().filter(selectedCar -> selectedCar.getId().equals(carId)).forEach(carToEdit -> {
+            carToEdit.setUpdatedDate(new Date());
+            carToEdit.setName(car.getName());
+            carToEdit.setRegistration(car.getRegistration());
+            carToEdit.setCompany(car.getCompany());
+            carToEdit.setModel(car.getModel());
+            carToEdit.setGeneration(car.getGeneration());
+            carToEdit.setYear(car.getYear());
+            carToEdit.setColor(car.getColor());
+            carToEdit.setEngine(car.getEngine());
+            carToEdit.setHorsepower(car.getHorsepower());
+            carToEdit.setTorque(car.getTorque());
+        });
+        userRepository.save(currentUser);
+        model.put("message", "Car merged successful.");
+        log.info("Car " + car.getName() + " merged for " + currentUser.getId() + " user.");
         return ok(model);
     }
 
@@ -185,5 +207,6 @@ public class UserService {
         });
         return new ResponseEntity<>(allUsers, HttpStatus.OK);
     }
+
 
 }

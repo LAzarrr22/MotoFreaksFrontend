@@ -56,6 +56,12 @@ public class UserController {
         return userService.addCar(token, car);
     }
 
+    @RequestMapping(path = "/merge/car/{carId}", method = RequestMethod.POST, produces = "application/json")
+    public Object mergeCar(HttpServletRequest req, @RequestBody NewCar car, @PathVariable String carId) {
+        String token = req.getHeader(AuthorizationHeader.HEADER_NAME).replace(AuthorizationHeader.TOKEN_PREFIX, "");
+        return userService.mergeCar(token, car, carId);
+    }
+
     @RequestMapping(path = "/add/friend/{friendId}", method = RequestMethod.POST, produces = "application/json")
     public Object addFriend(HttpServletRequest req, @PathVariable String friendId) {
         String token = req.getHeader(AuthorizationHeader.HEADER_NAME).replace(AuthorizationHeader.TOKEN_PREFIX, "");
