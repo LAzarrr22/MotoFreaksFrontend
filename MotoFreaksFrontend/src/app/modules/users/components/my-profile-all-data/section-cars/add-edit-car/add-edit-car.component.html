@@ -93,7 +93,20 @@
       </div>
     </div>
 
-    <button class="mat-flat-button save-button" mat-flat-button type="submit" color="primary">Save</button>
+    <div class="row">
+      <div class="col-md-3">
+        <button class="mat-flat-button save-button" mat-flat-button type="submit" color="primary">Save</button>
+      </div>
+      <ng-container *ngIf="isCarEdit">
+        <div class="col-md-3">
+          <button class="mat-flat-button cancel-button " mat-flat-button type="reset" color="warn"
+                  (click)="closeEditing()">
+            Cancel
+          </button>
+        </div>
+      </ng-container>
+    </div>
+
 
   </form>
 </div>

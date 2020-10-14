@@ -83,10 +83,14 @@ export class AddEditCarComponent implements OnInit {
       this.profileService.addCar(new NewCarModel(this.getName(), this.getRegistration(), this.getCompany(), this.getModel(), this.getGeneration(),
         this.getYear(), this.getColor(), this.getEngine(), this.getHorsepower(), this.getTorque()))
     }
-    this.closeTemplate.emit();
+    this.closeEditing();
     setTimeout(() => {
       this.profileService.getMyProfile()
     }, 0);
+  }
+
+  closeEditing() {
+    this.closeTemplate.emit();
   }
 
   getName() {

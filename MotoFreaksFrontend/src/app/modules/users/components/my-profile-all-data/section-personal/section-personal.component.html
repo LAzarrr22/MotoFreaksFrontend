@@ -4,7 +4,15 @@
   </div>
 
   <div class="col-md-1 col-lg-1 offset-md-10 offset-lg-10 ">
-    <button mat-button color="primary" style="height: 40%;font-size: 18px" (click)="editData()">Edit</button>
+    <button mat-button color="primary" style="height: 40%;font-size: 18px" [ngClass]="{'button-active': isEditable}"
+            (click)="editData()">
+      <ng-container *ngIf="isEditable; else editButton">
+        Cancel
+      </ng-container>
+      <ng-template #editButton>
+        Edit
+      </ng-template>
+    </button>
   </div>
 </div>
 

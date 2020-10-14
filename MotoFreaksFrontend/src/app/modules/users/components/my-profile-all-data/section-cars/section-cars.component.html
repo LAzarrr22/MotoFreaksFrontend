@@ -4,7 +4,15 @@
   </div>
 
   <div class="col-md-1 col-lg-1 offset-md-9 offset-lg-9 ">
-    <button mat-button color="primary" style="height: 40%;font-size: 18px" (click)="addCar()">Add new car</button>
+    <button mat-button color="primary" style="height: 40%;font-size: 18px" [ngClass]="{'button-active': isAddingCar}"
+            (click)="addCar()">
+      <ng-container *ngIf="isAddingCar; else addButton">
+        Cancel
+      </ng-container>
+      <ng-template #addButton>
+        Add new car
+      </ng-template>
+    </button>
   </div>
 </div>
 
