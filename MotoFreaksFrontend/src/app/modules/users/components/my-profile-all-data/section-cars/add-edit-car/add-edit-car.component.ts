@@ -4,6 +4,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ProfileService} from "../../../../logic/services/profile.service";
 import {NewCarModel} from "../../../../logic/dto/request/new-car.model";
 import {ValidationMessageMap} from "../../../../../../shared/interfaces/validation-message-map";
+import {CarsService} from "../../../../../cars/logic/service/cars.service";
 
 @Component({
   selector: 'app-add-edit-car',
@@ -22,9 +23,12 @@ export class AddEditCarComponent implements OnInit {
   @Output()
   closeTemplate = new EventEmitter();
   validationMessages: ValidationMessageMap;
+  companies: string[];
+  models: string[]
+  generations: string[];
 
 
-  constructor(private formBuilder: FormBuilder, private profileService: ProfileService) {
+  constructor(private formBuilder: FormBuilder, private profileService: ProfileService, private carsService: CarsService) {
     this.validationMessages = {
       year: {
         pattern: 'Password must contain only number',
@@ -45,48 +49,60 @@ export class AddEditCarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.isCarEdit && this.car) {
-      this.formMerge = this.formBuilder.group({
-        name: new FormControl(this.car.name, [Validators.required, Validators.maxLength(16)]),
-        registration: new FormControl(this.car.registration),
-        company: new FormControl(this.car.company, [Validators.required]),
-        model: new FormControl(this.car.model, [Validators.required]),
-        generation: new FormControl(this.car.generation, [Validators.required]),
-        year: new FormControl(this.car.year, [Validators.required, Validators.maxLength(4), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
-        color: new FormControl(this.car.color),
-        engine: new FormControl(this.car.engine),
-        horsepower: new FormControl(this.car.horsepower, [Validators.maxLength(4), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
-        torque: new FormControl(this.car.torque, [Validators.maxLength(4), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
-      });
-    } else {
-      this.formMerge = this.formBuilder.group({
-        name: new FormControl('', [Validators.required]),
-        registration: new FormControl(''),
-        company: new FormControl('', [Validators.required]),
-        model: new FormControl('', [Validators.required]),
-        generation: new FormControl('', [Validators.required]),
-        year: new FormControl('', [Validators.required, Validators.maxLength(4), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
-        color: new FormControl(''),
-        engine: new FormControl(''),
-        horsepower: new FormControl('', [Validators.maxLength(4), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
-        torque: new FormControl('', [Validators.maxLength(4), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
-      });
+    this.formMerge = this.formBuilder.group({
+      name: new FormControl(this.car != undefined ? this.car.name : '', [Validators.required, Validators.maxLength(16)]),
+      registration: new FormControl(this.car != undefined ? this.car.registration : ''),
+      company: new FormControl(this.car != undefined ? this.car.company : '', [Validators.required]),
+      model: new FormControl(this.car != undefined ? this.car.model : '', [Validators.required]),
+      generation: new FormControl(this.car != undefined ? this.car.generation : '', [Validators.required]),
+      year: new FormControl(this.car != undefined ? this.car.year : '', [Validators.required, Validators.maxLength(4), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
+      color: new FormControl(this.car != undefined ? this.car.color : ''),
+      engine: new FormControl(this.car != undefined ? this.car.engine : ''),
+      horsepower: new FormControl(this.car != undefined ? this.car.horsepower : '', [Validators.maxLength(4), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
+      torque: new FormControl(this.car != undefined ? this.car.torque : '', [Validators.maxLength(4), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
+    });
+    this.loadCompaniesList();
+
+    if (this.car) {
+      this.loadModelsList();
+      this.loadGenerationsList();
     }
+
   }
 
   submit() {
-    if (this.isCarEdit) {
-      this.profileService.mergeCar(new NewCarModel(this.getName(), this.getRegistration(), this.getCompany(), this.getModel(), this.getGeneration(),
-        this.getYear(), this.getColor(), this.getEngine(), this.getHorsepower(), this.getTorque()), this.car.id)
-    } else if (this.isCarAdd) {
-      console.log("test")
-      this.profileService.addCar(new NewCarModel(this.getName(), this.getRegistration(), this.getCompany(), this.getModel(), this.getGeneration(),
-        this.getYear(), this.getColor(), this.getEngine(), this.getHorsepower(), this.getTorque()))
+    if (this.formMerge.valid) {
+      if (this.isCarEdit) {
+        this.profileService.mergeCar(new NewCarModel(this.getName(), this.getRegistration(), this.getCompany(), this.getModel(), this.getGeneration(),
+          this.getYear(), this.getColor(), this.getEngine(), this.getHorsepower(), this.getTorque()), this.car.id)
+      } else if (this.isCarAdd) {
+        this.profileService.addCar(new NewCarModel(this.getName(), this.getRegistration(), this.getCompany(), this.getModel(), this.getGeneration(),
+          this.getYear(), this.getColor(), this.getEngine(), this.getHorsepower(), this.getTorque()))
+      }
+
+      this.closeEditing();
+      setTimeout(() => {
+        this.profileService.getMyProfile()
+      }, 0);
     }
-    this.closeEditing();
-    setTimeout(() => {
-      this.profileService.getMyProfile()
-    }, 0);
+  }
+
+  loadCompaniesList() {
+    this.carsService.getCompaniesList().subscribe(companies => {
+      this.companies = companies
+    })
+  }
+
+  loadModelsList() {
+    this.carsService.getModelsList(this.getCompany()).subscribe(models => {
+      this.models = models;
+    })
+  }
+
+  loadGenerationsList() {
+    this.carsService.getGenerationList(this.getCompany(), this.getModel()).subscribe(generations => {
+      this.generations = generations;
+    })
   }
 
   closeEditing() {
@@ -131,6 +147,17 @@ export class AddEditCarComponent implements OnInit {
 
   getTorque() {
     return this.formMerge.controls.torque.value;
+  }
+
+  companySelectionChange() {
+    this.loadModelsList();
+    this.formMerge.controls.model.reset('');
+    this.formMerge.controls.generation.reset('');
+  }
+
+  modelSelectionChange() {
+    this.loadGenerationsList();
+    this.formMerge.controls.generation.reset('');
   }
 }
 
