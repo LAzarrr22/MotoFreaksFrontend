@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/cars")
+@CrossOrigin(origins = "http://localhost:4200")
 public class CarCompanyController {
 
     private final CarsService carsService;
@@ -48,5 +49,19 @@ public class CarCompanyController {
         return carsService.findAll();
     }
 
+    @RequestMapping(path = "/all/companies", method = RequestMethod.GET, produces = "application/json")
+    public Object getAllCompanies() {
+        return carsService.getAllCompanies();
+    }
+
+    @RequestMapping(path = "/all/models/{company}", method = RequestMethod.GET, produces = "application/json")
+    public Object getModels(@PathVariable String company) {
+        return carsService.getModels(company);
+    }
+
+    @RequestMapping(path = "/all/generations/{company}/{model}", method = RequestMethod.GET, produces = "application/json")
+    public Object getGenerations(@PathVariable String company, @PathVariable String model) {
+        return carsService.getGenerations(company, model);
+    }
 
 }

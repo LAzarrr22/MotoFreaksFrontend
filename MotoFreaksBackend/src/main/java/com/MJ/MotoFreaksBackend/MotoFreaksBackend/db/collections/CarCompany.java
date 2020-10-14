@@ -2,7 +2,6 @@ package com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
@@ -18,7 +17,6 @@ public class CarCompany {
     private Date createdDate;
     private Date updatedDate;
     private String creatorId;
-    @Indexed
     private String company;
     private Map<String, List<String>> modelList;
 

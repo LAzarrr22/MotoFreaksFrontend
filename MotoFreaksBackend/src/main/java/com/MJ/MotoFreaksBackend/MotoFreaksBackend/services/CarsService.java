@@ -5,7 +5,6 @@ import com.MJ.MotoFreaksBackend.MotoFreaksBackend.repository.CarCompanyRepositor
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.resource.requests.NewCarCompany;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -19,13 +18,11 @@ import static org.springframework.http.ResponseEntity.ok;
 public class CarsService {
 
     private final CarCompanyRepository carRepository;
-    private final MongoTemplate mongoTemplate;
     private final UserService userService;
 
     @Autowired
-    public CarsService(CarCompanyRepository carRepository, MongoTemplate mongoTemplate, UserService userService) {
+    public CarsService(CarCompanyRepository carRepository, UserService userService) {
         this.carRepository = carRepository;
-        this.mongoTemplate = mongoTemplate;
         this.userService = userService;
     }
 
@@ -93,10 +90,26 @@ public class CarsService {
         return carRepository.findAll();
     }
 
-
     private CarCompany getCompanyByName(String company) {
         Optional<CarCompany> optionalCarCompany = carRepository.findCarByCompany(company);
         return optionalCarCompany.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Company not found"));
+    }
+
+    public Object getAllCompanies() {
+        List<String> companies = new ArrayList<>();
+        carRepository.findAll().forEach(carCompanyModel -> {
+            companies.add(carCompanyModel.getCompany());
+        });
+        return ok(companies);
+    }
+
+    public Object getModels(String company) {
+        return ok(getCompanyByName(company).getModelList().keySet());
+    }
+
+    public Object getGenerations(String company, String model) {
+
+        return ok(getCompanyByName(company).getModelList().get(model));
     }
 }
 
