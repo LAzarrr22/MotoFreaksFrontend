@@ -9,3 +9,9 @@
   @extend .icon-to-click;
   padding: 0;
 }
+
+.icon-to-delete {
+  @extend .icon-to-click;
+  padding: 0;
+  color: $custom-warn;
+}

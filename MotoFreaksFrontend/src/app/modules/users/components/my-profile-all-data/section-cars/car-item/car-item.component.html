@@ -3,6 +3,7 @@
     <mat-card-header>
       <mat-card-title>{{car.name}}
         <mat-icon class="icon-to-edit" (click)="editCar()">edit</mat-icon>
+        <mat-icon class="icon-to-delete" (click)="removeCar()">delete</mat-icon>
       </mat-card-title>
       <mat-card-subtitle>{{car.company}}, {{car.model}}, {{car.generation}}</mat-card-subtitle>
       <mat-card-subtitle>{{car.year}} r, {{car.color}}</mat-card-subtitle>

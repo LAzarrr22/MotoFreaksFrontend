@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {CarModel} from "../../../../logic/dto/models/car.model";
+import {ProfileService} from "../../../../logic/services/profile.service";
 
 @Component({
   selector: 'app-car-item',
@@ -12,7 +13,7 @@ export class CarItemComponent implements OnInit {
   car: CarModel;
   isEditing: boolean = false;
 
-  constructor() {
+  constructor(private profileService: ProfileService) {
   }
 
   ngOnInit(): void {
@@ -20,5 +21,15 @@ export class CarItemComponent implements OnInit {
 
   editCar() {
     this.isEditing = !this.isEditing;
+  }
+
+  removeCar() {
+    this.profileService.removeCar(this.car.id);
+
+    setTimeout(() => {
+      this.profileService.getMyProfile().subscribe(profile => {
+        console.dir(profile)
+      })
+    }, 200);
   }
 }
