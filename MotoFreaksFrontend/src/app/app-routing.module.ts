@@ -19,7 +19,7 @@ const routes: Routes = [
   {
     path: AppRoute.PROFILE,
     canActivate: [AuthGuard],
-    loadChildren: () => import('./modules/users/users.module').then(m => m.UsersModule)
+    loadChildren: () => import('./modules/profiles/profile.module').then(m => m.ProfileModule)
   },
   {
     path: AppRoute.SERVICE_NOT_AVAILABLE,

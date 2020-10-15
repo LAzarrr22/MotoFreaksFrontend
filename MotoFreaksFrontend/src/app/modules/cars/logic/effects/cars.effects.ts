@@ -17,7 +17,7 @@ import {
   GetModelsSuccess
 } from "../action/cars.action";
 import {catchError, switchMap} from "rxjs/operators";
-import {GetMyProfileFail} from "../../../users/logic/action/my-profile.action";
+import {GetMyProfileFail} from "../../../profiles/logic/action/my-profile.action";
 
 @Injectable()
 export class CarsEffects {

@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ProfileMeComponent} from './pages/profile-me/profile-me.component';
 import {ProfileFriendsComponent} from './pages/profile-friends/profile-friends.component';
-import {UsersRoutingModule} from "./users-routing.module";
+import {ProfileRoutingModule} from "./profile-routing.module";
 import {MyProfileApiService} from "./logic/services/my-profile-api.service";
 import {StoreModule} from "@ngrx/store";
 import {reducer} from "./logic/reducers/my-profile.reducers";
@@ -12,11 +12,6 @@ import {ProfileService} from "./logic/services/profile.service";
 import {TopBarUserInfoComponent} from './components/top-bar-user-info/top-bar-user-info.component';
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
-import {SectionPersonalComponent} from './components/my-profile-all-data/section-personal/section-personal.component';
-import {SectionCarsComponent} from './components/my-profile-all-data/section-cars/section-cars.component';
-import {SectionAddressComponent} from './components/my-profile-all-data/section-address/section-address.component';
-import {SectionContactComponent} from './components/my-profile-all-data/section-contact/section-contact.component';
-import {SectionFriendsComponent} from './components/my-profile-all-data/section-friends/section-friends.component';
 import {MyProfileAllDataComponent} from './components/my-profile-all-data/my-profile-all-data.component';
 import {MatBadgeModule} from "@angular/material/badge";
 import {MatDividerModule} from "@angular/material/divider";
@@ -28,18 +23,23 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatRadioModule} from "@angular/material/radio";
 import {PipesModule} from "../../shared/pipes/pipes.module";
 import {AppCommonModule} from "../common/common.module";
-import {CarItemComponent} from './components/my-profile-all-data/section-cars/car-item/car-item.component';
 import {MessageApiService} from "./logic/services/message-api.service";
 import {MatCardModule} from "@angular/material/card";
-import {AddEditCarComponent} from './components/my-profile-all-data/section-cars/add-edit-car/add-edit-car.component';
 import {CarsModule} from "../cars/cars.module";
+import {SectionMyPersonalComponent} from "./components/profile-sections/section-my-personal/section-my-personal.component";
+import {SectionAddressComponent} from "./components/profile-sections/section-address/section-address.component";
+import {SectionContactComponent} from "./components/profile-sections/section-contact/section-contact.component";
+import {SectionFriendsComponent} from "./components/profile-sections/section-friends/section-friends.component";
+import {SectionCarsComponent} from "./components/profile-sections/section-cars/section-cars.component";
+import {CarItemComponent} from "./components/profile-sections/section-cars/car-item/car-item.component";
+import {AddEditCarComponent} from "./components/profile-sections/section-cars/add-edit-car/add-edit-car.component";
 
 
 @NgModule({
-  declarations: [ProfileMeComponent, ProfileFriendsComponent, TopBarUserInfoComponent, SectionPersonalComponent, SectionCarsComponent, SectionAddressComponent, SectionContactComponent, SectionFriendsComponent, MyProfileAllDataComponent, CarItemComponent, AddEditCarComponent],
+  declarations: [ProfileMeComponent, ProfileFriendsComponent, TopBarUserInfoComponent, SectionMyPersonalComponent, SectionCarsComponent, SectionAddressComponent, SectionContactComponent, SectionFriendsComponent, MyProfileAllDataComponent, CarItemComponent, AddEditCarComponent],
   imports: [
     CommonModule,
-    UsersRoutingModule,
+    ProfileRoutingModule,
     StoreModule.forFeature('my-profile', reducer),
     EffectsModule.forFeature([MyProfileEffects]),
     MatButtonModule,
@@ -69,5 +69,5 @@ import {CarsModule} from "../cars/cars.module";
   ]
 
 })
-export class UsersModule {
+export class ProfileModule {
 }

@@ -21,6 +21,6 @@ export const routes: Routes = [
     RouterModule.forChild(routes),
   ],
 })
-export class UsersRoutingModule {
+export class ProfileRoutingModule {
 
 }

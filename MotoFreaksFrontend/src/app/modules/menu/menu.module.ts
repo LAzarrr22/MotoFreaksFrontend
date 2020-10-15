@@ -7,8 +7,8 @@ import {MatDividerModule} from "@angular/material/divider";
 import {MatIconModule} from "@angular/material/icon";
 import {MenuService} from "./logic/services/menu.service";
 import {TopBarComponent} from './components/top-bar/top-bar.component';
-import {ProfileService} from "../users/logic/services/profile.service";
-import {UsersModule} from "../users/users.module";
+import {ProfileService} from "../profiles/logic/services/profile.service";
+import {ProfileModule} from "../profiles/profile.module";
 
 
 @NgModule({
@@ -22,7 +22,7 @@ import {UsersModule} from "../users/users.module";
     MatMenuModule,
     MatDividerModule,
     MatIconModule,
-    UsersModule,
+    ProfileModule,
 
   ],
   providers: [

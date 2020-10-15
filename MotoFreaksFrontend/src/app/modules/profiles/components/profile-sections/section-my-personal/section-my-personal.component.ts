@@ -6,11 +6,11 @@ import {ValidationMessageMap} from "../../../../../shared/interfaces/validation-
 import {ProfileService} from "../../../logic/services/profile.service";
 
 @Component({
-  selector: 'app-section-personal',
-  templateUrl: './section-personal.component.html',
-  styleUrls: ['./section-personal.component.scss']
+  selector: 'app-section-my-personal',
+  templateUrl: './section-my-personal.component.html',
+  styleUrls: ['./section-my-personal.component.scss']
 })
-export class SectionPersonalComponent implements OnInit {
+export class SectionMyPersonalComponent implements OnInit {
   @Input()
   profile: MyProfileModel;
 
