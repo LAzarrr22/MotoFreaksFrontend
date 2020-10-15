@@ -70,6 +70,16 @@ public class UserService {
         return ok(model);
     }
 
+    public Object removeCar(String token, String id) {
+        Map<Object, Object> model = new HashMap<>();
+        User currentUser = getUserByToken(token);
+        currentUser.getCarsList().removeIf(carDataModel -> carDataModel.getId().equals(id));
+        userRepository.save(currentUser);
+        model.put("message", "Car removed successful.");
+        log.info("Car " + id + " removed from " + currentUser.getId() + " user.");
+        return ok(model);
+    }
+
     public Object mergeCar(String token, NewCar car, String carId) {
         Map<Object, Object> model = new HashMap<>();
         User currentUser = getUserByToken(token);
