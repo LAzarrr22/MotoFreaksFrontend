@@ -4,4 +4,5 @@ export enum ActiveRoute {
   REGISTER = '[Active] REGISTER',
   HOME = '[Active] HOME',
   MY_PROFILE = '[Active] MY_PROFILE',
+  ALL_USERS = '[Active] ALL_USERS',
 }

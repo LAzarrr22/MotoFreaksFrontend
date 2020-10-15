@@ -6,6 +6,8 @@ export enum AppPath {
   HOME_PATH = '/moto-freaks',
 
   PROFILE_ME_PATH = '/profile/me',
+  PROFILE_USER_PATH = '/profile/user',
+  USER_ALL = '/user/all',
 
   SERVICE_NOT_AVAILABLE = '/service-not-available',
 }
