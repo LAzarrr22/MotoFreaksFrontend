@@ -10,7 +10,7 @@ export const routes: Routes = [
     component: ProfileMeComponent
   },
   {
-    path: AppRoute.FRIENDS,
+    path: AppRoute.USER,
     component: ProfileFriendsComponent
   },
 

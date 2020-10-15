@@ -6,14 +6,17 @@ import {EffectsModule} from "@ngrx/effects";
 import {UserEffects} from "./logic/effects/user.effects";
 import {reducer} from "./logic/reducers/users.reducers";
 import {UsersService} from "./logic/services/users.service";
+import {AllUsersComponent} from './pages/all-users/all-users.component';
+import {UsersRoutingModule} from "./users-routing.module";
 
 
 @NgModule({
-  declarations: [],
+  declarations: [AllUsersComponent],
   imports: [
     CommonModule,
     StoreModule.forFeature('users', reducer),
     EffectsModule.forFeature([UserEffects]),
+    UsersRoutingModule,
   ],
   providers: [
     UserApiService,
