@@ -20,6 +20,7 @@ import {LoginSuccessfulDto} from "../dto/response/login-successful.model";
 import {AppPath} from "../../../../shared/enums/app-path.enum";
 import {Router} from "@angular/router";
 import {CommonComponentsService} from "../../../common/common.service";
+import {GetAllUsers} from "../../../users/logic/action/user.action";
 
 @Injectable()
 export class AuthenticationEffects {
@@ -47,7 +48,8 @@ export class AuthenticationEffects {
         this.router.navigate([AppPath.HOME_PATH])
       }),
       switchMap((userData: LoginSuccessfulDto) => [
-        new UserLoginSuccess(userData)
+        new UserLoginSuccess(userData),
+        new GetAllUsers()
       ]),
 
       catchError((error, caught) => {

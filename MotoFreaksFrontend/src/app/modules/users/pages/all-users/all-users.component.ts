@@ -3,6 +3,7 @@ import {UserModel} from "../../logic/dto/response/user-model";
 import {UsersService} from "../../logic/services/users.service";
 import {ActiveRoute} from "../../../../shared/enums/active-route.enum";
 import {MenuService} from "../../../menu/logic/services/menu.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-all-users',
@@ -11,14 +12,14 @@ import {MenuService} from "../../../menu/logic/services/menu.service";
 })
 export class AllUsersComponent implements OnInit {
 
-  users: UserModel[];
+  users: Observable<UserModel[]>;
 
   constructor(private menuService: MenuService, private usersService: UsersService) {
   }
 
   ngOnInit(): void {
-    this.menuService.activeRoute.next(ActiveRoute.ALL_USERS)
-    this.usersService.getAllUsers().subscribe(users => this.users = users)
+    this.menuService.activeRoute.next(ActiveRoute.ALL_USERS);
+    this.users = this.usersService.getAllUsers();
   }
 
 }

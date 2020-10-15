@@ -1,2 +1,1 @@
-<div *ngFor="let user of users">{{user.name}}</div>
-<div *ngFor="let user of users">{{user.id}}</div>
+<app-all-user-list [users]="users | async"></app-all-user-list>
