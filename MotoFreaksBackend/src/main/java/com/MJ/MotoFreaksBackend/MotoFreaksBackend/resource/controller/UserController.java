@@ -25,7 +25,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @RequestMapping(path = "/get", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(path = "/all", method = RequestMethod.GET, produces = "application/json")
     public Object getAll(HttpServletRequest req) {
         String token = req.getHeader(AuthorizationHeader.HEADER_NAME).replace(AuthorizationHeader.TOKEN_PREFIX, "");
         return userService.getAllUsers(token);
