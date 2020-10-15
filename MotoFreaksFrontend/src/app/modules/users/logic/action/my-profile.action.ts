@@ -30,6 +30,10 @@ export const MERGE_MY_CAR = '[Users] MERGE_MY_CAR';
 export const MERGE_MY_CAR_SUCCESS = '[Users] MERGE_MY_CAR_SUCCESS';
 export const MERGE_MY_CAR_FAIL = '[Users] MERGE_MY_CAR_FAIL';
 
+export const REMOVE_MY_CAR = '[Users] REMOVE_MY_CAR';
+export const REMOVE_MY_CAR_SUCCESS = '[Users] REMOVE_MY_CAR_SUCCESS';
+export const REMOVE_MY_CAR_FAIL = '[Users] REMOVE_MY_CAR_FAIL';
+
 export class GetMyProfile implements Action {
   readonly type = GET_MY_PROFILE;
 
@@ -156,6 +160,27 @@ export class MergeMyCarFail implements Action {
   }
 }
 
+export class RemoveMyCar implements Action {
+  readonly type = REMOVE_MY_CAR;
+
+  constructor(public id: string) {
+  }
+}
+
+export class RemoveMyCarSuccess implements Action {
+  readonly type = REMOVE_MY_CAR_SUCCESS;
+
+  constructor(public payload: string) {
+  }
+}
+
+export class RemoveMyCarFail implements Action {
+  readonly type = REMOVE_MY_CAR_FAIL;
+
+  constructor(public payload: string) {
+  }
+}
+
 
 export type Actions =
   | GetMyProfile
@@ -176,4 +201,7 @@ export type Actions =
   | MergeMyCar
   | MergeMyCarSuccess
   | MergeMyCarFail
+  | RemoveMyCar
+  | RemoveMyCarSuccess
+  | RemoveMyCarFail
 

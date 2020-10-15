@@ -27,7 +27,11 @@ import {
   MergeMyContactSuccess,
   MergeMyProfile,
   MergeMyProfileFail,
-  MergeMyProfileSuccess
+  MergeMyProfileSuccess,
+  REMOVE_MY_CAR,
+  RemoveMyCar,
+  RemoveMyCarFail,
+  RemoveMyCarSuccess
 } from "../action/my-profile.action";
 import {catchError, switchMap} from "rxjs/operators";
 import {MyProfileApiService} from "../services/my-profile-api.service";
@@ -137,6 +141,23 @@ export class MyProfileEffects {
       ]),
       catchError((error, caught) => {
         this.store$.dispatch(new MergeMyCarFail(error.error));
+        this.errorService.error(error);
+        return caught;
+      })
+    );
+
+  @Effect()
+  removeCar$: Observable<Action> = this.actions$
+    .pipe(
+      ofType(REMOVE_MY_CAR),
+      switchMap((action: RemoveMyCar) => {
+        return this.myProfileService.removeCar(action.id);
+      }),
+      switchMap((carData: string) => [
+        new RemoveMyCarSuccess(carData)
+      ]),
+      catchError((error, caught) => {
+        this.store$.dispatch(new RemoveMyCarFail(error.error));
         this.errorService.error(error);
         return caught;
       })

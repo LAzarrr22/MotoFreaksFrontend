@@ -85,4 +85,8 @@ export class MyProfileApiService {
         torque: newCar.torque,
       })
   }
+
+  removeCar(id: string) {
+    return this.httpClient.delete(`${environment.apiUrl}/user/remove/car/${id}`);
+  }
 }

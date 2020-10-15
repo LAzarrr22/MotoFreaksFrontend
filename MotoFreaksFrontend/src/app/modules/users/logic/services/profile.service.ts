@@ -9,7 +9,8 @@ import {
   MergeMyAddress,
   MergeMyCar,
   MergeMyContact,
-  MergeMyProfile
+  MergeMyProfile,
+  RemoveMyCar
 } from "../action/my-profile.action";
 import {MergeUserModel} from "../dto/request/merge-user.model";
 import {AddressModel} from "../dto/models/address.model";
@@ -45,5 +46,9 @@ export class ProfileService {
 
   mergeCar(mergeCar: NewCarModel, id: string) {
     this.store.dispatch(new MergeMyCar(mergeCar, id))
+  }
+
+  removeCar(id: string) {
+    this.store.dispatch(new RemoveMyCar(id))
   }
 }
