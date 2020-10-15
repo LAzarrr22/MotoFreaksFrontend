@@ -33,6 +33,7 @@ import {SectionFriendsComponent} from "./components/profile-sections/section-fri
 import {SectionCarsComponent} from "./components/profile-sections/section-cars/section-cars.component";
 import {CarItemComponent} from "./components/profile-sections/section-cars/car-item/car-item.component";
 import {AddEditCarComponent} from "./components/profile-sections/section-cars/add-edit-car/add-edit-car.component";
+import {UsersModule} from "../users/users.module";
 
 
 @NgModule({
@@ -56,7 +57,8 @@ import {AddEditCarComponent} from "./components/profile-sections/section-cars/ad
     PipesModule,
     AppCommonModule,
     MatCardModule,
-    CarsModule
+    CarsModule,
+    UsersModule
 
   ],
   exports: [

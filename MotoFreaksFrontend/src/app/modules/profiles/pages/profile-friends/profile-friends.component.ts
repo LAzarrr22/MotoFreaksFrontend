@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {UsersService} from "../../../users/logic/services/users.service";
 
 @Component({
   selector: 'app-profile-friends',
@@ -7,10 +8,11 @@ import {Component, OnInit} from '@angular/core';
 })
 export class ProfileFriendsComponent implements OnInit {
 
-  constructor() {
+  constructor(private usersService: UsersService) {
   }
 
   ngOnInit(): void {
+    this.usersService.getAllUsers().subscribe(users => console.dir(users))
   }
 
 }

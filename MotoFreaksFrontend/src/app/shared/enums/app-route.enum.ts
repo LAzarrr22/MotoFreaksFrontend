@@ -8,7 +8,7 @@ export enum AppRoute {
 
   PROFILE = 'profile',
   ME = 'me',
-  FRIENDS = 'friends',
+  FRIENDS = 'friend',
 
   SERVICE_NOT_AVAILABLE = 'service-not-available',
 }

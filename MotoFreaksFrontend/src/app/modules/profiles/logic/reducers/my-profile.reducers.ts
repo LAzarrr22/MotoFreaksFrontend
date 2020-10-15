@@ -1,5 +1,4 @@
 import {MyProfileModel} from "../dto/response/my-profile.model";
-import {createEntityAdapter, EntityAdapter} from '@ngrx/entity';
 import {GET_MY_PROFILE, GET_MY_PROFILE_FAIL, GET_MY_PROFILE_SUCCESS} from "../action/my-profile.action";
 import {createFeatureSelector, createSelector} from "@ngrx/store";
 
@@ -7,8 +6,6 @@ export interface MyProfileState {
   profile: MyProfileModel;
   loading: boolean;
 }
-
-export const adapter: EntityAdapter<MyProfileModel> = createEntityAdapter<MyProfileModel>();
 
 export const INITIAL_STATE: MyProfileState = {
   profile: null,
