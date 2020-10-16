@@ -11,38 +11,23 @@
 
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
 
-    <!-- Position Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Name</th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    <ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumns">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{columnNames[column]}}</th>
+      <td mat-cell *matCellDef="let element" class="click" (click)="goToProfile(element.id)"> {{element[column]}} </td>
     </ng-container>
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="lastName">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name</th>
-      <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
-    </ng-container>
-
-    <!-- Weight Column -->
-    <ng-container matColumnDef="gender">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender</th>
-      <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
-    </ng-container>
-
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="points">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Points</th>
-      <td mat-cell *matCellDef="let element"> {{element.points}} </td>
-    </ng-container>
-
-    <!-- Symbol Column -->
     <ng-container matColumnDef="isYourFriend">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Friends</th>
-      <td mat-cell *matCellDef="let element"> {{element.isYourFriend}} </td>
+      <td mat-cell *matCellDef="let element">
+
+        <mat-icon *ngIf="element.isYourFriend==false" class="click" (click)="addFriend(element.id)">person_add
+        </mat-icon>
+        <mat-icon *ngIf="element.isYourFriend">done</mat-icon>
+      </td>
     </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-    <tr mat-row *matRowDef="let user; columns: displayedColumns;" class="click" (click)="goToProfile(user.id)"></tr>
+    <tr mat-header-row *matHeaderRowDef="allColumnsDisplayed; sticky: true"></tr>
+    <tr mat-row *matRowDef="let user; columns: allColumnsDisplayed;"></tr>
 
     <tr class="mat-row" *matNoDataRow>
       <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>

@@ -13,8 +13,13 @@ import {MatSort} from "@angular/material/sort";
   styleUrls: ['./all-user-list.component.scss']
 })
 export class AllUserListComponent implements OnInit, AfterViewInit {
-
-  displayedColumns: string[] = ['name', 'lastName', 'gender', 'points', 'isYourFriend'];
+  columnNames = {
+    name: 'Name',
+    lastName: 'Last name',
+    gender: 'Gender',
+    points: 'Points'
+  };
+  displayedColumns = Object.keys(this.columnNames);
   dataSource: MatTableDataSource<UserModel>;
 
   @Input()
@@ -24,6 +29,11 @@ export class AllUserListComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private router: Router) {
+
+  }
+
+  get allColumnsDisplayed() {
+    return [...this.displayedColumns, 'isYourFriend']
 
   }
 
@@ -46,5 +56,9 @@ export class AllUserListComponent implements OnInit, AfterViewInit {
 
   goToProfile(id: string) {
     this.router.navigate([AppPath.PROFILE_USER_PATH, {id: id}])
+  }
+
+  addFriend(id: any) {
+    console.log(id)
   }
 }
