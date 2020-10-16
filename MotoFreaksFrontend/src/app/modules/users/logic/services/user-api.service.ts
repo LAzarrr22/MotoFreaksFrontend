@@ -15,4 +15,8 @@ export class UserApiService {
       .pipe(map(users => users.map(user => new UserModel(user.id, user.name, user.lastName, user.gender, user.enabled, user.carsList
         , user.contact, user.address, user.points, user.friendsList, user.isYourFriend))))
   }
+
+  addFriend(id: string): Observable<any> {
+    return this.httpClient.post(`${environment.apiUrl}/user/add/friend/${id}`, {})
+  }
 }

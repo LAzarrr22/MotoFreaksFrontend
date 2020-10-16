@@ -5,6 +5,7 @@ import {AppPath} from "../../../../shared/enums/app-path.enum";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatSort} from "@angular/material/sort";
+import {UsersService} from "../../logic/services/users.service";
 
 
 @Component({
@@ -28,7 +29,7 @@ export class AllUserListComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private usersService: UsersService) {
 
   }
 
@@ -58,7 +59,7 @@ export class AllUserListComponent implements OnInit, AfterViewInit {
     this.router.navigate([AppPath.PROFILE_USER_PATH, {id: id}])
   }
 
-  addFriend(id: any) {
-    console.log(id)
+  addFriend(id: string) {
+    this.usersService.addFriend(id);
   }
 }
