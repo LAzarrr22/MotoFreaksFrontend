@@ -1,0 +1,14 @@
+<div class="context">
+  <div class="personal-title">Personal data</div>
+  <mat-divider></mat-divider>
+  <app-section-user-personal [user]="userProfile"></app-section-user-personal>
+  <mat-divider></mat-divider>
+  <app-section-address [address]="userProfile.address"></app-section-address>
+  <mat-divider></mat-divider>
+  <app-section-contact [contact]="userProfile.contact"></app-section-contact>
+  <mat-divider></mat-divider>
+  <app-section-cars [cars]="userProfile.carsList"></app-section-cars>
+  <mat-divider></mat-divider>
+  <app-section-friends [friendsListId]="userProfile.friendsList"></app-section-friends>
+  <mat-divider></mat-divider>
+</div>

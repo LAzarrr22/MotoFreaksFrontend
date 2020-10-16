@@ -34,10 +34,12 @@ import {SectionCarsComponent} from "./components/profile-sections/section-cars/s
 import {CarItemComponent} from "./components/profile-sections/section-cars/car-item/car-item.component";
 import {AddEditCarComponent} from "./components/profile-sections/section-cars/add-edit-car/add-edit-car.component";
 import {UsersModule} from "../users/users.module";
+import {UserProfileAllDataComponent} from './components/user-profile-all-data/user-profile-all-data.component';
+import {SectionUserPersonalComponent} from './components/profile-sections/section-user-personal/section-user-personal.component';
 
 
 @NgModule({
-  declarations: [ProfileMeComponent, ProfileFriendsComponent, TopBarUserInfoComponent, SectionMyPersonalComponent, SectionCarsComponent, SectionAddressComponent, SectionContactComponent, SectionFriendsComponent, MyProfileAllDataComponent, CarItemComponent, AddEditCarComponent],
+  declarations: [ProfileMeComponent, ProfileFriendsComponent, TopBarUserInfoComponent, SectionMyPersonalComponent, SectionCarsComponent, SectionAddressComponent, SectionContactComponent, SectionFriendsComponent, MyProfileAllDataComponent, CarItemComponent, AddEditCarComponent, UserProfileAllDataComponent, SectionUserPersonalComponent],
   imports: [
     CommonModule,
     ProfileRoutingModule,
