@@ -15,6 +15,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatSortModule} from "@angular/material/sort";
 import {MatDividerModule} from "@angular/material/divider";
+import {MatIconModule} from "@angular/material/icon";
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import {MatDividerModule} from "@angular/material/divider";
     MatPaginatorModule,
     MatSortModule,
     MatDividerModule,
+    MatIconModule,
   ],
   providers: [
     UserApiService,

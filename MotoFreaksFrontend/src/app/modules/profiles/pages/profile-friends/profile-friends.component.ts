@@ -11,7 +11,6 @@ import {ActivatedRoute} from "@angular/router";
 export class ProfileFriendsComponent implements OnInit {
 
   users: UserModel[];
-  usersFiltered: UserModel[];
   user: UserModel;
 
   constructor(private route: ActivatedRoute, private usersService: UsersService) {
