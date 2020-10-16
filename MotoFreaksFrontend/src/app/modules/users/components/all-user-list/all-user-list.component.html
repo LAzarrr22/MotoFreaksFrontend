@@ -1,44 +1,52 @@
 <div class="context">
+  <div class="personal-title">Users</div>
 
-  <mat-label>Filter</mat-label>
-  <label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
-  </label>
+  <div class="filter-section">
+    <mat-form-field>
+      <mat-label>Filter users</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input>
+    </mat-form-field>
+    <mat-divider></mat-divider>
+  </div>
 
-
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
 
     <!-- Position Column -->
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Name</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Name</th>
       <td mat-cell *matCellDef="let element"> {{element.name}} </td>
     </ng-container>
 
     <!-- Name Column -->
     <ng-container matColumnDef="lastName">
-      <th mat-header-cell *matHeaderCellDef> Last Name</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name</th>
       <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
     </ng-container>
 
     <!-- Weight Column -->
     <ng-container matColumnDef="gender">
-      <th mat-header-cell *matHeaderCellDef> Gender</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender</th>
       <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
     </ng-container>
 
     <!-- Symbol Column -->
     <ng-container matColumnDef="points">
-      <th mat-header-cell *matHeaderCellDef> Points</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Points</th>
       <td mat-cell *matCellDef="let element"> {{element.points}} </td>
     </ng-container>
 
     <!-- Symbol Column -->
     <ng-container matColumnDef="isYourFriend">
-      <th mat-header-cell *matHeaderCellDef> Friends</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Friends</th>
       <td mat-cell *matCellDef="let element"> {{element.isYourFriend}} </td>
     </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="click" (click)="goToProfile(row.id)"></tr>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let user; columns: displayedColumns;" class="click" (click)="goToProfile(user.id)"></tr>
+
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+    </tr>
   </table>
+  <mat-paginator [pageSizeOptions]="[15, 30, 50, 100]" [length]="resultsLength" [pageSize]="15"></mat-paginator>
 </div>

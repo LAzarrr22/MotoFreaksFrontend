@@ -15,7 +15,6 @@ export class SectionUserPersonalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.dir(this.user)
   }
 
 }

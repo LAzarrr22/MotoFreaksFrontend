@@ -12,6 +12,9 @@ import {AllUserListComponent} from './components/all-user-list/all-user-list.com
 import {MatTableModule} from "@angular/material/table";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatSortModule} from "@angular/material/sort";
+import {MatDividerModule} from "@angular/material/divider";
 
 
 @NgModule({
@@ -24,6 +27,9 @@ import {MatInputModule} from "@angular/material/input";
     MatTableModule,
     MatFormFieldModule,
     MatInputModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatDividerModule,
   ],
   providers: [
     UserApiService,
