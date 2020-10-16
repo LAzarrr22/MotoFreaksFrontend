@@ -216,6 +216,9 @@ public class UserService {
     }
 
     private boolean isYourFriend(User currentUser, String id) {
+        if (currentUser.getId().equals(id)) {
+            return true;
+        }
         String commonFriends = currentUser.getFriendsList().stream().filter(id::equals).findAny().orElse("");
         return !commonFriends.isEmpty();
     }
