@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {UsersService} from "../../../users/logic/services/users.service";
 import {UserModel} from "../../../users/logic/dto/response/user-model";
 import {ActivatedRoute} from "@angular/router";
+import {ActiveRoute} from "../../../../shared/enums/active-route.enum";
+import {MenuService} from "../../../menu/logic/services/menu.service";
 
 @Component({
   selector: 'app-profile-friends',
@@ -13,10 +15,11 @@ export class ProfileFriendsComponent implements OnInit {
   users: UserModel[];
   user: UserModel;
 
-  constructor(private route: ActivatedRoute, private usersService: UsersService) {
+  constructor(private route: ActivatedRoute, private usersService: UsersService, private menuService: MenuService) {
   }
 
   ngOnInit(): void {
+    this.menuService.activeRoute.next(ActiveRoute.ALL_USERS)
     const userId = this.route.snapshot.paramMap.get('id');
     this.usersService.getAllUsers().subscribe(users => this.users = users);
     this.user = this.users.find((user: UserModel) => user.id === userId);

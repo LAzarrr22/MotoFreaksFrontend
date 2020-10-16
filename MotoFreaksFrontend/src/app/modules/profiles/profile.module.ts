@@ -36,6 +36,9 @@ import {AddEditCarComponent} from "./components/profile-sections/section-cars/ad
 import {UsersModule} from "../users/users.module";
 import {UserProfileAllDataComponent} from './components/user-profile-all-data/user-profile-all-data.component';
 import {SectionUserPersonalComponent} from './components/profile-sections/section-user-personal/section-user-personal.component';
+import {MatTableModule} from "@angular/material/table";
+import {MatSortModule} from "@angular/material/sort";
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 
 @NgModule({
@@ -60,7 +63,10 @@ import {SectionUserPersonalComponent} from './components/profile-sections/sectio
     AppCommonModule,
     MatCardModule,
     CarsModule,
-    UsersModule
+    UsersModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule
 
   ],
   exports: [
