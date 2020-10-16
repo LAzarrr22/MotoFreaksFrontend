@@ -27,5 +27,4 @@ public class MyUserDto {
     private Contact contact;
     private Address address;
     private Integer points;
-    private List<String> friendsList;
 }

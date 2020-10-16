@@ -7,6 +7,7 @@ import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.Contact;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.repository.UserRepository;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.resource.requests.MergeUser;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.resource.requests.NewCar;
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.resource.response.MyFriendDto;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.resource.response.MyUserDto;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.resource.response.UserDto;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.configs.JwtTokenProvider;
@@ -160,6 +161,18 @@ public class UserService {
         return ok(model);
     }
 
+    public Object getFriends(String token) {
+        User currentUser = getUserByToken(token);
+        List<MyFriendDto> myFriendList = new ArrayList<>();
+        userRepository.findAll().forEach(user -> {
+            currentUser.getFriendsList().forEach(friendId -> {
+                if (user.getId().equals(friendId))
+                    myFriendList.add(new MyFriendDto(user.getId(), user.getName(), user.getLastName(), user.getGender()));
+            });
+        });
+        return ok(myFriendList);
+    }
+
     public Object getProfile(String id, String currentToken) {
         User currentUser = getUserByToken(currentToken);
         User userToShow = getUserById(id);
@@ -175,7 +188,7 @@ public class UserService {
         MyUserDto myProfile
                 = new MyUserDto(currentUser.getId(), currentUser.getUserName(), currentUser.getName(), currentUser.getLastName(), currentUser.getGender(), currentUser.isEnabled(),
                 currentUser.getCreatedDate(), currentUser.getUpdatedDate(), currentUser.getLoginsHistory(), currentUser.getCarsList(),
-                currentUser.getContact(), currentUser.getAddress(), currentUser.getPoints(), currentUser.getFriendsList());
+                currentUser.getContact(), currentUser.getAddress(), currentUser.getPoints());
 
         return ok(myProfile);
     }
@@ -212,7 +225,7 @@ public class UserService {
         List<UserDto> allUsers = new ArrayList<>();
         userRepository.findAll().forEach(user -> {
             allUsers.add(new UserDto(user.getId(), user.getName(), user.getLastName(), user.getGender(), user.isEnabled(), user.getCarsList(),
-                    user.getContact(), user.getAddress(), user.getPoints(), user.getFriendsList(), isYourFriend(currentUser, user.getUserName()))
+                    user.getContact(), user.getAddress(), user.getPoints(), user.getFriendsList(), isYourFriend(currentUser, user.getId()))
             );
         });
         return new ResponseEntity<>(allUsers, HttpStatus.OK);

@@ -74,6 +74,12 @@ public class UserController {
         return userService.addFriend(token, friendId);
     }
 
+    @RequestMapping(path = "/get/friends", method = RequestMethod.GET, produces = "application/json")
+    public Object getFriends(HttpServletRequest req) {
+        String token = req.getHeader(AuthorizationHeader.HEADER_NAME).replace(AuthorizationHeader.TOKEN_PREFIX, "");
+        return userService.getFriends(token);
+    }
+
     @RequestMapping(path = "/show/profile/{id}", method = RequestMethod.GET, produces = "application/json")
     public Object showProfile(@PathVariable String id, HttpServletRequest req) {
         String token = req.getHeader(AuthorizationHeader.HEADER_NAME).replace(AuthorizationHeader.TOKEN_PREFIX, "");
