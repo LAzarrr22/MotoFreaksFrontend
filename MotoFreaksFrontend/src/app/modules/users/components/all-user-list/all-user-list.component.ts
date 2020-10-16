@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {UserModel} from "../../logic/dto/response/user-model";
+import {Router} from "@angular/router";
+import {AppPath} from "../../../../shared/enums/app-path.enum";
 
 
 @Component({
@@ -14,23 +16,21 @@ export class AllUserListComponent implements OnInit {
 
   @Input()
   users: UserModel[];
-  selectedElementId: string | null = null;
 
 
-  constructor() {
+  constructor(private router: Router) {
   }
 
   ngOnInit(): void {
-    const ELEMENT_DATA = this.users;
-    this.dataSource = ELEMENT_DATA;
+    this.dataSource = this.users;
   }
 
   applyFilter(event: Event) {
-    // const filterValue = (event.target as HTMLInputElement).value;
-    // this.dataSource.filter = filterValue.trim().toLowerCase();
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   goToProfile(id: string) {
-    console.log(id);
+    this.router.navigate([AppPath.PROFILE_USER_PATH, {id: id}])
   }
 }

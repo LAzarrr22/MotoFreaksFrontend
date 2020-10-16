@@ -10,6 +10,8 @@ import {AllUsersComponent} from './pages/all-users/all-users.component';
 import {UsersRoutingModule} from "./users-routing.module";
 import {AllUserListComponent} from './components/all-user-list/all-user-list.component';
 import {MatTableModule} from "@angular/material/table";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
 
 
 @NgModule({
@@ -20,6 +22,8 @@ import {MatTableModule} from "@angular/material/table";
     EffectsModule.forFeature([UserEffects]),
     UsersRoutingModule,
     MatTableModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   providers: [
     UserApiService,

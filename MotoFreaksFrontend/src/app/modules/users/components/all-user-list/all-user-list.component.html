@@ -1,4 +1,11 @@
 <div class="context">
+
+  <mat-label>Filter</mat-label>
+  <label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+  </label>
+
+
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
     <!-- Position Column -->
