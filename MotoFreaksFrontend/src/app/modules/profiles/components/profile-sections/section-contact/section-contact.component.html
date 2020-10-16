@@ -2,7 +2,7 @@
   <div class="col-md-1 col-lg-1 ">
     <div class="title">Contact</div>
   </div>
-
+<ng-container *ngIf="myProfile">
   <div class="col-md-1 col-lg-1 offset-md-10 offset-lg-10">
     <button mat-button color="primary" style="height: 40%;font-size: 18px" [ngClass]="{'button-active': isEditable}"
             (click)="editData()">
@@ -14,6 +14,7 @@
       </ng-template>
     </button>
   </div>
+</ng-container>
 </div>
 
 

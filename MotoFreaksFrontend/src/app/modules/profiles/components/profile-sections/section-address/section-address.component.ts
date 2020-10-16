@@ -11,6 +11,9 @@ import {ProfileService} from "../../../logic/services/profile.service";
 export class SectionAddressComponent implements OnInit {
   @Input()
   address: AddressModel
+  @Input()
+  myProfile: boolean = false;
+
   isEditable: boolean = false;
   formMerge: FormGroup;
 

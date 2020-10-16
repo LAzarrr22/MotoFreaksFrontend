@@ -11,6 +11,8 @@ export class CarItemComponent implements OnInit {
 
   @Input()
   car: CarModel;
+  @Input()
+  myProfile: boolean = false;
   isEditing: boolean = false;
 
   constructor(private profileService: ProfileService) {
@@ -28,7 +30,6 @@ export class CarItemComponent implements OnInit {
 
     setTimeout(() => {
       this.profileService.getMyProfile().subscribe(profile => {
-        console.dir(profile)
       })
     }, 200);
   }

@@ -8,6 +8,8 @@ import {Component, Input, OnInit} from '@angular/core';
 export class SectionFriendsComponent implements OnInit {
   @Input()
   friendsListId: string[];
+  @Input()
+  myProfile: boolean = false;
 
   constructor() {
   }

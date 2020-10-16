@@ -13,6 +13,8 @@ export class SectionContactComponent implements OnInit {
 
   @Input()
   contact: ContactModel;
+  @Input()
+  myProfile: boolean = false;
   isEditable: boolean = false;
   formMerge: FormGroup;
   validationMessages: ValidationMessageMap;

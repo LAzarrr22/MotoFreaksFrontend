@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UsersService} from "../../../users/logic/services/users.service";
+import {UserModel} from "../../../users/logic/dto/response/user-model";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-profile-friends',
@@ -8,11 +10,17 @@ import {UsersService} from "../../../users/logic/services/users.service";
 })
 export class ProfileFriendsComponent implements OnInit {
 
-  constructor(private usersService: UsersService) {
+  users: UserModel[];
+  usersFiltered: UserModel[];
+  user: UserModel;
+
+  constructor(private route: ActivatedRoute, private usersService: UsersService) {
   }
 
   ngOnInit(): void {
-    this.usersService.getAllUsers().subscribe(users => console.dir(users))
+    const userId = this.route.snapshot.paramMap.get('id');
+    this.usersService.getAllUsers().subscribe(users => this.users = users);
+    this.user = this.users.find((user: UserModel) => user.id === userId);
   }
 
 }

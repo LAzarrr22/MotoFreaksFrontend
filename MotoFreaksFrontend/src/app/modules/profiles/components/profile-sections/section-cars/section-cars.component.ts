@@ -9,6 +9,8 @@ import {CarModel} from "../../../logic/dto/models/car.model";
 export class SectionCarsComponent implements OnInit {
   @Input()
   cars: CarModel[];
+  @Input()
+  myProfile: boolean = false;
   isAddingCar: boolean = false;
 
   constructor() {

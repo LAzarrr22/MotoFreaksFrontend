@@ -3,12 +3,12 @@
   <mat-divider></mat-divider>
   <app-section-my-personal [profile]="profile"></app-section-my-personal>
   <mat-divider></mat-divider>
-  <app-section-address [address]="profile.address"></app-section-address>
+  <app-section-address [address]="profile.address" [myProfile]="true"></app-section-address>
   <mat-divider></mat-divider>
-  <app-section-contact [contact]="profile.contact"></app-section-contact>
+  <app-section-contact [contact]="profile.contact" [myProfile]="true"></app-section-contact>
   <mat-divider></mat-divider>
-  <app-section-cars [cars]="profile.carsList"></app-section-cars>
+  <app-section-cars [cars]="profile.carsList" [myProfile]="true"></app-section-cars>
   <mat-divider></mat-divider>
-  <app-section-friends [friendsListId]="profile.friendsList"></app-section-friends>
+  <app-section-friends [friendsListId]="profile.friendsList" [myProfile]="true"></app-section-friends>
   <mat-divider></mat-divider>
 </div>
