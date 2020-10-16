@@ -8,6 +8,7 @@ import {MergeUserModel} from "../dto/request/merge-user.model";
 import {AddressModel} from "../dto/models/address.model";
 import {ContactModel} from "../dto/models/contact.model";
 import {NewCarModel} from "../dto/request/new-car.model";
+import {FriendUserModel} from "../dto/response/friend-user.model";
 
 @Injectable()
 export class MyProfileApiService {
@@ -17,7 +18,7 @@ export class MyProfileApiService {
   getMyProfile(): Observable<MyProfileModel> {
     return this.httpClient.get<MyProfileModel>(`${environment.apiUrl}/user/show/profile`)
       .pipe(map(data => new MyProfileModel(data.id, data.username, data.name, data.lastName, data.gender, data.enabled, data.createdDate,
-        data.updatedDate, data.loginsHistory, data.carsList, data.contact, data.address, data.points, data.friendsList)))
+        data.updatedDate, data.loginsHistory, data.carsList, data.contact, data.address, data.points)))
   }
 
   mergeMyProfile(mergeUser: MergeUserModel): Observable<any> {
@@ -88,5 +89,10 @@ export class MyProfileApiService {
 
   removeCar(id: string) {
     return this.httpClient.delete(`${environment.apiUrl}/user/remove/car/${id}`);
+  }
+
+  getMyFriends(): Observable<FriendUserModel[]> {
+    return this.httpClient.get<FriendUserModel[]>(`${environment.apiUrl}/user/get/friends`)
+      .pipe(map(friends => friends.map(friend => new FriendUserModel(friend.id, friend.name, friend.lastName, friend.gender))))
   }
 }

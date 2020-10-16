@@ -4,11 +4,16 @@ import {MergeUserModel} from "../dto/request/merge-user.model";
 import {AddressModel} from "../dto/models/address.model";
 import {ContactModel} from "../dto/models/contact.model";
 import {NewCarModel} from "../dto/request/new-car.model";
+import {FriendUserModel} from "../dto/response/friend-user.model";
 
 
 export const GET_MY_PROFILE = '[Profile] USERS_MY_PROFILE';
 export const GET_MY_PROFILE_SUCCESS = '[Profile] USERS_MY_PROFILE_SUCCESS';
 export const GET_MY_PROFILE_FAIL = '[Profile] USERS_MY_PROFILE_FAIL';
+
+export const GET_MY_FRIENDS = '[Profile] GET_MY_FRIENDS';
+export const GET_MY_FRIENDS_SUCCESS = '[Profile] GET_MY_FRIENDS_SUCCESS';
+export const GET_MY_FRIENDS_FAIL = '[Profile] GET_MY_FRIENDS_FAIL';
 
 export const MERGE_MY_PROFILE = '[Profile] MERGE_MY_PROFILE';
 export const MERGE_MY_PROFILE_SUCCESS = '[Profile] MERGE_MY_PROFILE_SUCCESS';
@@ -181,6 +186,26 @@ export class RemoveMyCarFail implements Action {
   }
 }
 
+export class GetMyFriends implements Action {
+  readonly type = GET_MY_FRIENDS;
+
+  constructor() {
+  }
+}
+
+export class GetMyFriendsSuccess implements Action {
+  readonly type = GET_MY_FRIENDS_SUCCESS
+
+  constructor(public payload: FriendUserModel[]) {
+  }
+}
+
+export class GetMyFriendsFail implements Action {
+  readonly type = GET_MY_FRIENDS_FAIL;
+
+  constructor(public payload: string) {
+  }
+}
 
 export type Actions =
   | GetMyProfile
@@ -204,4 +229,7 @@ export type Actions =
   | RemoveMyCar
   | RemoveMyCarSuccess
   | RemoveMyCarFail
+  | GetMyFriends
+  | GetMyFriendsSuccess
+  | GetMyFriendsFail
 

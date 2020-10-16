@@ -17,10 +17,9 @@ export class MyProfileModel {
   contact: ContactModel;
   address: AddressModel;
   points: number;
-  friendsList: string[];
 
 
-  constructor(id: string, username: string, name: string, lastName: string, gender: Gender, enabled: boolean, createdDate: Date, updatedDate: Date, loginsHistory: Date[], carsList: CarModel[], contact: ContactModel, address: AddressModel, points: number, friendsList: string[]) {
+  constructor(id: string, username: string, name: string, lastName: string, gender: Gender, enabled: boolean, createdDate: Date, updatedDate: Date, loginsHistory: Date[], carsList: CarModel[], contact: ContactModel, address: AddressModel, points: number) {
     this.id = id;
     this.username = username;
     this.name = name;
@@ -34,6 +33,5 @@ export class MyProfileModel {
     this.contact = contact;
     this.address = address;
     this.points = points;
-    this.friendsList = friendsList;
   }
 }

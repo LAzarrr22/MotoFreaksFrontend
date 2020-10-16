@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {FriendUserModel} from "../../../logic/dto/response/friend-user.model";
 
 @Component({
   selector: 'app-section-friends',
@@ -7,7 +8,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class SectionFriendsComponent implements OnInit {
   @Input()
-  friendsListId: string[];
+  friendsList: FriendUserModel[];
   @Input()
   myProfile: boolean = false;
 

@@ -2,9 +2,10 @@ import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
 import {MyProfileModel} from "../dto/response/my-profile.model";
 import {Store} from "@ngrx/store";
-import {getMyProfile, MyProfileState} from "../reducers/my-profile.reducers";
+import {getMyFriends, getMyProfile, MyProfileState} from "../reducers/my-profile.reducers";
 import {
   AddMyCar,
+  GetMyFriends,
   GetMyProfile,
   MergeMyAddress,
   MergeMyCar,
@@ -17,6 +18,7 @@ import {AddressModel} from "../dto/models/address.model";
 import {ContactModel} from "../dto/models/contact.model";
 import {MyProfileApiService} from "./my-profile-api.service";
 import {NewCarModel} from "../dto/request/new-car.model";
+import {FriendUserModel} from "../dto/response/friend-user.model";
 
 @Injectable()
 export class ProfileService {
@@ -25,7 +27,12 @@ export class ProfileService {
 
   getMyProfile(): Observable<MyProfileModel> {
     this.store.dispatch(new GetMyProfile());
+    this.store.dispatch(new GetMyFriends());
     return this.store.select(getMyProfile);
+  }
+
+  getMyFriends(): Observable<FriendUserModel[]> {
+    return this.store.select(getMyFriends);
   }
 
   mergeProfile(mergeData: MergeUserModel) {

@@ -4,6 +4,7 @@ import {MenuService} from "../../../menu/logic/services/menu.service";
 import {Observable} from "rxjs";
 import {MyProfileModel} from "../../logic/dto/response/my-profile.model";
 import {ProfileService} from "../../logic/services/profile.service";
+import {FriendUserModel} from "../../logic/dto/response/friend-user.model";
 
 @Component({
   selector: 'app-profile-me',
@@ -13,6 +14,7 @@ import {ProfileService} from "../../logic/services/profile.service";
 export class ProfileMeComponent implements OnInit {
 
   profile: Observable<MyProfileModel>;
+  friendsList: Observable<FriendUserModel[]>
   isLoading: Observable<boolean>;
 
   constructor(private menuService: MenuService, private profileService: ProfileService) {
@@ -21,6 +23,7 @@ export class ProfileMeComponent implements OnInit {
 
   ngOnInit(): void {
     this.profile = this.profileService.getMyProfile();
+    this.friendsList = this.profileService.getMyFriends();
     this.menuService.activeRoute.next(ActiveRoute.MY_PROFILE)
   }
 

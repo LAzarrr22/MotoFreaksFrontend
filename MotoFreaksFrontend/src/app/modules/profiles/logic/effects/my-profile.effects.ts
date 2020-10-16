@@ -8,7 +8,10 @@ import {
   AddMyCar,
   AddMyCarFail,
   AddMyCarSuccess,
+  GET_MY_FRIENDS,
   GET_MY_PROFILE,
+  GetMyFriendsFail,
+  GetMyFriendsSuccess,
   GetMyProfileFail,
   GetMyProfileSuccess,
   MERGE_MY_ADDRESS,
@@ -35,6 +38,7 @@ import {
 import {catchError, switchMap} from "rxjs/operators";
 import {MyProfileApiService} from "../services/my-profile-api.service";
 import {Injectable} from "@angular/core";
+import {FriendUserModel} from "../dto/response/friend-user.model";
 
 
 @Injectable()
@@ -162,4 +166,19 @@ export class MyProfileEffects {
       })
     );
 
+  @Effect()
+  getMyFriends$: Observable<Action> = this.actions$
+    .pipe(ofType(GET_MY_FRIENDS),
+      switchMap(() => {
+        return this.myProfileService.getMyFriends();
+      }),
+      switchMap((friendsData: FriendUserModel[]) => [
+        new GetMyFriendsSuccess(friendsData),
+      ]),
+      catchError((error, caught) => {
+        this.store$.dispatch(new GetMyFriendsFail(error.error.message));
+        this.errorService.error(error);
+        return caught;
+      })
+    );
 }
