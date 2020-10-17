@@ -1,0 +1,10 @@
+<p>conv-list works!</p>
+
+<div *ngFor="let m of messages">
+  ID: {{m.id}}
+  <div *ngFor="let text of m.messages">
+    Mess: {{text.messageContent}}
+  </div>
+</div>
+
+
