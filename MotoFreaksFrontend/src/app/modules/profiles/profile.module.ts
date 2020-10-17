@@ -23,7 +23,6 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatRadioModule} from "@angular/material/radio";
 import {PipesModule} from "../../shared/pipes/pipes.module";
 import {AppCommonModule} from "../common/common.module";
-import {MessageApiService} from "./logic/services/message-api.service";
 import {MatCardModule} from "@angular/material/card";
 import {CarsModule} from "../cars/cars.module";
 import {SectionMyPersonalComponent} from "./components/profile-sections/section-my-personal/section-my-personal.component";
@@ -39,6 +38,7 @@ import {SectionUserPersonalComponent} from './components/profile-sections/sectio
 import {MatTableModule} from "@angular/material/table";
 import {MatSortModule} from "@angular/material/sort";
 import {MatPaginatorModule} from "@angular/material/paginator";
+import {MessagesModule} from "../messages/messages.module";
 
 
 @NgModule({
@@ -66,7 +66,8 @@ import {MatPaginatorModule} from "@angular/material/paginator";
     UsersModule,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MessagesModule,
 
   ],
   exports: [
@@ -74,8 +75,7 @@ import {MatPaginatorModule} from "@angular/material/paginator";
   ],
   providers: [
     MyProfileApiService,
-    ProfileService,
-    MessageApiService
+    ProfileService
   ]
 
 })

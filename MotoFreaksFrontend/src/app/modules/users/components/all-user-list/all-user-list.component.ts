@@ -61,5 +61,8 @@ export class AllUserListComponent implements OnInit, AfterViewInit {
 
   addFriend(id: string) {
     this.usersService.addFriend(id);
+    setTimeout(() => {
+      this.dataSource = new MatTableDataSource(this.users);
+    }, 1000)
   }
 }
