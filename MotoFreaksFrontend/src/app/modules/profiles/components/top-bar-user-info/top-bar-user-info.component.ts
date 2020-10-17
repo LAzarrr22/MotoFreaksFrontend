@@ -5,7 +5,7 @@ import {ProfileService} from "../../logic/services/profile.service";
 import {AppPath} from "../../../../shared/enums/app-path.enum";
 import {Subscription, timer} from "rxjs";
 import {switchMap} from "rxjs/operators";
-import {MessageApiService} from "../../logic/services/message-api.service";
+import {MessageApiService} from "../../../messages/logic/services/message-api.service";
 
 @Component({
   selector: 'app-top-bar-user-info',
@@ -48,4 +48,7 @@ export class TopBarUserInfoComponent implements OnInit, OnDestroy {
       });
   }
 
+  goToMessages() {
+    this.router.navigate([AppPath.MESSAGE_ALL])
+  }
 }

@@ -27,6 +27,11 @@ const routes: Routes = [
     loadChildren: () => import('./modules/users/users.module').then(m => m.UsersModule)
   },
   {
+    path: AppRoute.MESSAGE,
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./modules/messages/messages.module').then(m => m.MessagesModule)
+  },
+  {
     path: AppRoute.SERVICE_NOT_AVAILABLE,
     component: ConnectionRefusedComponent,
   },

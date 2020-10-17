@@ -6,7 +6,7 @@
       <button mat-icon-button color="primary">
 
         <mat-icon [matBadgeHidden]="hiddenBadge" matBadgePosition="before" matBadge="{{newMessages}}"
-                  matBadgeColor="warn">email
+                  matBadgeColor="warn" (click)="goToMessages()">email
         </mat-icon>
       </button>
 

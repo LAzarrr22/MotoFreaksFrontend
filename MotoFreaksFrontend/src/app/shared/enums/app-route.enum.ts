@@ -1,4 +1,6 @@
 export enum AppRoute {
+  ALL = 'all',
+
   AUTH = 'auth',
   LOGIN = 'login',
   REGISTER = 'register',
@@ -9,7 +11,9 @@ export enum AppRoute {
   PROFILE = 'profile',
   ME = 'me',
   USER = 'user',
-  ALL = 'all',
+
+  MESSAGE = 'messages',
+  CONVERSATION = 'conversation',
 
 
   SERVICE_NOT_AVAILABLE = 'service-not-available',

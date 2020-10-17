@@ -9,5 +9,8 @@ export enum AppPath {
   PROFILE_USER_PATH = '/profile/user',
   USER_ALL = '/user/all',
 
+  MESSAGE_ALL = '/messages/all',
+  MESSAGE_CONVERSATION = '/messages/conversation',
+
   SERVICE_NOT_AVAILABLE = '/service-not-available',
 }
