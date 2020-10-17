@@ -3,6 +3,7 @@ package com.MJ.MotoFreaksBackend.MotoFreaksBackend.services;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections.User;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.Message;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.repository.UserRepository;
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.resource.response.MessageData;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -79,6 +80,10 @@ public class MessageService {
 
     public Object getMessages(String token) {
         User currentUser = userService.getUserByToken(token);
-        return ok(currentUser.getMessages());
+        List<MessageData> allMessages = new ArrayList<>();
+        currentUser.getMessages().keySet().forEach(key -> {
+            allMessages.add(new MessageData(key, currentUser.getMessages().get(key)));
+        });
+        return ok(allMessages);
     }
 }
