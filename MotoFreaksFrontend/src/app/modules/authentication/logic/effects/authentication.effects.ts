@@ -4,6 +4,14 @@ import {Actions, Effect, ofType} from '@ngrx/effects';
 import {AuthenticationService} from '../services/authentication.service';
 import {Action, Store} from '@ngrx/store';
 import {
+  SET_ADMIN,
+  SET_MODERATOR,
+  SetAdmin,
+  SetAdminFail,
+  SetAdminSuccess,
+  SetModerator,
+  SetModeratorFail,
+  SetModeratorSuccess,
   USER_LOGIN,
   USER_LOGOUT,
   USER_REGISTER,
@@ -69,8 +77,8 @@ export class AuthenticationEffects {
       tap(() => {
         this.router.navigate([AppPath.HOME_PATH])
       }),
-      switchMap((userData: string) => [
-        new UserRegisterSuccess(userData),
+      switchMap((response: string) => [
+        new UserRegisterSuccess(response),
       ]),
       catchError((error, caught) => {
         this.store$.dispatch(new UserRegisterFail(error.error));
@@ -78,4 +86,42 @@ export class AuthenticationEffects {
         return caught;
       })
     );
+
+  @Effect()
+  setModerator$: Observable<Action> = this.actions$
+    .pipe(ofType(SET_MODERATOR),
+      switchMap((action: SetModerator) => {
+        return this.authService.setModerator(action.id);
+      }),
+      tap(() => {
+        //todo action to get roles to store
+      }),
+      switchMap((response: string) => [
+        new SetModeratorSuccess(response)
+      ]),
+      catchError((error, caught) => {
+        this.store$.dispatch(new SetModeratorFail(error.error));
+        this.errorService.error(error);
+        return caught;
+      })
+    );
+
+  @Effect()
+  setAdmin$: Observable<Action> = this.actions$
+    .pipe(ofType(SET_ADMIN),
+      switchMap((action: SetAdmin) => {
+        return this.authService.setAdmin(action.id);
+      }),
+      tap(() => {
+        //todo action to get roles to store
+      }),
+      switchMap((response: string) => [
+        new SetAdminSuccess(response)
+      ]),
+      catchError((error, caught) => {
+        this.store$.dispatch(new SetAdminFail(error.error));
+        this.errorService.error(error);
+        return caught;
+      })
+    )
 }

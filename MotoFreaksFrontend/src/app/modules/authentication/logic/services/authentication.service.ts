@@ -31,4 +31,12 @@ export class AuthenticationService {
       });
   }
 
+  setModerator(id: string): Observable<any> {
+    return this.httpClient.post(`${environment.apiUrl}/api/auth/set-role/moderator/${id}`, {})
+  }
+
+  setAdmin(id: string): Observable<any> {
+    return this.httpClient.post(`${environment.apiUrl}/api/auth/set-role/admin/${id}`, {})
+  }
+
 }

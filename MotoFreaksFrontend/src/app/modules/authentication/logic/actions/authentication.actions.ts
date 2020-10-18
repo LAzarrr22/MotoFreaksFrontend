@@ -13,6 +13,15 @@ export const USER_REGISTER_FAIL = '[Auth] USER_REGISTER_FAILED';
 
 export const USER_LOGOUT = '[Auth] USER_LOGOUT';
 
+export const SET_MODERATOR = '[Auth] SET_MODERATOR';
+export const SET_MODERATOR_SUCCESS = '[Auth] SET_MODERATOR_SUCCESS';
+export const SET_MODERATOR_FAIL = '[Auth] SET_MODERATOR_FAIL';
+
+export const SET_ADMIN = '[Auth] SET_ADMIN';
+export const SET_ADMIN_SUCCESS = '[Auth] SET_ADMIN_SUCCESS';
+export const SET_ADMIN_FAIL = '[Auth] SET_ADMIN_FAIL';
+
+
 export class UserLogin implements Action {
   readonly type = USER_LOGIN;
 
@@ -59,9 +68,56 @@ export class UserLogout implements Action {
   readonly type = USER_LOGOUT;
 }
 
+export class SetModerator implements Action {
+  readonly type = SET_MODERATOR;
+
+  constructor(public id: string) {
+  }
+}
+
+export class SetModeratorSuccess implements Action {
+  readonly type = SET_MODERATOR_SUCCESS;
+
+  constructor(public payload: string) {
+  }
+}
+
+export class SetModeratorFail implements Action {
+  readonly type = SET_MODERATOR_FAIL;
+
+  constructor(public payload: string) {
+  }
+}
+
+export class SetAdmin implements Action {
+  readonly type = SET_ADMIN;
+
+  constructor(public id: string) {
+  }
+}
+
+export class SetAdminSuccess implements Action {
+  readonly type = SET_ADMIN_SUCCESS;
+
+  constructor(public payload: string) {
+  }
+}
+
+export class SetAdminFail implements Action {
+  readonly type = SET_ADMIN_FAIL;
+
+  constructor(public payload: string) {
+  }
+}
 
 export type Actions =
   | UserLogin
   | UserLoginSuccess
   | UserLoginFail
-  | UserLogout;
+  | UserLogout
+  | SetModerator
+  | SetModeratorSuccess
+  | SetModeratorFail
+  | SetAdmin
+  | SetAdminSuccess
+  | SetAdminFail
