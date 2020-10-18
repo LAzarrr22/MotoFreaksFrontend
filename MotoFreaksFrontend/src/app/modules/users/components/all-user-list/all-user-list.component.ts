@@ -6,6 +6,7 @@ import {MatPaginator} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatSort} from "@angular/material/sort";
 import {UsersService} from "../../logic/services/users.service";
+import {ProfileService} from "../../../profiles/logic/services/profile.service";
 
 
 @Component({
@@ -29,7 +30,7 @@ export class AllUserListComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private router: Router, private usersService: UsersService) {
+  constructor(private router: Router, private usersService: UsersService, private profileService: ProfileService) {
 
   }
 
@@ -56,7 +57,13 @@ export class AllUserListComponent implements OnInit, AfterViewInit {
   }
 
   goToProfile(id: string) {
-    this.router.navigate([AppPath.PROFILE_USER_PATH, {id: id}])
+    let myId = '';
+    this.profileService.getMyProfile().subscribe(profile => myId = profile.id)
+    if (myId === id) {
+      this.router.navigate([AppPath.PROFILE_ME_PATH])
+    } else {
+      this.router.navigate([AppPath.PROFILE_USER_PATH, {id: id}])
+    }
   }
 
   addFriend(id: string) {
