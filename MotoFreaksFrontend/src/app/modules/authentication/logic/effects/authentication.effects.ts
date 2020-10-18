@@ -4,6 +4,10 @@ import {Actions, Effect, ofType} from '@ngrx/effects';
 import {AuthenticationService} from '../services/authentication.service';
 import {Action, Store} from '@ngrx/store';
 import {
+  GET_ROLES,
+  GetRoles,
+  GetRolesFail,
+  GetRolesSuccess,
   SET_ADMIN,
   SET_MODERATOR,
   SetAdmin,
@@ -29,6 +33,7 @@ import {AppPath} from "../../../../shared/enums/app-path.enum";
 import {Router} from "@angular/router";
 import {CommonComponentsService} from "../../../common/common.service";
 import {GetAllUsers} from "../../../users/logic/action/user.action";
+import {RolesEnum} from "../enums/roles.enum";
 
 @Injectable()
 export class AuthenticationEffects {
@@ -94,7 +99,7 @@ export class AuthenticationEffects {
         return this.authService.setModerator(action.id);
       }),
       tap(() => {
-        //todo action to get roles to store
+        new GetRoles()
       }),
       switchMap((response: string) => [
         new SetModeratorSuccess(response)
@@ -113,13 +118,30 @@ export class AuthenticationEffects {
         return this.authService.setAdmin(action.id);
       }),
       tap(() => {
-        //todo action to get roles to store
+        new GetRoles()
       }),
       switchMap((response: string) => [
         new SetAdminSuccess(response)
       ]),
       catchError((error, caught) => {
         this.store$.dispatch(new SetAdminFail(error.error));
+        this.errorService.error(error);
+        return caught;
+      })
+    )
+
+  @Effect()
+  getRoles$: Observable<Action> = this.actions$
+    .pipe(
+      ofType(GET_ROLES),
+      switchMap(() => {
+        return this.authService.getRoles();
+      }),
+      switchMap((roles: RolesEnum[]) => [
+        new GetRolesSuccess(roles)
+      ]),
+      catchError((error, caught) => {
+        this.store$.dispatch(new GetRolesFail(error.error));
         this.errorService.error(error);
         return caught;
       })

@@ -2,6 +2,7 @@ import {Action} from "@ngrx/store";
 import {LoginSuccessfulDto} from '../dto/response/login-successful.model';
 import {LoginModel} from "../dto/request/login.model";
 import {RegisterModel} from "../dto/request/register.model";
+import {RolesEnum} from "../enums/roles.enum";
 
 export const USER_LOGIN = '[Auth] USER_LOGIN';
 export const USER_LOGIN_SUCCESS = '[Auth] USER_LOGIN_SUCCESS';
@@ -20,6 +21,10 @@ export const SET_MODERATOR_FAIL = '[Auth] SET_MODERATOR_FAIL';
 export const SET_ADMIN = '[Auth] SET_ADMIN';
 export const SET_ADMIN_SUCCESS = '[Auth] SET_ADMIN_SUCCESS';
 export const SET_ADMIN_FAIL = '[Auth] SET_ADMIN_FAIL';
+
+export const GET_ROLES = '[Auth] GET_ROLES';
+export const GET_ROLES_SUCCESS = '[Auth] GET_ROLES_SUCCESS';
+export const GET_ROLES_FAIL = '[Auth] GET_ROLES_FAIL';
 
 
 export class UserLogin implements Action {
@@ -110,6 +115,27 @@ export class SetAdminFail implements Action {
   }
 }
 
+export class GetRoles implements Action {
+  readonly type = GET_ROLES;
+
+  constructor() {
+  }
+}
+
+export class GetRolesSuccess implements Action {
+  readonly type = GET_ROLES_SUCCESS;
+
+  constructor(public roles: RolesEnum[]) {
+  }
+}
+
+export class GetRolesFail implements Action {
+  readonly type = GET_ROLES_FAIL;
+
+  constructor(public payload: string) {
+  }
+}
+
 export type Actions =
   | UserLogin
   | UserLoginSuccess
@@ -121,3 +147,7 @@ export type Actions =
   | SetAdmin
   | SetAdminSuccess
   | SetAdminFail
+  | GetRoles
+  | GetRolesSuccess
+  | GetRolesFail
+

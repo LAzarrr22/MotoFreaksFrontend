@@ -1,10 +1,18 @@
-import {USER_LOGIN, USER_LOGIN_FAIL, USER_LOGIN_SUCCESS, USER_LOGOUT} from "../actions/authentication.actions";
+import {
+  GET_ROLES,
+  GET_ROLES_FAIL,
+  GET_ROLES_SUCCESS,
+  USER_LOGIN,
+  USER_LOGIN_FAIL,
+  USER_LOGIN_SUCCESS,
+  USER_LOGOUT
+} from "../actions/authentication.actions";
 import {RolesEnum} from "../enums/roles.enum";
 
 export interface State {
   token: string;
   loggedIn: boolean;
-  roles: [RolesEnum];
+  roles: RolesEnum[];
 }
 
 const INITIAL_STATE: State = {
@@ -16,6 +24,7 @@ const INITIAL_STATE: State = {
 export function reducer(state: State = INITIAL_STATE, action) {
   switch (action.type) {
     case USER_LOGIN:
+    case GET_ROLES:
       return {
         ...state
       };
@@ -25,6 +34,13 @@ export function reducer(state: State = INITIAL_STATE, action) {
         token: action.payload.token,
         roles: action.payload.roles
       };
+    case GET_ROLES_SUCCESS:
+      return {
+        ...state,
+        roles: action.roles
+      }
+    case GET_ROLES_FAIL:
+      return state;
 
     case USER_LOGIN_FAIL:
       return INITIAL_STATE;

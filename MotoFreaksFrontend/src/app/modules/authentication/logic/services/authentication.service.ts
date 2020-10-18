@@ -6,6 +6,7 @@ import {LoginSuccessfulDto} from '../dto/response/login-successful.model'
 import {map} from 'rxjs/operators';
 import {LoginModel} from "../dto/request/login.model";
 import {RegisterModel} from "../dto/request/register.model";
+import {RolesEnum} from "../enums/roles.enum";
 
 @Injectable()
 export class AuthenticationService {
@@ -37,6 +38,10 @@ export class AuthenticationService {
 
   setAdmin(id: string): Observable<any> {
     return this.httpClient.post(`${environment.apiUrl}/api/auth/set-role/admin/${id}`, {})
+  }
+
+  getRoles(): Observable<RolesEnum[]> {
+    return this.httpClient.get<RolesEnum[]>(`${environment.apiUrl}/api/auth/roles`)
   }
 
 }
