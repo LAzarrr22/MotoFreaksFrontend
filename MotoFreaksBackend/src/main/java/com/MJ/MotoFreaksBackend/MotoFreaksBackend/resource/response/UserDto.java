@@ -1,6 +1,7 @@
 package com.MJ.MotoFreaksBackend.MotoFreaksBackend.resource.response;
 
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.Gender;
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.Role;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.Address;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.CarDataModel;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.Contact;
@@ -24,5 +25,6 @@ public class UserDto {
     private Address address;
     private Integer points;
     private List<String> friendsList;
+    private List<Role> roles;
     private Boolean isYourFriend;
 }

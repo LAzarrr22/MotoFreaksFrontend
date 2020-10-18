@@ -1,6 +1,7 @@
 package com.MJ.MotoFreaksBackend.MotoFreaksBackend.services;
 
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections.User;
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.Role;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.Address;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.CarDataModel;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.Contact;
@@ -176,10 +177,11 @@ public class UserService {
     public Object getProfile(String id, String currentToken) {
         User currentUser = getUserByToken(currentToken);
         User userToShow = getUserById(id);
-
+        List<Role> roles = new ArrayList<>();
+        userToShow.getUserRoles().forEach(userRoles -> roles.add(userRoles.getRole()));
         UserDto profile = new UserDto(userToShow.getId(), userToShow.getName(), userToShow.getLastName(), userToShow.getGender(), userToShow.isEnabled()
                 , userToShow.getCarsList(), userToShow.getContact(), userToShow.getAddress(),
-                userToShow.getPoints(), userToShow.getFriendsList(), isYourFriend(currentUser, userToShow.getUserName()));
+                userToShow.getPoints(), userToShow.getFriendsList(), roles, isYourFriend(currentUser, userToShow.getUserName()));
         return ok(profile);
     }
 
@@ -227,8 +229,10 @@ public class UserService {
         User currentUser = getUserByToken(token);
         List<UserDto> allUsers = new ArrayList<>();
         userRepository.findAll().forEach(user -> {
+            List<Role> roles = new ArrayList<>();
+            user.getUserRoles().forEach(userRoles -> roles.add(userRoles.getRole()));
             allUsers.add(new UserDto(user.getId(), user.getName(), user.getLastName(), user.getGender(), user.isEnabled(), user.getCarsList(),
-                    user.getContact(), user.getAddress(), user.getPoints(), user.getFriendsList(), isYourFriend(currentUser, user.getId()))
+                    user.getContact(), user.getAddress(), user.getPoints(), user.getFriendsList(), roles, isYourFriend(currentUser, user.getId()))
             );
         });
         return new ResponseEntity<>(allUsers, HttpStatus.OK);
