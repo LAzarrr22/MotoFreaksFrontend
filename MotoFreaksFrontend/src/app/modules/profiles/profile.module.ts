@@ -39,10 +39,11 @@ import {MatTableModule} from "@angular/material/table";
 import {MatSortModule} from "@angular/material/sort";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MessagesModule} from "../messages/messages.module";
+import {SectionRolesComponent} from './components/profile-sections/section-roles/section-roles.component';
 
 
 @NgModule({
-  declarations: [ProfileMeComponent, ProfileFriendsComponent, TopBarUserInfoComponent, SectionMyPersonalComponent, SectionCarsComponent, SectionAddressComponent, SectionContactComponent, SectionFriendsComponent, MyProfileAllDataComponent, CarItemComponent, AddEditCarComponent, UserProfileAllDataComponent, SectionUserPersonalComponent],
+  declarations: [ProfileMeComponent, ProfileFriendsComponent, TopBarUserInfoComponent, SectionMyPersonalComponent, SectionCarsComponent, SectionAddressComponent, SectionContactComponent, SectionFriendsComponent, MyProfileAllDataComponent, CarItemComponent, AddEditCarComponent, UserProfileAllDataComponent, SectionUserPersonalComponent, SectionRolesComponent],
   imports: [
     CommonModule,
     ProfileRoutingModule,

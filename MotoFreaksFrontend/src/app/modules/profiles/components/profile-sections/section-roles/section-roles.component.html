@@ -1,0 +1,46 @@
+<div class="row align-items-center pb-4">
+  <div class="col-md-1 col-lg-1 ">
+    <div class="title">Roles</div>
+  </div>
+</div>
+
+
+<div class="row">
+
+  <div class="col-md-3 property-column">
+    <div class="row">
+      <div class="col label">
+        Moderator
+      </div>
+    </div>
+    <div class="row">
+      <div class="col data">
+        <ng-container *ngIf="isProfileModerator()">
+          ENABLED
+        </ng-container>
+        <ng-container *ngIf="!isProfileModerator()" (click)="setModerator()">
+          BUTTON
+        </ng-container>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-3 property-column">
+    <div class="row">
+      <div class="col label">
+        Admin
+      </div>
+    </div>
+    <div class="row">
+      <div class="col data">
+        <ng-container *ngIf="isProfileAdmin()">
+          ENABLED
+        </ng-container>
+        <ng-container *ngIf="!isProfileAdmin()" (click)="setAdmin()">
+          BUTTON
+        </ng-container>
+      </div>
+    </div>
+  </div>
+
+</div>
