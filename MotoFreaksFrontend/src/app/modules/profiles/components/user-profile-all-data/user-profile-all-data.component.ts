@@ -1,5 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {UserModel} from "../../../users/logic/dto/response/user-model";
+import {UsersService} from "../../../users/logic/services/users.service";
 
 @Component({
   selector: 'app-user-profile-all-data',
@@ -10,11 +11,17 @@ export class UserProfileAllDataComponent implements OnInit {
 
   @Input()
   userProfile: UserModel;
+  @Output()
+  reloadUser = new EventEmitter();
 
-  constructor() {
+  constructor(private usersService: UsersService) {
   }
 
   ngOnInit(): void {
   }
 
+  addFriend(id: string) {
+    this.usersService.addFriend(id);
+    this.reloadUser.emit();
+  }
 }

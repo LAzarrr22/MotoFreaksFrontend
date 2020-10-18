@@ -21,8 +21,18 @@ export class ProfileFriendsComponent implements OnInit {
   ngOnInit(): void {
     this.menuService.activeRoute.next(ActiveRoute.ALL_USERS)
     const userId = this.route.snapshot.paramMap.get('id');
+    this.getUser(userId);
+
+  }
+
+  getUser(userId: string) {
     this.usersService.getAllUsers().subscribe(users => this.users = users);
     this.user = this.users.find((user: UserModel) => user.id === userId);
   }
 
+  reloadUser(userId: string) {
+    setTimeout(() => {
+      this.getUser(userId)
+    }, 1000)
+  }
 }

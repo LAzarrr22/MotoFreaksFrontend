@@ -18,8 +18,12 @@ export class UsersService {
 
   addFriend(id: string) {
     this.store.dispatch(new AddFriend(id));
-    this.store.dispatch(new GetAllUsers());
-    this.store.dispatch(new GetMyFriends());
+
+    setTimeout(() => {
+      this.store.dispatch(new GetAllUsers());
+      this.store.dispatch(new GetMyFriends());
+    }, 300)
+
   }
 
 }

@@ -1,5 +1,23 @@
 <div class="context">
-  <div class="personal-title">Personal data</div>
+  <div class="row">
+    <div class="personal-title">Personal data</div>
+
+    <div class="col-md-4 col-lg-4">
+      <div class="button-section">
+        <ng-container *ngIf="userProfile.isYourFriend==false">
+          <button class="button-submit" type='submit' (click)="addFriend(userProfile.id)">Add friend</button>
+        </ng-container>
+        <ng-container *ngIf="userProfile.isYourFriend">
+          <div class="friend-text">
+            You are friends
+          </div>
+        </ng-container>
+      </div>
+    </div>
+
+  </div>
+
+
   <mat-divider></mat-divider>
   <app-section-user-personal [user]="userProfile"></app-section-user-personal>
   <mat-divider></mat-divider>
