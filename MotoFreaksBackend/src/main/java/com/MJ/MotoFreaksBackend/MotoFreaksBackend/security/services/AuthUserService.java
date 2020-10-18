@@ -137,4 +137,11 @@ public class AuthUserService implements UserDetailsService {
         log.info("Added " + role + " role to " + id + " user.");
         return ok(model);
     }
+
+    public Object getRoles(String token) {
+        User currentUser = userService.getUserByToken(token);
+        List<Role> roles = new ArrayList<>();
+        currentUser.getUserRoles().forEach(userRoles -> roles.add(userRoles.getRole()));
+        return ok(roles);
+    }
 }
