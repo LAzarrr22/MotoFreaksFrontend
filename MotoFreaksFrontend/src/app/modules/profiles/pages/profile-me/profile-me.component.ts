@@ -5,6 +5,8 @@ import {Observable} from "rxjs";
 import {MyProfileModel} from "../../logic/dto/response/my-profile.model";
 import {ProfileService} from "../../logic/services/profile.service";
 import {FriendUserModel} from "../../logic/dto/response/friend-user.model";
+import {AuthService} from "../../../authentication/logic/services/auth.service";
+import {RolesEnum} from "../../../authentication/logic/enums/roles.enum";
 
 @Component({
   selector: 'app-profile-me',
@@ -16,15 +18,17 @@ export class ProfileMeComponent implements OnInit {
   profile: Observable<MyProfileModel>;
   friendsList: Observable<FriendUserModel[]>
   isLoading: Observable<boolean>;
+  myRoles: Observable<RolesEnum[]>;
 
-  constructor(private menuService: MenuService, private profileService: ProfileService) {
+  constructor(private menuService: MenuService, private profileService: ProfileService, private authService: AuthService) {
 
   }
 
   ngOnInit(): void {
     this.profile = this.profileService.getMyProfile();
     this.friendsList = this.profileService.getMyFriends();
-    this.menuService.activeRoute.next(ActiveRoute.MY_PROFILE)
+    this.myRoles = this.authService.getCurrentRoles();
+    this.menuService.activeRoute.next(ActiveRoute.MY_PROFILE);
   }
 
 }

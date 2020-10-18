@@ -34,6 +34,10 @@ export class SectionRolesComponent implements OnInit {
     return !!this.roles.find(role => role == RolesEnum.MODERATOR);
   }
 
+  isProfileUser() {
+    return !!this.roles.find(role => role == RolesEnum.USER);
+  }
+
   isCurrentUserAdmin() {
     return this.authService.isAdmin();
   }

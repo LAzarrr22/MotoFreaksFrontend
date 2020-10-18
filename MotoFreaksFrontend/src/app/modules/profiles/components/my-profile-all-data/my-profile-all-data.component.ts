@@ -19,9 +19,11 @@ export class MyProfileAllDataComponent implements OnInit {
   myRoles: RolesEnum[];
 
   constructor() {
+
   }
 
   ngOnInit(): void {
+    console.dir(this.myRoles)
   }
 
 }

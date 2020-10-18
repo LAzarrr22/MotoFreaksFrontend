@@ -21,7 +21,7 @@ export class AuthService {
   }
 
   getCurrentRoles() {
-    return this.roles;
+   return this.store.select(getRoles)
   }
 
   setAdmin(id: string) {
