@@ -32,13 +32,13 @@ public class AuthController {
         return customUserAuthService.registerUser(user, Role.USER);
     }
 
-    @PostMapping("/set-role/moderator/{username}")
-    public Object addModeratorRole(@PathVariable String username) {
-        return customUserAuthService.addRole(username, Role.MODERATOR);
+    @PostMapping("/set-role/moderator/{id}")
+    public Object addModeratorRole(@PathVariable String id) {
+        return customUserAuthService.addRole(id, Role.MODERATOR);
     }
 
-    @PostMapping("/set-role/admin/{username}")
-    public Object addAdminRole(@PathVariable String username) {
-        return customUserAuthService.addRole(username, Role.ADMIN);
+    @PostMapping("/set-role/admin/{id}")
+    public Object addAdminRole(@PathVariable String id) {
+        return customUserAuthService.addRole(id, Role.ADMIN);
     }
 }

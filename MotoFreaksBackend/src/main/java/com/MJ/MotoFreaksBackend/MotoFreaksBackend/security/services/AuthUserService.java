@@ -122,19 +122,19 @@ public class AuthUserService implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(), authorities);
     }
 
-    public Object addRole(String username, Role role) {
+    public Object addRole(String id, Role role) {
         Map<Object, Object> model = new HashMap<>();
-        User userExists = userService.getUserByUserName(username);
-        model.put("userEmail:", username);
+        User userExists = userService.getUserById(id);
+        model.put("ID:", id);
         if (role == Role.ADMIN) {
             userExists.getUserRoles().add(this.roleService.getRoleByName(Role.MODERATOR));
             model.put("newRole", Role.MODERATOR.toString());
-            log.info("Added " + Role.MODERATOR + " role to " + username + " user.");
+            log.info("Added " + Role.MODERATOR + " role to " + id + " user.");
         }
         userExists.getUserRoles().add(this.roleService.getRoleByName(role));
         model.put("newRole", role);
         this.userRepository.save(userExists);
-        log.info("Added " + role + " role to " + username + " user.");
+        log.info("Added " + role + " role to " + id + " user.");
         return ok(model);
     }
 }
