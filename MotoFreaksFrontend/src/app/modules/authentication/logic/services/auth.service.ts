@@ -2,6 +2,7 @@ import {Store} from "@ngrx/store";
 import {AuthenticationState, getRoles, isUserLoggedIn} from "../store";
 import {Injectable} from "@angular/core";
 import {RolesEnum} from "../enums/roles.enum";
+import {SetAdmin, SetModerator} from "../actions/authentication.actions";
 
 @Injectable()
 export class AuthService {
@@ -15,6 +16,14 @@ export class AuthService {
 
   isLoggedUser() {
     return this.isLogged;
+  }
+
+  setAdmin(id: string) {
+    this.store.dispatch(new SetAdmin(id))
+  }
+
+  setModerator(id: string) {
+    this.store.dispatch(new SetModerator(id))
   }
 
   isAdmin() {

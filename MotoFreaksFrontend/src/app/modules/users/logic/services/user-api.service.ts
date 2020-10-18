@@ -13,7 +13,7 @@ export class UserApiService {
   getAllUsersApi(): Observable<UserModel[]> {
     return this.httpClient.get<UserModel[]>(`${environment.apiUrl}/user/all`)
       .pipe(map(users => users.map(user => new UserModel(user.id, user.name, user.lastName, user.gender, user.enabled, user.carsList
-        , user.contact, user.address, user.points, user.friendsList, user.isYourFriend))))
+        , user.contact, user.address, user.points, user.friendsList, user.roles, user.isYourFriend))))
   }
 
   addFriend(id: string): Observable<any> {
