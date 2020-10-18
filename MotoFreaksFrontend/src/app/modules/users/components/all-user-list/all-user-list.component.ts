@@ -26,6 +26,8 @@ export class AllUserListComponent implements OnInit, AfterViewInit {
 
   @Input()
   users: UserModel[];
+  @Input()
+  meId: string;
   resultsLength = 0;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
