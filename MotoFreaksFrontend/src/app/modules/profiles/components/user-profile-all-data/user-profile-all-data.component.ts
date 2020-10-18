@@ -40,4 +40,8 @@ export class UserProfileAllDataComponent implements OnInit {
     this.reloadUser.emit();
   }
 
+  isCurrentUserModerator() {
+    return this.authService.isModerator();
+  }
+
 }

@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {RolesEnum} from "../../../../authentication/logic/enums/roles.enum";
+import {AuthService} from "../../../../authentication/logic/services/auth.service";
 
 @Component({
   selector: 'app-section-roles',
@@ -10,13 +11,15 @@ export class SectionRolesComponent implements OnInit {
 
   @Input()
   roles: RolesEnum[];
+  @Input()
+  myProfile: boolean = false;
 
   @Output()
   setAdminAPI = new EventEmitter();
   @Output()
   setModeratorAPI = new EventEmitter();
 
-  constructor() {
+  constructor(private authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -24,12 +27,19 @@ export class SectionRolesComponent implements OnInit {
   }
 
   isProfileAdmin() {
-    console.dir(this.roles)
     return !!this.roles.find(role => role == RolesEnum.ADMIN);
   }
 
   isProfileModerator() {
     return !!this.roles.find(role => role == RolesEnum.MODERATOR);
+  }
+
+  isCurrentUserAdmin() {
+    return this.authService.isAdmin();
+  }
+
+  isCurrentUserModerator() {
+    return this.authService.isModerator();
   }
 
   setAdmin() {

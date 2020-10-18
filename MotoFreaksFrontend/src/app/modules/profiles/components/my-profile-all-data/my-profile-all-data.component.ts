@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MyProfileModel} from "../../logic/dto/response/my-profile.model";
 import {FriendUserModel} from "../../logic/dto/response/friend-user.model";
+import {RolesEnum} from "../../../authentication/logic/enums/roles.enum";
 
 @Component({
   selector: 'app-my-profile-all-data',
@@ -14,6 +15,8 @@ export class MyProfileAllDataComponent implements OnInit {
   isLoading: boolean;
   @Input()
   friends: FriendUserModel[];
+  @Input()
+  myRoles: RolesEnum[];
 
   constructor() {
   }

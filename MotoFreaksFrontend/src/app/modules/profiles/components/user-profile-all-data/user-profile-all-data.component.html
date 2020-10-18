@@ -18,9 +18,11 @@
 
   <mat-divider></mat-divider>
   <app-section-user-personal [user]="userProfile"></app-section-user-personal>
-  <mat-divider></mat-divider>
-  <app-section-roles [roles]="userProfile.roles" (setAdminAPI)="setAdmin()"
-                     (setModeratorAPI)="setModerator()"></app-section-roles>
+  <ng-container *ngIf="isCurrentUserModerator()">
+    <mat-divider></mat-divider>
+    <app-section-roles [roles]="userProfile.roles" (setAdminAPI)="setAdmin()"
+                       (setModeratorAPI)="setModerator()"></app-section-roles>
+  </ng-container>
   <mat-divider></mat-divider>
   <app-section-address [address]="userProfile.address"></app-section-address>
   <mat-divider></mat-divider>

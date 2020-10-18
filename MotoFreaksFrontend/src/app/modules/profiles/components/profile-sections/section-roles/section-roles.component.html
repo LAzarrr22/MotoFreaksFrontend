@@ -5,9 +5,8 @@
 </div>
 
 
-<div class="row">
-
-  <div class="col-md-3 property-column">
+<div class="row" *ngFor="myProfile==false">
+  <div class="col-md-3 property-column" *ngIf="isCurrentUserModerator()">
     <div class="row">
       <div class="col label">
         Moderator
@@ -18,14 +17,15 @@
         <ng-container *ngIf="isProfileModerator()">
           ENABLED
         </ng-container>
-        <ng-container *ngIf="!isProfileModerator()" (click)="setModerator()">
-          BUTTON
+
+        <ng-container *ngIf="!isProfileModerator()">
+          <button class="button-set-role" type='submit' (click)="setModerator()">Set</button>
         </ng-container>
       </div>
     </div>
   </div>
 
-  <div class="col-md-3 property-column">
+  <div class="col-md-3 property-column" *ngIf="isCurrentUserAdmin()">
     <div class="row">
       <div class="col label">
         Admin
@@ -36,8 +36,8 @@
         <ng-container *ngIf="isProfileAdmin()">
           ENABLED
         </ng-container>
-        <ng-container *ngIf="!isProfileAdmin()" (click)="setAdmin()">
-          BUTTON
+        <ng-container *ngIf="!isProfileAdmin()">
+          <button class="button-set-role" type='submit' (click)="setAdmin()">Set</button>
         </ng-container>
       </div>
     </div>
