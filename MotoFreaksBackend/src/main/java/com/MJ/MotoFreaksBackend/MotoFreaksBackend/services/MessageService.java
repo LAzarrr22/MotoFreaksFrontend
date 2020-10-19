@@ -73,7 +73,7 @@ public class MessageService {
 
         User currentUser = userService.getUserByToken(token);
         currentUser.getMessages().values().forEach(messages -> {
-            count.set(messages.stream().filter(message -> !message.isRead()).count());
+            count.updateAndGet(v -> v + messages.stream().filter(message -> !message.isRead()).count());
         });
         return ok(count);
     }
