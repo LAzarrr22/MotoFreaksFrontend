@@ -11,3 +11,18 @@
   font-size: $font-size-Xbig;
   font-weight: bold;
 }
+
+.my-message {
+  background-color: $custom-blue;
+  border-radius: 6px;
+  border: 2px solid;
+  min-width: 200px;
+}
+
+.user-message {
+  background-color: $custom-grey;
+  border-radius: 6px;
+  border: 2px solid;
+  color: $custom-white-dark;
+  min-width: 200px;
+}

@@ -11,17 +11,23 @@
 
   <ng-container *ngFor="let m of currentShowMessages">
     <ng-container *ngIf="!m.received">
-      <div class="row">
-        <div class="col">
-          Me: {{m.messageContent}}
+      <div class="row p-2">
+        <div class="col offset-8">
+          <div class="my-message mat-elevation-z10">
+            Me: {{m.messageContent}}
+          </div>
+
         </div>
       </div>
     </ng-container>
 
     <ng-container *ngIf="m.received">
-      <div class="row">
-        <div class="col offset-8">
-          {{receiverName}}: {{m.messageContent}}
+      <div class="row p-2">
+        <div class="col-4">
+          <div class="user-message mat-elevation-z10 ">
+            {{receiverName}}: {{m.messageContent}}
+          </div>
+
         </div>
       </div>
     </ng-container>
