@@ -1,10 +1,10 @@
-<p>conv-list works!</p>
+<div class="context">
+  <div class="personal-title">Messages</div>
+  <mat-divider></mat-divider>
 
-<div *ngFor="let m of messages">
-  ID: {{m.id}}
-  <div *ngFor="let text of m.messages">
-    Mess: {{text.messageContent}}
+  <div *ngFor="let m of messages">
+    <app-conv-item-list [receiverName]="getReceiverName(m.id)" [receiverLastName]="getReceiverLastName(m.id)"
+                        [messages]="m.messages" (click)="goToExpandConv(m.id)"></app-conv-item-list>
   </div>
+
 </div>
-
-

@@ -1,3 +1,1 @@
-<p>my-messages works!</p>
-<div></div>
-<app-conv-list [messages]="messages |async"></app-conv-list>
+<app-conv-list [messages]="messages |async" [allUsers]="users | async"></app-conv-list>

@@ -1,16 +1,16 @@
 export class MessageModel {
   messageContent: string;
-  isRead: boolean;
+  read: boolean;
   createdDate: Date;
   readDate: Date;
-  isReceived: boolean;
+  received: boolean;
 
 
-  constructor(messageContent: string, isRead: boolean, createdDate: Date, readDate: Date, isReceived: boolean) {
+  constructor(messageContent: string, read: boolean, createdDate: Date, readDate: Date, received: boolean) {
     this.messageContent = messageContent;
-    this.isRead = isRead;
+    this.read = read;
     this.createdDate = createdDate;
     this.readDate = readDate;
-    this.isReceived = isReceived;
+    this.received = received;
   }
 }

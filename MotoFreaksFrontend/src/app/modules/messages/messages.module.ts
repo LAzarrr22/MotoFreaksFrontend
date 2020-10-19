@@ -10,15 +10,20 @@ import {EffectsModule} from "@ngrx/effects";
 import {reducer} from "./logic/reducers/messages.reducers";
 import {MessagesEffects} from "./logic/effects/messages.effects";
 import {ConvListComponent} from './components/conv-list/conv-list.component';
+import {NewMessageComponent} from "./components/new-message/new-message.component";
+import {ConvItemListComponent} from "./components/conv-item-list/conv-item-list.component";
+import {ConvExpandedComponent} from "./components/conv-expanded/conv-expanded.component";
+import {MatDividerModule} from "@angular/material/divider";
 
 
 @NgModule({
-  declarations: [MyMessagesComponent, MessagesConversationComponent, ConvListComponent],
+  declarations: [MyMessagesComponent, MessagesConversationComponent, ConvListComponent, NewMessageComponent, ConvItemListComponent, ConvExpandedComponent],
   imports: [
     CommonModule,
     MessagesRoutingModule,
     StoreModule.forFeature('messages', reducer),
     EffectsModule.forFeature([MessagesEffects]),
+    MatDividerModule,
   ], providers: [
     MessagesService,
     MessageApiService,
