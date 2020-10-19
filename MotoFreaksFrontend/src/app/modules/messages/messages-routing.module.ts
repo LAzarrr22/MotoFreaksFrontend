@@ -2,6 +2,7 @@ import {AppRoute} from "../../shared/enums/app-route.enum";
 import {RouterModule, Routes} from "@angular/router";
 import {NgModule} from "@angular/core";
 import {MyMessagesComponent} from "./pages/my-messages/my-messages.component";
+import {MessagesConversationComponent} from "./pages/messages-conversation/messages-conversation.component";
 
 
 export const routes: Routes = [
@@ -10,8 +11,8 @@ export const routes: Routes = [
     component: MyMessagesComponent,
   },
   {
-    path: AppRoute.ALL,
-    component: MyMessagesComponent,
+    path: AppRoute.CONVERSATION,
+    component: MessagesConversationComponent,
   },
 
 

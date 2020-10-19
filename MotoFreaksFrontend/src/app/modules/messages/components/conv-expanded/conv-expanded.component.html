@@ -1,0 +1,30 @@
+<div class="context">
+  <div class="personal-title">{{receiverName}} {{receiverLastName}}</div>
+  <mat-divider></mat-divider>
+  <ng-container *ngIf="currentShowMessages.length!=messages.length">
+    <div class="row">
+      <div class="col offset-6">
+        Show more
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngFor="let m of currentShowMessages">
+    <ng-container *ngIf="!m.received">
+      <div class="row">
+        <div class="col">
+          Me: {{m.messageContent}}
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="m.received">
+      <div class="row">
+        <div class="col offset-8">
+          {{receiverName}}: {{m.messageContent}}
+        </div>
+      </div>
+    </ng-container>
+
+  </ng-container>
+</div>
