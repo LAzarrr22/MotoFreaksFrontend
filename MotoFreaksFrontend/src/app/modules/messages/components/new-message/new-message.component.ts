@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
@@ -8,8 +8,9 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 })
 export class NewMessageComponent implements OnInit {
 
-  @Input()
-  receiverID: string
+
+  @Output()
+  sendMessageEvent = new EventEmitter<string>();
 
   form = new FormGroup({
     message: new FormControl('', [Validators.required])
@@ -23,7 +24,7 @@ export class NewMessageComponent implements OnInit {
 
   sendMessage() {
     if (this.form.valid) {
-
+      this.sendMessageEvent.emit(this.form.controls.message.value)
     }
 
   }
