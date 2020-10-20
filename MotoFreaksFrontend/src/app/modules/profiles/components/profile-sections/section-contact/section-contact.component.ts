@@ -49,7 +49,7 @@ export class SectionContactComponent implements OnInit {
         new ContactModel(this.getNewEmail(), this.getNewPhone(), this.getNewFacebook(), this.getNewInstagram(), this.getNewTwitter(), this.getNewSkype(), this.getNewYoutube()))
       setTimeout(() => {
         this.profileService.getMyProfile()
-      }, 0);
+      }, 500);
       this.editData();
     }
   }

@@ -83,7 +83,7 @@ export class AddEditCarComponent implements OnInit {
       this.closeEditing();
       setTimeout(() => {
         this.profileService.getMyProfile()
-      }, 0);
+      }, 500);
     }
   }
 

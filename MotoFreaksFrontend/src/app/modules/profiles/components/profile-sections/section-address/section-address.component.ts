@@ -39,7 +39,7 @@ export class SectionAddressComponent implements OnInit {
         new AddressModel(this.getNewCountry(), this.getNewState(), this.getNewCity(), this.getNewStreet()))
       setTimeout(() => {
         this.profileService.getMyProfile()
-      }, 0);
+      }, 500);
       this.editData();
     }
   }

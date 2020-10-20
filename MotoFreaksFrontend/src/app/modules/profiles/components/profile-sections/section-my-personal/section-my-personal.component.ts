@@ -70,7 +70,7 @@ export class SectionMyPersonalComponent implements OnInit {
         new MergeUserModel(this.getNewName(), this.getNewLastName(), this.getNewGender(), this.getNewEnabled(), this.getNewPassword()))
       setTimeout(() => {
         this.profileService.getMyProfile();
-      }, 0)
+      }, 500)
       this.editData();
     }
   }
