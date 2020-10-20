@@ -3,6 +3,7 @@ package com.MJ.MotoFreaksBackend.MotoFreaksBackend.services;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections.User;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.Message;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.repository.UserRepository;
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.resource.requests.NewMessage;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.resource.response.MessageData;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -26,9 +27,9 @@ public class MessageService {
     }
 
 
-    public Object sendMessage(String token, String receiverId, String messageContent) {
+    public Object sendMessage(String token, String receiverId, NewMessage messageContent) {
         Map<Object, Object> model = new HashMap<>();
-        Message message = new Message(messageContent, new Date());
+        Message message = new Message(messageContent.getContent(), new Date());
 
         User senderUser = userService.getUserByToken(token);
         User receiverUser = userService.getUserById(receiverId);
