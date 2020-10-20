@@ -24,6 +24,6 @@ export class MessagesService {
     this.store.dispatch(new SendMessage(id, content))
     setTimeout(() => {
       this.store.dispatch(new GetAllMessages())
-    }, 1000)
+    }, 800)
   }
 }

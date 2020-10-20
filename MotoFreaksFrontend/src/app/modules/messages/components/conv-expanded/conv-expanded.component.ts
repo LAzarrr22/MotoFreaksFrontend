@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MessageModel} from "../../logic/dto/model/message.model";
 import {MAT_TOOLTIP_DEFAULT_OPTIONS, MatTooltipDefaultOptions} from "@angular/material/tooltip";
 import {Router} from "@angular/router";
@@ -30,6 +30,10 @@ export class ConvExpandedComponent implements OnInit {
   receiverLastName: string;
   @Input()
   receiverID: string
+
+  @Output()
+  loadFirstMessage = new EventEmitter();
+
   currentShowMessages: MessageModel[];
   loadedCount: number = 5;
 
@@ -37,33 +41,42 @@ export class ConvExpandedComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.messages.length > 6) {
-      this.sliceMessages(this.loadedCount)
-    } else {
-      this.currentShowMessages = this.messages;
+    if (this.messages != undefined) {
+      this.sliceMessages();
     }
-
   }
 
   goToConvList() {
     this.router.navigate([AppPath.MESSAGE_ALL])
   }
 
-  sliceMessages(count: number) {
-    this.currentShowMessages = this.messages.slice(this.messages.length - this.loadedCount, this.messages.length);
+  sliceMessages() {
+    if (this.messages.length > 6) {
+      this.currentShowMessages = this.messages.slice(this.messages.length - this.loadedCount, this.messages.length);
+    } else {
+      this.currentShowMessages = this.messages;
+    }
+
   }
 
   loadMore() {
-    this.loadedCount += 5;
-    this.sliceMessages(this.loadedCount)
+    if (this.messages.length > 6) {
+      this.loadedCount += 5;
+    }
+    this.sliceMessages()
   }
 
   sendMessage(content: string) {
     this.messagesService.sendMessage(this.receiverID, content);
 
     setTimeout(() => {
-      this.loadedCount += 1;
-      this.sliceMessages(this.loadedCount)
+      this.loadFirstMessage.emit();
+    }, 1000)
+    setTimeout(() => {
+      if (this.messages.length > 6) {
+        this.loadedCount += 1;
+      }
+      this.sliceMessages()
     }, 1500)
 
   }

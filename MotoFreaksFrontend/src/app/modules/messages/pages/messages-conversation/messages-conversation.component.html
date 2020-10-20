@@ -1,4 +1,5 @@
 <app-conv-expanded [messages]="messages" [receiverName]="getReceiverName()"
-                   [receiverLastName]="getReceiverLastName()" [receiverID]="userId"></app-conv-expanded>
+                   [receiverLastName]="getReceiverLastName()" [receiverID]="userId"
+                   (loadFirstMessage)="loadMessages()"></app-conv-expanded>
 
 
