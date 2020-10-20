@@ -1,11 +1,14 @@
 package com.MJ.MotoFreaksBackend.MotoFreaksBackend.config;
 
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections.Event;
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections.Post;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections.Recommendation;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.MemberState;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.TypeEvents;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.TypeRecomendation;
-import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.*;
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.CarDataModel;
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.QuestionAnswer;
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.Review;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.repository.*;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.services.AuthUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -102,7 +105,7 @@ public class DBSeeder implements CommandLineRunner {
         memberStateMap.put(MemberState.ACCEPTED, friends);
         Event event = new Event(TypeEvents.MEETING, "Spotkanie", date, date, "parking", "wspolne spotkanie", "1234", memberStateMap);
 
-        List<Topic> topics = new ArrayList<>();
+
         List<Post> posts = new ArrayList<>();
 //        Post post = new Post("jak naprawic kolo", "potrzebujesz kluczy", date, date, friends, "1234");
 //        posts.add(post);
