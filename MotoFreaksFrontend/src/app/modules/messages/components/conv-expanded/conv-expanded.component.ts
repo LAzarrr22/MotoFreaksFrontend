@@ -36,6 +36,7 @@ export class ConvExpandedComponent implements OnInit {
 
   currentShowMessages: MessageModel[];
   loadedCount: number = 5;
+  isShowMore: boolean;
 
   constructor(private router: Router, private messagesService: MessagesService) {
   }
@@ -52,6 +53,7 @@ export class ConvExpandedComponent implements OnInit {
 
   sliceMessages() {
     if (this.messages.length > 6) {
+      this.isShowMore = true;
       this.currentShowMessages = this.messages.slice(this.messages.length - this.loadedCount, this.messages.length);
     } else {
       this.currentShowMessages = this.messages;

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-new-message',
@@ -13,7 +13,7 @@ export class NewMessageComponent implements OnInit {
   sendMessageEvent = new EventEmitter<string>();
 
   form = new FormGroup({
-    message: new FormControl('', [Validators.required])
+    message: new FormControl('')
   })
 
   constructor() {
@@ -23,9 +23,15 @@ export class NewMessageComponent implements OnInit {
   }
 
   sendMessage() {
-    if (this.form.valid) {
-      this.sendMessageEvent.emit(this.form.controls.message.value)
-    }
 
+    if (this.form.valid) {
+      this.sendMessageEvent.emit(this.getText())
+      this.form.controls.message.setValue('');
+    }
   }
+
+  getText() {
+    return this.form.controls.message.value;
+  }
+
 }

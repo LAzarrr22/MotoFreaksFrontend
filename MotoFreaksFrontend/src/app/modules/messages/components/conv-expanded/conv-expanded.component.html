@@ -7,7 +7,7 @@
   <mat-divider></mat-divider>
   <ng-container *ngIf="currentShowMessages; else notFound">
 
-    <ng-container *ngIf="currentShowMessages.length!=messages.length">
+    <ng-container *ngIf="isShowMore">
       <div class="row">
         <div class="col offset-6 back" (click)="loadMore()">
           Show more
