@@ -23,7 +23,6 @@ export class MyProfileAllDataComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.dir(this.myRoles)
   }
 
 }

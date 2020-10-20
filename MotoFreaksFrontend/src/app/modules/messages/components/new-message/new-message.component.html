@@ -1,0 +1,25 @@
+<div class="context">
+  <mat-divider></mat-divider>
+  <div class="row">
+    <div class="col-5 offset-7 pt-3">
+
+      <form class="message-form" [formGroup]="form" (ngSubmit)="sendMessage()">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Message</mat-label>
+          <input matInput #message maxlength="256" placeholder="Message" formControlName="message">
+          <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+        </mat-form-field>
+        <error-form [form]="form" [control]="'message'"></error-form>
+
+        <div class="row">
+          <div class="col offset-10">
+            <button type="submit" mat-flat-button color="primary">Send</button>
+          </div>
+        </div>
+      </form>
+
+    </div>
+
+  </div>
+</div>
+

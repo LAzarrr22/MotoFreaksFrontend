@@ -14,6 +14,13 @@ import {NewMessageComponent} from "./components/new-message/new-message.componen
 import {ConvItemListComponent} from "./components/conv-item-list/conv-item-list.component";
 import {ConvExpandedComponent} from "./components/conv-expanded/conv-expanded.component";
 import {MatDividerModule} from "@angular/material/divider";
+import {MatTooltipModule} from "@angular/material/tooltip";
+import {MatIconModule} from "@angular/material/icon";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {ReactiveFormsModule} from "@angular/forms";
+import {AppCommonModule} from "../common/common.module";
+import {MatButtonModule} from "@angular/material/button";
 
 
 @NgModule({
@@ -24,6 +31,13 @@ import {MatDividerModule} from "@angular/material/divider";
     StoreModule.forFeature('messages', reducer),
     EffectsModule.forFeature([MessagesEffects]),
     MatDividerModule,
+    MatTooltipModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    AppCommonModule,
+    MatButtonModule,
   ], providers: [
     MessagesService,
     MessageApiService,

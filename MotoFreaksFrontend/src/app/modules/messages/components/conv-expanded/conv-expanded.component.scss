@@ -5,24 +5,32 @@
   padding: 0px 60px 60px 60px;
 }
 
+.back {
+  cursor: pointer;
+  color: $custom-white-dark;
+  font-size: $font-size-medium;
+  width: fit-content;
+}
+
 .personal-title {
   color: $custom-white;
-  padding-bottom: 20px;
+  padding: 20px 0 20px 25px;
   font-size: $font-size-Xbig;
   font-weight: bold;
+
 }
 
 .my-message {
   background-color: $custom-blue;
   border-radius: 6px;
-  border: 2px solid;
+  border: 1px solid;
   min-width: 200px;
 }
 
 .user-message {
   background-color: $custom-grey;
   border-radius: 6px;
-  border: 2px solid;
+  border: 1px solid;
   color: $custom-white-dark;
   min-width: 200px;
 }

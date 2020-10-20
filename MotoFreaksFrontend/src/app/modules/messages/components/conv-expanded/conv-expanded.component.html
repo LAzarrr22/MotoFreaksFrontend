@@ -1,9 +1,13 @@
 <div class="context">
+  <div class="back" (click)="goToConvList()">
+    <mat-icon matTooltip="Back" matTooltipPosition="right">keyboard_backspace</mat-icon>
+  </div>
+
   <div class="personal-title">{{receiverName}} {{receiverLastName}}</div>
   <mat-divider></mat-divider>
   <ng-container *ngIf="currentShowMessages.length!=messages.length">
     <div class="row">
-      <div class="col offset-6">
+      <div class="col offset-6 back" (click)="loadMore()">
         Show more
       </div>
     </div>
@@ -13,7 +17,8 @@
     <ng-container *ngIf="!m.received">
       <div class="row p-2">
         <div class="col offset-8">
-          <div class="my-message mat-elevation-z10">
+          <div class="my-message mat-elevation-z10" matTooltip="{{m.createdDate | date: 'medium'}}"
+               matTooltipPosition="left">
             Me: {{m.messageContent}}
           </div>
 
@@ -24,7 +29,8 @@
     <ng-container *ngIf="m.received">
       <div class="row p-2">
         <div class="col-4">
-          <div class="user-message mat-elevation-z10 ">
+          <div class="user-message mat-elevation-z10 " matTooltip="{{m.createdDate | date: 'medium'}}"
+               matTooltipPosition="right">
             {{receiverName}}: {{m.messageContent}}
           </div>
 

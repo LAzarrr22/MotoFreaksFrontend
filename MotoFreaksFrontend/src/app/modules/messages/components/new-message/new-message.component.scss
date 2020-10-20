@@ -1,0 +1,22 @@
+@import "src/styles";
+@import "~bootstrap";
+
+.context {
+  padding: 0px 120px 60px 120px;
+}
+
+.message-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.icon-click {
+  color: $custom-blue;
+  size: $font-size-Xbig;
+  cursor: pointer;
+}
