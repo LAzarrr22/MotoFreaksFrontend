@@ -34,6 +34,7 @@ import {Router} from "@angular/router";
 import {CommonComponentsService} from "../../../common/common.service";
 import {GetAllUsers} from "../../../users/logic/action/user.action";
 import {RolesEnum} from "../enums/roles.enum";
+import {GetAllMessages} from "../../../messages/logic/action/messages.action";
 
 @Injectable()
 export class AuthenticationEffects {
@@ -62,7 +63,8 @@ export class AuthenticationEffects {
       }),
       switchMap((userData: LoginSuccessfulDto) => [
         new UserLoginSuccess(userData),
-        new GetAllUsers()
+        new GetAllUsers(),
+        new GetAllMessages(),
       ]),
 
       catchError((error, caught) => {

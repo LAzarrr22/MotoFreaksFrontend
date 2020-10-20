@@ -3,6 +3,8 @@ import {UserModel} from "../../../users/logic/dto/response/user-model";
 import {UsersService} from "../../../users/logic/services/users.service";
 import {RolesEnum} from "../../../authentication/logic/enums/roles.enum";
 import {AuthService} from "../../../authentication/logic/services/auth.service";
+import {AppPath} from "../../../../shared/enums/app-path.enum";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-user-profile-all-data',
@@ -19,7 +21,7 @@ export class UserProfileAllDataComponent implements OnInit {
   @Output()
   reloadUser = new EventEmitter();
 
-  constructor(private usersService: UsersService, private authService: AuthService) {
+  constructor(private usersService: UsersService, private authService: AuthService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -44,4 +46,7 @@ export class UserProfileAllDataComponent implements OnInit {
     return this.authService.isModerator();
   }
 
+  goToConversation() {
+    this.router.navigate([AppPath.MESSAGE_CONVERSATION, {id: this.userProfile.id}])
+  }
 }

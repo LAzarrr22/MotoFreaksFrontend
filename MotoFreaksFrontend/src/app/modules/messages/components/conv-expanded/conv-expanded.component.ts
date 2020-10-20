@@ -62,9 +62,9 @@ export class ConvExpandedComponent implements OnInit {
     this.messagesService.sendMessage(this.receiverID, content);
 
     setTimeout(() => {
-      console.dir(this.messages)
+      this.loadedCount += 1;
       this.sliceMessages(this.loadedCount)
-    }, 1100)
+    }, 1500)
 
   }
 }
