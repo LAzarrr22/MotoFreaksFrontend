@@ -5,7 +5,7 @@ import {ProfileService} from "../../logic/services/profile.service";
 import {AppPath} from "../../../../shared/enums/app-path.enum";
 import {Subscription, timer} from "rxjs";
 import {switchMap} from "rxjs/operators";
-import {MessageApiService} from "../../../messages/logic/services/message-api.service";
+import {MessagesService} from "../../../messages/logic/services/messages.service";
 
 @Component({
   selector: 'app-top-bar-user-info',
@@ -19,7 +19,7 @@ export class TopBarUserInfoComponent implements OnInit, OnDestroy {
   hiddenBadge: boolean = true;
   unreadSubscription: Subscription;
 
-  constructor(private router: Router, private profileService: ProfileService, private messageService: MessageApiService) {
+  constructor(private router: Router, private profileService: ProfileService, private messageService: MessagesService) {
 
   }
 
@@ -37,7 +37,7 @@ export class TopBarUserInfoComponent implements OnInit, OnDestroy {
   }
 
   getMessageCount() {
-    this.unreadSubscription = timer(0, 10000).pipe(switchMap(() => this.messageService.getMyUnreadMessagesCount()))
+    this.unreadSubscription = timer(0, 10000).pipe(switchMap(() => this.messageService.getUnreadCount()))
       .subscribe(count => {
         if (count > 0) {
           this.newMessages = count

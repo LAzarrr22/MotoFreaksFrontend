@@ -10,8 +10,8 @@ export class MessageApiService {
   constructor(private readonly httpClient: HttpClient) {
   }
 
-  getMyUnreadMessagesCount(): Observable<any> {
-    return this.httpClient.get(`${environment.apiUrl}/message/unread/count`);
+  getMyUnreadMessagesCount(): Observable<number> {
+    return this.httpClient.get<number>(`${environment.apiUrl}/message/unread/count`);
   }
 
   getAllMyMessages(): Observable<MessageDataModel[]> {

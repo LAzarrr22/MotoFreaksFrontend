@@ -7,8 +7,11 @@ import {Observable} from "rxjs";
 import {catchError, switchMap} from "rxjs/operators";
 import {
   GET_ALL_MESSAGES,
+  GET_UNREAD_MESSAGES,
   GetAllMessagesFail,
   GetAllMessagesSuccess,
+  GetUnreadMessagesFail,
+  GetUnreadMessagesSuccess,
   READ_MESSAGES,
   ReadMessages,
   ReadMessagesFail,
@@ -26,6 +29,23 @@ export class MessagesEffects {
   constructor(private messageApiService: MessageApiService, private actions$: Actions, private store$: Store
     , private errorService: CommonComponentsService) {
   }
+
+  @Effect()
+  getUnreadMessages$: Observable<Action> = this.actions$
+    .pipe(
+      ofType(GET_UNREAD_MESSAGES),
+      switchMap(() => {
+        return this.messageApiService.getMyUnreadMessagesCount();
+      }),
+      switchMap((unread: number) => [
+        new GetUnreadMessagesSuccess(unread),
+      ]),
+      catchError((error, caught) => {
+        this.store$.dispatch(new GetUnreadMessagesFail(error.error.message));
+        this.errorService.error(error);
+        return caught;
+      })
+    )
 
   @Effect()
   getAllMessages$: Observable<Action> = this.actions$

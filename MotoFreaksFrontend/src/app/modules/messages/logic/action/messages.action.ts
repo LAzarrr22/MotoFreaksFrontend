@@ -1,6 +1,9 @@
 import {Action} from "@ngrx/store";
 import {MessageDataModel} from "../dto/response/message-data.model";
 
+export const GET_UNREAD_MESSAGES = '[Messages] GET_UNREAD_MESSAGES'
+export const GET_UNREAD_MESSAGES_SUCCESS = '[Messages] GET_UNREAD_MESSAGES_SUCCESS'
+export const GET_UNREAD_MESSAGES_FAIL = '[Messages] GET_UNREAD_MESSAGES_FAIL'
 
 export const GET_ALL_MESSAGES = '[Messages] GET_ALL_MESSAGES'
 export const GET_ALL_MESSAGES_SUCCESS = '[Messages] GET_ALL_MESSAGES_SUCCESS'
@@ -13,6 +16,27 @@ export const SEND_MESSAGE_FAIL = '[Messages] SEND_MESSAGE_FAIL'
 export const READ_MESSAGES = '[Messages] READ_MESSAGES'
 export const READ_MESSAGES_SUCCESS = '[Messages] READ_MESSAGES_SUCCESS'
 export const READ_MESSAGES_FAIL = '[Messages] READ_MESSAGES_FAIL'
+
+export class GetUnreadMessages implements Action {
+  readonly type = GET_UNREAD_MESSAGES;
+
+  constructor() {
+  }
+}
+
+export class GetUnreadMessagesSuccess implements Action {
+  readonly type = GET_UNREAD_MESSAGES_SUCCESS;
+
+  constructor(public unread: number) {
+  }
+}
+
+export class GetUnreadMessagesFail implements Action {
+  readonly type = GET_UNREAD_MESSAGES_FAIL;
+
+  constructor(public payload: string) {
+  }
+}
 
 export class GetAllMessages implements Action {
   readonly type = GET_ALL_MESSAGES;
@@ -87,4 +111,7 @@ export type Actions =
   | ReadMessages
   | ReadMessagesSuccess
   | ReadMessagesFail
+  | GetUnreadMessages
+  | GetUnreadMessagesSuccess
+  | GetUnreadMessagesFail
 
