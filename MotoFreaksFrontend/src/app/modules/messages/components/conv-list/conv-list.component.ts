@@ -16,12 +16,10 @@ export class ConvListComponent implements OnInit {
   @Input()
   allUsers: UserModel[];
 
-
   constructor(private router: Router) {
   }
 
   ngOnInit(): void {
-    //todo sort by last reveived
   }
 
   getReceiverName(id: string): string {

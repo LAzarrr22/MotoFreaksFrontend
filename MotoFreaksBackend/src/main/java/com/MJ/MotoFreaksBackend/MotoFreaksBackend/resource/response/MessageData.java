@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -12,5 +13,6 @@ import java.util.List;
 @NoArgsConstructor
 public class MessageData {
     private String id;
+    private Date lastMessage;
     private List<Message> messages;
 }

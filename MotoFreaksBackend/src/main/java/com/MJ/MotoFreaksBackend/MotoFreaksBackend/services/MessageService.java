@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
 
 import static org.springframework.http.ResponseEntity.ok;
 
@@ -83,8 +84,9 @@ public class MessageService {
         User currentUser = userService.getUserByToken(token);
         List<MessageData> allMessages = new ArrayList<>();
         currentUser.getMessages().keySet().forEach(key -> {
-            allMessages.add(new MessageData(key, currentUser.getMessages().get(key)));
+            allMessages.add(new MessageData(key, currentUser.getMessages().get(key).get(currentUser.getMessages().get(key).size() - 1).getCreatedDate(), currentUser.getMessages().get(key)));
         });
-        return ok(allMessages);
+
+        return ok(allMessages.stream().sorted(Comparator.comparing(MessageData::getLastMessage).reversed()).collect(Collectors.toList()));
     }
 }
