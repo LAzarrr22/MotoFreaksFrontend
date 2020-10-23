@@ -2,6 +2,7 @@ package com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections;
 
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.PostType;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.Address;
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.CarDataModel;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -24,5 +25,6 @@ public class Post {
     private String creatorId;
     private List<String> userIdLikes;
     private Address location;
+    private CarDataModel car;
 
 }
