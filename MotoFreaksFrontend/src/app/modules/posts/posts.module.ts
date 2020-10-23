@@ -5,6 +5,7 @@ import {StoreModule} from "@ngrx/store";
 import {reducer} from "./logic/reducers/posts.reducers";
 import {EffectsModule} from "@ngrx/effects";
 import {PostsEffects} from "./logic/effects/posts.effects";
+import {PostsService} from "./logic/services/posts.service";
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import {PostsEffects} from "./logic/effects/posts.effects";
     EffectsModule.forFeature([PostsEffects])
   ],
   providers: [
-    PostsApiService
+    PostsApiService,
+    PostsService,
   ]
 
 })

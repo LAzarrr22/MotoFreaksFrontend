@@ -4,7 +4,10 @@ import {environment} from "../../../../../environments/environment";
 import {Observable} from "rxjs";
 import {PostModel} from "../dto/model/post.model";
 import {PostType} from "../enums/post-type.enum";
+import {Injectable} from "@angular/core";
 
+
+@Injectable()
 export class PostsApiService {
 
   constructor(private httpClient: HttpClient) {
