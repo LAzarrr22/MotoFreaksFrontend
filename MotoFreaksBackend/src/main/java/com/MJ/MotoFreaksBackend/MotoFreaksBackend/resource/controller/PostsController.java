@@ -39,4 +39,9 @@ public class PostsController {
         String token = req.getHeader(AuthorizationHeader.HEADER_NAME).replace(AuthorizationHeader.TOKEN_PREFIX, "");
         return postsService.getMyPosts(token);
     }
+
+    @RequestMapping(path = "/delete/{id}", method = RequestMethod.GET, produces = "application/json")
+    public Object getMyPosts(@PathVariable String id) {
+        return postsService.deletePost(id);
+    }
 }

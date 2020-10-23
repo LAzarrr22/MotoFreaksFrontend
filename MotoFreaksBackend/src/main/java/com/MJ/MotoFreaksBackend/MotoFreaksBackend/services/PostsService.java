@@ -52,4 +52,11 @@ public class PostsService {
         Optional<List<Post>> findPosts = postsRepository.findByCreatorIdOptional(currentUser.getId());
         return findPosts.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Posts_not_found"));
     }
+
+    public Object deletePost(String id) {
+        Map<Object, Object> model = new HashMap<>();
+        postsRepository.deleteById(id);
+        model.put("message", "Post " + id + " removed successful.");
+        return ok(model);
+    }
 }
