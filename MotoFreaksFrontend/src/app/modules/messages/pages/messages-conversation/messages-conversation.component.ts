@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {ActiveRoute} from "../../../../shared/enums/active-route.enum";
 import {ActivatedRoute} from "@angular/router";
 import {UsersService} from "../../../users/logic/services/users.service";
 import {MenuService} from "../../../menu/logic/services/menu.service";
@@ -24,7 +23,7 @@ export class MessagesConversationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.menuService.activeRoute.next(ActiveRoute.MY_PROFILE)
+    this.menuService.activeRoute.next('')
     this.userId = this.route.snapshot.paramMap.get('id');
     this.userService.getAllUsers().subscribe(users => this.allUsers = users);
     this.loadMessages();
