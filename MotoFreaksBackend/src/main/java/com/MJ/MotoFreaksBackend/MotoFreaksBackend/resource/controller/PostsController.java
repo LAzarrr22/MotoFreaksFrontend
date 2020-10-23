@@ -1,6 +1,7 @@
 package com.MJ.MotoFreaksBackend.MotoFreaksBackend.resource.controller;
 
 
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.PostType;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.resource.requests.NewPost;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.security.consts.AuthorizationHeader;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.services.PostsService;
@@ -28,6 +29,11 @@ public class PostsController {
         return postsService.getAll();
     }
 
+    @RequestMapping(path = "/all/type/{type}", method = RequestMethod.GET, produces = "application/json")
+    public Object getAllByType(@PathVariable PostType type) {
+        return postsService.getAllByType(type);
+    }
+
     @RequestMapping(path = "/add", method = RequestMethod.POST, produces = "application/json")
     public Object addPost(HttpServletRequest req, @RequestBody NewPost newPost) {
         String token = req.getHeader(AuthorizationHeader.HEADER_NAME).replace(AuthorizationHeader.TOKEN_PREFIX, "");
@@ -40,7 +46,12 @@ public class PostsController {
         return postsService.getMyPosts(token);
     }
 
-    @RequestMapping(path = "/delete/{id}", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(path = "/all/id/{id}", method = RequestMethod.GET, produces = "application/json")
+    public Object getPostsById(HttpServletRequest req, @PathVariable String id) {
+        return postsService.getPostsById(id);
+    }
+
+    @RequestMapping(path = "/delete/{id}", method = RequestMethod.DELETE, produces = "application/json")
     public Object getMyPosts(@PathVariable String id) {
         return postsService.deletePost(id);
     }

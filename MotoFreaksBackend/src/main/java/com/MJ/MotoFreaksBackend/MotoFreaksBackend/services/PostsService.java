@@ -2,6 +2,7 @@ package com.MJ.MotoFreaksBackend.MotoFreaksBackend.services;
 
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections.Post;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections.User;
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.enums.PostType;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.repository.PostsRepository;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.resource.requests.NewPost;
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +29,8 @@ public class PostsService {
     }
 
     public Object getAll() {
-        return postsRepository.findAll();
+        List<Post> returnPosts = postsRepository.findAll();
+        return ok(returnPosts.stream().sorted(Comparator.comparing(Post::getCreatedDate).reversed()));
     }
 
     public Object addPost(NewPost newPost, String token) {
@@ -49,8 +51,7 @@ public class PostsService {
 
     public Object getMyPosts(String token) {
         User currentUser = userService.getUserByToken(token);
-        Optional<List<Post>> findPosts = postsRepository.findByCreatorIdOptional(currentUser.getId());
-        return findPosts.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Posts_not_found"));
+        return ok(getPostsById(currentUser.getId()));
     }
 
     public Object deletePost(String id) {
@@ -58,5 +59,17 @@ public class PostsService {
         postsRepository.deleteById(id);
         model.put("message", "Post " + id + " removed successful.");
         return ok(model);
+    }
+
+    public Object getAllByType(PostType type) {
+        Optional<List<Post>> findPosts = postsRepository.findByTypeOptional(type);
+        List<Post> returnPosts = findPosts.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Posts_not_found"));
+        return ok(returnPosts.stream().sorted(Comparator.comparing(Post::getCreatedDate).reversed()));
+    }
+
+    public Object getPostsById(String id) {
+        Optional<List<Post>> findPosts = postsRepository.findByCreatorIdOptional(id);
+        List<Post> returnPosts = findPosts.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Posts_not_found"));
+        return ok(returnPosts.stream().sorted(Comparator.comparing(Post::getCreatedDate).reversed()));
     }
 }
