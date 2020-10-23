@@ -1,0 +1,76 @@
+<div class="row">
+  <div class="title">Create Post</div>
+</div>
+<div class="pl-3 pr-3">
+  <form class="login-form" [formGroup]="formBasic" (ngSubmit)="addPost()">
+
+    <div class="row">
+      <div class="col-md-2 col-lg-2 ">
+        <mat-form-field appearance="legacy" class="full-width">
+          <mat-label>Type</mat-label>
+          <mat-select formControlName="type">
+            <mat-option *ngFor="let type of postTypeList" [value]="type">{{type}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-4 col-lg-4">
+        <mat-form-field appearance="legacy" class="full-width">
+          <mat-label>Title</mat-label>
+          <input matInput placeholder="Title" formControlName="title">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+
+
+      <div class="col-md-6 col-lg-6">
+        <mat-form-field appearance="legacy" class="full-width">
+          <mat-label>Context</mat-label>
+          <textarea matInput #body maxlength="256" placeholder="Context" formControlName="body"></textarea>
+          <mat-hint align="end">{{body.value.length}} / 256</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="col-md-5 col-lg-5 "></div>
+
+    </div>
+
+
+    <div class="row">
+      <div class="title">Address</div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 col-lg-4">
+        <mat-form-field appearance="legacy" class="full-width">
+          <mat-label>Address</mat-label>
+          <input matInput placeholder="Address" formControlName="address">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="title">Car</div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 col-lg-4">
+        <mat-form-field appearance="legacy" class="full-width">
+          <mat-label>Car</mat-label>
+          <mat-select formControlName="car">
+            <mat-option *ngFor="let car of userCarList" [value]="car.id">'{{car.name}}' - {{car.company}}
+              , {{car.model}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="col-md-2 offset-6">
+        <button class="button-submit" mat-flat-button type="submit" color="primary">Post</button>
+      </div>
+
+    </div>
+
+  </form>
+</div>
