@@ -14,3 +14,10 @@
 .add-car {
   max-height: 25px;
 }
+
+.back {
+  cursor: pointer;
+  color: $custom-white-dark;
+  font-size: $font-size-medium;
+  width: fit-content;
+}

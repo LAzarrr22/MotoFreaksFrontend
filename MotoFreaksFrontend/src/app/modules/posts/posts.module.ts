@@ -18,6 +18,8 @@ import {ProfileModule} from "../profiles/profile.module";
 import {CreatePostPageComponent} from './pages/create-post-page/create-post-page.component';
 import {AllPostPageComponent} from './pages/all-post-page/all-post-page.component';
 import {PostsRoutingModule} from "./posts-routing.module";
+import {MatIconModule} from "@angular/material/icon";
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 
 @NgModule({
@@ -32,7 +34,9 @@ import {PostsRoutingModule} from "./posts-routing.module";
     MatInputModule,
     MatSelectModule,
     MatButtonModule,
-    ProfileModule
+    ProfileModule,
+    MatIconModule,
+    MatTooltipModule
   ],
   exports: [
     CreatePostComponent,

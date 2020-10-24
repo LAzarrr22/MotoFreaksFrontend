@@ -6,6 +6,9 @@ import {Store} from "@ngrx/store";
 import {PostsState} from "../../logic/reducers/posts.reducers";
 import {CarModel} from "../../../profiles/logic/dto/models/car.model";
 import {ProfileService} from "../../../profiles/logic/services/profile.service";
+import {AddressModel} from "../../../profiles/logic/dto/models/address.model";
+import {Router} from "@angular/router";
+import {AppPath} from "../../../../shared/enums/app-path.enum";
 
 @Component({
   selector: 'app-create-post',
@@ -18,18 +21,20 @@ export class CreatePostComponent implements OnInit {
   formAddress: FormGroup;
   @Input()
   postTypeList = [];
-
   userCarList: CarModel[] = [];
   addNewCar: boolean = false;
+  currentAddress: AddressModel;
   errorMessage: Observable<string>
   validationMessages: ValidationMessageMap;
 
-  constructor(private readonly store: Store<PostsState>, private formBuilder: FormBuilder, private  profileService: ProfileService) {
+  constructor(private readonly store: Store<PostsState>, private formBuilder: FormBuilder,
+              private  profileService: ProfileService, private router: Router) {
 
   }
 
   ngOnInit(): void {
     this.profileService.getMyProfile().subscribe(me => this.userCarList = me.carsList);
+    this.profileService.getMyProfile().subscribe(me => this.currentAddress = me.address);
 
 
     this.formBasic = this.formBuilder.group({
@@ -52,6 +57,7 @@ export class CreatePostComponent implements OnInit {
   addPost() {
     console.dir(this.formBasic)
     console.dir(this.getCar(this.formBasic.controls.car.value))
+    console.dir(this.currentAddress)
   }
 
   getAddressFromProfile() {
@@ -64,5 +70,9 @@ export class CreatePostComponent implements OnInit {
 
   addCarChange() {
     this.addNewCar = !this.addNewCar;
+  }
+
+  goToAllPosts() {
+    this.router.navigate([AppPath.POSTS_ALL_PATH])
   }
 }
