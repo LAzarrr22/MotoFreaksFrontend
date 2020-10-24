@@ -44,6 +44,7 @@ public class PostsService {
         post.setCreatedDate(new Date());
         post.setLocation(newPost.getLocation());
         post.setUserIdLikes(new ArrayList<>());
+        post.setCar(newPost.getCar());
         postsRepository.save(post);
         model.put("message", "Post added successful.");
         return ok(model);
