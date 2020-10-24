@@ -72,7 +72,7 @@ import {SectionRolesComponent} from './components/profile-sections/section-roles
 
   ],
   exports: [
-    ProfileMeComponent, ProfileFriendsComponent, TopBarUserInfoComponent
+    ProfileMeComponent, ProfileFriendsComponent, TopBarUserInfoComponent, AddEditCarComponent
   ],
   providers: [
     MyProfileApiService,

@@ -1,12 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Observable} from "rxjs";
 import {ValidationMessageMap} from "../../../../shared/interfaces/validation-message-map";
 import {Store} from "@ngrx/store";
 import {PostsState} from "../../logic/reducers/posts.reducers";
-import {ProfileService} from "../../../profiles/logic/services/profile.service";
-import {PostType} from "../../logic/enums/post-type.enum";
 import {CarModel} from "../../../profiles/logic/dto/models/car.model";
+import {MyProfileModel} from "../../../profiles/logic/dto/response/my-profile.model";
 
 @Component({
   selector: 'app-create-post',
@@ -17,19 +16,22 @@ export class CreatePostComponent implements OnInit {
 
   formBasic: FormGroup;
   formAddress: FormGroup;
-  private postTypes = PostType;
+  @Input()
   postTypeList = [];
-  userCarList: CarModel[];
+  @Input()
+  profile: MyProfileModel;
+  userCarList: CarModel[] = [];
+  addNewCar: boolean = false;
   errorMessage: Observable<string>
   validationMessages: ValidationMessageMap;
 
-  constructor(private readonly store: Store<PostsState>, private formBuilder: FormBuilder, private profileService: ProfileService) {
+  constructor(private readonly store: Store<PostsState>, private formBuilder: FormBuilder) {
 
   }
 
   ngOnInit(): void {
-    this.postTypeList = Object.keys(this.postTypes);
-    this.profileService.getMyProfile().subscribe(me => this.userCarList = me.carsList)
+
+    this.userCarList = this.profile.carsList;
 
     this.formBasic = this.formBuilder.group({
       type: new FormControl('', [Validators.required]),
@@ -46,9 +48,6 @@ export class CreatePostComponent implements OnInit {
       city: new FormControl('', [Validators.required]),
       street: new FormControl(''),
     });
-
-    console.dir(this.userCarList);
-
   }
 
   addPost() {
@@ -64,4 +63,7 @@ export class CreatePostComponent implements OnInit {
     return this.userCarList.find(car => car.id === id)
   }
 
+  addCarChange() {
+    this.addNewCar = !this.addNewCar;
+  }
 }
