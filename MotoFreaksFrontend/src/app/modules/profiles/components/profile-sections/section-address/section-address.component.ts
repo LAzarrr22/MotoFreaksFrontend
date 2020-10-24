@@ -25,7 +25,7 @@ export class SectionAddressComponent implements OnInit {
       country: new FormControl(this.address.country, [Validators.required]),
       state: new FormControl(this.address.state, [Validators.required]),
       city: new FormControl(this.address.city, [Validators.required]),
-      street: new FormControl(this.address.street),
+      street: new FormControl(this.address.street, [Validators.required]),
     });
   }
 

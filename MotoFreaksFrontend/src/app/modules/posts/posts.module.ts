@@ -20,6 +20,7 @@ import {AllPostPageComponent} from './pages/all-post-page/all-post-page.componen
 import {PostsRoutingModule} from "./posts-routing.module";
 import {MatIconModule} from "@angular/material/icon";
 import {MatTooltipModule} from "@angular/material/tooltip";
+import {AppCommonModule} from "../common/common.module";
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     MatButtonModule,
     ProfileModule,
     MatIconModule,
-    MatTooltipModule
+    MatTooltipModule,
+    AppCommonModule
   ],
   exports: [
     CreatePostComponent,

@@ -36,7 +36,7 @@ export class SectionMyPersonalComponent implements OnInit {
 
     this.validationMessages = {
       repeatPassword: {
-        notMatchingPassword: 'Passwords not equals'
+        missingAddress: 'Passwords not equals'
       },
       password: {
         pattern: '<p>Password must contain: </p>' +
@@ -54,8 +54,8 @@ export class SectionMyPersonalComponent implements OnInit {
   passwordMatchValidator(group: FormGroup): any {
     if (group) {
       if (group.get('password').value !== group.get('repeatPassword').value) {
-        group.controls['repeatPassword'].setErrors({notMatchingPassword: true});
-        return {notMatchingPassword: true};
+        group.controls['repeatPassword'].setErrors({missingAddress: true});
+        return {missingAddress: true};
       } else {
         group.controls['repeatPassword'].setErrors(null);
       }

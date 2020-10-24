@@ -38,6 +38,12 @@ export class CreatePostComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.validationMessages = {
+      address: {
+        missingAddress: 'Missing Address'
+      }
+    }
+
     this.storeProfile.select(getMyProfile).subscribe(me => {
       this.userCarList = me.carsList
       this.currentAddress = me.address
@@ -49,7 +55,6 @@ export class CreatePostComponent implements OnInit {
       body: new FormControl('', [Validators.required]),
       address: new FormControl(true),
       car: new FormControl('', [Validators.required]),
-
     })
 
     this.formAddress = this.formBuilder.group({
@@ -60,7 +65,16 @@ export class CreatePostComponent implements OnInit {
     });
   }
 
+  addressValidator() {
+    if (this.formBasic.controls.address.value || this.useOtherAddress) {
+      this.formBasic.controls['address'].setErrors(null);
+    } else if (!this.formBasic.controls.address.value || !this.useOtherAddress) {
+      this.formBasic.controls['address'].setErrors({missingAddress: true});
+    }
+  }
+
   addPost() {
+    this.addressValidator();
 
     if (this.formBasic.valid) {
       this.storePosts.dispatch(new AddPost(new NewPostModel(this.getType(), this.getTitle()
@@ -75,6 +89,7 @@ export class CreatePostComponent implements OnInit {
         , this.formAddress.controls.city.value, this.formAddress.controls.street.value)
       this.useOtherAddress = true;
       this.otherAddressContainer = !this.otherAddressContainer;
+      this.addressValidator();
     }
   }
 
@@ -85,6 +100,7 @@ export class CreatePostComponent implements OnInit {
   addOtherAddress() {
     this.otherAddressContainer = !this.otherAddressContainer;
     this.currentAddressEnabled = !this.currentAddressEnabled;
+    this.addressValidator();
 
   }
 
@@ -97,6 +113,7 @@ export class CreatePostComponent implements OnInit {
     this.useOtherAddress = false;
     this.otherAddressContainer = false;
     this.currentAddressEnabled = true;
+    this.addressValidator();
   }
 
   getCar(id: string) {
