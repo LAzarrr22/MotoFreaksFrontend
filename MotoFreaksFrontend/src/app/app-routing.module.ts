@@ -32,6 +32,11 @@ const routes: Routes = [
     loadChildren: () => import('./modules/messages/messages.module').then(m => m.MessagesModule)
   },
   {
+    path: AppRoute.POSTS,
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./modules/posts/posts.module').then(m => m.PostsModule)
+  },
+  {
     path: AppRoute.SERVICE_NOT_AVAILABLE,
     component: ConnectionRefusedComponent,
   },

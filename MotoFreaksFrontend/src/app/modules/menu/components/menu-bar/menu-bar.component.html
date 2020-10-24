@@ -14,13 +14,21 @@
       </div>
     </div>
 
+    <div *ngIf="isLogged"
+      class="side-menu__item" (click)="goToPosts()" [ngClass]="{'side-menu__item--active': activeRoute == '[Active] POSTS'}">
+      <i class="material-icons md-18 side-menu__icon">event_note</i>
+      <div class="side_menu__text">
+        Posts
+      </div>
+    </div>
+
 
     <div *ngIf="!isLogged"
-    class="side-menu__item" (click)="goToLogin()" [ngClass]="{'side-menu__item--active': activeRoute == '[Active] LOGIN'}">
+      class="side-menu__item" (click)="goToLogin()" [ngClass]="{'side-menu__item--active': activeRoute == '[Active] LOGIN'}">
       <i class="material-icons  side-menu__icon">login</i>
-    <div class="side_menu__text">
-      Login
-    </div>
+      <div class="side_menu__text">
+        Login
+      </div>
     </div>
 
     <div *ngIf="!isLogged"

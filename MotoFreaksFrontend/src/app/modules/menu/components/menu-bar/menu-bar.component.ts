@@ -55,4 +55,8 @@ export class MenuBarComponent implements OnInit {
   goToAllUsers() {
     this.router.navigate([AppPath.USER_ALL])
   }
+
+  goToPosts() {
+    this.router.navigate([AppPath.POSTS_ALL_PATH])
+  }
 }

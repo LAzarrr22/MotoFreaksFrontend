@@ -12,5 +12,8 @@ export enum AppPath {
   MESSAGE_ALL = '/messages/all',
   MESSAGE_CONVERSATION = '/messages/conversation',
 
+  POSTS_ALL_PATH = '/posts/all',
+  POSTS_CREATE_PATH = '/posts/create',
+
   SERVICE_NOT_AVAILABLE = '/service-not-available',
 }

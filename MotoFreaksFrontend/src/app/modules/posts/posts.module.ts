@@ -14,22 +14,29 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatSelectModule} from "@angular/material/select";
 import {MatButtonModule} from "@angular/material/button";
+import {ProfileModule} from "../profiles/profile.module";
+import {CreatePostPageComponent} from './pages/create-post-page/create-post-page.component';
+import {AllPostPageComponent} from './pages/all-post-page/all-post-page.component';
+import {PostsRoutingModule} from "./posts-routing.module";
 
 
 @NgModule({
-  declarations: [PostsListComponent, PostItemComponent, CreatePostComponent],
+  declarations: [PostsListComponent, PostItemComponent, CreatePostComponent, CreatePostPageComponent, AllPostPageComponent],
   imports: [
     CommonModule,
+    PostsRoutingModule,
     StoreModule.forFeature('posts', reducer),
     EffectsModule.forFeature([PostsEffects]),
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatButtonModule
+    MatButtonModule,
+    ProfileModule
   ],
   exports: [
-    CreatePostComponent
+    CreatePostComponent,
+    CreatePostPageComponent
   ],
   providers: [
     PostsApiService,

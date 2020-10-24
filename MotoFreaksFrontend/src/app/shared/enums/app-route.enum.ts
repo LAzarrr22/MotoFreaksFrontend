@@ -15,6 +15,9 @@ export enum AppRoute {
   MESSAGE = 'messages',
   CONVERSATION = 'conversation',
 
+  POSTS = 'posts',
+  CREATE = 'create',
+
 
   SERVICE_NOT_AVAILABLE = 'service-not-available',
 }

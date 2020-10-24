@@ -35,6 +35,7 @@ import {CommonComponentsService} from "../../../common/common.service";
 import {GetAllUsers} from "../../../users/logic/action/user.action";
 import {RolesEnum} from "../enums/roles.enum";
 import {GetAllMessages} from "../../../messages/logic/action/messages.action";
+import {GetMyProfile} from "../../../profiles/logic/action/my-profile.action";
 
 @Injectable()
 export class AuthenticationEffects {
@@ -63,6 +64,7 @@ export class AuthenticationEffects {
       }),
       switchMap((userData: LoginSuccessfulDto) => [
         new UserLoginSuccess(userData),
+        new GetMyProfile(),
         new GetAllUsers(),
         new GetAllMessages(),
       ]),
