@@ -24,9 +24,9 @@ export const DELETE_POST = '[Posts] DELETE_POST'
 export const DELETE_POST_SUCCESS = '[Posts] DELETE_POST_SUCCESS'
 export const DELETE_POST_FAIL = '[Posts] DELETE_POST_FAIL'
 
-export const ADD_POST = '[Posts] DELETE_POST'
-export const ADD_POST_SUCCESS = '[Posts] DELETE_POST_SUCCESS'
-export const ADD_POST_FAIL = '[Posts] DELETE_POST_FAIL'
+export const ADD_POST = '[Posts] ADD_POST'
+export const ADD_POST_SUCCESS = '[Posts] ADD_POST_SUCCESS'
+export const ADD_POST_FAIL = '[Posts] ADD_POST_FAIL'
 
 
 export class GetAllPosts implements Action {

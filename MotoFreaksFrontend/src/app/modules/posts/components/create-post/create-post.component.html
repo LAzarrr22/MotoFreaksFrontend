@@ -44,14 +44,78 @@
     <div class="row">
       <div class="title">Address</div>
     </div>
-    <div class="row">
+    <div class="row" [ngClass]="{'edit-blur': !currentAddressEnabled || useOtherAddress}">
       <div class="col-md-4 col-lg-4">
-        <mat-form-field appearance="legacy" class="full-width">
-          <mat-label>Address</mat-label>
-          <input matInput placeholder="Address" formControlName="address">
-        </mat-form-field>
+        <mat-label class="pr-3">Use current profile address: <b>{{currentAddress.city}}, {{currentAddress.street}}</b>
+        </mat-label>
+        <input type="checkbox" formControlName="address" *ngIf="!useOtherAddress">
       </div>
     </div>
+
+    <div class="row" *ngIf="useOtherAddress">
+      <div class="col-md-4 col-lg-4">
+        Selected address: <b>{{currentAddress.country}}, {{currentAddress.city}}, {{currentAddress.state}}
+        , {{currentAddress.street}}</b>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-2 col-lg-2">
+        <button type="button" class="add-car"
+                mat-flat-button color="accent" (click)="addOtherAddress()" *ngIf="!otherAddressContainer">Other address
+        </button>
+
+        <button type="button" class="add-car"
+                mat-flat-button color="warn" (click)="addOtherAddress()" *ngIf="otherAddressContainer">Cancel
+        </button>
+      </div>
+
+      <div class="col-md-2 col-lg-2" *ngIf="useOtherAddress">
+        <button type="button" class="add-car"
+                mat-flat-button color="accent" (click)="backToProfileAddress()" *ngIf="!otherAddressContainer">Profile
+          address
+        </button>
+
+      </div>
+    </div>
+
+    <div class="row pl-3" *ngIf="otherAddressContainer">
+
+      <form [formGroup]="formAddress" (ngSubmit)="saveOtherAddress()">
+
+        <mat-form-field appearance="legacy" class="mat-form-field-flex">
+          <mat-label>Country</mat-label>
+          <input matInput placeholder="Country" formControlName="country">
+        </mat-form-field>
+
+
+        <mat-form-field appearance="legacy" class="mat-form-field-flex">
+          <mat-label>State</mat-label>
+          <input matInput placeholder="State" formControlName="state">
+        </mat-form-field>
+
+
+        <mat-form-field appearance="legacy" class="mat-form-field-flex">
+          <mat-label>City</mat-label>
+          <input matInput placeholder="City" formControlName="city">
+        </mat-form-field>
+
+
+        <mat-form-field appearance="legacy" class="mat-form-field-flex">
+          <mat-label>Street</mat-label>
+          <input matInput placeholder="Street" formControlName="street">
+        </mat-form-field>
+
+
+        <div class="row">
+          <div class="col-md-2  col-lg-2 offset-2">
+            <button class="button-submit" mat-flat-button type="submit" color="primary">Use it</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+
 
     <div class="row">
       <div class="title">Car</div>
