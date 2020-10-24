@@ -5,7 +5,7 @@ import {ValidationMessageMap} from "../../../../shared/interfaces/validation-mes
 import {Store} from "@ngrx/store";
 import {PostsState} from "../../logic/reducers/posts.reducers";
 import {CarModel} from "../../../profiles/logic/dto/models/car.model";
-import {MyProfileModel} from "../../../profiles/logic/dto/response/my-profile.model";
+import {ProfileService} from "../../../profiles/logic/services/profile.service";
 
 @Component({
   selector: 'app-create-post',
@@ -18,20 +18,19 @@ export class CreatePostComponent implements OnInit {
   formAddress: FormGroup;
   @Input()
   postTypeList = [];
-  @Input()
-  profile: MyProfileModel;
+
   userCarList: CarModel[] = [];
   addNewCar: boolean = false;
   errorMessage: Observable<string>
   validationMessages: ValidationMessageMap;
 
-  constructor(private readonly store: Store<PostsState>, private formBuilder: FormBuilder) {
+  constructor(private readonly store: Store<PostsState>, private formBuilder: FormBuilder, private  profileService: ProfileService) {
 
   }
 
   ngOnInit(): void {
+    this.profileService.getMyProfile().subscribe(me => this.userCarList = me.carsList);
 
-    this.userCarList = this.profile.carsList;
 
     this.formBasic = this.formBuilder.group({
       type: new FormControl('', [Validators.required]),

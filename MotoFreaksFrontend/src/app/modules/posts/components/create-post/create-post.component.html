@@ -64,7 +64,12 @@
       </div>
 
       <div class="col-md-3 col-lg-3">
-        <button type="button" class="add-car" mat-flat-button color="accent" (click)="addCarChange()">Add new car
+        <button type="button" class="add-car"
+                mat-flat-button color="accent" (click)="addCarChange()" *ngIf="!addNewCar">Add new car
+        </button>
+
+        <button type="button" class="add-car"
+                mat-flat-button color="warn" (click)="addCarChange()" *ngIf="addNewCar">Cancel
         </button>
       </div>
 
