@@ -24,12 +24,12 @@ public class PostsController {
         this.postsService = postsService;
     }
 
-    @RequestMapping(path = "/all", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(path = "/get/ALL", method = RequestMethod.GET, produces = "application/json")
     public Object getAll() {
         return postsService.getAll();
     }
 
-    @RequestMapping(path = "/all/type/{type}", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(path = "/get/{type}", method = RequestMethod.GET, produces = "application/json")
     public Object getAllByType(@PathVariable PostType type) {
         return postsService.getAllByType(type);
     }
