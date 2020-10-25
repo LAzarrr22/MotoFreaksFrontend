@@ -1,7 +1,6 @@
 import {Action} from "@ngrx/store";
 import {NewPostModel} from "../dto/request/new-post.model";
 import {PostModel} from "../dto/model/post.model";
-import {PostType} from "../enums/post-type.enum";
 
 
 export const GET_ALL_POST = '[Posts] GET_ALL_POST'
@@ -16,10 +15,6 @@ export const GET_ALL_POST_BY_ID = '[Posts] GET_ALL_POST_BY_ID'
 export const GET_ALL_POST_BY_ID_SUCCESS = '[Posts] GET_ALL_POST_BY_ID_SUCCESS'
 export const GET_ALL_POST_BY_ID_FAIL = '[Posts] GET_ALL_POST_BY_ID_FAIL'
 
-export const GET_ALL_POST_BY_TYPE = '[Posts] GET_ALL_POST_BY_TYPE'
-export const GET_ALL_POST_BY_TYPE_SUCCESS = '[Posts] GET_ALL_POST_BY_TYPE_SUCCESS'
-export const GET_ALL_POST_BY_TYPE_FAIL = '[Posts] GET_ALL_POST_BY_TYPE_FAIL'
-
 export const DELETE_POST = '[Posts] DELETE_POST'
 export const DELETE_POST_SUCCESS = '[Posts] DELETE_POST_SUCCESS'
 export const DELETE_POST_FAIL = '[Posts] DELETE_POST_FAIL'
@@ -32,7 +27,7 @@ export const ADD_POST_FAIL = '[Posts] ADD_POST_FAIL'
 export class GetAllPosts implements Action {
   readonly type = GET_ALL_POST;
 
-  constructor() {
+  constructor(public typeOfPosts: string = 'ALL') {
   }
 }
 
@@ -92,28 +87,6 @@ export class GetAllPostByIdFail implements Action {
   }
 }
 
-
-export class GetAllPostByType implements Action {
-  readonly type = GET_ALL_POST_BY_TYPE;
-
-  constructor(public typePost: PostType) {
-  }
-}
-
-export class GetAllPostByTypeSuccess implements Action {
-  readonly type = GET_ALL_POST_BY_TYPE_SUCCESS;
-
-  constructor(public payload: PostModel[]) {
-  }
-}
-
-export class GetAllPostByTypeFail implements Action {
-  readonly type = GET_ALL_POST_BY_TYPE_FAIL;
-
-  constructor(public payload: string) {
-  }
-}
-
 export class DeletePost implements Action {
   readonly type = DELETE_POST;
 
@@ -166,9 +139,6 @@ export type Actions =
   | GetAllPosts
   | GetAllPostsSuccess
   | GetAllPostsFail
-  | GetAllPostByType
-  | GetAllPostByTypeSuccess
-  | GetAllPostByTypeFail
   | DeletePost
   | DeletePostSuccess
   | DeletePostFail

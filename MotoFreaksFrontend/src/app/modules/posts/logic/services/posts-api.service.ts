@@ -3,7 +3,6 @@ import {NewPostModel} from "../dto/request/new-post.model";
 import {environment} from "../../../../../environments/environment";
 import {Observable} from "rxjs";
 import {PostModel} from "../dto/model/post.model";
-import {PostType} from "../enums/post-type.enum";
 import {Injectable} from "@angular/core";
 
 
@@ -27,8 +26,8 @@ export class PostsApiService {
     return this.httpClient.delete(`${environment.apiUrl}/posts/delete/${id}`);
   }
 
-  getAllPosts(): Observable<PostModel[]> {
-    return this.httpClient.get<PostModel[]>(`${environment.apiUrl}/posts/all`)
+  getAllPosts(type: string): Observable<PostModel[]> {
+    return this.httpClient.get<PostModel[]>(`${environment.apiUrl}/posts/get/${type}`)
   }
 
   getAllMyPosts(): Observable<PostModel[]> {
@@ -39,7 +38,4 @@ export class PostsApiService {
     return this.httpClient.get<PostModel[]>(`${environment.apiUrl}/posts/all/id/${id}`)
   }
 
-  getAllPostsByType(type: PostType): Observable<PostModel[]> {
-    return this.httpClient.get<PostModel[]>(`${environment.apiUrl}/posts/all/type/${type}`)
-  }
 }

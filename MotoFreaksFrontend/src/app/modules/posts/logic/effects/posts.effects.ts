@@ -17,15 +17,11 @@ import {
   GET_ALL_MY_POST,
   GET_ALL_POST,
   GET_ALL_POST_BY_ID,
-  GET_ALL_POST_BY_TYPE,
   GetAllMyPostsFail,
   GetAllMyPostsSuccess,
   GetAllPostById,
   GetAllPostByIdFail,
   GetAllPostByIdSuccess,
-  GetAllPostByType,
-  GetAllPostByTypeFail,
-  GetAllPostByTypeSuccess,
   GetAllPosts,
   GetAllPostsFail,
   GetAllPostsSuccess
@@ -41,8 +37,8 @@ export class PostsEffects {
   @Effect()
   getAllPosts: Observable<Action> = this.action$
     .pipe(ofType(GET_ALL_POST),
-      switchMap(() => {
-        return this.postsApiService.getAllPosts();
+      switchMap((action: GetAllPosts) => {
+        return this.postsApiService.getAllPosts(action.typeOfPosts);
       }),
       switchMap((posts: PostModel[]) => [
         new GetAllPostsSuccess(posts)
@@ -65,22 +61,6 @@ export class PostsEffects {
       ]),
       catchError((error, caught) => {
         this.store$.dispatch(new GetAllPostByIdFail(error.error.message));
-        this.errorService.error(error);
-        return caught;
-      })
-    )
-
-  @Effect()
-  getAllPostsByType: Observable<Action> = this.action$
-    .pipe(ofType(GET_ALL_POST_BY_TYPE),
-      switchMap((action: GetAllPostByType) => {
-        return this.postsApiService.getAllPostsByType(action.typePost);
-      }),
-      switchMap((posts: PostModel[]) => [
-        new GetAllPostByTypeSuccess(posts)
-      ]),
-      catchError((error, caught) => {
-        this.store$.dispatch(new GetAllPostByTypeFail(error.error.message));
         this.errorService.error(error);
         return caught;
       })

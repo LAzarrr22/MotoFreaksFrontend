@@ -4,9 +4,6 @@ import {
   GET_ALL_POST_BY_ID,
   GET_ALL_POST_BY_ID_FAIL,
   GET_ALL_POST_BY_ID_SUCCESS,
-  GET_ALL_POST_BY_TYPE,
-  GET_ALL_POST_BY_TYPE_FAIL,
-  GET_ALL_POST_BY_TYPE_SUCCESS,
   GET_ALL_POST_FAIL,
   GET_ALL_POST_SUCCESS
 } from "../action/posts.action";
@@ -26,10 +23,8 @@ export const INITIAL_STATE: PostsState={
 export function reducer(state: PostsState= INITIAL_STATE, action) {
 switch(action.type){
   case GET_ALL_POST:
-  case GET_ALL_POST_BY_TYPE:
   case GET_ALL_POST_BY_ID:
   case GET_ALL_POST_FAIL:
-  case GET_ALL_POST_BY_TYPE_FAIL:
   case GET_ALL_POST_BY_ID_FAIL:
     return {
       ...state,
@@ -37,7 +32,6 @@ switch(action.type){
     }
 
   case GET_ALL_POST_SUCCESS:
-  case GET_ALL_POST_BY_TYPE_SUCCESS:
   case GET_ALL_POST_BY_ID_SUCCESS:
     return {
       posts:action.payload,
