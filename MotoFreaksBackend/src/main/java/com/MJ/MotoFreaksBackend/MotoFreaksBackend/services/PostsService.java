@@ -50,10 +50,6 @@ public class PostsService {
         return ok(model);
     }
 
-    public Object getMyPosts(String token) {
-        User currentUser = userService.getUserByToken(token);
-        return ok(getPostsById(currentUser.getId()));
-    }
 
     public Object deletePost(String id) {
         Map<Object, Object> model = new HashMap<>();

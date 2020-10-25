@@ -40,12 +40,6 @@ public class PostsController {
         return postsService.addPost(newPost, token);
     }
 
-    @RequestMapping(path = "/my-posts", method = RequestMethod.GET, produces = "application/json")
-    public Object getMyPosts(HttpServletRequest req) {
-        String token = req.getHeader(AuthorizationHeader.HEADER_NAME).replace(AuthorizationHeader.TOKEN_PREFIX, "");
-        return postsService.getMyPosts(token);
-    }
-
     @RequestMapping(path = "/all/id/{id}", method = RequestMethod.GET, produces = "application/json")
     public Object getPostsById(HttpServletRequest req, @PathVariable String id) {
         return postsService.getPostsById(id);
