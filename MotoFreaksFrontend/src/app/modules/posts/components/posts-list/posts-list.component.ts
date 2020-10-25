@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {PostModel} from "../../logic/dto/model/post.model";
 import {UserModel} from "../../../users/logic/dto/response/user-model";
 
@@ -13,6 +13,10 @@ export class PostsListComponent implements OnInit {
   postsList: PostModel[];
   @Input()
   allUsers: UserModel[];
+  @Input()
+  myId: string;
+  @Output()
+  deletePostEvent = new EventEmitter<string>();
 
   constructor() {
   }
@@ -20,11 +24,9 @@ export class PostsListComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getReceiverName(id: string): string {
-    return this.allUsers.find(user => user.id === id).name;
+
+  deletePost(id: string) {
+    this.deletePostEvent.emit(id);
   }
 
-  getReceiverLastName(id: string): string {
-    return this.allUsers.find(user => user.id === id).lastName;
-  }
 }

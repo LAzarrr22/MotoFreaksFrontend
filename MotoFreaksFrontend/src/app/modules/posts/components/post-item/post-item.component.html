@@ -1,41 +1,29 @@
-<div class="context" (click)="goToProfile()">
+<div class="context">
   <div class="border mat-elevation-z18">
 
-    <ng-container *ngIf="post.type=='ADVICE'">
-      <div class="row pb-1 pl-3 type">
-        <div class="col">
+    <div class="row pb-1 pl-3 type">
+      <div class="col-11">
+        <ng-container *ngIf="post.type=='ADVICE'">
           <mat-icon>question_answer</mat-icon>
-          {{post.type}}: <i>{{post.title}}</i>
-        </div>
-      </div>
-    </ng-container>
-
-    <ng-container *ngIf="post.type=='INFO'">
-      <div class="row pb-1 pl-3 type">
-        <div class="col">
+        </ng-container>
+        <ng-container *ngIf="post.type=='INFO'">
           <mat-icon>info</mat-icon>
-          {{post.type}}: <i>{{post.title}}</i>
-        </div>
-      </div>
-    </ng-container>
-
-    <ng-container *ngIf="post.type=='BORROW'">
-      <div class="row pb-1 pl-3 type">
-        <div class="col">
+        </ng-container>
+        <ng-container *ngIf="post.type=='BORROW'">
           <mat-icon>compare_arrows</mat-icon>
-          {{post.type}}: <i>{{post.title}}</i>
-        </div>
-      </div>
-    </ng-container>
-
-    <ng-container *ngIf="post.type=='ROAD_HELP'">
-      <div class="row pb-1 pl-3 type">
-        <div class="col">
+        </ng-container>
+        <ng-container *ngIf="post.type=='ROAD_HELP'">
           <mat-icon>handyman</mat-icon>
-          {{post.type}}: <i>{{post.title}}</i>
-        </div>
+        </ng-container>
+
+        {{post.type}}: <i>{{post.title}}</i>
       </div>
-    </ng-container>
+      <ng-container *ngIf="post.creatorId==myId">
+        <div class="col-1">
+          <mat-icon class="delete-icon" (click)="deletePost()">delete</mat-icon>
+        </div>
+      </ng-container>
+    </div>
 
 
     <div class="row pl-3 pb-1 header">
@@ -59,14 +47,14 @@
       </div>
     </div>
 
-    <div class="row pt-2 pb-3 pl-5 user-names">
+    <div class="row pt-2 pb-3 pl-5 user-names to-click" (click)="goToProfile()">
       <div class="col">
         {{authorName}} {{authorLastName}}
       </div>
     </div>
 
 
-    <div class="row pb-4 pl-4 ">
+    <div class="row pb-4 pl-4 to-click" (click)="goToProfile()">
       <div>
         <div class="col">
           {{post.body}}

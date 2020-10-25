@@ -4,8 +4,11 @@
 .context {
   padding: 20px 50px 20px 50px;
   color: $custom-white-dark;
-  cursor: pointer;
   min-width: 250px;
+}
+
+.to-click {
+  cursor: pointer;
 }
 
 .header {
@@ -26,4 +29,9 @@
 
 .type {
   font-size: $font-size-medium+2;
+}
+
+.delete-icon {
+  color: $custom-warn;
+  cursor: pointer;
 }

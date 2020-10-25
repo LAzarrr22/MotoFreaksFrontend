@@ -18,7 +18,7 @@ export class FilterPostsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.postTypeList = ['All', ...this.postTypeList]
+    this.postTypeList = ['ALL', ...this.postTypeList]
 
     this.form = this.formBuilder.group({
       type: new FormControl(''),
@@ -26,15 +26,10 @@ export class FilterPostsComponent implements OnInit {
   }
 
   applyFilter() {
-
-
   }
 
   filterType() {
-    if (this.form.controls.type.value === 'All') {
-      this.filterTypeEvent.emit(null);
-    } else {
       this.filterTypeEvent.emit(PostType[this.form.controls.type.value])
-    }
+
   }
 }
