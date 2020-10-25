@@ -30,10 +30,6 @@ export class PostsApiService {
     return this.httpClient.get<PostModel[]>(`${environment.apiUrl}/posts/get/${type}`)
   }
 
-  getAllMyPosts(): Observable<PostModel[]> {
-    return this.httpClient.get<PostModel[]>(`${environment.apiUrl}/posts/my-posts`)
-  }
-
   getAllPostsById(id: string): Observable<PostModel[]> {
     return this.httpClient.get<PostModel[]>(`${environment.apiUrl}/posts/all/id/${id}`)
   }

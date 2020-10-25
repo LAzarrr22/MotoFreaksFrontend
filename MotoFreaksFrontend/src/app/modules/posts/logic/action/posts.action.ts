@@ -7,10 +7,6 @@ export const GET_ALL_POST = '[Posts] GET_ALL_POST'
 export const GET_ALL_POST_SUCCESS = '[Posts] GET_ALL_POST_SUCCESS'
 export const GET_ALL_POST_FAIL = '[Posts] GET_ALL_POST_FAIL'
 
-export const GET_ALL_MY_POST = '[Posts] GET_ALL_MY_POST'
-export const GET_ALL_MY_POST_SUCCESS = '[Posts] GET_ALL_MY_POST_SUCCESS'
-export const GET_ALL_MY_POST_FAIL = '[Posts] GET_ALL_MY_POST_FAIL'
-
 export const GET_ALL_POST_BY_ID = '[Posts] GET_ALL_POST_BY_ID'
 export const GET_ALL_POST_BY_ID_SUCCESS = '[Posts] GET_ALL_POST_BY_ID_SUCCESS'
 export const GET_ALL_POST_BY_ID_FAIL = '[Posts] GET_ALL_POST_BY_ID_FAIL'
@@ -40,27 +36,6 @@ export class GetAllPostsSuccess implements Action {
 
 export class GetAllPostsFail implements Action {
   readonly type = GET_ALL_POST_FAIL;
-
-  constructor(public payload: string) {
-  }
-}
-
-export class GetAllMyPosts implements Action {
-  readonly type = GET_ALL_MY_POST;
-
-  constructor() {
-  }
-}
-
-export class GetAllMyPostsSuccess implements Action {
-  readonly type = GET_ALL_MY_POST_SUCCESS;
-
-  constructor(public payload: PostModel[]) {
-  }
-}
-
-export class GetAllMyPostsFail implements Action {
-  readonly type = GET_ALL_MY_POST_FAIL;
 
   constructor(public payload: string) {
   }
@@ -130,9 +105,6 @@ export class AddPostFail implements Action {
 }
 
 export type Actions =
-  | GetAllMyPosts
-  | GetAllMyPostsSuccess
-  | GetAllMyPostsFail
   | GetAllPostById
   | GetAllPostByIdSuccess
   | GetAllPostByIdFail

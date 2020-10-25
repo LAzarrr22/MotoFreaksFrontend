@@ -14,11 +14,8 @@ import {
   DeletePost,
   DeletePostFail,
   DeletePostSuccess,
-  GET_ALL_MY_POST,
   GET_ALL_POST,
   GET_ALL_POST_BY_ID,
-  GetAllMyPostsFail,
-  GetAllMyPostsSuccess,
   GetAllPostById,
   GetAllPostByIdFail,
   GetAllPostByIdSuccess,
@@ -61,22 +58,6 @@ export class PostsEffects {
       ]),
       catchError((error, caught) => {
         this.store$.dispatch(new GetAllPostByIdFail(error.error.message));
-        this.errorService.error(error);
-        return caught;
-      })
-    )
-
-  @Effect()
-  getAllMyPosts: Observable<Action> = this.action$
-    .pipe(ofType(GET_ALL_MY_POST),
-      switchMap(() => {
-        return this.postsApiService.getAllMyPosts();
-      }),
-      switchMap((posts: PostModel[]) => [
-        new GetAllMyPostsSuccess(posts)
-      ]),
-      catchError((error, caught) => {
-        this.store$.dispatch(new GetAllMyPostsFail(error.error.message));
         this.errorService.error(error);
         return caught;
       })
