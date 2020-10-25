@@ -24,6 +24,7 @@ export class AllUsersComponent implements OnInit {
     this.menuService.activeRoute.next(ActiveRoute.ALL_USERS);
     this.users = this.usersService.getAllUsers();
     this.profileService.getMyProfile().pipe(first()).subscribe(me => this.meId = me.id)
+    window.scrollTo(0, 0)
   }
 
 }

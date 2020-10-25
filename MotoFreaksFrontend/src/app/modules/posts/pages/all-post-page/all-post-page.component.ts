@@ -40,6 +40,7 @@ export class AllPostPageComponent implements OnInit {
     this.users = this.userService.getAllUsers();
     this.postTypeList = Object.keys(this.postTypes);
     this.profileService.getMyProfile().subscribe(profile => this.myId = profile.id)
+    window.scrollTo(0, 0)
   }
 
   addNew() {
@@ -61,7 +62,7 @@ export class AllPostPageComponent implements OnInit {
   }
 
   refreshPosts() {
-    if (this.currentFilterType) {
+    if (this.currentFilterType && !this.postsForProfile) {
       this.postsListObs = this.postsService.getAllPosts(this.currentFilterType);
     }
   }

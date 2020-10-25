@@ -29,6 +29,7 @@ export class ProfileMeComponent implements OnInit {
     this.friendsList = this.profileService.getMyFriends();
     this.myRoles = this.authService.getCurrentRoles();
     this.menuService.activeRoute.next(ActiveRoute.MY_PROFILE);
+    window.scrollTo(0, 0)
   }
 
 }

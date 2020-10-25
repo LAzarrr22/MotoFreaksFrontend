@@ -30,6 +30,7 @@ export class MessagesConversationComponent implements OnInit {
     if (this.messages != undefined) {
       this.messageService.readMessages(this.userId);
     }
+    window.scrollTo(0, 0)
   }
 
   getReceiverName(): string {

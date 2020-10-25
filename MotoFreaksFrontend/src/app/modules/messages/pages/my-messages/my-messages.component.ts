@@ -23,6 +23,7 @@ export class MyMessagesComponent implements OnInit {
     this.menuService.activeRoute.next('')
     this.messages = this.messageService.getAllMessages();
     this.users = this.userService.getAllUsers();
+    window.scrollTo(0, 0)
   }
 
 }

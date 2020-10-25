@@ -17,6 +17,7 @@ export class CreatePostPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    window.scrollTo(0, 0)
     this.menuService.activeRoute.next(ActiveRoute.POSTS)
     this.postTypeList = Object.keys(this.postTypes);
 

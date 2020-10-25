@@ -22,6 +22,7 @@ export class ProfileFriendsComponent implements OnInit {
     this.menuService.activeRoute.next(ActiveRoute.ALL_USERS)
     const userId = this.route.snapshot.paramMap.get('id');
     this.getUser(userId);
+    window.scrollTo(0, 0)
 
   }
 
