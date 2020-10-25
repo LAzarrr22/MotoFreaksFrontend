@@ -21,10 +21,11 @@ import {PostsRoutingModule} from "./posts-routing.module";
 import {MatIconModule} from "@angular/material/icon";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {AppCommonModule} from "../common/common.module";
+import {FilterPostsComponent} from "./components/filter-posts/filter-posts.component";
 
 
 @NgModule({
-  declarations: [PostsListComponent, PostItemComponent, CreatePostComponent, CreatePostPageComponent, AllPostPageComponent],
+  declarations: [PostsListComponent, PostItemComponent, CreatePostComponent, CreatePostPageComponent, AllPostPageComponent, FilterPostsComponent],
   imports: [
     CommonModule,
     PostsRoutingModule,

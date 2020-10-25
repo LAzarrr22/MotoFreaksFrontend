@@ -1,3 +1,17 @@
-<p>all-post-page works!</p>
+<div class="row create-button">
+  <div class="col">
+    <div (click)="addNew()">Create new post</div>
+  </div>
+</div>
 
-<div (click)="addNew()">ADD</div>
+<div class="row create-button">
+  <div class="col">
+    <div (click)="openFilter()">Filter</div>
+  </div>
+</div>
+
+<ng-container *ngIf="filterOpen">
+  <app-filter-posts></app-filter-posts>
+</ng-container>
+
+<app-posts-list [postsList]="postsListObs| async" [allUsers]="users | async"></app-posts-list>

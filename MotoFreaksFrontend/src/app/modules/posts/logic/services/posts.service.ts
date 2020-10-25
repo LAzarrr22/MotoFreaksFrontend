@@ -9,8 +9,6 @@ import {getPosts} from "../reducers/posts.reducers";
 export class PostsService {
 
   constructor(private store: Store) {
-
-
   }
 
   getAllPosts(): Observable<PostModel[]> {

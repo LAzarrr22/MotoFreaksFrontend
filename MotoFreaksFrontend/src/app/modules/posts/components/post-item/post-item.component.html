@@ -1,1 +1,81 @@
-<p>post-item works!</p>
+<div class="context" (click)="goToProfile()">
+  <div class="border mat-elevation-z18">
+
+    <ng-container *ngIf="post.type=='ADVICE'">
+      <div class="row pb-1 pl-3 type">
+        <div class="col">
+          <mat-icon>question_answer</mat-icon>
+          {{post.type}}: <i>{{post.title}}</i>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="post.type=='INFO'">
+      <div class="row pb-1 pl-3 type">
+        <div class="col">
+          <mat-icon>info</mat-icon>
+          {{post.type}}: <i>{{post.title}}</i>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="post.type=='BORROW'">
+      <div class="row pb-1 pl-3 type">
+        <div class="col">
+          <mat-icon>compare_arrows</mat-icon>
+          {{post.type}}: <i>{{post.title}}</i>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="post.type=='ROAD_HELP'">
+      <div class="row pb-1 pl-3 type">
+        <div class="col">
+          <mat-icon>handyman</mat-icon>
+          {{post.type}}: <i>{{post.title}}</i>
+        </div>
+      </div>
+    </ng-container>
+
+
+    <div class="row pl-3 pb-1 header">
+      <div class="col">
+        <mat-icon>calendar_today</mat-icon>
+        {{post.createdDate | date: 'medium'}}
+      </div>
+    </div>
+
+    <div class="row pl-3 pb-1 header">
+      <div class="col">
+        <mat-icon>location_on</mat-icon>
+        {{post.location.country}}, {{post.location.city}}, {{post.location.street}}
+      </div>
+    </div>
+
+    <div class="row pl-3 pb-1 header">
+      <div class="col">
+        <mat-icon>directions_car</mat-icon>
+        {{post.car.company}}, {{post.car.model}}, {{post.car.generation}}
+      </div>
+    </div>
+
+    <div class="row pt-2 pb-3 pl-5 user-names">
+      <div class="col">
+        {{authorName}} {{authorLastName}}
+      </div>
+    </div>
+
+
+    <div class="row pb-4 pl-4 ">
+      <div>
+        <div class="col">
+          {{post.body}}
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+

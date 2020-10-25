@@ -1,1 +1,4 @@
-<p>posts-list works!</p>
+<ng-container *ngFor="let post of postsList">
+  <app-post-item [post]="post" [authorName]="getReceiverName(post.creatorId)"
+                 [authorLastName]="getReceiverLastName(post.creatorId)"></app-post-item>
+</ng-container>

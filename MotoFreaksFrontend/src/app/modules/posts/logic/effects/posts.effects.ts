@@ -26,6 +26,7 @@ import {
   GetAllPostByType,
   GetAllPostByTypeFail,
   GetAllPostByTypeSuccess,
+  GetAllPosts,
   GetAllPostsFail,
   GetAllPostsSuccess
 } from "../action/posts.action";
@@ -108,7 +109,8 @@ export class PostsEffects {
         return this.postsApiService.addPost(action.newPost);
       }),
       switchMap((response: string) => [
-        new AddPostSuccess(response)
+        new AddPostSuccess(response),
+        new GetAllPosts()
       ]),
       catchError((error, caught) => {
         this.store$.dispatch(new AddPostFail(error.error.message));
