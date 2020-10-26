@@ -9,13 +9,7 @@ import {UsersService} from "./logic/services/users.service";
 import {AllUsersComponent} from './pages/all-users/all-users.component';
 import {UsersRoutingModule} from "./users-routing.module";
 import {AllUserListComponent} from './components/all-user-list/all-user-list.component';
-import {MatTableModule} from "@angular/material/table";
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatInputModule} from "@angular/material/input";
-import {MatPaginatorModule} from "@angular/material/paginator";
-import {MatSortModule} from "@angular/material/sort";
-import {MatDividerModule} from "@angular/material/divider";
-import {MatIconModule} from "@angular/material/icon";
+import {AngularMaterialModule} from "../../shared/angular-material.module";
 
 
 @NgModule({
@@ -25,13 +19,7 @@ import {MatIconModule} from "@angular/material/icon";
     StoreModule.forFeature('users', reducer),
     EffectsModule.forFeature([UserEffects]),
     UsersRoutingModule,
-    MatTableModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatDividerModule,
-    MatIconModule,
+    AngularMaterialModule
   ],
   providers: [
     UserApiService,

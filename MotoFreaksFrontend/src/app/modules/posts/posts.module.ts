@@ -9,19 +9,13 @@ import {PostsService} from "./logic/services/posts.service";
 import {PostsListComponent} from './components/posts-list/posts-list.component';
 import {PostItemComponent} from './components/post-item/post-item.component';
 import {CreatePostComponent} from './components/create-post/create-post.component';
-import {ReactiveFormsModule} from "@angular/forms";
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatInputModule} from "@angular/material/input";
-import {MatSelectModule} from "@angular/material/select";
-import {MatButtonModule} from "@angular/material/button";
 import {ProfileModule} from "../profiles/profile.module";
 import {CreatePostPageComponent} from './pages/create-post-page/create-post-page.component';
 import {AllPostPageComponent} from './pages/all-post-page/all-post-page.component';
 import {PostsRoutingModule} from "./posts-routing.module";
-import {MatIconModule} from "@angular/material/icon";
-import {MatTooltipModule} from "@angular/material/tooltip";
 import {AppCommonModule} from "../common/common.module";
 import {FilterPostsComponent} from "./components/filter-posts/filter-posts.component";
+import {AngularMaterialModule} from "../../shared/angular-material.module";
 
 
 @NgModule({
@@ -31,14 +25,8 @@ import {FilterPostsComponent} from "./components/filter-posts/filter-posts.compo
     PostsRoutingModule,
     StoreModule.forFeature('posts', reducer),
     EffectsModule.forFeature([PostsEffects]),
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatButtonModule,
+    AngularMaterialModule,
     ProfileModule,
-    MatIconModule,
-    MatTooltipModule,
     AppCommonModule
   ],
   exports: [
