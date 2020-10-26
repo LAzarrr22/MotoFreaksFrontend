@@ -18,19 +18,17 @@ import {SectionMyPersonalComponent} from "./components/profile-sections/section-
 import {SectionAddressComponent} from "./components/profile-sections/section-address/section-address.component";
 import {SectionContactComponent} from "./components/profile-sections/section-contact/section-contact.component";
 import {SectionFriendsComponent} from "./components/profile-sections/section-friends/section-friends.component";
-import {SectionCarsComponent} from "./components/profile-sections/section-cars/section-cars.component";
-import {CarItemComponent} from "./components/profile-sections/section-cars/car-item/car-item.component";
-import {AddEditCarComponent} from "./components/profile-sections/section-cars/add-edit-car/add-edit-car.component";
 import {UsersModule} from "../users/users.module";
 import {UserProfileAllDataComponent} from './components/user-profile-all-data/user-profile-all-data.component';
 import {SectionUserPersonalComponent} from './components/profile-sections/section-user-personal/section-user-personal.component';
 import {MessagesModule} from "../messages/messages.module";
 import {SectionRolesComponent} from './components/profile-sections/section-roles/section-roles.component';
 import {AngularMaterialModule} from "../../shared/angular-material.module";
+import {SharedSectionCarModule} from "./components/profile-sections/section-cars/shared-section-car.module";
 
 
 @NgModule({
-  declarations: [ProfileMeComponent, ProfileFriendsComponent, TopBarUserInfoComponent, SectionMyPersonalComponent, SectionCarsComponent, SectionAddressComponent, SectionContactComponent, SectionFriendsComponent, MyProfileAllDataComponent, CarItemComponent, AddEditCarComponent, UserProfileAllDataComponent, SectionUserPersonalComponent, SectionRolesComponent],
+  declarations: [ProfileMeComponent, ProfileFriendsComponent, TopBarUserInfoComponent, SectionMyPersonalComponent, SectionAddressComponent, SectionContactComponent, SectionFriendsComponent, MyProfileAllDataComponent, UserProfileAllDataComponent, SectionUserPersonalComponent, SectionRolesComponent],
   imports: [
     CommonModule,
     ProfileRoutingModule,
@@ -42,10 +40,10 @@ import {AngularMaterialModule} from "../../shared/angular-material.module";
     CarsModule,
     UsersModule,
     MessagesModule,
-
+    SharedSectionCarModule
   ],
   exports: [
-    ProfileMeComponent, ProfileFriendsComponent, TopBarUserInfoComponent, AddEditCarComponent
+    ProfileMeComponent, ProfileFriendsComponent, TopBarUserInfoComponent
   ],
   providers: [
     MyProfileApiService,

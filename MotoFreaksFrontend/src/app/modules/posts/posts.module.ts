@@ -9,13 +9,13 @@ import {PostsService} from "./logic/services/posts.service";
 import {PostsListComponent} from './components/posts-list/posts-list.component';
 import {PostItemComponent} from './components/post-item/post-item.component';
 import {CreatePostComponent} from './components/create-post/create-post.component';
-import {ProfileModule} from "../profiles/profile.module";
 import {CreatePostPageComponent} from './pages/create-post-page/create-post-page.component';
 import {AllPostPageComponent} from './pages/all-post-page/all-post-page.component';
 import {PostsRoutingModule} from "./posts-routing.module";
 import {AppCommonModule} from "../common/common.module";
 import {FilterPostsComponent} from "./components/filter-posts/filter-posts.component";
 import {AngularMaterialModule} from "../../shared/angular-material.module";
+import {SharedSectionCarModule} from "../profiles/components/profile-sections/section-cars/shared-section-car.module";
 
 
 @NgModule({
@@ -26,8 +26,8 @@ import {AngularMaterialModule} from "../../shared/angular-material.module";
     StoreModule.forFeature('posts', reducer),
     EffectsModule.forFeature([PostsEffects]),
     AngularMaterialModule,
-    ProfileModule,
-    AppCommonModule
+    AppCommonModule,
+    SharedSectionCarModule
   ],
   exports: [
     CreatePostComponent,

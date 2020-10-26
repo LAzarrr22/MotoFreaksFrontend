@@ -27,7 +27,9 @@ export class AllPostPageComponent implements OnInit {
   currentFilterType: PostType;
 
   @Input()
-  onlyMyPosts: boolean = false;
+  postsForProfile: boolean = false;
+  @Input()
+  idProfileToShow: boolean = false;
 
   constructor(private router: Router, private menuService: MenuService,
               private postsService: PostsService, private userService: UsersService,
