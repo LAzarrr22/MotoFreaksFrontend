@@ -3,6 +3,7 @@ package com.MJ.MotoFreaksBackend.MotoFreaksBackend.services;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections.CarCompany;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.repository.CarCompanyRepository;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.resource.requests.NewCarCompany;
+import com.google.common.collect.Ordering;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -100,16 +101,16 @@ public class CarsService {
         carRepository.findAll().forEach(carCompanyModel -> {
             companies.add(carCompanyModel.getCompany());
         });
-        return ok(companies);
+        return ok(Ordering.natural().sortedCopy(companies));
     }
 
     public Object getModels(String company) {
-        return ok(getCompanyByName(company).getModelList().keySet());
+        return ok(Ordering.natural().sortedCopy(getCompanyByName(company).getModelList().keySet()));
     }
 
     public Object getGenerations(String company, String model) {
 
-        return ok(getCompanyByName(company).getModelList().get(model));
+        return ok(Ordering.natural().sortedCopy(getCompanyByName(company).getModelList().get(model)));
     }
 }
 
