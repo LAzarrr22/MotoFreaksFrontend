@@ -14,7 +14,7 @@ export class CommonComponentsService {
   }
 
   error(error: any) {
-    if (error.status === 0) {
+    if (error.status === 0 || error.status === 500) {
       this.store.dispatch(new UserLogout());
       this.router.navigate([AppPath.SERVICE_NOT_AVAILABLE])
       this.menuService.enabled.next('false')
