@@ -31,7 +31,8 @@ import {SharedSectionCarModule} from "../profiles/components/profile-sections/se
   ],
   exports: [
     CreatePostComponent,
-    CreatePostPageComponent
+    CreatePostPageComponent,
+    AllPostPageComponent
   ],
   providers: [
     PostsApiService,

@@ -1,11 +1,12 @@
-<div class="row create-button">
-  <div class="col-3">
+<div class="personal-title p-3">Posts</div>
+<div class="row create-button" *ngIf="myId==idProfileToShow || !postsForProfile">
+  <div class="col">
     <div (click)="addNew()">Create new post</div>
   </div>
 </div>
 
 <div class="row section-filter">
-  <div class="col-3">
+  <div class="col">
     <div (click)="openFilter()">
       <mat-icon *ngIf="!filterOpen">keyboard_arrow_down</mat-icon>
       <mat-icon *ngIf="filterOpen">keyboard_arrow_up</mat-icon>

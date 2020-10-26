@@ -29,7 +29,7 @@ export class AllPostPageComponent implements OnInit {
   @Input()
   postsForProfile: boolean = false;
   @Input()
-  idProfileToShow: boolean = false;
+  idProfileToShow: string;
 
   constructor(private router: Router, private menuService: MenuService,
               private postsService: PostsService, private userService: UsersService,
@@ -37,12 +37,18 @@ export class AllPostPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.menuService.activeRoute.next(ActiveRoute.POSTS)
-    this.postsListObs = this.postsService.getAllPosts();
-    this.users = this.userService.getAllUsers();
     this.postTypeList = Object.keys(this.postTypes);
     this.profileService.getMyProfile().subscribe(profile => this.myId = profile.id)
-    window.scrollTo(0, 0)
+    this.users = this.userService.getAllUsers();
+
+    if (!this.postsForProfile) {
+      this.menuService.activeRoute.next(ActiveRoute.POSTS)
+      this.postsListObs = this.postsService.getAllPosts();
+      window.scrollTo(0, 0)
+    } else {
+      this.postsListObs = this.postsService.getAllPostById(this.idProfileToShow);
+    }
+
   }
 
   addNew() {
@@ -55,7 +61,10 @@ export class AllPostPageComponent implements OnInit {
 
   deletePost(id: string) {
     this.postsService.deletePost(id)
-    this.refreshPosts();
+    setTimeout(() => {
+      this.refreshPosts();
+    }, 500)
+
   }
 
   filterType(type: PostType) {
@@ -64,8 +73,10 @@ export class AllPostPageComponent implements OnInit {
   }
 
   refreshPosts() {
-    if (this.currentFilterType && !this.postsForProfile) {
+    if (!this.postsForProfile) {
       this.postsListObs = this.postsService.getAllPosts(this.currentFilterType);
+    } else {
+      this.postsListObs = this.postsService.getAllPostById(this.idProfileToShow);
     }
   }
 }

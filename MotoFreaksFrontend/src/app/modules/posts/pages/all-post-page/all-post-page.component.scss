@@ -1,4 +1,5 @@
 @import "src/styles";
+@import "~bootstrap";
 
 .create-button {
   color: $custom-blue;
@@ -16,3 +17,11 @@
   cursor: pointer;
   width: fit-content;
 }
+
+.personal-title {
+  color: $custom-white;
+  padding-bottom: 20px;
+  font-size: $font-size-Xbig;
+  font-weight: bold;
+}
+

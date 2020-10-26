@@ -25,6 +25,7 @@ import {MessagesModule} from "../messages/messages.module";
 import {SectionRolesComponent} from './components/profile-sections/section-roles/section-roles.component';
 import {AngularMaterialModule} from "../../shared/angular-material.module";
 import {SharedSectionCarModule} from "./components/profile-sections/section-cars/shared-section-car.module";
+import {PostsModule} from "../posts/posts.module";
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import {SharedSectionCarModule} from "./components/profile-sections/section-cars
     CarsModule,
     UsersModule,
     MessagesModule,
-    SharedSectionCarModule
+    SharedSectionCarModule,
+    PostsModule
   ],
   exports: [
     ProfileMeComponent, ProfileFriendsComponent, TopBarUserInfoComponent

@@ -3,7 +3,7 @@
   <mat-divider></mat-divider>
   <app-section-my-personal [profile]="profile"></app-section-my-personal>
   <mat-divider></mat-divider>
-    <app-section-roles [roles]="myRoles" [myProfile]="true"></app-section-roles>
+  <app-section-roles [roles]="myRoles" [myProfile]="true"></app-section-roles>
   <mat-divider></mat-divider>
   <app-section-address [address]="profile.address" [myProfile]="true"></app-section-address>
   <mat-divider></mat-divider>
@@ -12,4 +12,6 @@
   <app-section-cars [cars]="profile.carsList" [myProfile]="true"></app-section-cars>
   <mat-divider></mat-divider>
   <app-section-friends [friendsList]="friends" [myProfile]="true"></app-section-friends>
+  <mat-divider></mat-divider>
+  <app-all-post-page [idProfileToShow]="profile.id" [postsForProfile]="true"></app-all-post-page>
 </div>
