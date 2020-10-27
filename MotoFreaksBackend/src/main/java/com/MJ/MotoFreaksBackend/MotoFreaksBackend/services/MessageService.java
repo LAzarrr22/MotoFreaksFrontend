@@ -87,6 +87,6 @@ public class MessageService {
             allMessages.add(new MessageData(key, currentUser.getMessages().get(key).get(currentUser.getMessages().get(key).size() - 1).getCreatedDate(), currentUser.getMessages().get(key)));
         });
 
-        return ok(allMessages.stream().sorted(Comparator.comparing(MessageData::getLastMessage).reversed()).collect(Collectors.toList()));
+        return ok(allMessages.stream().sorted(Comparator.comparing(MessageData::getLastMessageDate).reversed()).collect(Collectors.toList()));
     }
 }

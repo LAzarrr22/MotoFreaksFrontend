@@ -13,6 +13,6 @@ import java.util.List;
 @NoArgsConstructor
 public class MessageData {
     private String id;
-    private Date lastMessage;
+    private Date lastMessageDate;
     private List<Message> messages;
 }
