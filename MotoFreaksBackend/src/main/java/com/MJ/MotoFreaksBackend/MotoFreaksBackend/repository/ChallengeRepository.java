@@ -10,9 +10,6 @@ import java.util.Optional;
 @Repository
 public interface ChallengeRepository extends MongoRepository<Challenge, String> {
 
-    @Query("{'creatorUserName': ?0}")
-    Optional<Challenge> findByUsername(String username);
-
     @Query("{'name': ?0}")
     Optional<Challenge> findByName(String name);
 

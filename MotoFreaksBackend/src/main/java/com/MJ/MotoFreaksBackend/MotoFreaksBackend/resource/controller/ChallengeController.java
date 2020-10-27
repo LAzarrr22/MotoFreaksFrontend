@@ -42,12 +42,12 @@ public class ChallengeController {
     }
 
     @RequestMapping(path = "/get/findBy/id/{id}", method = RequestMethod.GET, produces = "application/json")
-    public Object findById(@PathVariable("id") String id) {
+    public Object findById(@PathVariable String id) {
         return challengeService.findById(id);
     }
 
     @RequestMapping(path = "/get/check/exists/{name}", method = RequestMethod.GET, produces = "application/json")
-    public Object isExists(@PathVariable("name") String name) {
+    public Object isExists(@PathVariable String name) {
         return challengeService.isExistByName(name);
     }
 }

@@ -64,8 +64,8 @@ public class ChallengeService {
     }
 
     public Object findByUser(String id) {
-        Optional<Challenge> optionalChallenge = challengeRepository.findById(id);
-        return optionalChallenge.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Challenge not found"));
+        List<Challenge> findChallengeList = challengeRepository.findAll().stream().filter(challenge -> challenge.getCreatorId().equals(id)).collect(Collectors.toList());
+        return findChallengeList.isEmpty() ? new ResponseStatusException(HttpStatus.NOT_FOUND, "Challenge not found") : findChallengeList;
     }
 
     public Object findById(String id) {
