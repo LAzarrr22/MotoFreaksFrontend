@@ -9,5 +9,5 @@ export class ChallengeModel {
   model: string
   generation: string
   creatorId: string
-  QAList: QuestionAnswer[];
+  qaList: QuestionAnswer[];
 }
