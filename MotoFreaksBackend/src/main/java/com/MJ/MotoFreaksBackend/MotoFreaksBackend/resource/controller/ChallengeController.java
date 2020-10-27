@@ -28,7 +28,7 @@ public class ChallengeController {
     }
 
     @RequestMapping(path = "/get/all", method = RequestMethod.GET, produces = "application/json")
-    public Object findByCar() {
+    public Object findAll() {
         return challengeService.getAll();
     }
 
@@ -42,9 +42,9 @@ public class ChallengeController {
         return challengeService.findByUser(id);
     }
 
-    @RequestMapping(path = "/get/findBy/id/{id}", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(path = "/get/questions/id/{id}", method = RequestMethod.GET, produces = "application/json")
     public Object findById(@PathVariable String id) {
-        return challengeService.findById(id);
+        return challengeService.getQuestions(id);
     }
 
     @RequestMapping(path = "/get/check/exists/{name}", method = RequestMethod.GET, produces = "application/json")

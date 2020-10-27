@@ -3,6 +3,7 @@ package com.MJ.MotoFreaksBackend.MotoFreaksBackend.services;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections.Challenge;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.repository.ChallengeRepository;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.resource.requests.NewChallengeModel;
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.resource.response.ChallengeDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -60,12 +61,12 @@ public class ChallengeService {
         if (challengeList.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Challenge not found");
         }
-        return sortByName(challengeList, true);
+        return sortByName(mappingToDtoChallenges(challengeList), true);
     }
 
     public Object findByUser(String id) {
         List<Challenge> findChallengeList = challengeRepository.findAll().stream().filter(challenge -> challenge.getCreatorId().equals(id)).collect(Collectors.toList());
-        return findChallengeList.isEmpty() ? new ResponseStatusException(HttpStatus.NOT_FOUND, "Challenge not found") : findChallengeList;
+        return findChallengeList.isEmpty() ? new ResponseStatusException(HttpStatus.NOT_FOUND, "Challenge not found") : mappingToDtoChallenges(findChallengeList);
     }
 
     public Object findById(String id) {
@@ -82,14 +83,28 @@ public class ChallengeService {
 
     public Object getAll() {
         List<Challenge> challengeList = challengeRepository.findAll();
-        return sortByName(challengeList, true);
+        return sortByName(mappingToDtoChallenges(challengeList), true);
     }
 
-    private List<Challenge> sortByName(List<Challenge> mixList, boolean direction) {
+    private List<ChallengeDto> sortByName(List<ChallengeDto> mixList, boolean direction) {
         if (direction) {
-            return mixList.stream().sorted(Comparator.comparing(Challenge::getName)).collect(Collectors.toList());
+            return mixList.stream().sorted(Comparator.comparing(ChallengeDto::getName)).collect(Collectors.toList());
         }
-        return mixList.stream().sorted(Comparator.comparing(Challenge::getName).reversed()).collect(Collectors.toList());
+        return mixList.stream().sorted(Comparator.comparing(ChallengeDto::getName).reversed()).collect(Collectors.toList());
 
+    }
+
+    private List<ChallengeDto> mappingToDtoChallenges(List<Challenge> challengeList) {
+        List<ChallengeDto> challengeDtoList = new ArrayList<>();
+        challengeList.forEach(challenge -> {
+            challengeDtoList.add(new ChallengeDto(challenge.getId(), challenge.getName(), challenge.getCompany(), challenge.getModel()
+                    , challenge.getGeneration(), challenge.getCreatorId()));
+        });
+        return challengeDtoList;
+    }
+
+    public Object getQuestions(String id) {
+        Optional<Challenge> optionalChallenge = challengeRepository.findById(id);
+        return optionalChallenge.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Challenge not found")).getQaList();
     }
 }
