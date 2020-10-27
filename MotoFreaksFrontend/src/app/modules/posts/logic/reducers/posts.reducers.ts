@@ -24,18 +24,23 @@ export function reducer(state: PostsState= INITIAL_STATE, action) {
 switch(action.type){
   case GET_ALL_POST:
   case GET_ALL_POST_BY_ID:
-  case GET_ALL_POST_FAIL:
-  case GET_ALL_POST_BY_ID_FAIL:
     return {
       ...state,
-      loading:true
+      loading: true
     }
 
   case GET_ALL_POST_SUCCESS:
   case GET_ALL_POST_BY_ID_SUCCESS:
     return {
-      posts:action.payload,
-      loading:true
+      posts: action.payload,
+      loading: false
+    }
+
+  case GET_ALL_POST_FAIL:
+  case GET_ALL_POST_BY_ID_FAIL:
+    return {
+      ...state,
+      loading: false
     }
 
   default:
