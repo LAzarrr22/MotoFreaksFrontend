@@ -11,5 +11,5 @@ public class NewChallengeModel {
     private String company;
     private String model;
     private String generation;
-    private List<QuestionAnswer> QAList;
+    private List<QuestionAnswer> qaList;
 }
