@@ -12,23 +12,17 @@ export class AllChallengesPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     console.log('all challenges')
     let paramMap = new Map<string, string>();
     // paramMap.set('model','TT');
-    paramMap.set('generation', '8n');
-    paramMap.set('company', 'Audi');
+    // paramMap.set('generation', '8n');
+    paramMap.set('company', 'MINI');
 
     this.challengesApiService.getAllChallengesByCarApi(paramMap).subscribe(ch => {
       ch.forEach(challenge => {
         console.dir(challenge)
-        console.dir(challenge.qaList)
-        challenge.qaList.forEach(qaList => {
-          console.dir(qaList.correctAnswer)
 
-          qaList.answers.forEach(ans => {
-            console.dir(ans)
-          })
-        })
       })
 
     })
