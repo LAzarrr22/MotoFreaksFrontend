@@ -2,13 +2,14 @@ package com.MJ.MotoFreaksBackend.MotoFreaksBackend.models;
 
 import lombok.Data;
 
-import java.util.Map;
+import java.util.List;
 
 @Data
 public class QuestionAnswer {
 
     private String question;
     private int points;
-    private Map<String, Boolean> answers;
+    private List<String> answers;
+    private String correctAnswer;
 }
 

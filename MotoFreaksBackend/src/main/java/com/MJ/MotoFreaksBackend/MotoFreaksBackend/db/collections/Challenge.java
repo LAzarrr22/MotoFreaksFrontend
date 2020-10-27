@@ -24,6 +24,6 @@ public class Challenge {
     private String model;
     private String generation;
     private String creatorId;
-    private List<QuestionAnswer> QAList;
+    private List<QuestionAnswer> qaList;
 
 }
