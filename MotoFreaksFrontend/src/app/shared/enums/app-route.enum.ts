@@ -1,6 +1,11 @@
 export enum AppRoute {
-  ALL = 'all',
 
+  //common routes
+  ALL = 'all',
+  CREATE = 'create',
+  SERVICE_NOT_AVAILABLE = 'service-not-available',
+
+  //auth routes
   AUTH = 'auth',
   LOGIN = 'login',
   REGISTER = 'register',
@@ -8,16 +13,21 @@ export enum AppRoute {
 
   HOME = 'moto-freaks',
 
+  //profiles routes
   PROFILE = 'profile',
   ME = 'me',
   USER = 'user',
 
+  //messages routes
   MESSAGE = 'messages',
   CONVERSATION = 'conversation',
 
+  //posts routes
   POSTS = 'posts',
-  CREATE = 'create',
 
 
-  SERVICE_NOT_AVAILABLE = 'service-not-available',
+//challenges routes
+  CHALLENGES = 'challenges',
+
+
 }
