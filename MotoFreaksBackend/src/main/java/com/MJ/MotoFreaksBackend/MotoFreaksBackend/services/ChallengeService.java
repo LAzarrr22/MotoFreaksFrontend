@@ -37,22 +37,22 @@ public class ChallengeService {
         if (!isExistByName(challenge.getName())) {
             Challenge newChallenge = new Challenge();
             newChallenge.setCreatedDate(new Date());
-            newChallenge.setCreatorUserName(userService.getUserByToken(token).getUserName());
+            newChallenge.setCreatorId(userService.getUserByToken(token).getId());
             newChallenge.setName(challenge.getName());
             newChallenge.setCompany(challenge.getCompany());
             newChallenge.setModel(challenge.getModel());
             newChallenge.setGeneration(challenge.getGeneration());
-            newChallenge.setGroupId("test");//todo
             newChallenge.setQAList(challenge.getQAList());
             challengeRepository.save(newChallenge);
             model.put("message", "Challenge " + challenge.getName() + " was created.");
-            log.info("Challenge " + challenge.getName() + " was created by " + newChallenge.getCreatorUserName());
+            log.info("Challenge " + challenge.getName() + " was created by " + newChallenge.getCreatorId());
         }
         return ok(model);
     }
 
     public Object findByCar(Map<String, String> carParam) {
         Query query = new Query();
+        log.error(carParam.keySet().toString());
         carParam.keySet().forEach(key -> {
             query.addCriteria(Criteria.where(key).is(carParam.get(key)));
         });
@@ -63,8 +63,8 @@ public class ChallengeService {
         return challengeList;
     }
 
-    public Object findByUser(String username) {
-        Optional<Challenge> optionalChallenge = challengeRepository.findByUsername(username);
+    public Object findByUser(String id) {
+        Optional<Challenge> optionalChallenge = challengeRepository.findById(id);
         return optionalChallenge.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Challenge not found"));
     }
 

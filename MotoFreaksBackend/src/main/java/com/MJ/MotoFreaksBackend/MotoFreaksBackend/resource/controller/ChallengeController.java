@@ -20,27 +20,28 @@ public class ChallengeController {
         this.challengeService = challengeService;
     }
 
-    @RequestMapping(path = "/create", method = RequestMethod.PUT, produces = "application/json")
+    @RequestMapping(path = "/create", method = RequestMethod.POST, produces = "application/json")
     public Object createChallenge(HttpServletRequest req, @RequestBody NewChallengeModel challenge) {
         String token = req.getHeader(AuthorizationHeader.HEADER_NAME).replace(AuthorizationHeader.TOKEN_PREFIX, "");
         return challengeService.createChallenge(token, challenge);
     }
-    @RequestMapping(path = "/findBy/car", method = RequestMethod.GET, produces = "application/json")
+
+    @RequestMapping(path = "/get/findBy/car", method = RequestMethod.GET, produces = "application/json")
     public Object findByCar(@RequestParam Map<String, String> carParam) {
         return challengeService.findByCar(carParam);
     }
 
-    @RequestMapping(path = "/findBy/user/{user}", method = RequestMethod.GET, produces = "application/json")
-    public Object findByUser(@PathVariable("user") String username) {
-        return challengeService.findByUser(username);
+    @RequestMapping(path = "/get/findBy/user/id/{id}", method = RequestMethod.GET, produces = "application/json")
+    public Object findByUser(@PathVariable String id) {
+        return challengeService.findByUser(id);
     }
 
-    @RequestMapping(path = "/findBy/id/{id}", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(path = "/get/findBy/id/{id}", method = RequestMethod.GET, produces = "application/json")
     public Object findById(@PathVariable("id") String id) {
         return challengeService.findById(id);
     }
 
-    @RequestMapping(path = "/check/exists/{name}", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(path = "/get/check/exists/{name}", method = RequestMethod.GET, produces = "application/json")
     public Object isExists(@PathVariable("name") String name) {
         return challengeService.isExistByName(name);
     }
