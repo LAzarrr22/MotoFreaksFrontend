@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.springframework.http.ResponseEntity.ok;
 
@@ -52,7 +53,6 @@ public class ChallengeService {
 
     public Object findByCar(Map<String, String> carParam) {
         Query query = new Query();
-        log.error(carParam.keySet().toString());
         carParam.keySet().forEach(key -> {
             query.addCriteria(Criteria.where(key).is(carParam.get(key)));
         });
@@ -60,7 +60,7 @@ public class ChallengeService {
         if (challengeList.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Challenge not found");
         }
-        return challengeList;
+        return sortByName(challengeList, true);
     }
 
     public Object findByUser(String id) {
@@ -78,5 +78,18 @@ public class ChallengeService {
         if (optionalChallenge.isPresent())
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Challenge with that name is already exists");
         return false;
+    }
+
+    public Object getAll() {
+        List<Challenge> challengeList = challengeRepository.findAll();
+        return sortByName(challengeList, true);
+    }
+
+    private List<Challenge> sortByName(List<Challenge> mixList, boolean direction) {
+        if (direction) {
+            return mixList.stream().sorted(Comparator.comparing(Challenge::getName)).collect(Collectors.toList());
+        }
+        return mixList.stream().sorted(Comparator.comparing(Challenge::getName).reversed()).collect(Collectors.toList());
+
     }
 }

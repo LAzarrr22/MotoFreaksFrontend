@@ -26,6 +26,11 @@ public class ChallengeController {
         return challengeService.createChallenge(token, challenge);
     }
 
+    @RequestMapping(path = "/get/all", method = RequestMethod.GET, produces = "application/json")
+    public Object findByCar() {
+        return challengeService.getAll();
+    }
+
     @RequestMapping(path = "/get/findBy/car", method = RequestMethod.GET, produces = "application/json")
     public Object findByCar(@RequestParam Map<String, String> carParam) {
         return challengeService.findByCar(carParam);
