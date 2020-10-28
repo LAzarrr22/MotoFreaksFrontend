@@ -1,1 +1,24 @@
-<p>all-challenges-page works!</p>
+<div class="context">
+  <div class="title-page">All Challenges</div>
+
+  <div class="row section-filter">
+    <div class="col">
+      <div (click)="openFilter()">
+        <mat-icon *ngIf="!filterOpen">keyboard_arrow_down</mat-icon>
+        <mat-icon *ngIf="filterOpen">keyboard_arrow_up</mat-icon>
+
+        Filter
+      </div>
+    </div>
+    <ng-container *ngIf="filterOpen">
+      <app-challenges-filter (applyFilterEvent)="applyCarFilter($event)"
+                             (clearFilterEvent)="clearFilter()"></app-challenges-filter>
+    </ng-container>
+  </div>
+
+  <app-challenges-list [challengesList]="challengesListObs|async"></app-challenges-list>
+
+</div>
+
+
+

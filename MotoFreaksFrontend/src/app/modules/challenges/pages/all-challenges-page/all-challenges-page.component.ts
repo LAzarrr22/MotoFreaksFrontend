@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {ChallengesService} from "../../logic/services/challenges.service";
 import {ActiveRoute} from "../../../../shared/enums/active-route.enum";
 import {MenuService} from "../../../menu/logic/services/menu.service";
+import {Observable} from "rxjs";
+import {ChallengeDtoModel} from "../../logic/dto/response/challenge-dto.model";
 
 @Component({
   selector: 'app-all-challenges-page',
@@ -10,24 +12,32 @@ import {MenuService} from "../../../menu/logic/services/menu.service";
 })
 export class AllChallengesPageComponent implements OnInit {
 
+  challengesListObs: Observable<ChallengeDtoModel[]>
+  filterOpen: boolean = false;
+
   constructor(private challengesService: ChallengesService, private menuService: MenuService) {
   }
 
   ngOnInit(): void {
     this.menuService.activeRoute.next(ActiveRoute.CHALLENGE)
 
-    console.log('all challenges')
     let paramMap = new Map<string, string>();
     // paramMap.set('model','TT');
     // paramMap.set('generation', '8n');
     paramMap.set('company', 'MINI');
 
-    this.challengesService.getAllChallengesByCar(paramMap).subscribe(ch => {
-
-      console.dir(ch)
-
-
-    })
+    this.challengesListObs = this.challengesService.getAllChallenges()
   }
 
+  openFilter() {
+    this.filterOpen = !this.filterOpen;
+  }
+
+  applyCarFilter(params: Map<string, string>) {
+    this.challengesListObs = this.challengesService.getAllChallengesByCar(params);
+  }
+
+  clearFilter() {
+    this.challengesListObs = this.challengesService.getAllChallenges()
+  }
 }
