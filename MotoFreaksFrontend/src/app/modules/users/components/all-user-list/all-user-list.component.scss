@@ -1,4 +1,4 @@
-@import "src/styles";
+@import "src/app/shared/styles/common-classes";
 
 table {
   width: 100%;
@@ -19,9 +19,3 @@ table {
   padding: 20px;
 }
 
-.personal-title {
-  color: $custom-white;
-  padding-bottom: 20px;
-  font-size: $font-size-Xbig;
-  font-weight: bold;
-}

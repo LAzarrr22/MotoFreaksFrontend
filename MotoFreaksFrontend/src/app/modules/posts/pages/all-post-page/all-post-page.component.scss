@@ -1,4 +1,4 @@
-@import "src/styles";
+@import "src/app/shared/styles/common-classes";
 @import "~bootstrap";
 
 .create-button {
@@ -18,10 +18,5 @@
   width: fit-content;
 }
 
-.personal-title {
-  color: $custom-white;
-  padding-bottom: 20px;
-  font-size: $font-size-Xbig;
-  font-weight: bold;
-}
+
 
