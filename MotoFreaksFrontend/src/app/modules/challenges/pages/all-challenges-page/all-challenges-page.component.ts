@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ChallengesApiService} from "../../logic/services/challenges-api.service";
+import {ChallengesService} from "../../logic/services/challenges.service";
 
 @Component({
   selector: 'app-all-challenges-page',
@@ -8,7 +8,7 @@ import {ChallengesApiService} from "../../logic/services/challenges-api.service"
 })
 export class AllChallengesPageComponent implements OnInit {
 
-  constructor(private challengesApiService: ChallengesApiService) {
+  constructor(private challengesService: ChallengesService) {
   }
 
   ngOnInit(): void {
@@ -19,11 +19,10 @@ export class AllChallengesPageComponent implements OnInit {
     // paramMap.set('generation', '8n');
     paramMap.set('company', 'MINI');
 
-    this.challengesApiService.getAllChallengesByCarApi(paramMap).subscribe(ch => {
-      ch.forEach(challenge => {
-        console.dir(challenge)
+    this.challengesService.getAllChallengesByCar(paramMap).subscribe(ch => {
 
-      })
+      console.dir(ch)
+
 
     })
   }

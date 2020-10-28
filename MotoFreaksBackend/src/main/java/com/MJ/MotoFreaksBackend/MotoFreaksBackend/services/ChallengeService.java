@@ -44,7 +44,7 @@ public class ChallengeService {
             newChallenge.setCompany(challenge.getCompany());
             newChallenge.setModel(challenge.getModel());
             newChallenge.setGeneration(challenge.getGeneration());
-            newChallenge.setQaList(challenge.getQAList());
+            newChallenge.setQaList(challenge.getQaList());
             challengeRepository.save(newChallenge);
             model.put("message", "Challenge " + challenge.getName() + " was created.");
             log.info("Challenge " + challenge.getName() + " was created by " + newChallenge.getCreatorId());
