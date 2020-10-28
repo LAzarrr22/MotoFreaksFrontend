@@ -59,4 +59,8 @@ export class MenuBarComponent implements OnInit {
   goToPosts() {
     this.router.navigate([AppPath.POSTS_ALL_PATH])
   }
+
+  goToChallenges() {
+    this.router.navigate([AppPath.CHALLENGES_ALL_PATH])
+  }
 }

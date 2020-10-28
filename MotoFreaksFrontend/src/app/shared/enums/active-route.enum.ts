@@ -6,4 +6,5 @@ export enum ActiveRoute {
   MY_PROFILE = '[Active] MY_PROFILE',
   ALL_USERS = '[Active] ALL_USERS',
   POSTS = '[Active] POSTS',
+  CHALLENGE = '[Active] CHALLENGE',
 }
