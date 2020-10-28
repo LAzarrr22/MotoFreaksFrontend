@@ -1,0 +1,22 @@
+@import "src/styles";
+
+.context {
+  padding: 0px 60px 60px 60px;
+}
+
+.title-page {
+  color: $custom-white;
+  padding-bottom: 20px;
+  font-size: $font-size-Xbig;
+  font-weight: bold;
+}
+
+.click {
+  cursor: pointer;
+}
+
+.delete-icon {
+  color: $custom-warn;
+  cursor: pointer;
+}
+

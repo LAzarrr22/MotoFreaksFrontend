@@ -1,17 +1,17 @@
-@import "src/app/modules/profiles/components/my-profile-all-data/section";
+@import "src/app/modules/profiles/components/profile-sections/section";
 
 .car-card {
-  max-width: 200px;
-  min-width: 200px;
+  max-width: 250px;
+  min-width: 250px;
 }
 
 .icon-to-edit {
-  @extend .icon-to-click;
+  @extend .click;
+  color: $custom-blue;
   padding: 0;
 }
 
 .icon-to-delete {
-  @extend .icon-to-click;
+  @extend .delete-icon;
   padding: 0;
-  color: $custom-warn;
 }

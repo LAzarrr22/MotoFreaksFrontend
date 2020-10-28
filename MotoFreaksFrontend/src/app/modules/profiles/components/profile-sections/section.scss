@@ -1,6 +1,5 @@
-@import "src/styles";
-@import "~bootstrap";
-@import "~@fortawesome/fontawesome-free/css/all.css";
+@import "src/app/shared/styles/common-classes";
+@import "node_modules/bootstrap";
 
 .title {
   color: $custom-white;
@@ -26,13 +25,6 @@
 .data {
   color: $custom-blue;
   font-size: $font-size-medium+4;
-}
-
-.icon-to-click {
-  padding-left: 20px;
-  font-size: $font-size-big;
-  color: $custom-blue;
-  cursor: pointer;
 }
 
 .edit-blur {

@@ -1,4 +1,4 @@
-@import "src/app/modules/profiles/components/my-profile-all-data/section";
+@import "src/app/modules/profiles/components/profile-sections/section";
 
 table {
   width: 100%;
@@ -9,10 +9,6 @@ table {
 .context {
   padding-right: 80px;
   padding-left: 100px;
-}
-
-.click {
-  cursor: pointer;
 }
 
 .filter-section {

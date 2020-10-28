@@ -1,14 +1,10 @@
-@import "src/styles";
+@import "src/app/shared/styles/common-classes";
 @import "~bootstrap";
 
 .context {
   padding: 20px 50px 20px 50px;
   color: $custom-white-dark;
   min-width: 250px;
-}
-
-.to-click {
-  cursor: pointer;
 }
 
 .header {
@@ -31,7 +27,3 @@
   font-size: $font-size-medium+2;
 }
 
-.delete-icon {
-  color: $custom-warn;
-  cursor: pointer;
-}
