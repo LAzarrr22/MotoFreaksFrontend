@@ -1,3 +1,10 @@
 <ng-container *ngFor="let question of questionsList">
   <app-question-item [question]="question"></app-question-item>
 </ng-container>
+<div class="row">
+  <div class="col-4 offset-4">
+    <button class="mat-flat-button full-width" color="warn" mat-flat-button
+            (click)="endFill()">End
+    </button>
+  </div>
+</div>

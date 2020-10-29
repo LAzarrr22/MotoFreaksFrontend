@@ -17,4 +17,8 @@ export class QuestionAnswerItemComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  getNumberOfColumn() {
+    console.log(12 / this.answers.length)
+    return 12 / this.answers.length;
+  }
 }
