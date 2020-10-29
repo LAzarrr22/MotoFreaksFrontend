@@ -21,11 +21,6 @@ export class AllChallengesPageComponent implements OnInit {
   ngOnInit(): void {
     this.menuService.activeRoute.next(ActiveRoute.CHALLENGE)
 
-    let paramMap = new Map<string, string>();
-    // paramMap.set('model','TT');
-    // paramMap.set('generation', '8n');
-    paramMap.set('company', 'MINI');
-
     this.challengesListObs = this.challengesService.getAllChallenges()
   }
 

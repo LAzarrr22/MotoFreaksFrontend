@@ -1,6 +1,10 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {CarsService} from "../../../cars/logic/service/cars.service";
+import {Actions, ofType} from "@ngrx/effects";
+import {map} from "rxjs/operators";
+import {Observable} from "rxjs";
+import {GET_ALL_CHALLENGES_BY_CAR_FAIL, GetAllChallengesByCarFail} from "../../logic/actions/challenges.actions";
 
 @Component({
   selector: 'app-challenges-filter',
@@ -13,12 +17,15 @@ export class ChallengesFilterComponent implements OnInit {
   companies: string[];
   models: string[]
   generations: string[];
+  errorMessage: Observable<string>
+
   @Output()
   applyFilterEvent = new EventEmitter<Map<string, string>>();
   @Output()
   clearFilterEvent = new EventEmitter();
 
-  constructor(private formBuilder: FormBuilder, private carsService: CarsService) {
+  constructor(private formBuilder: FormBuilder, private carsService: CarsService, private actions: Actions) {
+    this.errorMessage = this.actions.pipe(ofType(GET_ALL_CHALLENGES_BY_CAR_FAIL), map((action: GetAllChallengesByCarFail) => action.payload));
   }
 
   ngOnInit(): void {
@@ -65,16 +72,31 @@ export class ChallengesFilterComponent implements OnInit {
     this.loadModelsList();
     this.formFilter.controls.model.reset('');
     this.formFilter.controls.generation.reset('');
+    this.submit();
   }
 
   modelSelectionChange() {
     this.loadGenerationsList();
     this.formFilter.controls.generation.reset('');
+    this.submit();
+  }
+
+  generationSelectionChange() {
+    this.submit();
   }
 
   submit() {
-    this.applyFilterEvent.emit(null)
-    console.log('test')
+    let paramMap = new Map<string, string>();
+    if (this.getCompany()) {
+      paramMap.set('company', this.getCompany());
+      if (this.getModel()) {
+        paramMap.set('model', this.getModel());
+      }
+      if (this.getGeneration()) {
+        paramMap.set('generation', this.getGeneration());
+      }
+      this.applyFilterEvent.emit(paramMap)
+    }
   }
 
   clearFilter() {

@@ -45,7 +45,8 @@ export class ChallengesEffects {
         return this.challengesApiService.getAllChallengesApi();
       }),
       switchMap((challenges: ChallengeDtoModel[]) => [
-        new GetAllChallengesSuccess(challenges)
+        new GetAllChallengesSuccess(challenges),
+        new GetAllChallengesFail('')
       ]),
       catchError((error, caught) => {
         this.store$.dispatch(new GetAllChallengesFail(error.error.message));
@@ -61,7 +62,8 @@ export class ChallengesEffects {
         return this.challengesApiService.getAllChallengesByCarApi(action.paramMap);
       }),
       switchMap((challenges: ChallengeDtoModel[]) => [
-        new GetAllChallengesByCarSuccess(challenges)
+        new GetAllChallengesByCarSuccess(challenges),
+        new GetAllChallengesByCarFail('')
       ]),
       catchError((error, caught) => {
         this.store$.dispatch(new GetAllChallengesByCarFail(error.error.message));
