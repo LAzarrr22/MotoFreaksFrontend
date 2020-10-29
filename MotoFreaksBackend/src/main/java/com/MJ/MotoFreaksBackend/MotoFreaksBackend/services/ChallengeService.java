@@ -98,7 +98,7 @@ public class ChallengeService {
         List<ChallengeDto> challengeDtoList = new ArrayList<>();
         challengeList.forEach(challenge -> {
             challengeDtoList.add(new ChallengeDto(challenge.getId(), challenge.getName(), challenge.getCompany(), challenge.getModel()
-                    , challenge.getGeneration(), challenge.getCreatorId()));
+                    , challenge.getGeneration(), challenge.getCreatorId(), challenge.getQaList().size()));
         });
         return challengeDtoList;
     }

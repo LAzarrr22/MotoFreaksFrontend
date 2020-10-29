@@ -13,4 +13,5 @@ public class ChallengeDto {
     private String model;
     private String generation;
     private String creatorId;
+    private int questionsCount;
 }
