@@ -11,6 +11,8 @@ export class ChallengesListComponent implements OnInit {
 
   @Input()
   challengesList: ChallengeDtoModel[];
+  @Input()
+  myId: string;
 
 
   constructor(private usersService: UsersService) {

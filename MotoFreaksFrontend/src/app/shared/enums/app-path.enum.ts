@@ -16,6 +16,7 @@ export enum AppPath {
   POSTS_CREATE_PATH = '/posts/create',
 
   CHALLENGES_ALL_PATH = '/challenges/all',
+  CHALLENGES_DO_PATH = '/challenges/fill',
 
   SERVICE_NOT_AVAILABLE = '/service-not-available',
 }

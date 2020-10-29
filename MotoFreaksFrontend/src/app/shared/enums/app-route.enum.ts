@@ -28,6 +28,7 @@ export enum AppRoute {
 
 //challenges routes
   CHALLENGES = 'challenges',
+  FILL = 'fill'
 
 
 }

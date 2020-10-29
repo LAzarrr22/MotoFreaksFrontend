@@ -16,10 +16,13 @@ import {CreateChallengeComponent} from "./components/create-challenge/create-cha
 import {ChallengesFilterComponent} from './components/challenges-filter/challenges-filter.component';
 import {AngularMaterialModule} from "../../shared/angular-material.module";
 import {AppCommonModule} from "../common/common.module";
+import {QuestionsComponent} from './components/questions/questions.component';
+import {QuestionItemComponent} from './components/question-item/question-item.component';
+import {QuestionAnswerItemComponent} from './components/question-answer-item/question-answer-item.component';
 
 
 @NgModule({
-  declarations: [AllChallengesPageComponent, ChallengesListComponent, ChallengesListItemComponent, CreateChallengeComponent, DoChallengePageComponent, CreateChallengePageComponent, ChallengesFilterComponent],
+  declarations: [AllChallengesPageComponent, ChallengesListComponent, ChallengesListItemComponent, CreateChallengeComponent, DoChallengePageComponent, CreateChallengePageComponent, ChallengesFilterComponent, QuestionsComponent, QuestionItemComponent, QuestionAnswerItemComponent],
   imports: [
     CommonModule,
     ChallengesRoutingModule,

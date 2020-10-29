@@ -1,0 +1,20 @@
+<div class="context">
+  <div class="border mat-elevation-z18">
+
+    <div class="row points pl-4">
+      <div>
+        {{question.points}} points
+      </div>
+    </div>
+
+    <div class="row question-text">
+      <div class="col-6 offset-3">
+        {{question.question}}
+      </div>
+    </div>
+    <div class="row pl-4">
+      <app-question-answer-item [answers]="question.answers"
+                                [correctAnswer]="question.correctAnswer"></app-question-answer-item>
+    </div>
+  </div>
+</div>
