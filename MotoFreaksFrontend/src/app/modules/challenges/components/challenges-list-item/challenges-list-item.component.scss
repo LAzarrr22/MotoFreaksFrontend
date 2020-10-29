@@ -1,1 +1,27 @@
 @import "src/app/shared/styles/common-classes";
+@import "~bootstrap";
+
+.context-min {
+  @extend .context;
+  min-width: 300px;
+}
+
+.header {
+  font-size: $font-size-big;
+  min-width: 150px;
+  padding-bottom: 10px;
+  padding-top: 15px;
+  color: $custom-white;
+  text-align: center;
+}
+
+.sub-text {
+  font-size: $font-size-medium;
+  min-width: 150px;
+}
+
+.border {
+  border-radius: 3px;
+  border: 2px solid;
+  color: $custom-white-dark;
+}

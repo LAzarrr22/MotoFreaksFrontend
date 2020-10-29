@@ -10,6 +10,11 @@ export class ChallengesListItemComponent implements OnInit {
 
   @Input()
   challenge: ChallengeDtoModel;
+  @Input()
+  creatorName: string;
+  @Input()
+  creatorLastName: string;
+
 
   constructor() {
   }
@@ -17,4 +22,11 @@ export class ChallengesListItemComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  goToProfile() {
+
+  }
+
+  startChallenge() {
+
+  }
 }

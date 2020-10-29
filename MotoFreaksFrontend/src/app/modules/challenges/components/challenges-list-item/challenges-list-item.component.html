@@ -1,4 +1,33 @@
-<div>{{challenge.id}}</div>
-<div>{{challenge.company}}</div>
-<div>{{challenge.model}}</div>
-<div>{{challenge.generation}}</div>
+<div class="context-min">
+  <div class="border mat-elevation-z18">
+
+    <div class="row pt-3 click header">
+      <div class="col-4 offset-4">
+        {{challenge.name}}
+      </div>
+    </div>
+
+    <div class="row pl-3 pb-1 sub-text">
+      <div class="col">
+        <mat-icon>directions_car</mat-icon>
+        {{challenge.company}}, {{challenge.model}}, {{challenge.generation}}
+      </div>
+    </div>
+
+    <div class="row pl-3 pb-1 sub-text click" (click)="goToProfile()">
+      <div class="col " matTooltip="Profile" matTooltipPosition="left">
+        <mat-icon>person</mat-icon>
+        {{creatorName}} {{creatorLastName}}
+      </div>
+    </div>
+
+    <div class="row pl-3 pb-1 sub-text" (click)="goToProfile()">
+      <div class="col ">
+        <mat-icon>person</mat-icon>
+        {{challenge.questionsCount}} ------ {{challenge.allPoints}} points
+      </div>
+    </div>
+
+  </div>
+</div>
+
