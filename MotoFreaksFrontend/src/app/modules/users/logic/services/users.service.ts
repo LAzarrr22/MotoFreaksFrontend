@@ -26,4 +26,21 @@ export class UsersService {
 
   }
 
+  getLastName(id: string): string {
+    let lastName;
+    this.store.select(getAllUsers).subscribe(users => {
+      lastName = users.find(user => user.id === id).lastName;
+    });
+
+    return lastName;
+  }
+
+  getName(id: string): string {
+    let name;
+    this.store.select(getAllUsers).subscribe(users => {
+      name = users.find(user => user.id === id).name;
+    });
+
+    return name;
+  }
 }
