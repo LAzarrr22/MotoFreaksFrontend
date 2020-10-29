@@ -7,4 +7,5 @@ export class ChallengeDtoModel {
   generation: string
   creatorId: string
   questionsCount: number;
+  allPoints: number;
 }

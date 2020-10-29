@@ -1,6 +1,7 @@
 package com.MJ.MotoFreaksBackend.MotoFreaksBackend.services;
 
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.db.collections.Challenge;
+import com.MJ.MotoFreaksBackend.MotoFreaksBackend.models.QuestionAnswer;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.repository.ChallengeRepository;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.resource.requests.NewChallengeModel;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.resource.response.ChallengeDto;
@@ -98,9 +99,13 @@ public class ChallengeService {
         List<ChallengeDto> challengeDtoList = new ArrayList<>();
         challengeList.forEach(challenge -> {
             challengeDtoList.add(new ChallengeDto(challenge.getId(), challenge.getName(), challenge.getCompany(), challenge.getModel()
-                    , challenge.getGeneration(), challenge.getCreatorId(), challenge.getQaList().size()));
+                    , challenge.getGeneration(), challenge.getCreatorId(), challenge.getQaList().size(), countAllPoints(challenge.getQaList())));
         });
         return challengeDtoList;
+    }
+
+    private int countAllPoints(List<QuestionAnswer> questionList) {
+        return questionList.stream().mapToInt(QuestionAnswer::getPoints).sum();
     }
 
     public Object getQuestions(String id) {
