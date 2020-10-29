@@ -6,8 +6,6 @@ import {MenuService} from "../../../menu/logic/services/menu.service";
 import {Observable} from "rxjs";
 import {PostModel} from "../../logic/dto/model/post.model";
 import {PostsService} from "../../logic/services/posts.service";
-import {UserModel} from "../../../users/logic/dto/response/user-model";
-import {UsersService} from "../../../users/logic/services/users.service";
 import {PostType} from "../../logic/enums/post-type.enum";
 import {ProfileService} from "../../../profiles/logic/services/profile.service";
 
@@ -19,7 +17,6 @@ import {ProfileService} from "../../../profiles/logic/services/profile.service";
 export class AllPostPageComponent implements OnInit {
 
   postsListObs: Observable<PostModel[]>
-  users: Observable<UserModel[]>
   filterOpen: boolean = false;
   postTypes = PostType;
   postTypeList = [];
@@ -32,14 +29,12 @@ export class AllPostPageComponent implements OnInit {
   idProfileToShow: string;
 
   constructor(private router: Router, private menuService: MenuService,
-              private postsService: PostsService, private userService: UsersService,
-              private profileService: ProfileService) {
+              private postsService: PostsService, private profileService: ProfileService) {
   }
 
   ngOnInit(): void {
     this.postTypeList = Object.keys(this.postTypes);
-    this.profileService.getMyProfile().subscribe(profile => this.myId = profile.id)
-    this.users = this.userService.getAllUsers();
+    this.myId = this.profileService.getMyId();
 
     if (!this.postsForProfile) {
       this.menuService.activeRoute.next(ActiveRoute.POSTS)

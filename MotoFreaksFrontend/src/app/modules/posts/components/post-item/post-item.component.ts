@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {PostModel} from "../../logic/dto/model/post.model";
 import {Router} from "@angular/router";
 import {AppPath} from "../../../../shared/enums/app-path.enum";
-import {UserModel} from "../../../users/logic/dto/response/user-model";
+import {UsersService} from "../../../users/logic/services/users.service";
 
 @Component({
   selector: 'app-post-item',
@@ -14,8 +14,6 @@ export class PostItemComponent implements OnInit {
   @Input()
   post: PostModel;
   @Input()
-  users: UserModel[];
-  @Input()
   myId: string;
   @Output()
   deletePostEvent = new EventEmitter<string>();
@@ -23,7 +21,7 @@ export class PostItemComponent implements OnInit {
   authorLastName: string;
 
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private userService: UsersService) {
   }
 
   ngOnInit(): void {
@@ -40,11 +38,11 @@ export class PostItemComponent implements OnInit {
   }
 
   getReceiverName() {
-    this.authorName = this.users.find(user => user.id === this.post.creatorId).name;
+    this.authorName = this.userService.getName(this.post.creatorId);
   }
 
   getReceiverLastName() {
-    this.authorLastName = this.users.find(user => user.id === this.post.creatorId).lastName;
+    this.authorLastName = this.userService.getLastName(this.post.creatorId);
   }
 
   deletePost() {

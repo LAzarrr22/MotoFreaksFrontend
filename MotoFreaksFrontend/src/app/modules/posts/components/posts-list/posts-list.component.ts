@@ -1,6 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {PostModel} from "../../logic/dto/model/post.model";
-import {UserModel} from "../../../users/logic/dto/response/user-model";
 
 @Component({
   selector: 'app-posts-list',
@@ -11,8 +10,6 @@ export class PostsListComponent implements OnInit {
 
   @Input()
   postsList: PostModel[];
-  @Input()
-  allUsers: UserModel[];
   @Input()
   myId: string;
   @Output()

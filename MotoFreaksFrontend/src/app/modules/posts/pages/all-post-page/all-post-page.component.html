@@ -19,5 +19,5 @@
   </ng-container>
 </div>
 
-<app-posts-list [postsList]="postsListObs| async" [allUsers]="users | async" [myId]="myId"
+<app-posts-list [postsList]="postsListObs| async" [myId]="myId"
                 (deletePostEvent)="deletePost($event)"></app-posts-list>

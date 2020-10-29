@@ -16,19 +16,42 @@ import {
 import {MergeUserModel} from "../dto/request/merge-user.model";
 import {AddressModel} from "../dto/models/address.model";
 import {ContactModel} from "../dto/models/contact.model";
-import {MyProfileApiService} from "./my-profile-api.service";
 import {NewCarModel} from "../dto/request/new-car.model";
 import {FriendUserModel} from "../dto/response/friend-user.model";
 
 @Injectable()
 export class ProfileService {
-  constructor(private store: Store<MyProfileState>, private apiMyProfile: MyProfileApiService) {
+  constructor(private store: Store<MyProfileState>) {
   }
 
   getMyProfile(): Observable<MyProfileModel> {
     this.store.dispatch(new GetMyProfile());
     this.store.dispatch(new GetMyFriends());
     return this.store.select(getMyProfile);
+  }
+
+  getMyId(): string {
+    let id;
+    this.store.select(getMyProfile).subscribe(me => {
+      id = me.id;
+    })
+    return id;
+  }
+
+  getMyName(): string {
+    let name;
+    this.store.select(getMyProfile).subscribe(me => {
+      name = me.name;
+    })
+    return name;
+  }
+
+  getMyLastName(): string {
+    let lastName;
+    this.store.select(getMyProfile).subscribe(me => {
+      lastName = me.id;
+    })
+    return lastName;
   }
 
   getMyFriends(): Observable<FriendUserModel[]> {
@@ -58,4 +81,6 @@ export class ProfileService {
   removeCar(id: string) {
     this.store.dispatch(new RemoveMyCar(id))
   }
+
+
 }

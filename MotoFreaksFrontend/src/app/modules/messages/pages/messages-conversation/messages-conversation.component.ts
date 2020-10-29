@@ -4,7 +4,6 @@ import {UsersService} from "../../../users/logic/services/users.service";
 import {MenuService} from "../../../menu/logic/services/menu.service";
 import {MessageModel} from "../../logic/dto/model/message.model";
 import {MessagesService} from "../../logic/services/messages.service";
-import {UserModel} from "../../../users/logic/dto/response/user-model";
 import {MessageDataModel} from "../../logic/dto/response/message-data.model";
 
 @Component({
@@ -17,7 +16,6 @@ export class MessagesConversationComponent implements OnInit {
   messagesData: MessageDataModel;
   messages: MessageModel[];
   userId: string
-  allUsers: UserModel[];
 
   constructor(private route: ActivatedRoute, private menuService: MenuService, private messageService: MessagesService, private userService: UsersService) {
   }
@@ -25,7 +23,6 @@ export class MessagesConversationComponent implements OnInit {
   ngOnInit(): void {
     this.menuService.activeRoute.next('')
     this.userId = this.route.snapshot.paramMap.get('id');
-    this.userService.getAllUsers().subscribe(users => this.allUsers = users);
     this.loadMessages();
     if (this.messages != undefined) {
       this.messageService.readMessages(this.userId);
@@ -34,11 +31,11 @@ export class MessagesConversationComponent implements OnInit {
   }
 
   getReceiverName(): string {
-    return this.allUsers.find(user => user.id === this.userId).name;
+    return this.userService.getName(this.userId);
   }
 
   getReceiverLastName(): string {
-    return this.allUsers.find(user => user.id === this.userId).lastName;
+    return this.userService.getLastName(this.userId);
   }
 
   loadMessages() {
