@@ -95,4 +95,8 @@ export class MyProfileApiService {
     return this.httpClient.get<FriendUserModel[]>(`${environment.apiUrl}/user/get/friends`)
       .pipe(map(friends => friends.map(friend => new FriendUserModel(friend.id, friend.name, friend.lastName, friend.gender))))
   }
+
+  addPoints(points: number) {
+    return this.httpClient.post(`${environment.apiUrl}/user/add/points/${points}`, {})
+  }
 }

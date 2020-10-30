@@ -5,13 +5,18 @@ import {Observable} from "rxjs";
 import {MyProfileModel} from "../dto/response/my-profile.model";
 import {
   ADD_MY_CAR,
+  ADD_POINTS,
   AddMyCar,
   AddMyCarFail,
   AddMyCarSuccess,
+  AddPoints,
+  AddPointsFail,
+  AddPointsSuccess,
   GET_MY_FRIENDS,
   GET_MY_PROFILE,
   GetMyFriendsFail,
   GetMyFriendsSuccess,
+  GetMyProfile,
   GetMyProfileFail,
   GetMyProfileSuccess,
   MERGE_MY_ADDRESS,
@@ -110,6 +115,24 @@ export class MyProfileEffects {
       ]),
       catchError((error, caught) => {
         this.store$.dispatch(new MergeMyContactFail(error.error));
+        this.errorService.error(error);
+        return caught;
+      })
+    );
+
+  @Effect()
+  addPoints$: Observable<Action> = this.actions$
+    .pipe(
+      ofType(ADD_POINTS),
+      switchMap((action: AddPoints) => {
+        return this.myProfileService.addPoints(action.points);
+      }),
+      switchMap((response: string) => [
+        new AddPointsSuccess(response),
+        new GetMyProfile()
+      ]),
+      catchError((error, caught) => {
+        this.store$.dispatch(new AddPointsFail(error.error));
         this.errorService.error(error);
         return caught;
       })

@@ -5,6 +5,7 @@ import {Store} from "@ngrx/store";
 import {getMyFriends, getMyProfile, MyProfileState} from "../reducers/my-profile.reducers";
 import {
   AddMyCar,
+  AddPoints,
   GetMyFriends,
   GetMyProfile,
   MergeMyAddress,
@@ -80,6 +81,11 @@ export class ProfileService {
 
   removeCar(id: string) {
     this.store.dispatch(new RemoveMyCar(id))
+  }
+
+  addPoints(points: number) {
+    this.store.dispatch(new AddPoints(points));
+
   }
 
 

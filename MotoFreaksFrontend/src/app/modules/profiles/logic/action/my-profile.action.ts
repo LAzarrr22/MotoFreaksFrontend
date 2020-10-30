@@ -27,6 +27,10 @@ export const MERGE_MY_CONTACT = '[Profile] MERGE_MY_CONTACT';
 export const MERGE_MY_CONTACT_SUCCESS = '[Profile] MERGE_MY_CONTACT_SUCCESS';
 export const MERGE_MY_CONTACT_FAIL = '[Profile] MERGE_MY_CONTACT_FAIL';
 
+export const ADD_POINTS = '[Profile] ADD_POINTS';
+export const ADD_POINTS_SUCCESS = '[Profile] ADD_POINTS_SUCCESS';
+export const ADD_POINTS_FAIL = '[Profile] ADD_POINTS_FAIL';
+
 export const ADD_MY_CAR = '[Profile] ADD_MY_CAR';
 export const ADD_MY_CAR_SUCCESS = '[Profile] ADD_MY_CAR_SUCCESS';
 export const ADD_MY_CAR_FAIL = '[Profile] ADD_MY_CAR_FAIL';
@@ -118,6 +122,27 @@ export class MergeMyAddressSuccess implements Action {
 
 export class MergeMyAddressFail implements Action {
   readonly type = MERGE_MY_ADDRESS_FAIL;
+
+  constructor(public payload: string) {
+  }
+}
+
+export class AddPoints implements Action {
+  readonly type = ADD_POINTS;
+
+  constructor(public points: number) {
+  }
+}
+
+export class AddPointsSuccess implements Action {
+  readonly type = ADD_POINTS_SUCCESS;
+
+  constructor(public payload: string) {
+  }
+}
+
+export class AddPointsFail implements Action {
+  readonly type = ADD_POINTS_FAIL;
 
   constructor(public payload: string) {
   }
@@ -220,6 +245,9 @@ export type Actions =
   | MergeMyContact
   | MergeMyContactSuccess
   | MergeMyContactFail
+  | AddPoints
+  | AddPointsSuccess
+  | AddPointsFail
   | AddMyCar
   | AddMyCarSuccess
   | AddMyCarFail
