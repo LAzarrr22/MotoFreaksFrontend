@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {QuestionAnswer} from "../../logic/dto/response/question-answer.model";
 
 @Component({
@@ -11,8 +11,11 @@ export class QuestionsComponent implements OnInit {
   @Input()
   questionsList: QuestionAnswer[]
   obtainedPoints: number = 0;
+  @Output()
+  finish = new EventEmitter<number>()
 
   constructor() {
+
   }
 
   ngOnInit(): void {
@@ -23,6 +26,6 @@ export class QuestionsComponent implements OnInit {
   }
 
   endFill() {
-
+    this.finish.emit(this.obtainedPoints);
   }
 }
