@@ -1,4 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-question-answer-item',
@@ -10,15 +11,26 @@ export class QuestionAnswerItemComponent implements OnInit {
   answers: string[];
   @Input()
   correctAnswer: string;
+  @Output()
+  answersChange = new EventEmitter<boolean>();
 
-  constructor() {
+  form: FormGroup;
+
+
+  constructor(fb: FormBuilder) {
+    this.form = fb.group({
+      answer: ['', Validators.required]
+    });
   }
 
   ngOnInit(): void {
   }
 
-  getNumberOfColumn() {
-    console.log(12 / this.answers.length)
-    return 12 / this.answers.length;
+  add() {
+    this.answersChange.emit(this.checkAnswer())
+  }
+
+  private checkAnswer() {
+    return this.form.controls.answer.value === this.correctAnswer;
   }
 }

@@ -10,11 +10,16 @@ export class QuestionsComponent implements OnInit {
 
   @Input()
   questionsList: QuestionAnswer[]
+  obtainedPoints: number = 0;
 
   constructor() {
   }
 
   ngOnInit(): void {
+  }
+
+  changeObtainedPoints(points: number) {
+    this.obtainedPoints += points;
   }
 
   endFill() {

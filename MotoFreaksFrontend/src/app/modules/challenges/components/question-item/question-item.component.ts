@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {QuestionAnswer} from "../../logic/dto/response/question-answer.model";
 
 @Component({
@@ -10,6 +10,9 @@ export class QuestionItemComponent implements OnInit {
 
   @Input()
   question: QuestionAnswer;
+  @Output()
+  changePoints = new EventEmitter<number>();
+  isAlreadyCorrect: boolean = false;
 
   constructor() {
   }
@@ -17,4 +20,14 @@ export class QuestionItemComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  addPoints(answer: boolean) {
+    if (answer && !this.isAlreadyCorrect) {
+      this.isAlreadyCorrect = answer;
+      this.changePoints.emit(this.question.points);
+    } else if (!answer && this.isAlreadyCorrect) {
+      this.changePoints.emit(-this.question.points);
+      this.isAlreadyCorrect = false;
+    }
+
+  }
 }
