@@ -46,6 +46,7 @@ public class ChallengeService {
             newChallenge.setModel(challenge.getModel());
             newChallenge.setGeneration(challenge.getGeneration());
             newChallenge.setQaList(challenge.getQaList());
+            newChallenge.setCompetitorIdList(new ArrayList<>());
             challengeRepository.save(newChallenge);
             model.put("message", "Challenge " + challenge.getName() + " was created.");
             log.info("Challenge " + challenge.getName() + " was created by " + newChallenge.getCreatorId());
@@ -53,7 +54,19 @@ public class ChallengeService {
         return ok(model);
     }
 
-    public Object findByCar(Map<String, String> carParam) {
+    public Object addCompetitor(String token, String id) {
+        Map<Object, Object> model = new HashMap<>();
+        String userId = userService.getUserByToken(token).getId();
+        Challenge foundChallenge = findById(id);
+        foundChallenge.getCompetitorIdList().add(userId);
+        challengeRepository.save(foundChallenge);
+        model.put("message", "Added competitor to " + foundChallenge.getName() + " challenge");
+        log.info("Added competitor " + userId + " to " + foundChallenge.getName() + " challenge ");
+        return ok(model);
+    }
+
+    public Object findByCar(Map<String, String> carParam, String token) {
+        String userId = userService.getUserByToken(token).getId();
         Query query = new Query();
         carParam.keySet().forEach(key -> {
             query.addCriteria(Criteria.where(key).is(carParam.get(key)));
@@ -62,15 +75,16 @@ public class ChallengeService {
         if (challengeList.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Challenge not found");
         }
-        return sortByName(mappingToDtoChallenges(challengeList), true);
+        return sortByName(mappingToDtoChallenges(challengeList, userId), true);
     }
 
-    public Object findByUser(String id) {
+    public Object findByUser(String id, String token) {
+        String userId = userService.getUserByToken(token).getId();
         List<Challenge> findChallengeList = challengeRepository.findAll().stream().filter(challenge -> challenge.getCreatorId().equals(id)).collect(Collectors.toList());
-        return findChallengeList.isEmpty() ? new ResponseStatusException(HttpStatus.NOT_FOUND, "Challenge not found") : mappingToDtoChallenges(findChallengeList);
+        return findChallengeList.isEmpty() ? new ResponseStatusException(HttpStatus.NOT_FOUND, "Challenge not found") : mappingToDtoChallenges(findChallengeList, userId);
     }
 
-    public Object findById(String id) {
+    public Challenge findById(String id) {
         Optional<Challenge> optionalChallenge = challengeRepository.findById(id);
         return optionalChallenge.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Challenge not found"));
     }
@@ -82,9 +96,10 @@ public class ChallengeService {
         return false;
     }
 
-    public Object getAll() {
+    public Object getAll(String token) {
+        String userId = userService.getUserByToken(token).getId();
         List<Challenge> challengeList = challengeRepository.findAll();
-        return sortByName(mappingToDtoChallenges(challengeList), true);
+        return sortByName(mappingToDtoChallenges(challengeList, userId), true);
     }
 
     private List<ChallengeDto> sortByName(List<ChallengeDto> mixList, boolean direction) {
@@ -95,11 +110,11 @@ public class ChallengeService {
 
     }
 
-    private List<ChallengeDto> mappingToDtoChallenges(List<Challenge> challengeList) {
+    private List<ChallengeDto> mappingToDtoChallenges(List<Challenge> challengeList, String userId) {
         List<ChallengeDto> challengeDtoList = new ArrayList<>();
         challengeList.forEach(challenge -> {
             challengeDtoList.add(new ChallengeDto(challenge.getId(), challenge.getName(), challenge.getCompany(), challenge.getModel()
-                    , challenge.getGeneration(), challenge.getCreatorId(), challenge.getQaList().size(), countAllPoints(challenge.getQaList())));
+                    , challenge.getGeneration(), challenge.getCreatorId(), isAlreadyFilled(userId, challenge), challenge.getQaList().size(), countAllPoints(challenge.getQaList())));
         });
         return challengeDtoList;
     }
@@ -112,4 +127,10 @@ public class ChallengeService {
         Optional<Challenge> optionalChallenge = challengeRepository.findById(id);
         return optionalChallenge.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Challenge not found")).getQaList();
     }
+
+    private boolean isAlreadyFilled(String userId, Challenge challenge) {
+        String commonFriends = challenge.getCompetitorIdList().stream().filter(userId::equals).findAny().orElse("");
+        return !commonFriends.isEmpty();
+    }
+
 }

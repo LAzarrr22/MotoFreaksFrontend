@@ -27,23 +27,34 @@ public class ChallengeController {
         return challengeService.createChallenge(token, challenge);
     }
 
+    @RequestMapping(path = "/id/{id}/add/competitor", method = RequestMethod.POST, produces = "application/json")
+    public Object addCompetitor(HttpServletRequest req, @PathVariable String id) {
+        String token = req.getHeader(AuthorizationHeader.HEADER_NAME).replace(AuthorizationHeader.TOKEN_PREFIX, "");
+        return challengeService.addCompetitor(token, id);
+    }
+
     @RequestMapping(path = "/get/all", method = RequestMethod.GET, produces = "application/json")
-    public Object findAll() {
-        return challengeService.getAll();
+    public Object findAll(HttpServletRequest req) {
+        String token = req.getHeader(AuthorizationHeader.HEADER_NAME).replace(AuthorizationHeader.TOKEN_PREFIX, "");
+
+        return challengeService.getAll(token);
     }
 
     @RequestMapping(path = "/get/findBy/car", method = RequestMethod.GET, produces = "application/json")
-    public Object findByCar(@RequestParam Map<String, String> carParam) {
-        return challengeService.findByCar(carParam);
+    public Object findByCar(HttpServletRequest req, @RequestParam Map<String, String> carParam) {
+        String token = req.getHeader(AuthorizationHeader.HEADER_NAME).replace(AuthorizationHeader.TOKEN_PREFIX, "");
+        return challengeService.findByCar(carParam, token);
     }
 
     @RequestMapping(path = "/get/findBy/user/id/{id}", method = RequestMethod.GET, produces = "application/json")
-    public Object findByUser(@PathVariable String id) {
-        return challengeService.findByUser(id);
+    public Object findByUser(HttpServletRequest req, @PathVariable String id) {
+        String token = req.getHeader(AuthorizationHeader.HEADER_NAME).replace(AuthorizationHeader.TOKEN_PREFIX, "");
+
+        return challengeService.findByUser(id, token);
     }
 
     @RequestMapping(path = "/get/questions/id/{id}", method = RequestMethod.GET, produces = "application/json")
-    public Object findById(@PathVariable String id) {
+    public Object getQuestionsById(@PathVariable String id) {
         return challengeService.getQuestions(id);
     }
 

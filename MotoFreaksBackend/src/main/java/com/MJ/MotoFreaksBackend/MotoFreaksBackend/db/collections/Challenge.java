@@ -25,5 +25,6 @@ public class Challenge {
     private String generation;
     private String creatorId;
     private List<QuestionAnswer> qaList;
+    private List<String> competitorIdList;
 
 }
