@@ -19,10 +19,11 @@ import {AppCommonModule} from "../common/common.module";
 import {QuestionsComponent} from './components/questions/questions.component';
 import {QuestionItemComponent} from './components/question-item/question-item.component';
 import {QuestionAnswerItemComponent} from './components/question-answer-item/question-answer-item.component';
+import {SummaryFinishChallengeComponent} from './components/summary-finish-challenge/summary-finish-challenge.component';
 
 
 @NgModule({
-  declarations: [AllChallengesPageComponent, ChallengesListComponent, ChallengesListItemComponent, CreateChallengeComponent, DoChallengePageComponent, CreateChallengePageComponent, ChallengesFilterComponent, QuestionsComponent, QuestionItemComponent, QuestionAnswerItemComponent],
+  declarations: [AllChallengesPageComponent, ChallengesListComponent, ChallengesListItemComponent, CreateChallengeComponent, DoChallengePageComponent, CreateChallengePageComponent, ChallengesFilterComponent, QuestionsComponent, QuestionItemComponent, QuestionAnswerItemComponent, SummaryFinishChallengeComponent],
   imports: [
     CommonModule,
     ChallengesRoutingModule,

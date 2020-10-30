@@ -15,6 +15,7 @@ export class DoChallengePageComponent implements OnInit {
   questions: Observable<QuestionAnswer[]>;
   challengeId: string;
   showSummary: boolean = false;
+  obtainedPoints: number = 0;
 
   constructor(private route: ActivatedRoute, private challengesService: ChallengesService,
               private router: Router, private profileService: ProfileService) {
@@ -27,6 +28,7 @@ export class DoChallengePageComponent implements OnInit {
   }
 
   finishChallenge(obtainedPoints: number) {
+    this.obtainedPoints = obtainedPoints;
     this.showSummary = true;
     this.challengesService.addCompetitor(this.challengeId);
     this.profileService.addPoints(obtainedPoints);
