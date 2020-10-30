@@ -49,21 +49,21 @@ export class CreateChallengeFail implements Action {
 }
 
 export class AddCompetitor implements Action {
-  readonly type = CREATE_CHALLENGE;
+  readonly type = ADD_COMPETITOR;
 
   constructor(public challengeId: string) {
   }
 }
 
 export class AddCompetitorSuccess implements Action {
-  readonly type = CREATE_CHALLENGE_SUCCESS;
+  readonly type = ADD_COMPETITOR_SUCCESS;
 
   constructor(public payload: string) {
   }
 }
 
 export class AddCompetitorFail implements Action {
-  readonly type = CREATE_CHALLENGE_FAIL;
+  readonly type = ADD_COMPETITOR_FAIL;
 
   constructor(public payload: string) {
   }
