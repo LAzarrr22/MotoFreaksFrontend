@@ -1,8 +1,15 @@
 <div class="context-min">
   <div class="border mat-elevation-z18">
 
-    <div class="row pt-3 click header">
-      <div class="col-4 offset-4">
+    <div class="row pt-3 sub-text-already" *ngIf="challenge.alreadyFilled">
+      <div class="col">
+        <mat-icon>done</mat-icon>
+        You have already filled this challenge
+      </div>
+    </div>
+
+    <div class="row pt-3 header">
+      <div class="col-8 offset-2">
         {{challenge.name}}
       </div>
     </div>
@@ -35,7 +42,7 @@
       </div>
     </div>
 
-    <div class="row pt-3 pb-3 click">
+    <div class="row pt-3 pb-3 click" *ngIf="!challenge.alreadyFilled">
       <div class="col-2 offset-5 ">
         <button class="mat-flat-button full-width start-button" color="accent" mat-flat-button
                 (click)="startChallenge()">Start

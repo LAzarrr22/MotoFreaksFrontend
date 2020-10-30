@@ -29,3 +29,8 @@
   border: 2px solid;
   color: $custom-white-dark;
 }
+
+.sub-text-already {
+  @extend .sub-text;
+  color: $custom-green;
+}

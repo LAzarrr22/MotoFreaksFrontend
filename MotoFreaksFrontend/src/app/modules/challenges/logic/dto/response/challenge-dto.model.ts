@@ -5,7 +5,8 @@ export class ChallengeDtoModel {
   company: string
   model: string
   generation: string
-  creatorId: string
+  creatorId: string;
+  alreadyFilled: boolean;
   questionsCount: number;
   allPoints: number;
 }
