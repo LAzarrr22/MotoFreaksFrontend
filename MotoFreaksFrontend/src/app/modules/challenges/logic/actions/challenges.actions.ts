@@ -7,6 +7,10 @@ export const CREATE_CHALLENGE = '[Challenge] CHALLENGES_CREATE'
 export const CREATE_CHALLENGE_SUCCESS = '[Challenge] CHALLENGES_CREATE_SUCCESS'
 export const CREATE_CHALLENGE_FAIL = '[Challenge] CHALLENGES_CREATE_FAIL'
 
+export const ADD_COMPETITOR = '[Challenge] ADD_COMPETITOR'
+export const ADD_COMPETITOR_SUCCESS = '[Challenge] ADD_COMPETITOR_SUCCESS'
+export const ADD_COMPETITOR_FAIL = '[Challenge] ADD_COMPETITOR_FAIL'
+
 export const GET_ALL_CHALLENGES = '[Challenge] GET_ALL_CHALLENGES'
 export const GET_ALL_CHALLENGES_SUCCESS = '[Challenge] GET_ALL_CHALLENGES_SUCCESS'
 export const GET_ALL_CHALLENGES_FAIL = '[Challenge] GET_ALL_CHALLENGES_FAIL'
@@ -38,6 +42,27 @@ export class CreateChallengeSuccess implements Action {
 }
 
 export class CreateChallengeFail implements Action {
+  readonly type = CREATE_CHALLENGE_FAIL;
+
+  constructor(public payload: string) {
+  }
+}
+
+export class AddCompetitor implements Action {
+  readonly type = CREATE_CHALLENGE;
+
+  constructor(public challengeId: string) {
+  }
+}
+
+export class AddCompetitorSuccess implements Action {
+  readonly type = CREATE_CHALLENGE_SUCCESS;
+
+  constructor(public payload: string) {
+  }
+}
+
+export class AddCompetitorFail implements Action {
   readonly type = CREATE_CHALLENGE_FAIL;
 
   constructor(public payload: string) {
@@ -132,6 +157,9 @@ export type Actions =
   | CreateChallenge
   | CreateChallengeSuccess
   | CreateChallengeFail
+  | AddCompetitor
+  | AddCompetitorSuccess
+  | AddCompetitorFail
   | GetAllChallenges
   | GetAllChallengesSuccess
   | GetAllChallengesFail

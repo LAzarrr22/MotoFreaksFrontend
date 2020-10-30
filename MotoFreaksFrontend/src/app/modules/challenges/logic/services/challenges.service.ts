@@ -6,6 +6,7 @@ import {QuestionAnswer} from "../dto/response/question-answer.model";
 import {Store} from "@ngrx/store";
 import {ChallengesState, getAllChallenges, getSelectedQuestions} from "../reducers/challenges.reducers";
 import {
+  AddCompetitor,
   CreateChallenge,
   GetAllChallenges,
   GetAllChallengesByCar,
@@ -21,6 +22,13 @@ export class ChallengesService {
 
   createChallenge(newChallenge: NewChallengeModel) {
     this.store.dispatch(new CreateChallenge(newChallenge));
+    setTimeout(() => {
+      this.store.dispatch(new GetAllChallenges());
+    }, 0);
+  }
+
+  addCompetitor(challengeId: string) {
+    this.store.dispatch(new AddCompetitor(challengeId));
     setTimeout(() => {
       this.store.dispatch(new GetAllChallenges());
     }, 0);

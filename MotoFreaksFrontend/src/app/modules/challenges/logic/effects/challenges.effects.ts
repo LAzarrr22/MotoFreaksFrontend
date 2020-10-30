@@ -5,6 +5,10 @@ import {CommonComponentsService} from "../../../common/common.service";
 import {ChallengesApiService} from "../services/challenges-api.service";
 import {Observable} from "rxjs";
 import {
+  ADD_COMPETITOR,
+  AddCompetitor,
+  AddCompetitorFail,
+  AddCompetitorSuccess,
   CREATE_CHALLENGE,
   CreateChallenge,
   CreateChallengeFail,
@@ -116,6 +120,23 @@ export class ChallengesEffects {
       ]),
       catchError((error, caught) => {
         this.store$.dispatch(new CreateChallengeFail(error.error.message));
+        this.errorService.error(error);
+        return caught;
+      })
+    )
+
+  @Effect()
+  addCompetitor$: Observable<Action> = this.actions$
+    .pipe(ofType(ADD_COMPETITOR),
+      switchMap((action: AddCompetitor) => {
+        return this.challengesApiService.addCompetitorChallengeApi(action.challengeId);
+      }),
+      switchMap((response: string) => [
+        new AddCompetitorSuccess(response),
+        new GetAllChallenges()
+      ]),
+      catchError((error, caught) => {
+        this.store$.dispatch(new AddCompetitorFail(error.error.message));
         this.errorService.error(error);
         return caught;
       })

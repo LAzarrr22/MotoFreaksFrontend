@@ -21,6 +21,10 @@ export class ChallengesApiService {
     })
   }
 
+  addCompetitorChallengeApi(challengeId: string) {
+    return this.httpClient.post(`${environment.apiUrl}/challenge/id/${challengeId}/add/competitor`, {})
+  }
+
   getAllChallengesApi(): Observable<ChallengeDtoModel[]> {
     return this.httpClient.get<ChallengeDtoModel[]>(`${environment.apiUrl}/challenge/get/all`)
   }
