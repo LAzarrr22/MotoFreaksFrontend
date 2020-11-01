@@ -41,7 +41,7 @@ export class AllPostPageComponent implements OnInit {
       this.postsListObs = this.postsService.getAllPosts();
       window.scrollTo(0, 0)
     } else {
-      this.postsListObs = this.postsService.getAllPostById(this.idProfileToShow);
+      this.postsListObs = this.postsService.getAllPostByCreatorId(this.idProfileToShow);
     }
 
   }
@@ -71,7 +71,7 @@ export class AllPostPageComponent implements OnInit {
     if (!this.postsForProfile) {
       this.postsListObs = this.postsService.getAllPosts(this.currentFilterType);
     } else {
-      this.postsListObs = this.postsService.getAllPostById(this.idProfileToShow);
+      this.postsListObs = this.postsService.getAllPostByCreatorId(this.idProfileToShow);
     }
   }
 }

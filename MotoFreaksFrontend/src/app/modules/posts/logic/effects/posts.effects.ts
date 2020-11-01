@@ -16,9 +16,9 @@ import {
   DeletePostSuccess,
   GET_ALL_POST,
   GET_ALL_POST_BY_ID,
-  GetAllPostById,
-  GetAllPostByIdFail,
-  GetAllPostByIdSuccess,
+  GetAllPostByUserId,
+  GetAllPostByUserIdFail,
+  GetAllPostByUserIdSuccess,
   GetAllPosts,
   GetAllPostsFail,
   GetAllPostsSuccess
@@ -48,16 +48,16 @@ export class PostsEffects {
     )
 
   @Effect()
-  getAllPostsById: Observable<Action> = this.action$
+  getAllPostsByCreatorId: Observable<Action> = this.action$
     .pipe(ofType(GET_ALL_POST_BY_ID),
-      switchMap((action: GetAllPostById) => {
-        return this.postsApiService.getAllPostsById(action.id);
+      switchMap((action: GetAllPostByUserId) => {
+        return this.postsApiService.getAllPostsByCreatorId(action.userId);
       }),
       switchMap((posts: PostModel[]) => [
-        new GetAllPostByIdSuccess(posts)
+        new GetAllPostByUserIdSuccess(posts)
       ]),
       catchError((error, caught) => {
-        this.store$.dispatch(new GetAllPostByIdFail(error.error.message));
+        this.store$.dispatch(new GetAllPostByUserIdFail(error.error.message));
         this.errorService.error(error);
         return caught;
       })

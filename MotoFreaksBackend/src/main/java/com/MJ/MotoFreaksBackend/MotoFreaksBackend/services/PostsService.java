@@ -85,7 +85,7 @@ public class PostsService {
     }
 
 
-    public Object getPostsById(String id) {
+    public Object getPostsByCreatorId(String id) {
         Optional<List<Post>> findPosts = postsRepository.findByCreatorIdOptional(id);
         List<Post> returnPosts = findPosts.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Posts_not_found"));
         return ok(returnPosts.stream().sorted(Comparator.comparing(Post::getCreatedDate).reversed()));

@@ -41,21 +41,21 @@ export class GetAllPostsFail implements Action {
   }
 }
 
-export class GetAllPostById implements Action {
+export class GetAllPostByUserId implements Action {
   readonly type = GET_ALL_POST_BY_ID;
 
-  constructor(public id: string) {
+  constructor(public userId: string) {
   }
 }
 
-export class GetAllPostByIdSuccess implements Action {
+export class GetAllPostByUserIdSuccess implements Action {
   readonly type = GET_ALL_POST_BY_ID_SUCCESS;
 
   constructor(public payload: PostModel[]) {
   }
 }
 
-export class GetAllPostByIdFail implements Action {
+export class GetAllPostByUserIdFail implements Action {
   readonly type = GET_ALL_POST_BY_ID_FAIL;
 
   constructor(public payload: string) {
@@ -105,9 +105,9 @@ export class AddPostFail implements Action {
 }
 
 export type Actions =
-  | GetAllPostById
-  | GetAllPostByIdSuccess
-  | GetAllPostByIdFail
+  | GetAllPostByUserId
+  | GetAllPostByUserIdSuccess
+  | GetAllPostByUserIdFail
   | GetAllPosts
   | GetAllPostsSuccess
   | GetAllPostsFail

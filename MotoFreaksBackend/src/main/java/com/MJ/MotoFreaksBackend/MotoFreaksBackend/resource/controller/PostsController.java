@@ -41,9 +41,9 @@ public class PostsController {
         return postsService.addPost(newPost, token);
     }
 
-    @RequestMapping(path = "/all/id/{id}", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(path = "/all/creator/id/{id}", method = RequestMethod.GET, produces = "application/json")
     public Object getPostsById(HttpServletRequest req, @PathVariable String id) {
-        return postsService.getPostsById(id);
+        return postsService.getPostsByCreatorId(id);
     }
 
     @RequestMapping(path = "/delete/{id}", method = RequestMethod.DELETE, produces = "application/json")
