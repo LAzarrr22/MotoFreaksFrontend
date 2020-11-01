@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/posts")
@@ -25,13 +26,13 @@ public class PostsController {
     }
 
     @RequestMapping(path = "/get/ALL", method = RequestMethod.GET, produces = "application/json")
-    public Object getAll() {
-        return postsService.getAll();
+    public Object getAll(@RequestParam Map<String, String> carParam) {
+        return postsService.getAll(carParam);
     }
 
     @RequestMapping(path = "/get/{type}", method = RequestMethod.GET, produces = "application/json")
-    public Object getAllByType(@PathVariable PostType type) {
-        return postsService.getAllByType(type);
+    public Object getAllByType(@PathVariable PostType type, @RequestParam Map<String, String> carParam) {
+        return postsService.getAllByType(type, carParam);
     }
 
     @RequestMapping(path = "/add", method = RequestMethod.POST, produces = "application/json")

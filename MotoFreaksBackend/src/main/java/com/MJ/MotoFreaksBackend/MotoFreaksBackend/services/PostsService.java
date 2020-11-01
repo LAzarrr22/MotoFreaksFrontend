@@ -7,6 +7,9 @@ import com.MJ.MotoFreaksBackend.MotoFreaksBackend.repository.PostsRepository;
 import com.MJ.MotoFreaksBackend.MotoFreaksBackend.resource.requests.NewPost;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -21,15 +24,38 @@ public class PostsService {
 
     private final PostsRepository postsRepository;
     private final UserService userService;
+    private final MongoTemplate mongoTemplate;
 
     @Autowired
-    public PostsService(PostsRepository postsRepository, UserService userService) {
+    public PostsService(PostsRepository postsRepository, UserService userService, MongoTemplate mongoTemplate) {
         this.postsRepository = postsRepository;
         this.userService = userService;
+        this.mongoTemplate = mongoTemplate;
     }
 
-    public Object getAll() {
-        List<Post> returnPosts = postsRepository.findAll();
+    public Object getAll(Map<String, String> carParam) {
+        List<Post> allPosts = postsRepository.findAll();
+        return findPostsByCar(carParam, allPosts, null);
+    }
+
+    public Object getAllByType(PostType type, Map<String, String> carParam) {
+        Optional<List<Post>> findPosts = postsRepository.findByTypeOptional(type);
+        List<Post> returnPosts = findPosts.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Posts_not_found"));
+        return findPostsByCar(carParam, returnPosts, type);
+    }
+
+    private Object findPostsByCar(Map<String, String> carParam, List<Post> returnPosts, PostType type) {
+        if (!carParam.isEmpty()) {
+            Query query = new Query();
+            if (type != null) {
+                query.addCriteria(Criteria.where("type").is(type));
+            }
+            carParam.keySet().forEach(key -> {
+                query.addCriteria(Criteria.where("car." + key).is(carParam.get(key)));
+            });
+            returnPosts = mongoTemplate.find(query, Post.class);
+
+        }
         return ok(returnPosts.stream().sorted(Comparator.comparing(Post::getCreatedDate).reversed()));
     }
 
@@ -58,11 +84,6 @@ public class PostsService {
         return ok(model);
     }
 
-    public Object getAllByType(PostType type) {
-        Optional<List<Post>> findPosts = postsRepository.findByTypeOptional(type);
-        List<Post> returnPosts = findPosts.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Posts_not_found"));
-        return ok(returnPosts.stream().sorted(Comparator.comparing(Post::getCreatedDate).reversed()));
-    }
 
     public Object getPostsById(String id) {
         Optional<List<Post>> findPosts = postsRepository.findByCreatorIdOptional(id);
