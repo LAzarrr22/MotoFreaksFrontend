@@ -1,22 +1,26 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
-import {CarsService} from "../../../cars/logic/service/cars.service";
-import {Actions, ofType} from "@ngrx/effects";
-import {map} from "rxjs/operators";
 import {Observable} from "rxjs";
-import {GET_ALL_CHALLENGES_BY_CAR_FAIL, GetAllChallengesByCarFail} from "../../logic/actions/challenges.actions";
+import {CarsService} from "../../cars/logic/service/cars.service";
+import {Actions, ofType} from "@ngrx/effects";
+import {
+  GET_ALL_CHALLENGES_BY_CAR_FAIL,
+  GetAllChallengesByCarFail
+} from "../../challenges/logic/actions/challenges.actions";
+import {map} from "rxjs/operators";
 
 @Component({
-  selector: 'app-challenges-filter',
-  templateUrl: './challenges-filter.component.html',
-  styleUrls: ['./challenges-filter.component.scss']
+  selector: 'app-filter-by-car',
+  templateUrl: './filter-by-car.component.html',
+  styleUrls: ['./filter-by-car.component.scss']
 })
-export class ChallengesFilterComponent implements OnInit {
+export class FilterByCarComponent implements OnInit {
 
   formFilter: FormGroup;
   companies: string[];
   models: string[]
   generations: string[];
+  //todo input
   errorMessage: Observable<string>
 
   @Output()

@@ -23,7 +23,7 @@ export const ADD_POST_FAIL = '[Posts] ADD_POST_FAIL'
 export class GetAllPosts implements Action {
   readonly type = GET_ALL_POST;
 
-  constructor(public typeOfPosts: string = 'ALL') {
+  constructor(public typeOfPosts: string = 'ALL', public paramMap: Map<string, string> = null) {
   }
 }
 

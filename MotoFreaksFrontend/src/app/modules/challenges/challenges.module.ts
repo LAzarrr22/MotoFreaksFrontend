@@ -13,7 +13,6 @@ import {ChallengesListItemComponent} from './components/challenges-list-item/cha
 import {DoChallengePageComponent} from './pages/do-challenge-page/do-challenge-page.component';
 import {CreateChallengePageComponent} from './pages/create-challenge-page/create-challenge-page.component';
 import {CreateChallengeComponent} from "./components/create-challenge/create-challenge.component";
-import {ChallengesFilterComponent} from './components/challenges-filter/challenges-filter.component';
 import {AngularMaterialModule} from "../../shared/angular-material.module";
 import {AppCommonModule} from "../common/common.module";
 import {QuestionsComponent} from './components/questions/questions.component';
@@ -23,7 +22,9 @@ import {SummaryFinishChallengeComponent} from './components/summary-finish-chall
 
 
 @NgModule({
-  declarations: [AllChallengesPageComponent, ChallengesListComponent, ChallengesListItemComponent, CreateChallengeComponent, DoChallengePageComponent, CreateChallengePageComponent, ChallengesFilterComponent, QuestionsComponent, QuestionItemComponent, QuestionAnswerItemComponent, SummaryFinishChallengeComponent],
+  declarations: [AllChallengesPageComponent, ChallengesListComponent, ChallengesListItemComponent, CreateChallengeComponent,
+    DoChallengePageComponent, CreateChallengePageComponent, QuestionsComponent, QuestionItemComponent,
+    QuestionAnswerItemComponent, SummaryFinishChallengeComponent],
   imports: [
     CommonModule,
     ChallengesRoutingModule,

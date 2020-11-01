@@ -4,16 +4,18 @@ import {CommonModule} from "@angular/common";
 import {ConnectionRefusedComponent} from './connection-refused/connection-refused.component';
 import {CommonComponentsService} from "./common.service";
 import {AngularMaterialModule} from "../../shared/angular-material.module";
+import {FilterByCarComponent} from './filter-by-car/filter-by-car.component';
 
 
 @NgModule({
-  declarations: [ErrorFormComponent, ConnectionRefusedComponent],
+  declarations: [ErrorFormComponent, ConnectionRefusedComponent, FilterByCarComponent],
   imports: [
     CommonModule,
     AngularMaterialModule
   ],
   exports: [
-    ErrorFormComponent
+    ErrorFormComponent,
+    FilterByCarComponent
   ],
   providers: [
     CommonComponentsService

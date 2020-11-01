@@ -12,8 +12,8 @@
     </div>
   </div>
     <ng-container *ngIf="filterOpen">
-      <app-challenges-filter (applyFilterEvent)="applyCarFilter($event)"
-                             (clearFilterEvent)="clearFilter()"></app-challenges-filter>
+      <app-filter-by-car (applyFilterEvent)="applyCarFilter($event)"
+                         (clearFilterEvent)="clearFilter()"></app-filter-by-car>
     </ng-container>
 
   <app-challenges-list [challengesList]="challengesListObs|async" [myId]="myId"></app-challenges-list>
