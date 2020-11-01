@@ -34,3 +34,7 @@
   @extend .sub-text;
   color: $custom-green;
 }
+
+.fixed-width {
+  width: fit-content;
+}

@@ -21,10 +21,12 @@
       </div>
     </div>
 
-    <div class="row pl-3 pb-1 sub-text click" (click)="goToProfile()">
-      <div class="col " matTooltip="Profile" matTooltipPosition="left">
-        <mat-icon>person</mat-icon>
-        {{creatorName}} {{creatorLastName}}
+    <div class="row pl-3 pb-1 sub-text" (click)="goToProfile()">
+      <div class="col" matTooltip="Profile" matTooltipPosition="left">
+        <div class="fixed-width click">
+          <mat-icon>person</mat-icon>
+          {{creatorName}} {{creatorLastName}}
+        </div>
       </div>
     </div>
 

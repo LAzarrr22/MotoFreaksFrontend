@@ -1,4 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Router} from "@angular/router";
+import {AppPath} from "../../../../shared/enums/app-path.enum";
 
 @Component({
   selector: 'app-summary-finish-challenge',
@@ -10,10 +12,13 @@ export class SummaryFinishChallengeComponent implements OnInit {
   @Input()
   points: number;
 
-  constructor() {
+  constructor(private router: Router) {
   }
 
   ngOnInit(): void {
   }
 
+  goToChallenges() {
+    this.router.navigate([AppPath.CHALLENGES_ALL_PATH])
+  }
 }
