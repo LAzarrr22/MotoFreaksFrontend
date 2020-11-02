@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:8080',
+  apiUrl: 'https://moto-freak-backend.herokuapp.com/',
   jwtExpirationTime: 3600,
   localstorageSessionKey: 'sessionMTFR'
 };
