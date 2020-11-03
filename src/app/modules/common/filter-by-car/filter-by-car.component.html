@@ -39,8 +39,8 @@
       </div>
     </div>
 
-    <div class="row error-message pt-4" *ngIf="errorMessage |async">
-      <p>Challenges for  {{getCompany()}} {{getModel()}} {{getGeneration()}}  NOT FOUND</p>
+    <div class="row error-message pt-4" *ngIf="errorMessage">
+      <p>{{errorMessage}} -  {{getCompany()}} {{getModel()}} {{getGeneration()}} </p>
     </div>
 
   </form>

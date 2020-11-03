@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {Observable} from "rxjs";
 import {CarsService} from "../../cars/logic/service/cars.service";
@@ -20,16 +20,14 @@ export class FilterByCarComponent implements OnInit {
   companies: string[];
   models: string[]
   generations: string[];
-  //todo input
-  errorMessage: Observable<string>
-
+  @Input()
+  errorMessage: string
   @Output()
   applyFilterEvent = new EventEmitter<Map<string, string>>();
   @Output()
   clearFilterEvent = new EventEmitter();
 
-  constructor(private formBuilder: FormBuilder, private carsService: CarsService, private actions: Actions) {
-    this.errorMessage = this.actions.pipe(ofType(GET_ALL_CHALLENGES_BY_CAR_FAIL), map((action: GetAllChallengesByCarFail) => action.payload));
+  constructor(private formBuilder: FormBuilder, private carsService: CarsService) {
   }
 
   ngOnInit(): void {
