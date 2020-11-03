@@ -3,7 +3,8 @@
 
 .context-min {
   @extend .context;
-  min-width: 300px;
+  min-width: 250px;
+  padding: 20px 3% 20px 7%;
 }
 
 .header {

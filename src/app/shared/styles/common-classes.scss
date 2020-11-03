@@ -1,7 +1,7 @@
 @import "src/styles";
 
 .context {
-  padding: 0px 60px 60px 60px;
+  padding: 0px 5% 60px 5%;
 }
 
 .title-page {
@@ -32,5 +32,9 @@
 .error-message {
   color: $custom-warn;
   padding-bottom: 15px;
+}
+
+.center-text{
+  text-align: center;
 }
 

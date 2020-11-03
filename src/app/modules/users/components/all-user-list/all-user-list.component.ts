@@ -17,9 +17,7 @@ import {ProfileService} from "../../../profiles/logic/services/profile.service";
 export class AllUserListComponent implements OnInit, AfterViewInit {
   columnNames = {
     name: 'Name',
-    lastName: 'Last name',
     gender: 'Gender',
-    points: 'Points'
   };
   displayedColumns = Object.keys(this.columnNames);
   dataSource: MatTableDataSource<UserModel>;

@@ -2,7 +2,10 @@
 @import "~bootstrap";
 
 .button-section {
-  width: 35%;
+  height: 25px;
+  border-radius: 15px;
+  background-color: $custom-blue;
+  color: $custom-white;
 }
 
 .friend-text {

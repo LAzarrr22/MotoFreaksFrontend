@@ -1,7 +1,7 @@
 <div class="context">
   <mat-divider></mat-divider>
   <div class="row">
-    <div class="col-5 offset-7 pt-3">
+    <div class="col-md-5  col-sm-10 offset-md-7 pt-3">
 
       <form class="message-form" [formGroup]="form" (ngSubmit)="sendMessage()">
         <mat-form-field appearance="outline" class="full-width">
@@ -12,7 +12,7 @@
         <error-form [form]="form" [control]="'message'"></error-form>
 
         <div class="row">
-          <div class="col offset-10">
+          <div class="col offset-md-10">
             <ng-container *ngIf="getText()">
               <button type="submit" mat-flat-button color="primary">Send</button>
             </ng-container>

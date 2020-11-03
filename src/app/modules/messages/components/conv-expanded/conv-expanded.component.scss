@@ -2,7 +2,11 @@
 @import "~bootstrap";
 
 .context {
-  padding: 0px 60px 60px 60px;
+  padding: 10px 5% 15px 5%;
+  min-width: 250px;
+}
+.center-text{
+  text-align: center;
 }
 
 .back {
