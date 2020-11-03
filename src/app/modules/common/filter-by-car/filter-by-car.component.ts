@@ -104,6 +104,8 @@ export class FilterByCarComponent implements OnInit {
   }
 
   clearFilter() {
+    this.models=[];
+    this.generations =[];
     this.clearFilterEvent.emit()
   }
 }

@@ -13,15 +13,18 @@ export class FilterPostsComponent implements OnInit {
   @Output()
   filterTypeEvent = new EventEmitter<PostType>();
   form: FormGroup;
+  @Output()
+  applyCarFilterEvent = new EventEmitter<Map<string, string>>();
+  @Output()
+  clearFilterEvent = new EventEmitter();
 
   constructor(private formBuilder: FormBuilder) {
   }
 
   ngOnInit(): void {
-    this.postTypeList = ['ALL', ...this.postTypeList]
 
     this.form = this.formBuilder.group({
-      type: new FormControl(''),
+      type: new FormControl('ALL'),
     })
   }
 
@@ -30,6 +33,13 @@ export class FilterPostsComponent implements OnInit {
 
   filterType() {
       this.filterTypeEvent.emit(PostType[this.form.controls.type.value])
+  }
 
+  applyCarFilter($event: Map<string, string>) {
+    this.applyCarFilterEvent.emit($event);
+  }
+
+  clearCarFilter() {
+    this.clearFilterEvent.emit();
   }
 }

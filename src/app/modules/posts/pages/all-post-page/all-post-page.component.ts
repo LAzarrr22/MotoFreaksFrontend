@@ -22,6 +22,7 @@ export class AllPostPageComponent implements OnInit {
   postTypeList = [];
   myId: string;
   currentFilterType: PostType;
+  currentCarFilter: Map<string,string>;
 
   @Input()
   postsForProfile: boolean = false;
@@ -67,9 +68,18 @@ export class AllPostPageComponent implements OnInit {
     this.refreshPosts();
   }
 
+  applyCarFilter(params: Map<string, string>) {
+    this.currentCarFilter=params;
+    this.refreshPosts();
+  }
+  clearCarFilter() {
+    this.currentCarFilter=null;
+    this.refreshPosts();
+  }
+
   refreshPosts() {
     if (!this.postsForProfile) {
-      this.postsListObs = this.postsService.getAllPosts(this.currentFilterType);
+      this.postsListObs = this.postsService.getAllPosts(this.currentFilterType, this.currentCarFilter);
     } else {
       this.postsListObs = this.postsService.getAllPostByCreatorId(this.idProfileToShow);
     }
