@@ -16,5 +16,5 @@
 
   </form>
   <app-filter-by-car (applyFilterEvent)="applyCarFilter($event)"
-                     (clearFilterEvent)="clearCarFilter()"></app-filter-by-car>
+                     (clearFilterEvent)="clearCarFilter()" [errorMessage]="errorMessage"></app-filter-by-car>
 </div>

@@ -15,7 +15,8 @@
     </div>
   </div>
   <ng-container *ngIf="filterOpen">
-    <app-filter-posts [postTypeList]="postTypeList" (filterTypeEvent)="filterType($event)"
+    <app-filter-posts [postTypeList]="postTypeList" [errorMessage]="errorMessage |async"
+                      (filterTypeEvent)="filterType($event)"
                         (applyCarFilterEvent)="applyCarFilter($event)" (clearFilterEvent)="clearCarFilter()" ></app-filter-posts>
   </ng-container>
 </div>

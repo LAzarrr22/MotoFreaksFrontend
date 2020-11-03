@@ -8,6 +8,14 @@ import {PostModel} from "../../logic/dto/model/post.model";
 import {PostsService} from "../../logic/services/posts.service";
 import {PostType} from "../../logic/enums/post-type.enum";
 import {ProfileService} from "../../../profiles/logic/services/profile.service";
+import {Actions, ofType} from "@ngrx/effects";
+import {
+  GET_ALL_CHALLENGES_BY_CAR_FAIL,
+  GetAllChallengesByCarFail
+} from "../../../challenges/logic/actions/challenges.actions";
+import {map} from "rxjs/operators";
+import {CarsService} from "../../../cars/logic/service/cars.service";
+import {GET_ALL_POST_FAIL, GetAllPostsFail} from "../../logic/action/posts.action";
 
 @Component({
   selector: 'app-all-post-page',
@@ -28,9 +36,13 @@ export class AllPostPageComponent implements OnInit {
   postsForProfile: boolean = false;
   @Input()
   idProfileToShow: string;
+  errorMessage:Observable<string>;
 
   constructor(private router: Router, private menuService: MenuService,
-              private postsService: PostsService, private profileService: ProfileService) {
+              private postsService: PostsService, private profileService: ProfileService,
+              private actions: Actions) {
+    this.errorMessage = this.actions.pipe(ofType(GET_ALL_POST_FAIL), map((action: GetAllPostsFail) => action.payload));
+
   }
 
   ngOnInit(): void {

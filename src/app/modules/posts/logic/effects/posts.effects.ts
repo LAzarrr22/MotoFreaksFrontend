@@ -38,7 +38,8 @@ export class PostsEffects {
         return this.postsApiService.getAllPosts(action.typeOfPosts,action.paramMap);
       }),
       switchMap((posts: PostModel[]) => [
-        new GetAllPostsSuccess(posts)
+        new GetAllPostsSuccess(posts),
+        new GetAllPostsFail('')
       ]),
       catchError((error, caught) => {
         this.store$.dispatch(new GetAllPostsFail(error.error.message));
@@ -54,7 +55,8 @@ export class PostsEffects {
         return this.postsApiService.getAllPostsByCreatorId(action.userId);
       }),
       switchMap((posts: PostModel[]) => [
-        new GetAllPostByUserIdSuccess(posts)
+        new GetAllPostByUserIdSuccess(posts),
+        new GetAllPostsFail('')
       ]),
       catchError((error, caught) => {
         this.store$.dispatch(new GetAllPostByUserIdFail(error.error.message));

@@ -17,6 +17,8 @@ export class FilterPostsComponent implements OnInit {
   applyCarFilterEvent = new EventEmitter<Map<string, string>>();
   @Output()
   clearFilterEvent = new EventEmitter();
+  @Input()
+  errorMessage:string;
 
   constructor(private formBuilder: FormBuilder) {
   }
