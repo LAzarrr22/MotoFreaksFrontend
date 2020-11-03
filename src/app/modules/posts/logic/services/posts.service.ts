@@ -11,8 +11,8 @@ export class PostsService {
   constructor(private store: Store) {
   }
 
-  getAllPosts(type: string = 'ALL'): Observable<PostModel[]> {
-    this.store.dispatch(new GetAllPosts(type))
+  getAllPosts(type: string = 'ALL', paramMap: Map<string, string> = null): Observable<PostModel[]> {
+    this.store.dispatch(new GetAllPosts(type,paramMap))
     return this.store.select(getPosts);
   }
 

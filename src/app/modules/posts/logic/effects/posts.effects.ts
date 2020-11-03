@@ -35,7 +35,7 @@ export class PostsEffects {
   getAllPosts: Observable<Action> = this.action$
     .pipe(ofType(GET_ALL_POST),
       switchMap((action: GetAllPosts) => {
-        return this.postsApiService.getAllPosts(action.typeOfPosts);
+        return this.postsApiService.getAllPosts(action.typeOfPosts,action.paramMap);
       }),
       switchMap((posts: PostModel[]) => [
         new GetAllPostsSuccess(posts)

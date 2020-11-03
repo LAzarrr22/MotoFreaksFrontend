@@ -1,4 +1,4 @@
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {NewPostModel} from "../dto/request/new-post.model";
 import {environment} from "../../../../../environments/environment";
 import {Observable} from "rxjs";
@@ -26,8 +26,17 @@ export class PostsApiService {
     return this.httpClient.delete(`${environment.apiUrl}/posts/delete/${id}`);
   }
 
-  getAllPosts(type: string): Observable<PostModel[]> {
-    return this.httpClient.get<PostModel[]>(`${environment.apiUrl}/posts/get/${type}`)
+  getAllPosts(type: string, paramMap: Map<string, string>): Observable<PostModel[]> {
+    let params = new HttpParams();
+    if(paramMap) {
+      for (let paramMapElement of paramMap) {
+        params = params.set(paramMapElement[0], paramMapElement[1])
+      }
+      return this.httpClient.get<PostModel[]>(`${environment.apiUrl}/posts/get/${type}`,{params})
+
+    }else{
+      return this.httpClient.get<PostModel[]>(`${environment.apiUrl}/posts/get/${type}`)
+    }
   }
 
   getAllPostsByCreatorId(id: string): Observable<PostModel[]> {
