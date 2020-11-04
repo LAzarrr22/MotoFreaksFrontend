@@ -4,6 +4,7 @@ import {MergeUserModel} from "../../../logic/dto/request/merge-user.model";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ValidationMessageMap} from "../../../../../shared/interfaces/validation-message-map";
 import {ProfileService} from "../../../logic/services/profile.service";
+import {AuthService} from "../../../../authentication/logic/services/auth.service";
 
 @Component({
   selector: 'app-section-my-personal',
@@ -21,7 +22,7 @@ export class SectionMyPersonalComponent implements OnInit {
   formMerge: FormGroup;
   validationMessages: ValidationMessageMap;
 
-  constructor(private formBuilder: FormBuilder, private profileService: ProfileService) {
+  constructor(private formBuilder: FormBuilder, private profileService: ProfileService, private authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -70,6 +71,7 @@ export class SectionMyPersonalComponent implements OnInit {
         new MergeUserModel(this.getNewName(), this.getNewLastName(), this.getNewGender(), this.getNewEnabled(), this.getNewPassword()))
       setTimeout(() => {
         this.profileService.getMyProfile();
+        this.authService.getValidation();
       }, 500)
       this.editData();
     }

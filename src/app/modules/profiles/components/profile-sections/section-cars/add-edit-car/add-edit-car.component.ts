@@ -5,6 +5,7 @@ import {ProfileService} from "../../../../logic/services/profile.service";
 import {NewCarModel} from "../../../../logic/dto/request/new-car.model";
 import {ValidationMessageMap} from "../../../../../../shared/interfaces/validation-message-map";
 import {CarsService} from "../../../../../cars/logic/service/cars.service";
+import {AuthService} from "../../../../../authentication/logic/services/auth.service";
 
 @Component({
   selector: 'app-add-edit-car',
@@ -28,7 +29,8 @@ export class AddEditCarComponent implements OnInit {
   generations: string[];
 
 
-  constructor(private formBuilder: FormBuilder, private profileService: ProfileService, private carsService: CarsService) {
+  constructor(private formBuilder: FormBuilder, private profileService: ProfileService,
+              private carsService: CarsService, private authService: AuthService) {
     this.validationMessages = {
       year: {
         pattern: 'Password must contain only number',
@@ -83,6 +85,7 @@ export class AddEditCarComponent implements OnInit {
       this.closeEditing();
       setTimeout(() => {
         this.profileService.getMyProfile()
+        this.authService.getValidation();
       }, 500);
     }
   }

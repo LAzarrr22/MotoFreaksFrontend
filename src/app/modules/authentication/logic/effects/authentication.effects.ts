@@ -4,6 +4,7 @@ import {Actions, Effect, ofType} from '@ngrx/effects';
 import {AuthenticationService} from '../services/authentication.service';
 import {Action, Store} from '@ngrx/store';
 import {
+  CHECK_VALIDATION, CheckValidation, CheckValidationFail, CheckValidationSuccess,
   GET_ROLES,
   GetRoles,
   GetRolesFail,
@@ -146,6 +147,23 @@ export class AuthenticationEffects {
       ]),
       catchError((error, caught) => {
         this.store$.dispatch(new GetRolesFail(error.error));
+        this.errorService.error(error);
+        return caught;
+      })
+    )
+
+  @Effect()
+  checkValidation$: Observable<Action> = this.actions$
+    .pipe(
+      ofType(CHECK_VALIDATION),
+      switchMap(() => {
+        return this.authService.checkUserValidation();
+      }),
+      switchMap((validation: boolean) => [
+        new CheckValidationSuccess(validation)
+      ]),
+      catchError((error, caught) => {
+        this.store$.dispatch(new CheckValidationFail(error.error));
         this.errorService.error(error);
         return caught;
       })

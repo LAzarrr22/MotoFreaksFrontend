@@ -3,6 +3,7 @@ import {AddressModel} from "../../../logic/dto/models/address.model";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ProfileService} from "../../../logic/services/profile.service";
 import {MyProfileModel} from "../../../logic/dto/response/my-profile.model";
+import {AuthService} from "../../../../authentication/logic/services/auth.service";
 
 @Component({
   selector: 'app-section-address',
@@ -18,7 +19,7 @@ export class SectionAddressComponent implements OnInit {
   isEditable: boolean = false;
   formMerge: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private profileService: ProfileService) {
+  constructor(private formBuilder: FormBuilder, private profileService: ProfileService, private authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -40,6 +41,7 @@ export class SectionAddressComponent implements OnInit {
         new AddressModel(this.getNewCountry(), this.getNewState(), this.getNewCity(), this.getNewStreet()))
       setTimeout(() => {
         this.profileService.getMyProfile()
+        this.authService.getValidation();
       }, 500);
       this.editData();
     }

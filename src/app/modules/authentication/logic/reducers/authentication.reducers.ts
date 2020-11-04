@@ -1,4 +1,5 @@
 import {
+  CHECK_VALIDATION, CHECK_VALIDATION_FAIL, CHECK_VALIDATION_SUCCESS,
   GET_ROLES,
   GET_ROLES_FAIL,
   GET_ROLES_SUCCESS,
@@ -28,6 +29,7 @@ export function reducer(state: AuthenticationState = INITIAL_STATE, action) {
   switch (action.type) {
     case USER_LOGIN:
     case GET_ROLES:
+    case CHECK_VALIDATION:
       return {
         ...state
       };
@@ -43,13 +45,17 @@ export function reducer(state: AuthenticationState = INITIAL_STATE, action) {
         ...state,
         roles: action.roles
       }
+    case CHECK_VALIDATION_SUCCESS:
+      return {
+        ...state,
+        isValidated: action.validation
+      }
     case GET_ROLES_FAIL:
+    case CHECK_VALIDATION_FAIL:
       return state;
 
     case USER_LOGIN_FAIL:
-      return INITIAL_STATE;
-
-    case USER_LOGOUT:
+     case USER_LOGOUT:
       return INITIAL_STATE;
 
     default:

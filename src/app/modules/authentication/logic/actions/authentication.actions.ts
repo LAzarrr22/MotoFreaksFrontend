@@ -26,6 +26,10 @@ export const GET_ROLES = '[Auth] GET_ROLES';
 export const GET_ROLES_SUCCESS = '[Auth] GET_ROLES_SUCCESS';
 export const GET_ROLES_FAIL = '[Auth] GET_ROLES_FAIL';
 
+export const CHECK_VALIDATION = '[Auth] CHECK_VALIDATION';
+export const CHECK_VALIDATION_SUCCESS = '[Auth] CHECK_VALIDATION_SUCCESS';
+export const CHECK_VALIDATION_FAIL = '[Auth] CHECK_VALIDATION_FAIL';
+
 
 export class UserLogin implements Action {
   readonly type = USER_LOGIN;
@@ -136,6 +140,27 @@ export class GetRolesFail implements Action {
   }
 }
 
+export class CheckValidation implements Action {
+  readonly type = CHECK_VALIDATION;
+
+  constructor() {
+  }
+}
+
+export class CheckValidationSuccess implements Action {
+  readonly type = CHECK_VALIDATION_SUCCESS;
+
+  constructor(public validation: boolean) {
+  }
+}
+
+export class CheckValidationFail implements Action {
+  readonly type = CHECK_VALIDATION_FAIL;
+
+  constructor(public payload: string) {
+  }
+}
+
 export type Actions =
   | UserLogin
   | UserLoginSuccess
@@ -150,4 +175,7 @@ export type Actions =
   | GetRoles
   | GetRolesSuccess
   | GetRolesFail
+  | CheckValidation
+  | CheckValidationSuccess
+  | CheckValidationFail
 

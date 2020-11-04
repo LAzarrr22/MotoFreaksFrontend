@@ -43,5 +43,7 @@ export class AuthenticationService {
   getRoles(): Observable<RolesEnum[]> {
     return this.httpClient.get<RolesEnum[]>(`${environment.apiUrl}/api/auth/roles`)
   }
-
+checkUserValidation():Observable<boolean>{
+  return this.httpClient.get<boolean>(`${environment.apiUrl}/api/auth/check/validation`)
+}
 }
