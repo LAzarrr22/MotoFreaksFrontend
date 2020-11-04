@@ -3,7 +3,7 @@
     <div class="title color-white">Friends</div>
   </div>
 </div>
-
+<ng-container *ngIf="friendsList.length>0;else notFriends">
 <div class="pb-4">
   <div class="filter-section">
     <mat-form-field>
@@ -43,3 +43,11 @@
   </table>
   <mat-paginator [pageSizeOptions]="[15, 30, 50, 100]" [length]="resultsLength" [pageSize]="15"></mat-paginator>
 </div>
+</ng-container>
+
+<ng-template  #notFriends>
+  <div class="not-found">
+    Not found any friends. Go to all users
+  </div>
+
+</ng-template>

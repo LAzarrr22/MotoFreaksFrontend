@@ -36,10 +36,7 @@ switch(action.type){
     }
 
   case GET_POST_FAIL:
-    return {
-      ...state,
-      loading: false
-    }
+    return INITIAL_STATE;
 
   default:
     return state;
