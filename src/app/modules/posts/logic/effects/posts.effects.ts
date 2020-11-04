@@ -17,11 +17,10 @@ import {
   GET_ALL_POST,
   GET_ALL_POST_BY_ID,
   GetAllPostByUserId,
-  GetAllPostByUserIdFail,
   GetAllPostByUserIdSuccess,
   GetAllPosts,
-  GetAllPostsFail,
-  GetAllPostsSuccess
+  GetAllPostsSuccess,
+  GetPostsFail
 } from "../action/posts.action";
 import {catchError, switchMap} from "rxjs/operators";
 
@@ -39,10 +38,10 @@ export class PostsEffects {
       }),
       switchMap((posts: PostModel[]) => [
         new GetAllPostsSuccess(posts),
-        new GetAllPostsFail('')
+        new GetPostsFail('')
       ]),
       catchError((error, caught) => {
-        this.store$.dispatch(new GetAllPostsFail(error.error.message));
+        this.store$.dispatch(new GetPostsFail(error.error.message));
         this.errorService.error(error);
         return caught;
       })
@@ -52,14 +51,14 @@ export class PostsEffects {
   getAllPostsByCreatorId: Observable<Action> = this.action$
     .pipe(ofType(GET_ALL_POST_BY_ID),
       switchMap((action: GetAllPostByUserId) => {
-        return this.postsApiService.getAllPostsByCreatorId(action.userId);
+        return this.postsApiService.getAllPostsByCreatorId(action.userId,action.typeOfPosts,action.paramMap);
       }),
       switchMap((posts: PostModel[]) => [
         new GetAllPostByUserIdSuccess(posts),
-        new GetAllPostsFail('')
+        new GetPostsFail('')
       ]),
       catchError((error, caught) => {
-        this.store$.dispatch(new GetAllPostByUserIdFail(error.error.message));
+        this.store$.dispatch(new GetPostsFail(error.error.message));
         this.errorService.error(error);
         return caught;
       })

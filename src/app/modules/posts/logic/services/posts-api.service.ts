@@ -39,8 +39,16 @@ export class PostsApiService {
     }
   }
 
-  getAllPostsByCreatorId(id: string): Observable<PostModel[]> {
-    return this.httpClient.get<PostModel[]>(`${environment.apiUrl}/posts/all/creator/id/${id}`)
+  getAllPostsByCreatorId(id: string, type: string, paramMap: Map<string, string>): Observable<PostModel[]> {
+    let params = new HttpParams();
+    if(paramMap) {
+      for (let paramMapElement of paramMap) {
+        params = params.set(paramMapElement[0], paramMapElement[1])
+      }
+      return this.httpClient.get<PostModel[]>(`${environment.apiUrl}/posts/creator/id/${id}/get/${type}`, {params})
+    }else{
+      return this.httpClient.get<PostModel[]>(`${environment.apiUrl}/posts/creator/id/${id}/get/${type}`)
+    }
   }
 
 }

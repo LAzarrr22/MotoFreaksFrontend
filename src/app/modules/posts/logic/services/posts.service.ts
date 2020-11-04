@@ -21,8 +21,8 @@ export class PostsService {
     return this.store.select(getPosts);
   }
 
-  getAllPostByCreatorId(id: string): Observable<PostModel[]> {
-    this.store.dispatch(new GetAllPostByUserId(id));
+  getAllPostByCreatorId(id: string, type: string = 'ALL', paramMap: Map<string, string> = null): Observable<PostModel[]> {
+    this.store.dispatch(new GetAllPostByUserId(id,type,paramMap));
     return this.store.select(getPosts);
   }
 

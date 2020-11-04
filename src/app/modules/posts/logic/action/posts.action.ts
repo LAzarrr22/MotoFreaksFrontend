@@ -5,11 +5,10 @@ import {PostModel} from "../dto/model/post.model";
 
 export const GET_ALL_POST = '[Posts] GET_ALL_POST'
 export const GET_ALL_POST_SUCCESS = '[Posts] GET_ALL_POST_SUCCESS'
-export const GET_ALL_POST_FAIL = '[Posts] GET_ALL_POST_FAIL'
+export const GET_POST_FAIL = '[Posts] GET_ALL_POST_FAIL'
 
 export const GET_ALL_POST_BY_ID = '[Posts] GET_ALL_POST_BY_ID'
 export const GET_ALL_POST_BY_ID_SUCCESS = '[Posts] GET_ALL_POST_BY_ID_SUCCESS'
-export const GET_ALL_POST_BY_ID_FAIL = '[Posts] GET_ALL_POST_BY_ID_FAIL'
 
 export const DELETE_POST = '[Posts] DELETE_POST'
 export const DELETE_POST_SUCCESS = '[Posts] DELETE_POST_SUCCESS'
@@ -34,8 +33,8 @@ export class GetAllPostsSuccess implements Action {
   }
 }
 
-export class GetAllPostsFail implements Action {
-  readonly type = GET_ALL_POST_FAIL;
+export class GetPostsFail implements Action {
+  readonly type = GET_POST_FAIL;
 
   constructor(public payload: string) {
   }
@@ -44,7 +43,7 @@ export class GetAllPostsFail implements Action {
 export class GetAllPostByUserId implements Action {
   readonly type = GET_ALL_POST_BY_ID;
 
-  constructor(public userId: string) {
+  constructor(public userId: string, public typeOfPosts: string = 'ALL', public paramMap: Map<string, string> = null) {
   }
 }
 
@@ -52,13 +51,6 @@ export class GetAllPostByUserIdSuccess implements Action {
   readonly type = GET_ALL_POST_BY_ID_SUCCESS;
 
   constructor(public payload: PostModel[]) {
-  }
-}
-
-export class GetAllPostByUserIdFail implements Action {
-  readonly type = GET_ALL_POST_BY_ID_FAIL;
-
-  constructor(public payload: string) {
   }
 }
 
@@ -107,10 +99,9 @@ export class AddPostFail implements Action {
 export type Actions =
   | GetAllPostByUserId
   | GetAllPostByUserIdSuccess
-  | GetAllPostByUserIdFail
   | GetAllPosts
   | GetAllPostsSuccess
-  | GetAllPostsFail
+  |GetPostsFail
   | DeletePost
   | DeletePostSuccess
   | DeletePostFail
