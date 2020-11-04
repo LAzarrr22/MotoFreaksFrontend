@@ -9,13 +9,13 @@ import {LoginPageComponent} from './pages/login-page/login-page.component';
 import {EffectsModule} from "@ngrx/effects";
 import {AuthenticationEffects} from "./logic/effects/authentication.effects";
 import {StoreModule} from "@ngrx/store";
-import {reducers} from "./logic/store";
 import {AuthenticationService} from "./logic/services/authentication.service";
 import {HttpClientModule} from "@angular/common/http";
 import {AuthenticationRoutingModule} from "./authentication-routing.module";
 import {AuthService} from "./logic/services/auth.service";
 import {AppCommonModule} from "../common/common.module";
 import {AngularMaterialModule} from "../../shared/angular-material.module";
+import {reducer} from "./logic/reducers/authentication.reducers";
 
 
 @NgModule({
@@ -28,7 +28,7 @@ import {AngularMaterialModule} from "../../shared/angular-material.module";
     CommonModule,
     HttpClientModule,
     AuthenticationRoutingModule,
-    StoreModule.forFeature('authentication', reducers),
+    StoreModule.forFeature('authentication', reducer),
     EffectsModule.forFeature([AuthenticationEffects]),
     AngularMaterialModule,
     AppCommonModule,

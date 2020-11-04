@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
-import {AuthenticationState} from "../../logic/store";
 import {LoginModel} from "../../logic/dto/request/login.model";
 import {USER_LOGIN_FAIL, UserLogin, UserLoginFail} from "../../logic/actions/authentication.actions";
 import {FormControl, FormGroup} from "@angular/forms";
 import {Observable} from "rxjs";
 import {Actions, ofType} from "@ngrx/effects";
 import {map} from "rxjs/operators";
+import {AuthenticationState} from "../../logic/reducers/authentication.reducers";
 
 @Component({
   selector: 'app-login',

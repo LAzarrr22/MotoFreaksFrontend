@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
-import {AuthenticationState, isUserLoggedIn} from "../../../authentication/logic/store";
+import {AuthenticationState, isUserLoggedIn} from "../../../authentication/logic/reducers/authentication.reducers";
 
 @Component({
   selector: 'app-top-bar',

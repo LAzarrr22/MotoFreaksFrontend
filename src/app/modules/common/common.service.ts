@@ -3,8 +3,8 @@ import {Injectable} from "@angular/core";
 import {AppPath} from "../../shared/enums/app-path.enum";
 import {MenuService} from "../menu/logic/services/menu.service";
 import {Store} from "@ngrx/store";
-import {AuthenticationState} from "../authentication/logic/store";
 import {UserLogout} from "../authentication/logic/actions/authentication.actions";
+import {AuthenticationState} from "../authentication/logic/reducers/authentication.reducers";
 
 @Injectable()
 export class CommonComponentsService {

@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 
 import {select, Store} from '@ngrx/store';
 import {first, switchMap} from 'rxjs/operators';
-import {AuthenticationState, getAuthToken} from '../logic/store';
+import {AuthenticationState, getAuthToken} from "../logic/reducers/authentication.reducers";
 
 @Injectable()
 export class HTTPCustomInterceptor implements HttpInterceptor {

@@ -3,7 +3,10 @@ import {Router} from "@angular/router";
 import {AppPath} from "../../../../shared/enums/app-path.enum";
 import {MenuService} from "../../logic/services/menu.service";
 import {Store} from "@ngrx/store";
-import {AuthenticationState, isUserLoggedIn} from "../../../authentication/logic/store";
+import {
+  AuthenticationState,
+  isUserLoggedIn
+} from 'src/app/modules/authentication/logic/reducers/authentication.reducers';
 
 @Component({
   selector: 'app-menu-bar',

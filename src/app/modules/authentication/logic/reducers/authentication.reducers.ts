@@ -8,20 +8,23 @@ import {
   USER_LOGOUT
 } from "../actions/authentication.actions";
 import {RolesEnum} from "../enums/roles.enum";
+import {createFeatureSelector, createSelector} from "@ngrx/store";
 
-export interface State {
+export interface AuthenticationState {
   token: string;
   loggedIn: boolean;
+  isValidated:boolean;
   roles: RolesEnum[];
 }
 
-const INITIAL_STATE: State = {
+const INITIAL_STATE: AuthenticationState = {
   token: null,
   loggedIn: false,
+  isValidated:false,
   roles: [RolesEnum.UNKNOWN]
 };
 
-export function reducer(state: State = INITIAL_STATE, action) {
+export function reducer(state: AuthenticationState = INITIAL_STATE, action) {
   switch (action.type) {
     case USER_LOGIN:
     case GET_ROLES:
@@ -32,7 +35,8 @@ export function reducer(state: State = INITIAL_STATE, action) {
       return {
         loggedIn: true,
         token: action.payload.token,
-        roles: action.payload.roles
+        roles: action.payload.roles,
+        isValidated: action.payload.isValidated
       };
     case GET_ROLES_SUCCESS:
       return {
@@ -54,6 +58,15 @@ export function reducer(state: State = INITIAL_STATE, action) {
 
 }
 
-export const getAuthToken = (state) => state.token;
+export const getToken = (state) => state.token;
 export const isLoggedIn = (state) => state.loggedIn;
-export const getRoles = (state) => state.roles;
+export const roles = (state) => state.roles;
+export const getUserValidation = (state) => state.isValidated;
+
+
+const fromAuthenticationState = createFeatureSelector<AuthenticationState>('authentication');
+
+export const getAuthToken = createSelector(fromAuthenticationState, getToken);
+export const getRoles = createSelector(fromAuthenticationState, roles);
+export const isUserLoggedIn = createSelector(fromAuthenticationState, isLoggedIn);
+export const isValidated = createSelector(fromAuthenticationState, getUserValidation);

@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Store} from "@ngrx/store";
-import {AuthenticationState} from "../../logic/store";
 import {USER_REGISTER_FAIL, UserLoginFail, UserRegister} from "../../logic/actions/authentication.actions";
 import {RegisterModel} from "../../logic/dto/request/register.model";
 import {Actions, ofType} from "@ngrx/effects";
 import {map} from "rxjs/operators";
 import {Observable} from "rxjs";
 import {ValidationMessageMap} from "../../../../shared/interfaces/validation-message-map";
+import {AuthenticationState} from "../../logic/reducers/authentication.reducers";
 
 @Component({
   selector: 'app-register',

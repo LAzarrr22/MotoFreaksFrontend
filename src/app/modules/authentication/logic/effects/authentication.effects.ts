@@ -27,7 +27,6 @@ import {
   UserRegisterSuccess
 } from '../actions/authentication.actions';
 import {catchError, switchMap, tap} from 'rxjs/operators';
-import {AuthenticationState} from '../store';
 import {LoginSuccessfulDto} from "../dto/response/login-successful.model";
 import {AppPath} from "../../../../shared/enums/app-path.enum";
 import {Router} from "@angular/router";
@@ -36,6 +35,7 @@ import {GetAllUsers} from "../../../users/logic/action/user.action";
 import {RolesEnum} from "../enums/roles.enum";
 import {GetAllMessages} from "../../../messages/logic/action/messages.action";
 import {GetMyProfile} from "../../../profiles/logic/action/my-profile.action";
+import {AuthenticationState} from "../reducers/authentication.reducers";
 
 @Injectable()
 export class AuthenticationEffects {
