@@ -2,6 +2,9 @@
   <div class="row">
     <div class="title-page">Personal data</div>
   </div>
+  <div class="row" *ngIf="!isValidated">
+    <div class="not-validated">Please fill all required (red) fields and add at least one car !</div>
+  </div>
   <mat-divider></mat-divider>
   <app-section-my-personal [profile]="profile"></app-section-my-personal>
   <mat-divider></mat-divider>
@@ -12,8 +15,10 @@
   <app-section-contact [contact]="profile.contact" [myProfile]="true"></app-section-contact>
   <mat-divider></mat-divider>
   <app-section-cars [cars]="profile.carsList" [myProfile]="true"></app-section-cars>
+<ng-container *ngIf="isValidated">
   <mat-divider></mat-divider>
   <app-section-friends [friendsList]="friends" [myProfile]="true"></app-section-friends>
   <mat-divider></mat-divider>
   <app-all-post-page [idProfileToShow]="profile.id" [postsForProfile]="true"></app-all-post-page>
+</ng-container>
 </div>

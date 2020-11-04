@@ -1,6 +1,6 @@
 <div class="row align-items-center pb-4">
   <div class="col-md-1 col-lg-1 ">
-    <div class="title">Details</div>
+    <div class="title color-white">Details</div>
   </div>
 
   <div class="col-md-1 col-lg-1 offset-md-10 offset-lg-10 ">
@@ -71,7 +71,7 @@
 
   <div class="col-md-3 property-column" [ngClass]="{'edit-blur': isEditable}">
     <div class="row">
-      <div class="col label">
+      <div class="col" [ngClass]="{'not-validated':!profile.gender, 'label':profile.gender}">
         Gender
       </div>
     </div>

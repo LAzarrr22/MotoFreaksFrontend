@@ -1,2 +1,6 @@
+<ng-container *ngIf="profile!=null">
+
 <app-my-profile-all-data [profile]="profile |async" [isLoading]="isLoading | async"
-                         [friends]="friendsList| async" [myRoles]="myRoles | async"></app-my-profile-all-data>
+                         [friends]="friendsList| async" [myRoles]="myRoles | async"
+                         [isValidated]="isValidated|async"></app-my-profile-all-data>
+</ng-container>

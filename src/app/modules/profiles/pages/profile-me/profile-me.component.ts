@@ -19,6 +19,7 @@ export class ProfileMeComponent implements OnInit {
   friendsList: Observable<FriendUserModel[]>
   isLoading: Observable<boolean>;
   myRoles: Observable<RolesEnum[]>;
+  isValidated:Observable<boolean>
 
   constructor(private menuService: MenuService, private profileService: ProfileService, private authService: AuthService) {
 
@@ -28,6 +29,7 @@ export class ProfileMeComponent implements OnInit {
     this.profile = this.profileService.getMyProfile();
     this.friendsList = this.profileService.getMyFriends();
     this.myRoles = this.authService.getCurrentRoles();
+    this.isValidated=this.authService.isValidatedUser();
     this.menuService.activeRoute.next(ActiveRoute.MY_PROFILE);
     window.scrollTo(0, 0)
   }

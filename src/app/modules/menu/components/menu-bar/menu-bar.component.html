@@ -6,8 +6,8 @@
     <p class="side-menu__title--b">MJ</p>
   </div>
   <div *ngIf="enabled == 'true'">
-    <div
-      class="side-menu__item" (click)="goToHome()" [ngClass]="{'side-menu__item--active': activeRoute == '[Active] HOME'}">
+
+    <div *ngIf="isLogged && isValidated" class="side-menu__item" (click)="goToHome()" [ngClass]="{'side-menu__item--active': activeRoute == '[Active] HOME'}">
       <i class="material-icons side-menu__icon">home</i>
       <div class="side_menu__text">
         Home

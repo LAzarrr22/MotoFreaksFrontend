@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {AddressModel} from "../../../logic/dto/models/address.model";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ProfileService} from "../../../logic/services/profile.service";
+import {MyProfileModel} from "../../../logic/dto/response/my-profile.model";
 
 @Component({
   selector: 'app-section-address',

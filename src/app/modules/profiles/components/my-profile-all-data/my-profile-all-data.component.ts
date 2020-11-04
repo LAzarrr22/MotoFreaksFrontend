@@ -17,6 +17,8 @@ export class MyProfileAllDataComponent implements OnInit {
   friends: FriendUserModel[];
   @Input()
   myRoles: RolesEnum[];
+  @Input()
+  isValidated: boolean;
 
   constructor() {
 

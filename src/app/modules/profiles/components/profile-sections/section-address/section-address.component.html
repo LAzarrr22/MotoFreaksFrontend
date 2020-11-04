@@ -1,6 +1,6 @@
 <div class="row align-items-center pb-4">
   <div class="col-md-1 col-lg-1 ">
-    <div class="title">Address</div>
+    <div class="title color-white">Address</div>
   </div>
 
   <ng-container *ngIf="myProfile">
@@ -23,7 +23,7 @@
 
   <div class="col-md-3 property-column" [ngClass]="{'edit-blur': isEditable}">
     <div class="row">
-      <div class="col label">
+      <div class="col" [ngClass]="{'not-validated':!address.country, 'label':address.country}">
         Country
       </div>
     </div>
@@ -36,7 +36,7 @@
 
   <div class="col-md-3 property-column" [ngClass]="{'edit-blur': isEditable}">
     <div class="row">
-      <div class="col label">
+      <div class="col" [ngClass]="{'not-validated':!address.state, 'label':address.state}">
         State
       </div>
     </div>
@@ -49,7 +49,7 @@
 
   <div class="col-md-3 property-column" [ngClass]="{'edit-blur': isEditable}">
     <div class="row">
-      <div class="col label">
+      <div class="col" [ngClass]="{'not-validated':!address.city, 'label':address.city}">
         City
       </div>
     </div>
@@ -62,7 +62,7 @@
 
   <div class="col-md-3 property-column" [ngClass]="{'edit-blur': isEditable}">
     <div class="row">
-      <div class="col label">
+      <div class="col" [ngClass]="{'not-validated':!address.street, 'label':address.street}">
         Street
       </div>
     </div>

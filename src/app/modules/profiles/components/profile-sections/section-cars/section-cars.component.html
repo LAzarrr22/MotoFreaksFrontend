@@ -1,6 +1,7 @@
 <div class="row align-items-center pb-4">
   <div class="col-md-1 col-lg-1 ">
-    <div class="title">Cars</div>
+    <div class="title color-white" *ngIf="cars.length>0">Cars</div>
+    <div class="title not-validated" *ngIf="cars.length===0">Cars</div>
   </div>
 <ng-container *ngIf="myProfile">
   <div class="col-md-1 col-lg-1 offset-md-9 offset-lg-9 ">
