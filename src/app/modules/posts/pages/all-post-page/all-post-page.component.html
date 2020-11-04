@@ -4,7 +4,6 @@
     <div (click)="addNew()">Create new post</div>
   </div>
 </div>
-<ng-container *ngIf="!postsForProfile">
 <div class="row section-filter">
   <div class="col">
     <div (click)="openFilter()">
@@ -20,6 +19,5 @@
                         (applyCarFilterEvent)="applyCarFilter($event)" (clearFilterEvent)="clearCarFilter()" ></app-filter-posts>
   </ng-container>
 </div>
-</ng-container>
 <app-posts-list [postsList]="postsListObs| async" [myId]="myId"
                 (deletePostEvent)="deletePost($event)"></app-posts-list>

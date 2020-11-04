@@ -9,13 +9,8 @@ import {PostsService} from "../../logic/services/posts.service";
 import {PostType} from "../../logic/enums/post-type.enum";
 import {ProfileService} from "../../../profiles/logic/services/profile.service";
 import {Actions, ofType} from "@ngrx/effects";
-import {
-  GET_ALL_CHALLENGES_BY_CAR_FAIL,
-  GetAllChallengesByCarFail
-} from "../../../challenges/logic/actions/challenges.actions";
 import {map} from "rxjs/operators";
-import {CarsService} from "../../../cars/logic/service/cars.service";
-import {GET_ALL_POST_FAIL, GetAllPostsFail} from "../../logic/action/posts.action";
+import {GET_POST_FAIL, GetPostsFail} from "../../logic/action/posts.action";
 
 @Component({
   selector: 'app-all-post-page',
@@ -41,8 +36,7 @@ export class AllPostPageComponent implements OnInit {
   constructor(private router: Router, private menuService: MenuService,
               private postsService: PostsService, private profileService: ProfileService,
               private actions: Actions) {
-    this.errorMessage = this.actions.pipe(ofType(GET_ALL_POST_FAIL), map((action: GetAllPostsFail) => action.payload));
-
+      this.errorMessage = this.actions.pipe(ofType(GET_POST_FAIL), map((action: GetPostsFail) => action.payload));
   }
 
   ngOnInit(): void {
@@ -93,7 +87,7 @@ export class AllPostPageComponent implements OnInit {
     if (!this.postsForProfile) {
       this.postsListObs = this.postsService.getAllPosts(this.currentFilterType, this.currentCarFilter);
     } else {
-      this.postsListObs = this.postsService.getAllPostByCreatorId(this.idProfileToShow);
+      this.postsListObs = this.postsService.getAllPostByCreatorId(this.idProfileToShow,this.currentFilterType, this.currentCarFilter);
     }
   }
 }
