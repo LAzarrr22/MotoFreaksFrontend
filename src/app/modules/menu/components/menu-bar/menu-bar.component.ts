@@ -7,6 +7,7 @@ import {
   AuthenticationState,
   isUserLoggedIn
 } from 'src/app/modules/authentication/logic/reducers/authentication.reducers';
+import {AuthService} from "../../../authentication/logic/services/auth.service";
 
 @Component({
   selector: 'app-menu-bar',
@@ -18,9 +19,12 @@ export class MenuBarComponent implements OnInit {
   activeRoute: string = '';
   enabled: string = 'true';
   isLogged: boolean;
+  isValidated:boolean;
 
-  constructor(private router: Router, private changeDetector: ChangeDetectorRef, private menuService: MenuService, private authStore: Store<AuthenticationState>) {
+  constructor(private router: Router, private changeDetector: ChangeDetectorRef, private menuService: MenuService,
+              private authStore: Store<AuthenticationState>, private authService:AuthService) {
     this.authStore.select(isUserLoggedIn).subscribe(isLoggedState => this.isLogged = isLoggedState)
+    this.authService.isValidatedUser().subscribe(validation=>this.isValidated=validation)
   }
 
   ngOnInit() {

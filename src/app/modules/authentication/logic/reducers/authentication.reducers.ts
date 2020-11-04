@@ -32,11 +32,12 @@ export function reducer(state: AuthenticationState = INITIAL_STATE, action) {
         ...state
       };
     case USER_LOGIN_SUCCESS:
+      console.dir(action.payload)
       return {
         loggedIn: true,
         token: action.payload.token,
         roles: action.payload.roles,
-        isValidated: action.payload.isValidated
+        isValidated: action.payload.validated
       };
     case GET_ROLES_SUCCESS:
       return {

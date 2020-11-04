@@ -5,16 +5,15 @@ import {SetAdmin, SetModerator} from "../actions/authentication.actions";
 import {GetAllUsers} from "../../../users/logic/action/user.action";
 import {GetMyFriends} from "../../../profiles/logic/action/my-profile.action";
 import {AuthenticationState, getRoles, isUserLoggedIn, isValidated} from "../reducers/authentication.reducers";
+import {Observable} from "rxjs";
 
 @Injectable()
 export class AuthService {
   isLogged;
-  isValidated;
   roles: RolesEnum[];
 
   constructor(private store: Store<AuthenticationState>) {
     this.store.select(isUserLoggedIn).subscribe(loggedState => this.isLogged = loggedState.valueOf())
-    this.store.select(isValidated).subscribe(validation => this.isValidated = validation)
     this.store.select(getRoles).subscribe(roles => this.roles = roles);
   }
 
@@ -22,8 +21,8 @@ export class AuthService {
     return this.isLogged;
   }
 
-  isValidatedUser() {
-    return this.isValidated;
+  isValidatedUser():Observable<boolean> {
+    return this.store.select(isValidated);
   }
 
   getCurrentRoles() {

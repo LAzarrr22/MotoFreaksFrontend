@@ -14,7 +14,7 @@
       </div>
     </div>
 
-    <div *ngIf="isLogged"
+    <div *ngIf="isLogged && isValidated"
       class="side-menu__item" (click)="goToPosts()" [ngClass]="{'side-menu__item--active': activeRoute == '[Active] POSTS'}">
       <i class="material-icons md-18 side-menu__icon">event_note</i>
       <div class="side_menu__text">
@@ -22,7 +22,7 @@
       </div>
     </div>
 
-    <div *ngIf="isLogged"
+    <div *ngIf="isLogged && isValidated"
       class="side-menu__item" (click)="goToChallenges()" [ngClass]="{'side-menu__item--active': activeRoute == '[Active] CHALLENGE'}">
       <i class="material-icons md-18 side-menu__icon">done_all</i>
       <div class="side_menu__text">
@@ -55,7 +55,7 @@
       </div>
     </div>
 
-    <div *ngIf="isLogged"
+    <div *ngIf="isLogged && isValidated"
       class="side-menu__item" (click)="goToAllUsers()" [ngClass]="{'side-menu__item--active': activeRoute == '[Active] ALL_USERS'}">
       <i class="material-icons md-18 side-menu__icon">people_alt</i>
       <div class="side_menu__text">

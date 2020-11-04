@@ -18,7 +18,7 @@ export class AuthenticationService {
       username: login.username,
       password: login.password
     })
-      .pipe(map(data => new LoginSuccessfulDto(data.username, data.token, data.roles)));
+      .pipe(map(data => new LoginSuccessfulDto(data.username, data.validated, data.token, data.roles)));
   }
 
   register(register: RegisterModel): Observable<any> {
