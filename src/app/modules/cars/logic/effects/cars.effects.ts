@@ -9,14 +9,21 @@ import {
   ADD_GENERATION,
   ADD_MODEL,
   AddCompany,
-  AddCompanyFail,
   AddCompanySuccess,
   AddGeneration,
-  AddGenerationFail,
-  AddGenerationSuccess,
+  AddGenerationSuccess, AddItemFail,
   AddModel,
-  AddModelFail,
   AddModelSuccess,
+  DELETE_COMPANY,
+  DELETE_GENERATION,
+  DELETE_MODEL,
+  DeleteCompany,
+  DeleteCompanySuccess,
+  DeleteGeneration,
+  DeleteGenerationSuccess,
+  DeleteItemFail,
+  DeleteModel,
+  DeleteModelSuccess,
   GET_ALL_COMPANIES,
   GET_GENERATIONS,
   GET_MODELS,
@@ -95,7 +102,7 @@ export class CarsEffects {
         new AddCompanySuccess(companies),
       ]),
       catchError((error, caught) => {
-        this.store$.dispatch(new AddCompanyFail(error.error.message));
+        this.store$.dispatch(new AddItemFail(error.error.message));
         this.errorService.error(error);
         return caught;
       })
@@ -111,7 +118,7 @@ export class CarsEffects {
         new AddModelSuccess(models),
       ]),
       catchError((error, caught) => {
-        this.store$.dispatch(new AddModelFail(error.error.message));
+        this.store$.dispatch(new AddItemFail(error.error.message));
         this.errorService.error(error);
         return caught;
       })
@@ -127,7 +134,55 @@ export class CarsEffects {
         new AddGenerationSuccess(generations),
       ]),
       catchError((error, caught) => {
-        this.store$.dispatch(new AddGenerationFail(error.error.message));
+        this.store$.dispatch(new AddItemFail(error.error.message));
+        this.errorService.error(error);
+        return caught;
+      })
+    );
+
+@Effect()
+  deleteCompany$: Observable<Action> = this.actions$
+    .pipe(ofType(DELETE_COMPANY),
+      switchMap((action: DeleteCompany) => {
+        return this.carsService.deleteCompany(action.company);
+      }),
+      switchMap((companies: string[]) => [
+        new DeleteCompanySuccess(companies),
+      ]),
+      catchError((error, caught) => {
+        this.store$.dispatch(new DeleteItemFail(error.error.message));
+        this.errorService.error(error);
+        return caught;
+      })
+    );
+
+  @Effect()
+  deleteModel$: Observable<Action> = this.actions$
+    .pipe(ofType(DELETE_MODEL),
+      switchMap((action: DeleteModel) => {
+        return this.carsService.deleteModel(action.company, action.model);
+      }),
+      switchMap((models: string[]) => [
+        new DeleteModelSuccess(models),
+      ]),
+      catchError((error, caught) => {
+        this.store$.dispatch(new DeleteItemFail(error.error.message));
+        this.errorService.error(error);
+        return caught;
+      })
+    );
+
+  @Effect()
+  deleteGeneration$: Observable<Action> = this.actions$
+    .pipe(ofType(DELETE_GENERATION),
+      switchMap((action: DeleteGeneration) => {
+        return this.carsService.deleteGeneration(action.company, action.model, action.generation);
+      }),
+      switchMap((generations: string[]) => [
+        new DeleteGenerationSuccess(generations),
+      ]),
+      catchError((error, caught) => {
+        this.store$.dispatch(new DeleteItemFail(error.error.message));
         this.errorService.error(error);
         return caught;
       })

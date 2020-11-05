@@ -33,5 +33,17 @@ export class CarsApiService {
     return this.httpClient.post<string[]>(`${environment.apiUrl}/cars/add/generation/${company}/${model}/${generation}`,{})
   }
 
+deleteCompany(company: string): Observable<string[]> {
+    return this.httpClient.delete<string[]>(`${environment.apiUrl}/cars/delete/company/${company}`)
+  }
+
+  deleteModel(company: string, model: string): Observable<string[]> {
+    return this.httpClient.delete<string[]>(`${environment.apiUrl}/cars/delete/model/${company}/${model}`)
+  }
+
+  deleteGeneration(company: string, model: string, generation: string): Observable<string[]> {
+    return this.httpClient.delete<string[]>(`${environment.apiUrl}/cars/delete/generation/${company}/${model}/${generation}`)
+  }
+
 
 }

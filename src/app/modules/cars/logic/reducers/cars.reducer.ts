@@ -1,13 +1,16 @@
 import {
   ADD_COMPANY,
-  ADD_COMPANY_FAIL,
   ADD_COMPANY_SUCCESS,
   ADD_GENERATION,
-  ADD_GENERATION_FAIL,
-  ADD_GENERATION_SUCCESS,
+  ADD_GENERATION_SUCCESS, ADD_ITEM_FAIL,
   ADD_MODEL,
-  ADD_MODEL_FAIL,
   ADD_MODEL_SUCCESS,
+  DELETE_COMPANY,
+  DELETE_COMPANY_SUCCESS,
+  DELETE_GENERATION,
+  DELETE_GENERATION_SUCCESS, DELETE_ITEM_FAIL,
+  DELETE_MODEL,
+  DELETE_MODEL_SUCCESS,
   GET_ALL_COMPANIES,
   GET_ALL_COMPANIES_FAIL,
   GET_ALL_COMPANIES_SUCCESS,
@@ -42,18 +45,23 @@ export function reducer(state: CarsState = INITIAL_STATE, action) {
     case ADD_COMPANY:
     case ADD_MODEL:
     case ADD_GENERATION:
+    case DELETE_COMPANY:
+    case DELETE_MODEL:
+    case DELETE_GENERATION:
       return {
         ...state,
         loading: true
       };
     case GET_ALL_COMPANIES_SUCCESS:
     case ADD_COMPANY_SUCCESS:
+    case DELETE_COMPANY_SUCCESS:
       return {
         companies: action.payload,
         loading: false
       };
     case GET_MODELS_SUCCESS:
     case ADD_MODEL_SUCCESS:
+    case DELETE_MODEL_SUCCESS:
       return {
         ...state,
         models: action.payload,
@@ -61,6 +69,7 @@ export function reducer(state: CarsState = INITIAL_STATE, action) {
       };
     case GET_GENERATIONS_SUCCESS:
     case ADD_GENERATION_SUCCESS:
+    case DELETE_GENERATION_SUCCESS:
       return {
         ...state,
         generation: action.payload,
@@ -69,9 +78,8 @@ export function reducer(state: CarsState = INITIAL_STATE, action) {
     case GET_ALL_COMPANIES_FAIL:
     case GET_MODELS_FAIL:
     case GET_GENERATIONS_FAIL:
-    case ADD_COMPANY_FAIL:
-    case ADD_MODEL_FAIL:
-    case ADD_GENERATION_FAIL:
+    case ADD_ITEM_FAIL:
+    case DELETE_ITEM_FAIL:
       return {
         ...state,
         loading: false

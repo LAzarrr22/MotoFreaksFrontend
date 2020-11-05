@@ -14,15 +14,25 @@ export const GET_GENERATIONS_FAIL = '[Cars] GET_GENERATIONS_FAIL';
 
 export const ADD_COMPANY = '[Cars] ADD_COMPANY';
 export const ADD_COMPANY_SUCCESS = '[Cars] ADD_COMPANY_SUCCESS';
-export const ADD_COMPANY_FAIL = '[Cars] ADD_COMPANY_FAIL';
 
 export const ADD_MODEL = '[Cars] ADD_MODEL';
 export const ADD_MODEL_SUCCESS = '[Cars] ADD_MODEL_SUCCESS';
-export const ADD_MODEL_FAIL = '[Cars] ADD_MODEL_FAIL';
 
 export const ADD_GENERATION = '[Cars] ADD_GENERATION';
 export const ADD_GENERATION_SUCCESS = '[Cars] ADD_GENERATION_SUCCESS';
-export const ADD_GENERATION_FAIL = '[Cars] ADD_GENERATION_FAIL';
+
+export const DELETE_COMPANY = '[Cars] DELETE_COMPANY';
+export const DELETE_COMPANY_SUCCESS = '[Cars] DELETE_COMPANY_SUCCESS';
+
+export const DELETE_MODEL = '[Cars] DELETE_MODEL';
+export const DELETE_MODEL_SUCCESS = '[Cars] DELETE_MODEL_SUCCESS';
+
+export const DELETE_GENERATION = '[Cars] DELETE_GENERATION';
+export const DELETE_GENERATION_SUCCESS = '[Cars] DELETE_GENERATION_SUCCESS';
+
+export const DELETE_ITEM_FAIL = '[Cars] DELETE_ITEM_FAIL';
+export const ADD_ITEM_FAIL = '[Cars] ADD_ITEM_FAIL';
+
 
 export class GetAllCompanies implements Action {
   readonly type = GET_ALL_COMPANIES;
@@ -101,12 +111,6 @@ export class AddCompanySuccess implements Action {
   }
 }
 
-export class AddCompanyFail implements Action {
-  readonly type = ADD_COMPANY_FAIL;
-
-  constructor(public payload: string) {
-  }
-}
 export class AddModel implements Action {
   readonly type = ADD_MODEL;
 
@@ -121,12 +125,6 @@ export class AddModelSuccess implements Action {
   }
 }
 
-export class AddModelFail implements Action {
-  readonly type = ADD_MODEL_FAIL;
-
-  constructor(public payload: string) {
-  }
-}
 export class AddGeneration implements Action {
   readonly type = ADD_GENERATION;
 
@@ -139,8 +137,55 @@ export class AddGenerationSuccess implements Action {
   constructor(public payload: string[]) {
   }
 }
-export class AddGenerationFail implements Action {
-  readonly type = ADD_GENERATION_FAIL;
+export class AddItemFail implements Action {
+  readonly type = ADD_ITEM_FAIL;
+
+  constructor(public payload: string) {
+  }
+}
+
+export class DeleteCompany implements Action {
+  readonly type = DELETE_COMPANY;
+
+  constructor(public company: string) {
+  }
+}
+
+export class DeleteCompanySuccess implements Action {
+  readonly type = DELETE_COMPANY_SUCCESS;
+
+  constructor(public payload: string[]) {
+  }
+}
+
+export class DeleteModel implements Action {
+  readonly type = DELETE_MODEL;
+
+  constructor(public company: string, public model: string) {
+  }
+}
+
+export class DeleteModelSuccess implements Action {
+  readonly type = DELETE_MODEL_SUCCESS;
+
+  constructor(public payload: string[]) {
+  }
+}
+
+export class DeleteGeneration implements Action {
+  readonly type = DELETE_GENERATION;
+
+  constructor(public company: string, public model: string, public generation: string) {
+  }
+}
+export class DeleteGenerationSuccess implements Action {
+  readonly type = DELETE_GENERATION_SUCCESS;
+
+  constructor(public payload: string[]) {
+  }
+}
+export class DeleteItemFail implements Action {
+  readonly type = DELETE_ITEM_FAIL;
 
   constructor(public payload: string) {
   }
