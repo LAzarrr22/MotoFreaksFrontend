@@ -1,0 +1,93 @@
+<div class="context">
+  <form [formGroup]="formCars" (ngSubmit)="addCars()">
+
+    <div class="row pb-5">
+
+      <div class="col-md-4 display-flex">
+        <mat-form-field appearance="legacy" class="pl-2 full-width">
+          <mat-label>Brand</mat-label>
+          <mat-select formControlName="company" (selectionChange)="companySelectionChange()">
+            <mat-option *ngFor="let company of companies" [value]="company">{{company}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-icon class="delete-icon" *ngIf="isCompanySelected">delete</mat-icon>
+      </div>
+
+
+      <div class="col-md-5 display-flex">
+        <mat-form-field appearance="legacy" class="pl-2 full-width">
+          <mat-label>New brand</mat-label>
+          <input matInput placeholder="New brand" formControlName="newCompany">
+        </mat-form-field>
+
+        <button mat-button color="primary">Add</button>
+      </div>
+    </div>
+
+MODeLS
+    <ng-container *ngIf="isCompanySelected;else missingCompanySelection">
+
+      <div class="row  pb-5" [ngClass]="{'edit-blur':  !isCompanySelected}">
+
+      <div class="col-md-4 display-flex">
+        <mat-form-field appearance="legacy" class="pl-2 full-width">
+          <mat-label>Model</mat-label>
+          <mat-select formControlName="model" (selectionChange)="modelSelectionChange()" >
+            <mat-option *ngFor="let model of models" [value]="model">{{model}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-icon class="delete-icon" *ngIf="isModelSelected">delete</mat-icon>
+      </div>
+
+        <div class="col-md-5 display-flex">
+          <mat-form-field appearance="legacy" class="pl-2 full-width">
+            <mat-label>New model</mat-label>
+            <input matInput placeholder="New model" formControlName="newModel">
+          </mat-form-field>
+
+          <button mat-button color="primary" *ngIf="isCompanySelected">Add</button>
+      </div>
+
+      </div>
+    </ng-container>
+
+
+    GENERSTION
+    <ng-container *ngIf="isModelSelected;else missingModelSelection">
+    <div class="row  pb-5" [ngClass]="{'edit-blur': getModel()==''}">
+
+      <div class="col-md-4 display-flex">
+        <mat-form-field appearance="legacy" class="pl-2 full-width">
+          <mat-label>Generation</mat-label>
+          <mat-select formControlName="generation" (selectionChange)="generationSelectionChange()">
+            <mat-option *ngFor="let generation of generations" [value]="generation">{{generation}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-icon class="delete-icon" *ngIf="isGenerationSelected">delete</mat-icon>
+      </div>
+
+
+      <div class="col-md-5 display-flex">
+        <mat-form-field appearance="legacy" class="pl-2 full-width">
+          <mat-label>New generation</mat-label>
+          <input matInput placeholder="New generation" formControlName="newGeneration">
+        </mat-form-field>
+
+        <button mat-button color="primary">Add</button>
+      </div>
+
+    </div>
+    </ng-container>
+
+  </form>
+</div>
+
+<ng-template #missingCompanySelection>
+  plese select Company before
+  </ng-template>
+
+<ng-template #missingModelSelection>
+  plesae seleect model before
+  </ng-template>
