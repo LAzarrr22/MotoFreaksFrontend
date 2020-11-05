@@ -49,12 +49,12 @@ export class AuthService {
     }, 300)
   }
 
-  isAdmin() {
-    return !!this.roles.find(role => role == RolesEnum.ADMIN);
+  isAdmin(roles: RolesEnum[] =this.roles) {
+    return !!roles.find(role => role == RolesEnum.ADMIN);
   }
 
-  isModerator() {
-    return !!this.roles.find(role => role == RolesEnum.MODERATOR);
+  isModerator(roles: RolesEnum[] =this.roles) {
+    return !!roles.find(role => role == RolesEnum.MODERATOR);
   }
 
   isUser() {

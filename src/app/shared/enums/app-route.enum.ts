@@ -28,7 +28,11 @@ export enum AppRoute {
 
 //challenges routes
   CHALLENGES = 'challenges',
-  FILL = 'fill'
+  FILL = 'fill',
+
+  //carsCompany
+  CARS='cars',
+  MODIFY='modify',
 
 
 }

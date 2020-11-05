@@ -3,8 +3,9 @@
 
 .side-menu__container {
   position: fixed;
+  padding-top: 100px;
   height: 100%;
-  width: 100px;
+  width: 60px;
   left: 0;
   top: 0;
   background-image: linear-gradient($custom-grey, darken($custom-grey, 2%));
@@ -12,14 +13,14 @@
 }
 
 .side-menu__item {
-  padding: 12px 5px 8px 0;
+  padding: 2px 5px 0px 0;
   text-align: center;
   cursor: pointer;
   margin-right: 8px;
   margin-bottom: 12px;
   border-top-right-radius: 2px;
   border-bottom-right-radius: 2px;
-  margin-top: 12px;
+  margin-top: 10px;
   color: $custom-white-dark;
 
   &:hover {
@@ -52,6 +53,7 @@
 
 .side-menu__title--container {
   text-align: center;
+  position: fixed;
   height: 50px;
   width: 120px;
   padding: 14px 0px 24px 0px;
@@ -59,6 +61,7 @@
   background-image: linear-gradient(darken($custom-blue, 5%), $custom-blue);
   border-bottom: 1px solid darken($custom-grey, 2%);
   cursor: default;
+  z-index: 222;
 }
 
 p {

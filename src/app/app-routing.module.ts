@@ -41,6 +41,11 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     loadChildren: () => import('./modules/challenges/challenges.module').then(m => m.ChallengesModule)
   },
+   {
+    path: AppRoute.CARS,
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./modules/cars/cars.module').then(m => m.CarsModule)
+  },
   {
     path: AppRoute.SERVICE_NOT_AVAILABLE,
     component: ConnectionRefusedComponent,

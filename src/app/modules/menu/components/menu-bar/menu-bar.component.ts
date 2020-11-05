@@ -20,14 +20,18 @@ export class MenuBarComponent implements OnInit {
   enabled: string = 'true';
   isLogged: boolean;
   isValidated:boolean;
+  isModerator:boolean=false;
+
 
   constructor(private router: Router, private changeDetector: ChangeDetectorRef, private menuService: MenuService,
               private authStore: Store<AuthenticationState>, private authService:AuthService) {
     this.authStore.select(isUserLoggedIn).subscribe(isLoggedState => this.isLogged = isLoggedState)
     this.authService.isValidatedUser().subscribe(validation=>this.isValidated=validation)
+    this.authService.getCurrentRoles().subscribe(roles=>this.isModerator= this.authService.isModerator(roles));
   }
 
   ngOnInit() {
+
     this.menuService.activeRoute.subscribe(activeElement => {
       this.activeRoute = activeElement;
       this.changeDetector.detectChanges();
@@ -69,5 +73,9 @@ export class MenuBarComponent implements OnInit {
 
   goToChallenges() {
     this.router.navigate([AppPath.CHALLENGES_ALL_PATH])
+  }
+
+  goToModifyCars() {
+    this.router.navigate([AppPath.MODIFY_CARS])
   }
 }

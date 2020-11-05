@@ -19,4 +19,6 @@ export enum AppPath {
   CHALLENGES_DO_PATH = '/challenges/fill',
 
   SERVICE_NOT_AVAILABLE = '/service-not-available',
+
+  MODIFY_CARS='/cars/modify',
 }

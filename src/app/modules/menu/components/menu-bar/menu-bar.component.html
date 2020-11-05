@@ -1,10 +1,12 @@
 <app-top-bar></app-top-bar>
 
-<div class="side-menu__container">
+
   <div class="side-menu__title--container">
     <p class="side-menu__title--a">MotoFreaks</p>
     <p class="side-menu__title--b">MJ</p>
   </div>
+
+<div class="side-menu__container">
   <div *ngIf="enabled == 'true'">
 
     <div *ngIf="isLogged && isValidated" class="side-menu__item" (click)="goToHome()" [ngClass]="{'side-menu__item--active': activeRoute == '[Active] HOME'}">
@@ -60,6 +62,14 @@
       <i class="material-icons md-18 side-menu__icon">people_alt</i>
       <div class="side_menu__text">
         All users
+      </div>
+    </div>
+
+ <div *ngIf="isLogged && isValidated &&isModerator"
+      class="side-menu__item" (click)="goToModifyCars()" [ngClass]="{'side-menu__item--active': activeRoute == '[Active] CARS'}">
+      <i class="material-icons md-18 side-menu__icon">directions_car</i>
+      <div class="side_menu__text">
+        Cars
       </div>
     </div>
 

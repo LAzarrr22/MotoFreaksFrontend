@@ -7,4 +7,5 @@ export enum ActiveRoute {
   ALL_USERS = '[Active] ALL_USERS',
   POSTS = '[Active] POSTS',
   CHALLENGE = '[Active] CHALLENGE',
+  CARS = '[Active] CARS',
 }
