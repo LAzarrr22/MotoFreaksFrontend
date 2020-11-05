@@ -5,9 +5,22 @@ import {CarsApiService} from "../service/cars-api.service";
 import {Observable} from "rxjs";
 import {Action, Store} from "@ngrx/store";
 import {
+  ADD_COMPANY,
+  ADD_GENERATION,
+  ADD_MODEL,
+  AddCompany,
+  AddCompanyFail,
+  AddCompanySuccess,
+  AddGeneration,
+  AddGenerationFail,
+  AddGenerationSuccess,
+  AddModel,
+  AddModelFail,
+  AddModelSuccess,
   GET_ALL_COMPANIES,
   GET_GENERATIONS,
   GET_MODELS,
+  GetAllCompaniesFail,
   GetAllCompaniesSuccess,
   GetGenerations,
   GetGenerationsFail,
@@ -17,7 +30,6 @@ import {
   GetModelsSuccess
 } from "../action/cars.action";
 import {catchError, switchMap} from "rxjs/operators";
-import {GetMyProfileFail} from "../../../profiles/logic/action/my-profile.action";
 
 @Injectable()
 export class CarsEffects {
@@ -35,7 +47,7 @@ export class CarsEffects {
         new GetAllCompaniesSuccess(companies),
       ]),
       catchError((error, caught) => {
-        this.store$.dispatch(new GetMyProfileFail(error.error.message));
+        this.store$.dispatch(new GetAllCompaniesFail(error.error.message));
         this.errorService.error(error);
         return caught;
       })
@@ -73,5 +85,52 @@ export class CarsEffects {
       })
     );
 
+  @Effect()
+  addCompany$: Observable<Action> = this.actions$
+    .pipe(ofType(ADD_COMPANY),
+      switchMap((action: AddCompany) => {
+        return this.carsService.addCompany(action.company);
+      }),
+      switchMap((companies: string[]) => [
+        new AddCompanySuccess(companies),
+      ]),
+      catchError((error, caught) => {
+        this.store$.dispatch(new AddCompanyFail(error.error.message));
+        this.errorService.error(error);
+        return caught;
+      })
+    );
+
+  @Effect()
+  addModel$: Observable<Action> = this.actions$
+    .pipe(ofType(ADD_MODEL),
+      switchMap((action: AddModel) => {
+        return this.carsService.addModel(action.company, action.model);
+      }),
+      switchMap((models: string[]) => [
+        new AddModelSuccess(models),
+      ]),
+      catchError((error, caught) => {
+        this.store$.dispatch(new AddModelFail(error.error.message));
+        this.errorService.error(error);
+        return caught;
+      })
+    );
+
+  @Effect()
+  addGeneration$: Observable<Action> = this.actions$
+    .pipe(ofType(ADD_GENERATION),
+      switchMap((action: AddGeneration) => {
+        return this.carsService.addGeneration(action.company, action.model, action.generation);
+      }),
+      switchMap((generations: string[]) => [
+        new AddGenerationSuccess(generations),
+      ]),
+      catchError((error, caught) => {
+        this.store$.dispatch(new AddGenerationFail(error.error.message));
+        this.errorService.error(error);
+        return caught;
+      })
+    );
 
 }

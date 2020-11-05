@@ -20,4 +20,18 @@ export class CarsApiService {
   getGenerations(company: string, model: string): Observable<string[]> {
     return this.httpClient.get<string[]>(`${environment.apiUrl}/cars/all/generations/${company}/${model}`)
   }
+
+  addCompany(company: string): Observable<string[]> {
+    return this.httpClient.post<string[]>(`${environment.apiUrl}/cars/add/company/${company}`,{})
+  }
+
+  addModel(company: string, model: string): Observable<string[]> {
+    return this.httpClient.post<string[]>(`${environment.apiUrl}/cars/add/model/${company}/${model}`,{})
+  }
+
+  addGeneration(company: string, model: string, generation: string): Observable<string[]> {
+    return this.httpClient.post<string[]>(`${environment.apiUrl}/cars/add/generation/${company}/${model}/${generation}`,{})
+  }
+
+
 }

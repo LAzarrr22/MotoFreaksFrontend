@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {Store} from "@ngrx/store";
 import {CarsState, getCompanies, getGenerations, getModels} from "../reducers/cars.reducer";
-import {GetAllCompanies, GetGenerations, GetModels} from "../action/cars.action";
+import {AddCompany, AddGeneration, AddModel, GetAllCompanies, GetGenerations, GetModels} from "../action/cars.action";
 
 @Injectable()
 export class CarsService {
@@ -20,6 +20,21 @@ export class CarsService {
 
   getGenerationList(company: string, model: string) {
     this.store.dispatch(new GetGenerations(company, model));
+    return this.store.select(getGenerations);
+  }
+
+  addCompany(company: string) {
+    this.store.dispatch(new AddCompany(company));
+    return this.store.select(getCompanies);
+  }
+
+  addModel(company: string, model: string) {
+    this.store.dispatch(new AddModel(company, model));
+    return this.store.select(getModels);
+  }
+
+  addGeneration(company: string, model: string, generation: string) {
+    this.store.dispatch(new AddGeneration(company, model, generation));
     return this.store.select(getGenerations);
   }
 }
