@@ -28,7 +28,6 @@ export class CreateQuestionComponent implements OnInit {
   }
 
   addQuestionToChallenge(){
-    console.dir(this.formQuestion)
 if(this.formQuestion.valid && this.correctAnswer && this.currentAnswers.length>0)
     this.addQuestion.emit(new QuestionAnswer(this.getQuestion(), this.getPoints(),this.currentAnswers, this.correctAnswer))
   }
