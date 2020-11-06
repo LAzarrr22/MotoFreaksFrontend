@@ -33,15 +33,15 @@ export class AddEditCarComponent implements OnInit {
               private carsService: CarsService, private authService: AuthService) {
     this.validationMessages = {
       year: {
-        pattern: 'Password must contain only number',
+        pattern: 'Year must contain only number',
         maxlength: 'Year must be at least 4 number long'
       },
       horsepower: {
-        pattern: 'Password must contain only number',
+        pattern: 'Horsepower must contain only number',
         maxlength: 'Year must be at least 4 number long'
       },
       torque: {
-        pattern: 'Password must contain only number',
+        pattern: 'Torque must contain only number',
         maxlength: 'Year must be at least 4 number long'
       },
       name: {
