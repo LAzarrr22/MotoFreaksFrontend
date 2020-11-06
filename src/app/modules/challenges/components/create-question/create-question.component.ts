@@ -2,6 +2,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {QuestionAnswer} from "../../logic/dto/response/question-answer.model";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {NewChallengeModel} from "../../logic/dto/request/new-challenge.model";
+import {ValidationMessageMap} from "../../../../shared/interfaces/validation-message-map";
 
 @Component({
   selector: 'app-create-question',
@@ -11,60 +12,83 @@ import {NewChallengeModel} from "../../logic/dto/request/new-challenge.model";
 export class CreateQuestionComponent implements OnInit {
 
   @Output()
-  addQuestion=new EventEmitter<QuestionAnswer>()
+  addQuestion = new EventEmitter<QuestionAnswer>()
   formQuestion: FormGroup;
-  currentAnswers:string[]=[];
-  correctAnswer:string;
+  currentAnswers: string[] = [];
+  correctAnswer: string;
+  validationMessages: ValidationMessageMap;
+  isAnswersAdded: boolean;
+  isCorrectAnswerSelect: boolean;
 
-  constructor(private formBuilder: FormBuilder) { }
+
+  constructor(private formBuilder: FormBuilder) {
+  }
 
   ngOnInit(): void {
     this.formQuestion = this.formBuilder.group({
       question: new FormControl('', [Validators.required]),
-      points: new FormControl('', [Validators.required,Validators.maxLength(2), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]), //todo only number
-      answer: new FormControl('' ),
+      points: new FormControl('', [Validators.required, Validators.maxLength(2), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]), //todo only number
+      answer: new FormControl(''),
       correct: new FormControl(false),
     })
+
+    this.validationMessages = {
+      points: {
+        pattern: 'Points must contain only number',
+        maxlength: 'Points must be in the 0-99 range'
+      }
+    }
   }
 
-  addQuestionToChallenge(){
-if(this.formQuestion.valid && this.correctAnswer && this.currentAnswers.length>0)
-    this.addQuestion.emit(new QuestionAnswer(this.getQuestion(), this.getPoints(),this.currentAnswers, this.correctAnswer))
+  addQuestionToChallenge() {
+    this.validationAnswers();
+    if (this.formQuestion.valid && this.correctAnswer && this.currentAnswers.length > 1)
+      this.addQuestion.emit(new QuestionAnswer(this.getQuestion(), this.getPoints(), this.currentAnswers, this.correctAnswer))
   }
 
-  addOtherAnswer(){
-if(this.getAnswer()!=''){
-  if(this.getCorrectAnswer()==true){
-    this.correctAnswer=this.getAnswer();
-    this.formQuestion.controls.correct.reset(false);
-  }
-  this.currentAnswers=[...this.currentAnswers,this.getAnswer()];
-  this.formQuestion.controls.answer.reset('');
-}
+  addOtherAnswer() {
+    if (this.getAnswer() != '') {
+      if (this.getCorrectAnswer() == true) {
+        this.correctAnswer = this.getAnswer();
+        this.formQuestion.controls.correct.reset(false);
+      }
+      this.currentAnswers = [...this.currentAnswers, this.getAnswer()];
+      this.formQuestion.controls.answer.reset('');
+    }
+    this.validationAnswers();
   }
 
-  getQuestion(){
+  validationAnswers() {
+    this.isAnswersAdded = this.currentAnswers.length > 1
+    this.isCorrectAnswerSelect = !!this.correctAnswer;
+
+  }
+
+  getQuestion() {
     return this.formQuestion.controls.question.value;
   }
 
-  getPoints(){
+  getPoints() {
     return this.formQuestion.controls.points.value;
   }
 
-  getAnswer(){
+  getAnswer() {
     return this.formQuestion.controls.answer.value;
   }
- getCorrectAnswer(){
+
+  getCorrectAnswer() {
     return this.formQuestion.controls.correct.value;
   }
 
   deleteAnswer(answer: string) {
-    if(this.correctAnswer==answer){
-      this.correctAnswer=null;
+    if (this.correctAnswer == answer) {
+      this.correctAnswer = null;
     }
     const index: number = this.currentAnswers.indexOf(answer);
     if (index !== -1) {
       this.currentAnswers.splice(index, 1);
     }
+    this.validationAnswers();
+
   }
 }

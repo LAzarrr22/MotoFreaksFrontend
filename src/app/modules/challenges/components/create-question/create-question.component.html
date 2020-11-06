@@ -7,7 +7,7 @@
           <mat-label>Question</mat-label>
           <input matInput placeholder="Question" formControlName="question">
         </mat-form-field>
-        <!--        <error-form [control]="'title'" [form]="formBasic"></error-form>-->
+                <error-form [control]="'question'" [form]="formQuestion"></error-form>
       </div>
     </div>
 
@@ -17,7 +17,7 @@
           <mat-label>Points</mat-label>
           <input matInput placeholder="Points" formControlName="points">
         </mat-form-field>
-        <!--        <error-form [control]="'title'" [form]="formBasic"></error-form>-->
+                <error-form [control]="'points'" [form]="formQuestion" [allMessages]="validationMessages"></error-form>
       </div>
     </div>
 
@@ -28,14 +28,12 @@
           <mat-label>Answer</mat-label>
           <input matInput placeholder="Answer" formControlName="answer">
         </mat-form-field>
-        <!--        <error-form [control]="'title'" [form]="formBasic"></error-form>-->
       </div>
 
   <ng-container *ngIf="correctAnswer==null">
   <div class="col-sm-1 col-md-1 col-lg-1">
     <mat-label class="pr-3">Is correct </mat-label>
     <input type="checkbox" placeholder="Is correct" formControlName="correct">
-        <!--        <error-form [control]="'title'" [form]="formBasic"></error-form>-->
       </div>
   </ng-container>
 
@@ -43,6 +41,9 @@
     <button mat-button color="primary" type="button" (click)="addOtherAnswer()">Add answer</button>
   </div>
     </div>
+
+    <div class="error-message" *ngIf="!isAnswersAdded"> Question must be contain at least 2 answers</div>
+    <div class="error-message" *ngIf="!isCorrectAnswerSelect"> Question must be contain one correct answer</div>
 
 
     <div class="row">
