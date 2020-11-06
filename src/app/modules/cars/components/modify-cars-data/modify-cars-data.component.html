@@ -1,6 +1,8 @@
 <div class="context">
   <form [formGroup]="formCars" (ngSubmit)="addCars()">
 
+    <div class="title-page">Brands</div>
+
     <div class="row pb-5">
 
       <div class="col-md-4 display-flex">
@@ -10,7 +12,7 @@
             <mat-option *ngFor="let company of companies" [value]="company">{{company}}</mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-icon class="delete-icon" *ngIf="isCompanySelected">delete</mat-icon>
+        <mat-icon class="delete-icon" *ngIf="isCompanySelected" (click)="deleteCompany()">delete</mat-icon>
       </div>
 
 
@@ -24,7 +26,7 @@
       </div>
     </div>
 
-MODeLS
+    <div class="title-page">Models</div>
     <ng-container *ngIf="isCompanySelected;else missingCompanySelection">
 
       <div class="row  pb-5" [ngClass]="{'edit-blur':  !isCompanySelected}">
@@ -37,7 +39,7 @@ MODeLS
           </mat-select>
         </mat-form-field>
 
-        <mat-icon class="delete-icon" *ngIf="isModelSelected">delete</mat-icon>
+        <mat-icon class="delete-icon" *ngIf="isModelSelected" (click)="deleteModel()">delete</mat-icon>
       </div>
 
         <div class="col-md-5 display-flex">
@@ -53,7 +55,7 @@ MODeLS
     </ng-container>
 
 
-    GENERSTION
+    <div class="title-page">Generations</div>
     <ng-container *ngIf="isModelSelected;else missingModelSelection">
     <div class="row  pb-5" [ngClass]="{'edit-blur': getModel()==''}">
 
@@ -65,7 +67,7 @@ MODeLS
           </mat-select>
         </mat-form-field>
 
-        <mat-icon class="delete-icon" *ngIf="isGenerationSelected">delete</mat-icon>
+        <mat-icon class="delete-icon" *ngIf="isGenerationSelected" (click)="deleteGeneration()">delete</mat-icon>
       </div>
 
 
@@ -85,9 +87,15 @@ MODeLS
 </div>
 
 <ng-template #missingCompanySelection>
-  plese select Company before
+  <div class="center-text color-blue pb-5">
+    Please select Company to gets models
+  </div>
+
   </ng-template>
 
 <ng-template #missingModelSelection>
-  plesae seleect model before
+  <div class="center-text color-blue pb-5">
+  Please select Model to gets generations
+  </div>
+
   </ng-template>

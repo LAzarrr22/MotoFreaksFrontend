@@ -34,19 +34,64 @@ export class ModifyCarsDataComponent implements OnInit {
   }
 
   addCars() {
-    if(this.getNewCompany()!=''){
-      this.carsService.addCompany(this.getNewCompany())
-      this.formCars.controls.newCompany.reset('');
-//clear Company select and others
-    }else if(this.getNewModel()!=''){
-      this.carsService.addModel(this.getCompany(),this.getNewModel())
-      this.formCars.controls.newModel.reset('');
-      this.companySelectionChange();
-    }else if(this.getNewGeneration()!=''){
-      this.carsService.addGeneration(this.getCompany(),this.getModel(),this.getNewGeneration())
-      this.formCars.controls.newGeneration.reset('');
+    if(this.getNewGeneration()!='' && this.isModelSelected){
+      this.addGeneration()
+    } else if(this.getNewModel()!='' && this.isCompanySelected){
+      this.addModel();
+    }else if(this.getNewCompany()!=''){
+      this.addCompany()
+    }
+  }
+
+  addCompany(){
+    this.carsService.addCompany(this.getNewCompany())
+    this.formCars.controls.company.reset(this.getNewCompany());
+    this.formCars.controls.newCompany.reset('');
+    this.companySelectionChange()
+  }
+
+  addModel(){
+    this.carsService.addModel(this.getCompany(),this.getNewModel())
+    this.formCars.controls.model.reset(this.getNewModel());
+    this.formCars.controls.newModel.reset('');
+    this.modelSelectionChange();
+    this.generations=[];
+  }
+
+  addGeneration(){
+    this.carsService.addGeneration(this.getCompany(),this.getModel(),this.getNewGeneration())
+    this.formCars.controls.generation.reset(this.getNewGeneration());
+    this.formCars.controls.newGeneration.reset('');
+  }
+
+  deleteCompany() {
+    if(this.getCompany()!='') {
+      this.carsService.deleteCompany(this.getCompany())
+      this.isCompanySelected=false;
+      this.formCars.controls.company.reset('');
+      this.clearModelAndGeneration()
+    }
+  }
+
+  deleteModel() {
+  if(this.getModel()!=''){
+  this.carsService.deleteModel(this.getCompany(),this.getModel())
+  this.companySelectionChange();
+}
+  }
+
+  deleteGeneration() {
+    if(this.getGeneration()!=''){
+      this.carsService.deleteGeneration(this.getCompany(),this.getModel(),this.getGeneration())
       this.modelSelectionChange()
     }
+  }
+
+  clearModelAndGeneration(){
+    this.isModelSelected=false;
+    this.isGenerationSelected=false;
+    this.formCars.controls.model.reset('');
+    this.formCars.controls.generation.reset('');
   }
 
   loadCompaniesList() {
@@ -74,6 +119,9 @@ export class ModifyCarsDataComponent implements OnInit {
   getModel() {
     return this.formCars.controls.model.value;
   }
+  getGeneration() {
+    return this.formCars.controls.generation.value;
+  }
 
 getNewCompany() {
     return this.formCars.controls.newCompany.value;
@@ -90,10 +138,7 @@ getNewCompany() {
   companySelectionChange() {
     this.loadModelsList();
     this.isCompanySelected=true;
-    this.isModelSelected=false;
-    this.isGenerationSelected=false;
-    this.formCars.controls.model.reset('');
-    this.formCars.controls.generation.reset('');
+    this.clearModelAndGeneration()
   }
 
   modelSelectionChange() {
@@ -106,5 +151,4 @@ getNewCompany() {
   generationSelectionChange() {
     this.isGenerationSelected=true;
   }
-
 }
