@@ -1,6 +1,12 @@
 <div class="context">
   <div class="title-page">All Challenges</div>
 
+  <div class="row create-button" *ngIf="isModerator">
+    <div class="col">
+      <div (click)="goToCreate()">Create new challenge</div>
+    </div>
+  </div>
+
   <div class="row section-filter">
     <div class="col pb-4">
       <div (click)="openFilter()">

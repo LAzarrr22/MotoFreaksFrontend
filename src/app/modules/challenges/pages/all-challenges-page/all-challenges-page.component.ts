@@ -8,7 +8,9 @@ import {ProfileService} from "../../../profiles/logic/services/profile.service";
 import {Actions, ofType} from "@ngrx/effects";
 import {GET_ALL_CHALLENGES_BY_CAR_FAIL, GetAllChallengesByCarFail} from "../../logic/actions/challenges.actions";
 import {map} from "rxjs/operators";
-import {CarsService} from "../../../cars/logic/service/cars.service";
+import {Router} from "@angular/router";
+import {AppPath} from "../../../../shared/enums/app-path.enum";
+import {AuthService} from "../../../authentication/logic/services/auth.service";
 
 @Component({
   selector: 'app-all-challenges-page',
@@ -21,9 +23,11 @@ export class AllChallengesPageComponent implements OnInit {
   filterOpen: boolean = false;
   myId: string;
   errorMessageObs:Observable<string>;
+  isModerator:boolean=false;
 
   constructor(private challengesService: ChallengesService, private menuService: MenuService,
-              private profileService: ProfileService, private actions: Actions) {
+              private profileService: ProfileService, private actions: Actions,
+              private router:Router, private authService:AuthService) {
     this.errorMessageObs = this.actions.pipe(ofType(GET_ALL_CHALLENGES_BY_CAR_FAIL), map((action: GetAllChallengesByCarFail) => action.payload));
   }
 
@@ -31,9 +35,13 @@ export class AllChallengesPageComponent implements OnInit {
     this.menuService.activeRoute.next(ActiveRoute.CHALLENGE)
     this.myId = this.profileService.getMyId();
     this.challengesListObs = this.challengesService.getAllChallenges()
+    this.isModerator=this.authService.isModerator()
     window.scrollTo(0, 0)
   }
 
+  goToCreate(){
+    this.router.navigate([AppPath.CHALLENGE_CREATE])
+  }
   openFilter() {
     this.filterOpen = !this.filterOpen;
   }

@@ -12,19 +12,21 @@ import {ChallengesListComponent} from './components/challenges-list/challenges-l
 import {ChallengesListItemComponent} from './components/challenges-list-item/challenges-list-item.component';
 import {DoChallengePageComponent} from './pages/do-challenge-page/do-challenge-page.component';
 import {CreateChallengePageComponent} from './pages/create-challenge-page/create-challenge-page.component';
-import {CreateChallengeComponent} from "./components/create-challenge/create-challenge.component";
 import {AngularMaterialModule} from "../../shared/angular-material.module";
 import {AppCommonModule} from "../common/common.module";
 import {QuestionsComponent} from './components/questions/questions.component';
 import {QuestionItemComponent} from './components/question-item/question-item.component';
 import {QuestionAnswerItemComponent} from './components/question-answer-item/question-answer-item.component';
 import {SummaryFinishChallengeComponent} from './components/summary-finish-challenge/summary-finish-challenge.component';
+import { CreateGeneralComponent } from './components/create-general/create-general.component';
+import { CreateQuestionComponent } from './components/create-question/create-question.component';
+import { CreatedQuestionItemComponent } from './components/created-question-item/created-question-item.component';
 
 
 @NgModule({
-  declarations: [AllChallengesPageComponent, ChallengesListComponent, ChallengesListItemComponent, CreateChallengeComponent,
+  declarations: [AllChallengesPageComponent, ChallengesListComponent, ChallengesListItemComponent,
     DoChallengePageComponent, CreateChallengePageComponent, QuestionsComponent, QuestionItemComponent,
-    QuestionAnswerItemComponent, SummaryFinishChallengeComponent],
+    QuestionAnswerItemComponent, SummaryFinishChallengeComponent, CreateGeneralComponent, CreateQuestionComponent, CreatedQuestionItemComponent],
   imports: [
     CommonModule,
     ChallengesRoutingModule,

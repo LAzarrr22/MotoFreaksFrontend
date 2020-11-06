@@ -1,2 +1,13 @@
 @import "src/app/shared/styles/common-classes";
 @import "~bootstrap";
+
+.create-button {
+  color: $custom-blue;
+  font-size: $font-size-big;
+  font-style: italic;
+  padding-left: 30px;
+  padding-bottom: 20px;
+  cursor: pointer;
+  width: fit-content;
+
+}
