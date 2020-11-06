@@ -1,0 +1,34 @@
+<div class="pt-5 pb-3">
+  <div class="border mat-elevation-z18">
+  <div class="row pl-3 pt-2">
+    <div class="col">
+      <mat-icon class="delete-icon"  (click)="deleteQuestion()">delete</mat-icon>
+    </div>
+  </div>
+
+    <div class="row pl-3 pt-2">
+    <div class="col">
+        QUESTION: <p>{{question.question}}</p>
+    </div>
+  </div>
+  <div class="row pl-3">
+    <div class="col">
+      POINTS: <p>{{question.points}}</p>
+    </div>
+  </div>
+
+    <div class="row pl-3">
+      <div class="col">
+        ANSWERS:
+      </div>
+    </div>
+    <div class="row pl-3">
+      <div class="col" *ngFor="let answer of question.answers">
+        <div>
+          <p [ngClass]="{'color-green': answer==question.correctAnswer}"> {{answer}}</p>
+        </div>
+      </div>
+  </div>
+
+  </div>
+</div>

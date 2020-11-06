@@ -1,0 +1,14 @@
+@import "src/app/shared/styles/common-classes";
+@import "~bootstrap";
+
+.border {
+  border-radius: 3px;
+  border: 2px solid;
+  color: $custom-white-dark;
+}
+
+p{
+  padding-top: 10px;
+  color: $custom-white;
+  font-size: $font-size-medium;
+}
