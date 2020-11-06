@@ -129,7 +129,7 @@ export class ChallengesEffects {
   addCompetitor$: Observable<Action> = this.actions$
     .pipe(ofType(ADD_COMPETITOR),
       switchMap((action: AddCompetitor) => {
-        return this.challengesApiService.addCompetitorChallengeApi(action.challengeId);
+        return this.challengesApiService.addCompetitorChallengeApi(action.challengeId,action.obtainPoints);
       }),
       switchMap((response: string) => [
         new AddCompetitorSuccess(response),

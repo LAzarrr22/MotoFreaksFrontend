@@ -51,7 +51,7 @@ export class CreateChallengeFail implements Action {
 export class AddCompetitor implements Action {
   readonly type = ADD_COMPETITOR;
 
-  constructor(public challengeId: string) {
+  constructor(public challengeId: string, public obtainPoints: number) {
   }
 }
 

@@ -27,8 +27,8 @@ export class ChallengesService {
     }, 0);
   }
 
-  addCompetitor(challengeId: string) {
-    this.store.dispatch(new AddCompetitor(challengeId));
+  addCompetitor(challengeId: string, obtainPoints:number) {
+    this.store.dispatch(new AddCompetitor(challengeId,obtainPoints));
     setTimeout(() => {
       this.store.dispatch(new GetAllChallenges());
     }, 0);
