@@ -4,7 +4,7 @@ import {
   GET_ALL_MESSAGES_SUCCESS,
   GET_UNREAD_MESSAGES,
   GET_UNREAD_MESSAGES_FAIL,
-  GET_UNREAD_MESSAGES_SUCCESS
+  GET_UNREAD_MESSAGES_SUCCESS, SEND_MESSAGE, SEND_MESSAGE_FAIL, SEND_MESSAGE_SUCCESS
 } from "../action/messages.action";
 import {createFeatureSelector, createSelector} from "@ngrx/store";
 import {MessageDataModel} from "../dto/response/message-data.model";
@@ -25,12 +25,14 @@ export function reducer(state: MessagesState = INITIAL_STATE, action) {
   switch (action.type) {
     case GET_ALL_MESSAGES:
     case GET_UNREAD_MESSAGES:
+    case SEND_MESSAGE:
       return {
         ...state,
         loading: true
       }
 
     case GET_ALL_MESSAGES_SUCCESS:
+    case SEND_MESSAGE_SUCCESS:
       return {
         ...state,
         messages: action.payload,
@@ -46,6 +48,7 @@ export function reducer(state: MessagesState = INITIAL_STATE, action) {
 
     case GET_ALL_MESSAGES_FAIL:
     case GET_UNREAD_MESSAGES_FAIL:
+    case SEND_MESSAGE_FAIL:
       return {
         ...state,
         loading: false

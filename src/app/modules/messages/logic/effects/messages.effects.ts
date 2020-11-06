@@ -71,7 +71,7 @@ export class MessagesEffects {
       switchMap((action: SendMessage) => {
         return this.messageApiService.sendMessage(action.id, action.content);
       }),
-      switchMap((response: string) => [
+      switchMap((response: MessageDataModel[]) => [
         new SendMessageSuccess(response),
       ]),
       catchError((error, caught) => {

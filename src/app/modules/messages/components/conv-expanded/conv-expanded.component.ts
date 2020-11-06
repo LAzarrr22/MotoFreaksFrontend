@@ -58,7 +58,6 @@ export class ConvExpandedComponent implements OnInit {
     } else {
       this.currentShowMessages = this.messages;
     }
-
   }
 
   loadMore() {
@@ -70,10 +69,9 @@ export class ConvExpandedComponent implements OnInit {
 
   sendMessage(content: string) {
     this.messagesService.sendMessage(this.receiverID, content);
-
     setTimeout(() => {
       this.loadFirstMessage.emit();
-    }, 1000)
+    }, 1200)
     setTimeout(() => {
       if (this.messages.length > 6) {
         this.loadedCount += 1;

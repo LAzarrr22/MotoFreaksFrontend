@@ -69,7 +69,7 @@ export class SendMessage implements Action {
 export class SendMessageSuccess implements Action {
   readonly type = SEND_MESSAGE_SUCCESS;
 
-  constructor(public payload: string) {
+  constructor(public payload: MessageDataModel[]) {
   }
 }
 
