@@ -1,9 +1,10 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {AppRoute} from "./shared/enums/app-route.enum";
-import {AuthGuard} from "./modules/authentication/logic/guards/auth-guard.service";
+import {AuthGuard} from "./shared/guards/auth-guard.service";
 import {AppPath} from "./shared/enums/app-path.enum";
 import {ConnectionRefusedComponent} from "./modules/common/connection-refused/connection-refused.component";
+import {ModeratorGuard} from "./shared/guards/moderator-guard.service";
 
 
 const routes: Routes = [
@@ -43,7 +44,7 @@ const routes: Routes = [
   },
    {
     path: AppRoute.CARS,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, ModeratorGuard],
     loadChildren: () => import('./modules/cars/cars.module').then(m => m.CarsModule)
   },
   {

@@ -1,9 +1,9 @@
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from "@angular/router";
 import {Observable} from "rxjs";
-import {AppPath} from "../../../../shared/enums/app-path.enum";
+import {AppPath} from "../enums/app-path.enum";
 import {Injectable} from "@angular/core";
-import {AuthService} from "../services/auth.service";
-import {MenuService} from "../../../menu/logic/services/menu.service";
+import {AuthService} from "../../modules/authentication/logic/services/auth.service";
+import {MenuService} from "../../modules/menu/logic/services/menu.service";
 
 @Injectable({
   providedIn: 'root'
