@@ -27,7 +27,7 @@ export class CreateQuestionComponent implements OnInit {
   ngOnInit(): void {
     this.formQuestion = this.formBuilder.group({
       question: new FormControl('', [Validators.required]),
-      points: new FormControl('', [Validators.required, Validators.maxLength(2), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]), //todo only number
+      points: new FormControl('', [Validators.required, Validators.maxLength(2), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
       answer: new FormControl(''),
       correct: new FormControl(false),
     })

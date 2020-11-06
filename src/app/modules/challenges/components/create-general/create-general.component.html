@@ -12,7 +12,7 @@
           <mat-label>Name</mat-label>
           <input matInput placeholder="Name" formControlName="name">
         </mat-form-field>
-        <!--        <error-form [control]="'title'" [form]="formBasic"></error-form>-->
+                <error-form [control]="'name'" [form]="formBasic"></error-form>
       </div>
     </div>
 
@@ -26,6 +26,9 @@
             <mat-option *ngFor="let company of companies" [value]="company">{{company}}</mat-option>
           </mat-select>
         </mat-form-field>
+
+        <error-form [control]="'company'" [form]="formBasic"></error-form>
+
       </div>
 
 
@@ -63,12 +66,12 @@
 </div>
 
 
-<div class="pl-5 pr-5" *ngIf="isAddQuestion">
+<div class="pr-5" *ngIf="isAddQuestion">
   <app-create-question (addQuestion)="addQuestion($event)"></app-create-question>
 
 </div>
 
-<div class="pl-5 pr-5">
+<div class="pl-2 pr-5">
 
   <ng-container *ngFor="let question of currentQuestions">
     <app-created-question-item [question]="question" (deleteQuestionEvn)="deleteQuestion(question)"></app-created-question-item>
