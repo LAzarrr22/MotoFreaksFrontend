@@ -30,7 +30,7 @@ export class DoChallengePageComponent implements OnInit {
   finishChallenge(obtainedPoints: number) {
     this.obtainedPoints = obtainedPoints;
     this.showSummary = true;
-    this.challengesService.addCompetitor(this.challengeId);
+    this.challengesService.addCompetitor(this.challengeId,this.obtainedPoints);
     this.profileService.addPoints(obtainedPoints);
   }
 
