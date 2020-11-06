@@ -4,13 +4,14 @@
 .congrats {
   @extend .title-page;
   color: $custom-blue;
+  font-size: $font-size-big;
   text-align: center;
 }
 
 .done-text {
   @extend .title-page;
   text-align: center;
-  font-size: $font-size-big
+  font-size: $font-size-medium+4px
 }
 
 .points-text {
