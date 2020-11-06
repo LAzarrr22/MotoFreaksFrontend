@@ -34,7 +34,7 @@
     </div>
   </div>
 
-  <div class="col-md-3 property-column" [ngClass]="{'edit-blur': isEditable}">
+  <div class="col-md-3 property-column" [ngClass]="{'edit-blur': isEditable}" *ngIf="myProfile">
     <div class="row">
       <div class="col" [ngClass]="{'not-validated':!address.state, 'label':address.state}">
         State
@@ -60,7 +60,7 @@
     </div>
     </div>
 
-  <div class="col-md-3 property-column" [ngClass]="{'edit-blur': isEditable}">
+  <div class="col-md-3 property-column" [ngClass]="{'edit-blur': isEditable}" *ngIf="myProfile">
     <div class="row">
       <div class="col" [ngClass]="{'not-validated':!address.street, 'label':address.street}">
         Street
