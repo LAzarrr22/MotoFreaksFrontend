@@ -1,0 +1,8 @@
+@import "src/app/shared/styles/common-classes";
+@import "~bootstrap";
+
+.back {
+  color: $custom-white-dark;
+  font-size: $font-size-medium;
+  width: fit-content;
+}

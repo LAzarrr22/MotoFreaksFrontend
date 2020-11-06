@@ -1,0 +1,77 @@
+<div class="back click pt-2" (click)="goToAllChallenges()">
+  <mat-icon matTooltip="Back" matTooltipPosition="right">keyboard_backspace</mat-icon>
+</div>
+
+
+<div class="pl-3 pr-3">
+  <form class="login-form" [formGroup]="formBasic" (ngSubmit)="createChallenge()">
+
+    <div class="row">
+      <div class="col-md-4 col-lg-4">
+        <mat-form-field appearance="legacy" class="full-width">
+          <mat-label>Name</mat-label>
+          <input matInput placeholder="Name" formControlName="name">
+        </mat-form-field>
+        <!--        <error-form [control]="'title'" [form]="formBasic"></error-form>-->
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-3">
+
+        <mat-form-field appearance="legacy" class="pl-2 full-width">
+          <mat-label>Brand</mat-label>
+          <mat-select formControlName="company" (selectionChange)="companySelectionChange()">
+            <mat-option *ngFor="let company of companies" [value]="company">{{company}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+
+      <div class="col-md-3">
+        <mat-form-field appearance="legacy" class="pl-2 full-width">
+          <mat-label>Model</mat-label>
+          <mat-select formControlName="model" (selectionChange)="modelSelectionChange()">
+            <mat-option *ngFor="let model of models" [value]="model">{{model}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+
+      <div class="col-md-3">
+        <mat-form-field appearance="legacy" class="pl-2 full-width">
+          <mat-label>Generation</mat-label>
+          <mat-select formControlName="generation">
+            <mat-option *ngFor="let generation of generations" [value]="generation">{{generation}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-2 col-lg-2 pt-3">
+        <button mat-button color="primary" type="button" (click)="openCreateQuestion()">Create question</button>
+      </div>
+
+      <div class="col-md-2 col-lg-2 pt-3">
+        <button mat-button color="primary" type="submit">Save challenge and questions</button>
+      </div>
+    </div>
+
+  </form>
+</div>
+
+
+<div class="pl-5 pr-5" *ngIf="isAddQuestion">
+  <app-create-question (addQuestion)="addQuestion($event)"></app-create-question>
+
+</div>
+
+<div class="pl-5 pr-5">
+
+  <ng-container *ngFor="let question of currentQuestions">
+    <app-created-question-item [question]="question" (deleteQuestionEvn)="deleteQuestion(question)"></app-created-question-item>
+  </ng-container>
+
+</div>
