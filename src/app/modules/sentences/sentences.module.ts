@@ -7,11 +7,13 @@ import {StoreModule} from "@ngrx/store";
 import {EffectsModule} from "@ngrx/effects";
 import {reducer} from "./logic/reducers/sentence.reducers";
 import {SentenceEffects} from "./logic/effects/sentence.effects";
+import { AllSentencePageComponent } from './pages/all-sentence-page/all-sentence-page.component';
+import { AllSentenceListComponent } from './components/all-sentence-list/all-sentence-list.component';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [AllSentencePageComponent, AllSentenceListComponent],
   imports: [
     CommonModule,
     SentencesRoutingModule,
