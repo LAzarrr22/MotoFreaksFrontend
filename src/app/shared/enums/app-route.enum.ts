@@ -35,4 +35,8 @@ export enum AppRoute {
   MODIFY='modify',
 
 
+  //sentences
+  SENTENCES='sentences'
+
+
 }

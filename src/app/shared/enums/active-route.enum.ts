@@ -8,4 +8,5 @@ export enum ActiveRoute {
   POSTS = '[Active] POSTS',
   CHALLENGE = '[Active] CHALLENGE',
   CARS = '[Active] CARS',
+  SENTENCES = '[Active] SENTENCES',
 }

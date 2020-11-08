@@ -32,6 +32,14 @@
       </div>
     </div>
 
+ <div *ngIf="isLogged && isValidated"
+      class="side-menu__item" (click)="goToSentences()" [ngClass]="{'side-menu__item--active': activeRoute == '[Active] SENTENCES'}">
+      <i class="material-icons md-18 side-menu__icon">menu_book</i>
+      <div class="side_menu__text">
+        Dictionary
+      </div>
+    </div>
+
 
     <div *ngIf="!isLogged"
       class="side-menu__item" (click)="goToLogin()" [ngClass]="{'side-menu__item--active': activeRoute == '[Active] LOGIN'}">

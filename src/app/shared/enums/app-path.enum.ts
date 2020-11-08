@@ -22,4 +22,6 @@ export enum AppPath {
   SERVICE_NOT_AVAILABLE = '/service-not-available',
 
   MODIFY_CARS='/cars/modify',
+
+  SENTENCES_ALL='/sentences/all'
 }

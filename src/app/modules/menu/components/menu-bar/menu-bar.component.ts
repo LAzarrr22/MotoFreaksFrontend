@@ -78,4 +78,8 @@ export class MenuBarComponent implements OnInit {
   goToModifyCars() {
     this.router.navigate([AppPath.MODIFY_CARS])
   }
+
+  goToSentences() {
+    this.router.navigate([AppPath.SENTENCES_ALL])
+  }
 }
