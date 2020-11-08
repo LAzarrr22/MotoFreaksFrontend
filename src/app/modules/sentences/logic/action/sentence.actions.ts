@@ -3,7 +3,7 @@ import {NewSentenceModel} from "../model/new-sentence.model";
 import {SentenceModel} from "../model/sentence.model";
 
 
-export const GET_ALL='[Sentence] GET_ALL'
+export const GET_ALL_SENTENCE='[Sentence] GET_ALL_SENTENCE'
 export const ADD_SENTENCE='[Sentence] ADD_SENTENCE'
 export const MERGE_SENTENCE='[Sentence] MERGE_SENTENCE'
 export const DELETE_SENTENCE='[Sentence] DELETE_SENTENCE'
@@ -13,7 +13,7 @@ export const ACTION_SENTENCE_FAIL='[Sentence] ACTION_SENTENCE_FAIL'
 
 
 export class GetAllSentences implements Action {
-  readonly type = GET_ALL;
+  readonly type = GET_ALL_SENTENCE;
 
   constructor() {
   }
