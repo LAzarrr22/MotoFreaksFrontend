@@ -1,4 +1,31 @@
-<p>all-sentence-list works!</p>
-<div *ngFor="let s of sentencesList">
-  {{s.name}}, {{s.translation}}
+<div class="min-width">
+  <div class="context">
+    <div class="title-page">Dictionary</div>
+
+    <div class="filter-section">
+      <mat-form-field>
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input>
+      </mat-form-field>
+      <mat-divider></mat-divider>
+    </div>
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+
+      <ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumns">
+        {{column}}
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{columnNames[column]}}</th>
+        <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+      </ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let user; columns: displayedColumns;"></tr>
+
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+      </tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[15, 30, 50, 100]" [length]="resultsLength" [pageSize]="15"></mat-paginator>
+  </div>
 </div>
