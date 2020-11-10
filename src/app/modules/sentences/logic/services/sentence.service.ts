@@ -13,6 +13,7 @@ export class SentenceService {
 
   getAll() {
     this.store.dispatch(new GetAllSentences())
+    return this.store.select(getAllSentences);
   }
 
   addNewSentence(newSentence: NewSentenceModel) {

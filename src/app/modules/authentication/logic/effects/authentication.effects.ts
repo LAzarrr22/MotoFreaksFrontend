@@ -37,6 +37,7 @@ import {RolesEnum} from "../enums/roles.enum";
 import {GetAllMessages} from "../../../messages/logic/action/messages.action";
 import {GetMyProfile} from "../../../profiles/logic/action/my-profile.action";
 import {AuthenticationState} from "../reducers/authentication.reducers";
+import {GetAllSentences} from "../../../sentences/logic/action/sentence.actions";
 
 @Injectable()
 export class AuthenticationEffects {
@@ -68,6 +69,7 @@ export class AuthenticationEffects {
         new GetMyProfile(),
         new GetAllUsers(),
         new GetAllMessages(),
+        new GetAllSentences()
       ]),
 
       catchError((error, caught) => {

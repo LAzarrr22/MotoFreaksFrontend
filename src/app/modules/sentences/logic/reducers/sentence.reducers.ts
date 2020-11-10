@@ -10,12 +10,12 @@ import {
 import {createFeatureSelector, createSelector} from "@ngrx/store";
 
 export interface SentenceState {
-  sentenceList:SentenceModel[];
+  sentences:SentenceModel[];
   loading:boolean;
 }
 
 export const INITIAL_STATE:SentenceState={
-  sentenceList:null,
+  sentences:null,
   loading:false
 }
 
@@ -31,24 +31,25 @@ export function reducer(state: SentenceState = INITIAL_STATE, action) {
         loading:true
       }
 
-    case ACTION_SENTENCE_SUCCESS:{
+    case ACTION_SENTENCE_SUCCESS:
       return {
-        sentenceList: action.payload,
+        sentences: action.payload,
         loading: false
       }
-    }
-    case ACTION_SENTENCE_FAIL:{
+
+    case ACTION_SENTENCE_FAIL:
       return {
         ...state,
         loading:false
       }
-    }
+    default:
+      return state
   }
 }
 
-export const isLoading = (state) => state.loading;
-export const sentence = (state) => state.sentenceList;
+export const isLoading = (state)=>state.loading;
+export const sentence = (state)=>state.sentences;
 
-const fromSentenceState = createFeatureSelector<SentenceState>('sentences');
+const fromSentenceState = createFeatureSelector<SentenceState>('sentences-store');
 export const getLoading = createSelector(fromSentenceState, isLoading)
 export const getAllSentences = createSelector(fromSentenceState, sentence)
