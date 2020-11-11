@@ -1,6 +1,7 @@
 <div class="min-width">
   <div class="context">
-    <div class="title-page">Dictionary</div>
+    <div class="title-page">Dictionary--{{sentencesList.length}}</div>
+    <div *ngIf="isModerator" class="color-blue sub-title pl-md-2 " (click)="openModifyTopUp()">Create new</div>
 
     <div class="filter-section">
       <mat-form-field>
@@ -19,8 +20,22 @@
       </ng-container>
 
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-      <tr mat-row *matRowDef="let user; columns: displayedColumns;"></tr>
+      <ng-container *ngIf="isModerator" matColumnDef="Action" >
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Actions</th>
+        <td  mat-cell *matCellDef="let element">
+
+          <mat-icon class="click color-blue" matTooltip="Edit Sentence" matTooltipPosition="left" (click)="openModifyTopUp(element)">
+            edit
+          </mat-icon>
+          <mat-icon class="delete-icon" matTooltip="Delete Sentence" matTooltipPosition="right">
+            delete
+          </mat-icon>
+
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="allColumnsDisplayed; sticky: true"></tr>
+      <tr mat-row *matRowDef="let user; columns: allColumnsDisplayed;"></tr>
 
       <tr class="mat-row" *matNoDataRow>
         <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>

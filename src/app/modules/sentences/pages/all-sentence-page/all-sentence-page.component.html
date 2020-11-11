@@ -1,2 +1,4 @@
-
-  <app-all-sentence-list [sentencesList]="sentencesObsv | async"></app-all-sentence-list>
+<ng-container *ngIf="sentencesObsv |async">
+  <app-all-sentence-list [sentencesList]="sentencesObsv |async " [isModerator]="isModerator"
+                          (mergeSentenceEvent)="mergeSentence($event)" (deleteSentenceEvent)="deleteSentence($event)"></app-all-sentence-list>
+</ng-container>

@@ -10,11 +10,13 @@ import {SentenceEffects} from "./logic/effects/sentence.effects";
 import { AllSentencePageComponent } from './pages/all-sentence-page/all-sentence-page.component';
 import { AllSentenceListComponent } from './components/all-sentence-list/all-sentence-list.component';
 import {AngularMaterialModule} from "../../shared/angular-material.module";
+import { AddEditSentenceComponent } from './components/add-edit-sentence/add-edit-sentence.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 
 
 @NgModule({
-  declarations: [AllSentencePageComponent, AllSentenceListComponent],
+  declarations: [AllSentencePageComponent, AllSentenceListComponent, AddEditSentenceComponent],
   imports: [
     CommonModule,
     SentencesRoutingModule,

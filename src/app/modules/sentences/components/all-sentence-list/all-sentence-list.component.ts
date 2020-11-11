@@ -1,8 +1,12 @@
-import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {SentenceModel} from "../../logic/model/sentence.model";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
+import {MatDialog} from "@angular/material/dialog";
+import {AddEditSentenceComponent} from "../add-edit-sentence/add-edit-sentence.component";
+import {NewSentenceModel} from "../../logic/model/new-sentence.model";
+import set = Reflect.set;
 
 @Component({
   selector: 'app-all-sentence-list',
@@ -10,8 +14,6 @@ import {MatSort} from "@angular/material/sort";
   styleUrls: ['./all-sentence-list.component.scss']
 })
 export class AllSentenceListComponent implements OnInit, AfterViewInit {
-
-
 
   columnNames = {
     name: 'Sentence',
@@ -27,9 +29,16 @@ export class AllSentenceListComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
 
   @Input()
-  sentencesList:SentenceModel[]
+  sentencesList: SentenceModel[]
+  @Input()
+  isModerator: boolean;
 
-  constructor() {
+  @Output()
+  mergeSentenceEvent = new EventEmitter<NewSentenceModel>();
+  @Output()
+  deleteSentenceEvent = new EventEmitter<string>();
+
+  constructor(public dialog: MatDialog) {
 
   }
 
@@ -37,9 +46,15 @@ export class AllSentenceListComponent implements OnInit, AfterViewInit {
     this.dataSource = new MatTableDataSource(this.sentencesList);
 
   }
+
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+  }
+
+  get allColumnsDisplayed() {
+    return this.isModerator ? [...this.displayedColumns, 'Action'] : this.displayedColumns
+
   }
 
   applyFilter(event: Event) {
@@ -48,5 +63,21 @@ export class AllSentenceListComponent implements OnInit, AfterViewInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  openModifyTopUp(object: SentenceModel = null) {
+    const dialogRef = this.dialog.open(AddEditSentenceComponent, {
+      data: object
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.dir(result)
+      if (result) {
+        this.mergeSentenceEvent.emit(result)
+        setTimeout(() => {
+          this.dataSource.data = this.sentencesList
+        }, 500)
+      }
+    });
+
   }
 }
