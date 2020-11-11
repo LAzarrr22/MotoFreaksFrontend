@@ -5,8 +5,6 @@ import {CommonComponentsService} from "../../../common/common.service";
 import {SentenceApiService} from "../services/sentence-api.service";
 import {Observable} from "rxjs";
 import {
-  ADD_SENTENCE,
-  AddSentence,
   DELETE_SENTENCE,
   DeleteSentence,
   GET_ALL_SENTENCE,
@@ -41,27 +39,12 @@ export class SentenceEffects {
       })
     );
 
- @Effect()
-  addNew$: Observable<Action> = this.actions$
-    .pipe(ofType(ADD_SENTENCE),
-      switchMap((action: AddSentence) => {
-        return this.sentenceApiService.addSentence(action.newSentence);
-      }),
-      switchMap((sentenceList: SentenceModel[]) => [
-        new SentenceSuccess(sentenceList)
-      ]),
-      catchError((error, caught) => {
-        this.store$.dispatch(new SentenceFail(error.error.message));
-        this.errorService.error(error);
-        return caught;
-      })
-    );
 
  @Effect()
   mergeSentence$: Observable<Action> = this.actions$
     .pipe(ofType(MERGE_SENTENCE),
       switchMap((action: MergeSentence) => {
-        return this.sentenceApiService.mergeSentence(action.idSentence,action.newSentence);
+        return this.sentenceApiService.mergeSentence(action.newSentence);
       }),
       switchMap((sentenceList: SentenceModel[]) => [
         new SentenceSuccess(sentenceList)

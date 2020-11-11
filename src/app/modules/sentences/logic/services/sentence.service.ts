@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {Store} from "@ngrx/store";
 import {getAllSentences, SentenceState} from "../reducers/sentence.reducers";
-import {AddSentence, DeleteSentence, GetAllSentences, MergeSentence} from "../action/sentence.actions";
+import {DeleteSentence, GetAllSentences, MergeSentence} from "../action/sentence.actions";
 import {NewSentenceModel} from "../model/new-sentence.model";
 
 
@@ -16,12 +16,8 @@ export class SentenceService {
     return this.store.select(getAllSentences);
   }
 
-  addNewSentence(newSentence: NewSentenceModel) {
-    this.store.dispatch(new AddSentence(newSentence))
-  }
-
-  mergeSentence(id: string, newSentence: NewSentenceModel) {
-    this.store.dispatch(new MergeSentence(id, newSentence))
+  mergeSentence(newSentence: NewSentenceModel) {
+    this.store.dispatch(new MergeSentence(newSentence))
   }
 
   deleteSentence(id: string) {

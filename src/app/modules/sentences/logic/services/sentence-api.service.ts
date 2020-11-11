@@ -15,20 +15,11 @@ export class SentenceApiService {
 
   getAll():Observable<SentenceModel[]>{
     return this.httpClient.get<SentenceModel[]>(`${environment.apiUrl}/sentence/get/all`)
-      .pipe(map(sentences=>
-        sentences.map(sentence=>
-          new SentenceModel(sentence.id,sentence.name,sentence.translation,sentence.creatorId,sentence.updatedById,sentence.createdDate,sentence.updatedDate))))
   }
 
-  addSentence(newSentence : NewSentenceModel):Observable<SentenceModel[]>{
-    return this.httpClient.post<SentenceModel[]>(`${environment.apiUrl}/sentence/modify/add`,{
-      name: newSentence.name,
-      translation: newSentence.translation
-    })
-  }
-
-  mergeSentence(id:string, newSentence : NewSentenceModel):Observable<SentenceModel[]>{
-    return this.httpClient.post<SentenceModel[]>(`${environment.apiUrl}/sentence/modify/merge/${id}`,{
+  mergeSentence(newSentence : NewSentenceModel):Observable<SentenceModel[]>{
+    return this.httpClient.post<SentenceModel[]>(`${environment.apiUrl}/sentence/modify/merge`,{
+      id: newSentence.id,
       name: newSentence.name,
       translation: newSentence.translation
     })

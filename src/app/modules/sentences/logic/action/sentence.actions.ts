@@ -4,7 +4,6 @@ import {SentenceModel} from "../model/sentence.model";
 
 
 export const GET_ALL_SENTENCE='[Sentence] GET_ALL_SENTENCE'
-export const ADD_SENTENCE='[Sentence] ADD_SENTENCE'
 export const MERGE_SENTENCE='[Sentence] MERGE_SENTENCE'
 export const DELETE_SENTENCE='[Sentence] DELETE_SENTENCE'
 
@@ -18,17 +17,11 @@ export class GetAllSentences implements Action {
   constructor() {
   }
 }
-export class AddSentence implements Action {
-  readonly type = ADD_SENTENCE;
-
-  constructor(public newSentence: NewSentenceModel) {
-  }
-}
 
 export class MergeSentence implements Action {
   readonly type = MERGE_SENTENCE;
 
-  constructor(public idSentence: string, public newSentence: NewSentenceModel) {
+  constructor(public newSentence: NewSentenceModel) {
   }
 }
 

@@ -2,7 +2,6 @@ import {SentenceModel} from "../model/sentence.model";
 import {
   ACTION_SENTENCE_FAIL,
   ACTION_SENTENCE_SUCCESS,
-  ADD_SENTENCE,
   DELETE_SENTENCE,
   GET_ALL_SENTENCE,
   MERGE_SENTENCE
@@ -22,7 +21,6 @@ export const INITIAL_STATE:SentenceState={
 
 export function reducer(state: SentenceState = INITIAL_STATE, action) {
   switch (action.type) {
-    case ADD_SENTENCE:
     case MERGE_SENTENCE:
     case DELETE_SENTENCE:
     case GET_ALL_SENTENCE:
