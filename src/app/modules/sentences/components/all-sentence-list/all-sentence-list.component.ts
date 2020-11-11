@@ -73,11 +73,19 @@ export class AllSentenceListComponent implements OnInit, AfterViewInit {
       console.dir(result)
       if (result) {
         this.mergeSentenceEvent.emit(result)
-        setTimeout(() => {
-          this.dataSource.data = this.sentencesList
-        }, 500)
+        this.refreshDataSource();
       }
     });
+  }
 
+  deleteSentence(id: string) {
+    this.deleteSentenceEvent.emit(id);
+    this.refreshDataSource();
+  }
+
+  refreshDataSource() {
+    setTimeout(() => {
+      this.dataSource.data = this.sentencesList
+    }, 500)
   }
 }

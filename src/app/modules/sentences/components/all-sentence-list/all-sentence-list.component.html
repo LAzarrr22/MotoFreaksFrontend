@@ -1,6 +1,6 @@
 <div class="min-width">
   <div class="context">
-    <div class="title-page">Dictionary--{{sentencesList.length}}</div>
+    <div class="title-page">Dictionary</div>
     <div *ngIf="isModerator" class="color-blue sub-title pl-md-2 " (click)="openModifyTopUp()">Create new</div>
 
     <div class="filter-section">
@@ -27,14 +27,14 @@
           <mat-icon class="click color-blue" matTooltip="Edit Sentence" matTooltipPosition="left" (click)="openModifyTopUp(element)">
             edit
           </mat-icon>
-          <mat-icon class="delete-icon" matTooltip="Delete Sentence" matTooltipPosition="right">
+          <mat-icon class="delete-icon" matTooltip="Delete Sentence" matTooltipPosition="right" (click)="deleteSentence(element.id)">
             delete
           </mat-icon>
 
         </td>
       </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="allColumnsDisplayed; sticky: true"></tr>
+      <tr mat-header-row *matHeaderRowDef="allColumnsDisplayed"></tr>
       <tr mat-row *matRowDef="let user; columns: allColumnsDisplayed;"></tr>
 
       <tr class="mat-row" *matNoDataRow>
