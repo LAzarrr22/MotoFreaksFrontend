@@ -1,7 +1,11 @@
 <div class="context">
+  <div class="title">
+    Modify Cars
+  </div>
+
   <form [formGroup]="formCars" (ngSubmit)="addCars()">
 
-    <div class="title-page">Brands</div>
+    <div class="title-page pl-2">Brands</div>
 
     <div class="row pb-5">
 
@@ -26,7 +30,7 @@
       </div>
     </div>
 
-    <div class="title-page">Models</div>
+    <div class="title-page pl-2">Models</div>
     <ng-container *ngIf="isCompanySelected;else missingCompanySelection">
 
       <div class="row  pb-5" [ngClass]="{'edit-blur':  !isCompanySelected}">
@@ -55,7 +59,7 @@
     </ng-container>
 
 
-    <div class="title-page">Generations</div>
+    <div class="title-page pl-2">Generations</div>
     <ng-container *ngIf="isModelSelected;else missingModelSelection">
     <div class="row  pb-5" [ngClass]="{'edit-blur': getModel()==''}">
 
