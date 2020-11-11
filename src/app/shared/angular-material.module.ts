@@ -15,6 +15,7 @@ import {MatRadioModule} from "@angular/material/radio";
 import {MatCardModule} from "@angular/material/card";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatMenuModule} from "@angular/material/menu";
+import {MatDialogModule} from "@angular/material/dialog";
 
 const matModules = [
   MatTableModule,
@@ -34,6 +35,7 @@ const matModules = [
   MatCardModule,
   MatTooltipModule,
   MatMenuModule,
+  MatDialogModule
 ];
 
 
