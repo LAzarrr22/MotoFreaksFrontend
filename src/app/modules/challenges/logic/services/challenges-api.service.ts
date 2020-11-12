@@ -14,6 +14,7 @@ export class ChallengesApiService {
   createChallengeApi(newChallenge: NewChallengeModel) {
     return this.httpClient.post(`${environment.apiUrl}/challenge/create`, {
       name: newChallenge.name,
+      general:newChallenge.general,
       company: newChallenge.company,
       model: newChallenge.model,
       generation: newChallenge.generation,
@@ -27,6 +28,10 @@ export class ChallengesApiService {
 
   getAllChallengesApi(): Observable<ChallengeDtoModel[]> {
     return this.httpClient.get<ChallengeDtoModel[]>(`${environment.apiUrl}/challenge/get/all`)
+  }
+
+  getAllChallengesGeneralApi(): Observable<ChallengeDtoModel[]> {
+    return this.httpClient.get<ChallengeDtoModel[]>(`${environment.apiUrl}/challenge/get/all/general`)
   }
 
   getAllChallengesByCarApi(paramMap: Map<string, string>): Observable<ChallengeDtoModel[]> {

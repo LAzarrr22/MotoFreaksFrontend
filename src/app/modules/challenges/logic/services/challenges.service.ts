@@ -10,7 +10,7 @@ import {
   CreateChallenge,
   GetAllChallenges,
   GetAllChallengesByCar,
-  GetAllChallengesByUser,
+  GetAllChallengesByUser, GetAllChallengesGeneral,
   GetQuestionsById
 } from "../actions/challenges.actions";
 
@@ -52,5 +52,10 @@ export class ChallengesService {
   getQuestions(id: string): Observable<QuestionAnswer[]> {
     this.store.dispatch(new GetQuestionsById(id));
     return this.store.select(getSelectedQuestions);
+  }
+
+  getAllGeneralChallenges() {
+    this.store.dispatch(new GetAllChallengesGeneral());
+    return this.store.select(getAllChallenges);
   }
 }

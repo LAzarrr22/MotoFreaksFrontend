@@ -15,7 +15,7 @@ import {
   CreateChallengeSuccess,
   GET_ALL_CHALLENGES,
   GET_ALL_CHALLENGES_BY_CAR,
-  GET_ALL_CHALLENGES_BY_USER,
+  GET_ALL_CHALLENGES_BY_USER, GET_ALL_CHALLENGES_GENERAL,
   GET_QUESTIONS_BY_ID,
   GetAllChallenges,
   GetAllChallengesByCar,
@@ -24,7 +24,7 @@ import {
   GetAllChallengesByUser,
   GetAllChallengesByUserFail,
   GetAllChallengesByUserSuccess,
-  GetAllChallengesFail,
+  GetAllChallengesFail, GetAllChallengesGeneral, GetAllChallengesGeneralFail, GetAllChallengesGeneralSuccess,
   GetAllChallengesSuccess,
   GetQuestionsById,
   GetQuestionsByIdFail,
@@ -54,6 +54,23 @@ export class ChallengesEffects {
       ]),
       catchError((error, caught) => {
         this.store$.dispatch(new GetAllChallengesFail(error.error.message));
+        this.errorService.error(error);
+        return caught;
+      })
+    )
+
+   @Effect()
+  getAllChallengesGeneral$: Observable<Action> = this.actions$
+    .pipe(ofType(GET_ALL_CHALLENGES_GENERAL),
+      switchMap(() => {
+        return this.challengesApiService.getAllChallengesGeneralApi();
+      }),
+      switchMap((challenges: ChallengeDtoModel[]) => [
+        new GetAllChallengesGeneralSuccess(challenges),
+        new GetAllChallengesFail('')
+      ]),
+      catchError((error, caught) => {
+        this.store$.dispatch(new GetAllChallengesGeneralFail(error.error.message));
         this.errorService.error(error);
         return caught;
       })

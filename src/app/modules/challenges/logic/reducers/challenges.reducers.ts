@@ -8,6 +8,9 @@ import {
   GET_ALL_CHALLENGES_BY_USER_FAIL,
   GET_ALL_CHALLENGES_BY_USER_SUCCESS,
   GET_ALL_CHALLENGES_FAIL,
+  GET_ALL_CHALLENGES_GENERAL,
+  GET_ALL_CHALLENGES_GENERAL_FAIL,
+  GET_ALL_CHALLENGES_GENERAL_SUCCESS,
   GET_ALL_CHALLENGES_SUCCESS,
   GET_QUESTIONS_BY_ID,
   GET_QUESTIONS_BY_ID_FAIL,
@@ -33,6 +36,7 @@ export function reducer(state: ChallengesState = INITIAL_STATE, action) {
     case GET_ALL_CHALLENGES_BY_CAR:
     case GET_ALL_CHALLENGES_BY_USER:
     case GET_ALL_CHALLENGES:
+    case GET_ALL_CHALLENGES_GENERAL:
     case GET_QUESTIONS_BY_ID:
       return {
         ...state,
@@ -41,6 +45,7 @@ export function reducer(state: ChallengesState = INITIAL_STATE, action) {
     case GET_ALL_CHALLENGES_BY_CAR_SUCCESS:
     case GET_ALL_CHALLENGES_BY_USER_SUCCESS:
     case GET_ALL_CHALLENGES_SUCCESS:
+    case GET_ALL_CHALLENGES_GENERAL_SUCCESS:
       return {
         ...state,
         challengesList: action.challenges,
@@ -57,6 +62,7 @@ export function reducer(state: ChallengesState = INITIAL_STATE, action) {
     case GET_ALL_CHALLENGES_BY_USER_FAIL:
     case GET_ALL_CHALLENGES_FAIL:
     case GET_QUESTIONS_BY_ID_FAIL:
+    case GET_ALL_CHALLENGES_GENERAL_FAIL:
       return {
         ...state,
         loading: true

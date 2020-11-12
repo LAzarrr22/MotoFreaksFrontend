@@ -15,6 +15,10 @@ export const GET_ALL_CHALLENGES = '[Challenge] GET_ALL_CHALLENGES'
 export const GET_ALL_CHALLENGES_SUCCESS = '[Challenge] GET_ALL_CHALLENGES_SUCCESS'
 export const GET_ALL_CHALLENGES_FAIL = '[Challenge] GET_ALL_CHALLENGES_FAIL'
 
+export const GET_ALL_CHALLENGES_GENERAL = '[Challenge] GET_ALL_CHALLENGES_GENERAL'
+export const GET_ALL_CHALLENGES_GENERAL_SUCCESS = '[Challenge] GET_ALL_CHALLENGES_GENERAL_SUCCESS'
+export const GET_ALL_CHALLENGES_GENERAL_FAIL = '[Challenge] GET_ALL_CHALLENGES_GENERAL_FAIL'
+
 export const GET_ALL_CHALLENGES_BY_CAR = '[Challenge] GET_ALL_CHALLENGES_BY_CAR'
 export const GET_ALL_CHALLENGES_BY_CAR_SUCCESS = '[Challenge] GET_ALL_CHALLENGES_BY_CAR_SUCCESS'
 export const GET_ALL_CHALLENGES_BY_CAR_FAIL = '[Challenge] GET_ALL_CHALLENGES_BY_CAR_FAIL'
@@ -85,6 +89,27 @@ export class GetAllChallengesSuccess implements Action {
 
 export class GetAllChallengesFail implements Action {
   readonly type = GET_ALL_CHALLENGES_FAIL;
+
+  constructor(public payload: string) {
+  }
+}
+
+export class GetAllChallengesGeneral implements Action {
+  readonly type = GET_ALL_CHALLENGES_GENERAL;
+
+  constructor() {
+  }
+}
+
+export class GetAllChallengesGeneralSuccess implements Action {
+  readonly type = GET_ALL_CHALLENGES_GENERAL_SUCCESS;
+
+  constructor(public challenges: ChallengeDtoModel[]) {
+  }
+}
+
+export class GetAllChallengesGeneralFail implements Action {
+  readonly type = GET_ALL_CHALLENGES_GENERAL_FAIL;
 
   constructor(public payload: string) {
   }

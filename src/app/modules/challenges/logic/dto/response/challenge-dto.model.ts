@@ -6,6 +6,7 @@ export class ChallengeDtoModel {
   model: string
   generation: string
   creatorId: string;
+  general:boolean;
   alreadyFilled: boolean;
   obtainPoints:number;
   questionsCount: number;
