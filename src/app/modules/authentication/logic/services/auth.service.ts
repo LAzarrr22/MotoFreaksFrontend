@@ -4,7 +4,13 @@ import {RolesEnum} from "../enums/roles.enum";
 import {CheckValidation, SetAdmin, SetModerator} from "../actions/authentication.actions";
 import {GetAllUsers} from "../../../users/logic/action/user.action";
 import {GetMyFriends} from "../../../profiles/logic/action/my-profile.action";
-import {AuthenticationState, getRoles, isUserLoggedIn, isValidated} from "../reducers/authentication.reducers";
+import {
+  AuthenticationState,
+  getAuthToken,
+  getRoles,
+  isUserLoggedIn,
+  isValidated
+} from "../reducers/authentication.reducers";
 import {Observable} from "rxjs";
 
 @Injectable()
@@ -63,5 +69,11 @@ export class AuthService {
 
   isUnknown() {
     return !!this.roles.find(role => role == RolesEnum.UNKNOWN);
+  }
+
+  getToken() {
+    let token;
+    this.store.select(getAuthToken).subscribe(tokenSuccess=>token=tokenSuccess)
+    return token;
   }
 }
