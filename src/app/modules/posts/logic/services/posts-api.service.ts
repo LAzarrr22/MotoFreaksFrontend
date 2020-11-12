@@ -22,6 +22,10 @@ export class PostsApiService {
     })
   }
 
+  resolvePost(id: string) {
+    return this.httpClient.post(`${environment.apiUrl}/posts/resolve/${id}`,{});
+  }
+
   deletePost(id: string) {
     return this.httpClient.delete(`${environment.apiUrl}/posts/delete/${id}`);
   }

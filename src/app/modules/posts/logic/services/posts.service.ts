@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import {Store} from "@ngrx/store";
 import {Observable} from "rxjs";
 import {PostModel} from "../dto/model/post.model";
-import {DeletePost, GetAllPostByUserId, GetAllPosts} from "../action/posts.action";
+import {DeletePost, GetAllPostByUserId, GetAllPosts, ResolvePost} from "../action/posts.action";
 import {getPosts} from "../reducers/posts.reducers";
 
 @Injectable()
@@ -21,9 +21,15 @@ export class PostsService {
     return this.store.select(getPosts);
   }
 
+  resolvePost(id: string) {
+    this.store.dispatch(new ResolvePost(id))
+    return this.store.select(getPosts);
+  }
+
   getAllPostByCreatorId(id: string, type: string = 'ALL', paramMap: Map<string, string> = null): Observable<PostModel[]> {
     this.store.dispatch(new GetAllPostByUserId(id,type,paramMap));
     return this.store.select(getPosts);
   }
+
 
 }

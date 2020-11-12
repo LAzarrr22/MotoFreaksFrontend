@@ -20,7 +20,7 @@ import {
   GetAllPostByUserIdSuccess,
   GetAllPosts,
   GetAllPostsSuccess,
-  GetPostsFail
+  GetPostsFail, RESOLVE_POST, ResolvePost, ResolvePostFail, ResolvePostSuccess
 } from "../action/posts.action";
 import {catchError, switchMap} from "rxjs/operators";
 
@@ -81,6 +81,21 @@ export class PostsEffects {
       })
     )
 
+  @Effect()
+  resolvePost: Observable<Action> = this.action$
+    .pipe(ofType(RESOLVE_POST),
+      switchMap((action: ResolvePost) => {
+        return this.postsApiService.resolvePost(action.id);
+      }),
+      switchMap((response: string) => [
+        new ResolvePostSuccess(response)
+      ]),
+      catchError((error, caught) => {
+        this.store$.dispatch(new ResolvePostFail(error.error.message));
+        this.errorService.error(error);
+        return caught;
+      })
+    )
 
   @Effect()
   deletePost: Observable<Action> = this.action$

@@ -10,6 +10,10 @@ export const GET_POST_FAIL = '[Posts] GET_ALL_POST_FAIL'
 export const GET_ALL_POST_BY_ID = '[Posts] GET_ALL_POST_BY_ID'
 export const GET_ALL_POST_BY_ID_SUCCESS = '[Posts] GET_ALL_POST_BY_ID_SUCCESS'
 
+export const RESOLVE_POST = '[Posts] RESOLVE_POST'
+export const RESOLVE_POST_SUCCESS = '[Posts] RESOLVE_POST_SUCCESS'
+export const RESOLVE_POST_FAIL = '[Posts] RESOLVE_POST_FAIL'
+
 export const DELETE_POST = '[Posts] DELETE_POST'
 export const DELETE_POST_SUCCESS = '[Posts] DELETE_POST_SUCCESS'
 export const DELETE_POST_FAIL = '[Posts] DELETE_POST_FAIL'
@@ -51,6 +55,27 @@ export class GetAllPostByUserIdSuccess implements Action {
   readonly type = GET_ALL_POST_BY_ID_SUCCESS;
 
   constructor(public payload: PostModel[]) {
+  }
+}
+
+export class ResolvePost implements Action {
+  readonly type = RESOLVE_POST;
+
+  constructor(public id: string) {
+  }
+}
+
+export class ResolvePostSuccess implements Action {
+  readonly type = RESOLVE_POST_SUCCESS;
+
+  constructor(public payload: string) {
+  }
+}
+
+export class ResolvePostFail implements Action {
+  readonly type = RESOLVE_POST_FAIL;
+
+  constructor(public payload: string) {
   }
 }
 
