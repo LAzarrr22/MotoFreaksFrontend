@@ -15,6 +15,8 @@ export class SectionContactComponent implements OnInit {
   contact: ContactModel;
   @Input()
   myProfile: boolean = false;
+  @Input()
+  isAdmin:boolean;
   isEditable: boolean = false;
   formMerge: FormGroup;
   validationMessages: ValidationMessageMap;

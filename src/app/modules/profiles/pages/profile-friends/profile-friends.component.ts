@@ -4,6 +4,7 @@ import {UserModel} from "../../../users/logic/dto/response/user-model";
 import {ActivatedRoute} from "@angular/router";
 import {ActiveRoute} from "../../../../shared/enums/active-route.enum";
 import {MenuService} from "../../../menu/logic/services/menu.service";
+import {AuthService} from "../../../authentication/logic/services/auth.service";
 
 @Component({
   selector: 'app-profile-friends',
@@ -14,14 +15,17 @@ export class ProfileFriendsComponent implements OnInit {
 
   users: UserModel[];
   user: UserModel;
+  isAdmin:boolean=false;
 
-  constructor(private route: ActivatedRoute, private usersService: UsersService, private menuService: MenuService) {
+  constructor(private route: ActivatedRoute, private usersService: UsersService,
+              private menuService: MenuService,  private authService:AuthService) {
   }
 
   ngOnInit(): void {
     this.menuService.activeRoute.next(ActiveRoute.ALL_USERS)
     const userId = this.route.snapshot.paramMap.get('id');
     this.getUser(userId);
+    this.isAdmin=this.authService.isAdmin();
     window.scrollTo(0, 0)
 
   }

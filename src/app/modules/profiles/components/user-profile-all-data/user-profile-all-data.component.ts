@@ -17,6 +17,8 @@ export class UserProfileAllDataComponent implements OnInit {
   userProfile: UserModel;
   @Input()
   currentRoles: RolesEnum[];
+  @Input()
+  isAdmin: boolean;
 
   @Output()
   reloadUser = new EventEmitter();
