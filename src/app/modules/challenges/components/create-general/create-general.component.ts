@@ -31,16 +31,24 @@ export class CreateGeneralComponent implements OnInit {
     this.loadCompaniesList();
     this.formBasic = this.formBuilder.group({
       name: new FormControl('', [Validators.required]),
-      company: new FormControl('', [Validators.required]),
+      company: new FormControl(''),
       model: new FormControl('' ),
       generation: new FormControl(''),
+      general:new FormControl('')
     })
   }
 
   createChallenge(){
+    console.dir(this.isGeneral())
     if(this.formBasic.valid && this.currentQuestions.length>0){
-      this.addNew.emit(new NewChallengeModel(this.getName(),this.getCompany(),this.getModel(),
-                                              this.getGeneration(),this.currentQuestions))
+      if(this.isGeneral()){
+        this.addNew.emit(new NewChallengeModel(this.getName(), this.isGeneral(),null,null,
+          null,this.currentQuestions))
+      }else{
+        this.addNew.emit(new NewChallengeModel(this.getName(), this.isGeneral(),this.getCompany(),this.getModel(),
+          this.getGeneration(),this.currentQuestions))
+      }
+
     }
   }
   addQuestion(question: QuestionAnswer){
@@ -90,6 +98,10 @@ export class CreateGeneralComponent implements OnInit {
 
   getGeneration() {
     return this.formBasic.controls.generation.value;
+  }
+
+ isGeneral() {
+    return this.formBasic.controls.general.value;
   }
 
   companySelectionChange() {

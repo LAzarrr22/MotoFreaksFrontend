@@ -12,11 +12,20 @@
           <mat-label>Name</mat-label>
           <input matInput placeholder="Name" formControlName="name">
         </mat-form-field>
-                <error-form [control]="'name'" [form]="formBasic"></error-form>
+        <error-form [control]="'name'" [form]="formBasic"></error-form>
       </div>
     </div>
 
 
+    <div class="row">
+      <div class="col-md-4 col-lg-4">
+        <mat-label class="general-text pr-3">General Challenge</mat-label>
+        <input type="checkbox" placeholder="General" formControlName="general">
+      </div>
+    </div>
+
+
+<ng-container *ngIf="!isGeneral()">
     <div class="row">
       <div class="col-md-3">
 
@@ -51,6 +60,7 @@
         </mat-form-field>
       </div>
     </div>
+</ng-container>
 
     <div class="row">
       <div class="col-md-2 col-lg-2 pt-3">
@@ -74,7 +84,8 @@
 <div class="pl-2 pr-5">
 
   <ng-container *ngFor="let question of currentQuestions">
-    <app-created-question-item [question]="question" (deleteQuestionEvn)="deleteQuestion(question)"></app-created-question-item>
+    <app-created-question-item [question]="question"
+                               (deleteQuestionEvn)="deleteQuestion(question)"></app-created-question-item>
   </ng-container>
 
 </div>
