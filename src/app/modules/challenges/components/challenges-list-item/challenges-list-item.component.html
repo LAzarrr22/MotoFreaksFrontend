@@ -14,12 +14,24 @@
       </div>
     </div>
 
-    <div class="row pl-3 pb-1 sub-text">
-      <div class="col">
-        <mat-icon>directions_car</mat-icon>
-        {{challenge.company}}, {{challenge.model}}, {{challenge.generation}}
+    <ng-container *ngIf="!challenge.general">
+      <div class="row pl-3 pb-1 sub-text">
+        <div class="col">
+          <mat-icon>directions_car</mat-icon>
+          {{challenge.company}}, {{challenge.model}}, {{challenge.generation}}
+        </div>
       </div>
-    </div>
+    </ng-container>
+
+    <ng-container *ngIf="challenge.general">
+      <div class="row pl-3 pb-1 sub-text">
+        <div class="col">
+          <mat-icon>360</mat-icon>
+         General for cars
+        </div>
+      </div>
+    </ng-container>
+
 
     <div class="row pl-3 pb-1 sub-text" (click)="goToProfile()">
       <div class="col" matTooltip="Profile" matTooltipPosition="left">

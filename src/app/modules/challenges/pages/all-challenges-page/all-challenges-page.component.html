@@ -17,10 +17,20 @@
       </div>
     </div>
   </div>
-    <ng-container *ngIf="filterOpen">
+  <ng-container *ngIf="filterOpen">
+    <div class="row pb-3">
+      <form [formGroup]="formGeneral">
+        <mat-label class="general-text pl-5 pr-3">General Challenge</mat-label>
+        <input type="checkbox" placeholder="General" formControlName="general" (ngModelChange)="onChangeGeneral()">
+      </form>
+    </div>
+
+    <ng-container *ngIf="!isGeneral()">
       <app-filter-by-car (applyFilterEvent)="applyCarFilter($event)"
                          (clearFilterEvent)="clearFilter()" [errorMessage]="errorMessageObs |async"></app-filter-by-car>
     </ng-container>
+
+  </ng-container>
   <app-challenges-list [challengesList]="challengesListObs|async" [myId]="myId"></app-challenges-list>
 
 </div>

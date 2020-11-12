@@ -11,6 +11,7 @@ import {map} from "rxjs/operators";
 import {Router} from "@angular/router";
 import {AppPath} from "../../../../shared/enums/app-path.enum";
 import {AuthService} from "../../../authentication/logic/services/auth.service";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-all-challenges-page',
@@ -22,12 +23,13 @@ export class AllChallengesPageComponent implements OnInit {
   challengesListObs: Observable<ChallengeDtoModel[]>
   filterOpen: boolean = false;
   myId: string;
-  errorMessageObs:Observable<string>;
-  isModerator:boolean=false;
+  errorMessageObs: Observable<string>;
+  isModerator: boolean = false;
+  formGeneral: FormGroup;
 
   constructor(private challengesService: ChallengesService, private menuService: MenuService,
               private profileService: ProfileService, private actions: Actions,
-              private router:Router, private authService:AuthService) {
+              private router: Router, private authService: AuthService, private formBuilder: FormBuilder) {
     this.errorMessageObs = this.actions.pipe(ofType(GET_ALL_CHALLENGES_BY_CAR_FAIL), map((action: GetAllChallengesByCarFail) => action.payload));
   }
 
@@ -35,15 +37,27 @@ export class AllChallengesPageComponent implements OnInit {
     this.menuService.activeRoute.next(ActiveRoute.CHALLENGE)
     this.myId = this.profileService.getMyId();
     this.challengesListObs = this.challengesService.getAllChallenges()
-    this.isModerator=this.authService.isModerator()
+    this.isModerator = this.authService.isModerator()
+    this.formGeneral = this.formBuilder.group({
+      general: new FormControl('')
+    })
     window.scrollTo(0, 0)
   }
 
-  goToCreate(){
+  goToCreate() {
     this.router.navigate([AppPath.CHALLENGE_CREATE])
   }
+
   openFilter() {
     this.filterOpen = !this.filterOpen;
+  }
+
+  onChangeGeneral() {
+    if (this.isGeneral()) {
+      this.challengesListObs = this.challengesService.getAllGeneralChallenges()
+    }else{
+      this.clearFilter()
+    }
   }
 
   applyCarFilter(params: Map<string, string>) {
@@ -52,5 +66,9 @@ export class AllChallengesPageComponent implements OnInit {
 
   clearFilter() {
     this.challengesListObs = this.challengesService.getAllChallenges()
+  }
+
+  isGeneral() {
+    return this.formGeneral.controls.general.value;
   }
 }
