@@ -11,6 +11,7 @@ import {ProfileService} from "../../../profiles/logic/services/profile.service";
 import {Actions, ofType} from "@ngrx/effects";
 import {map} from "rxjs/operators";
 import {GET_POST_FAIL, GetPostsFail} from "../../logic/action/posts.action";
+import {AuthService} from "../../../authentication/logic/services/auth.service";
 
 @Component({
   selector: 'app-all-post-page',
@@ -25,18 +26,19 @@ export class AllPostPageComponent implements OnInit {
   postTypeList = [];
   myId: string;
   currentFilterType: PostType;
-  currentCarFilter: Map<string,string>;
+  currentCarFilter: Map<string, string>;
+  isAdmin: boolean = false;
 
   @Input()
   postsForProfile: boolean = false;
   @Input()
   idProfileToShow: string;
-  errorMessage:Observable<string>;
+  errorMessage: Observable<string>;
 
   constructor(private router: Router, private menuService: MenuService,
               private postsService: PostsService, private profileService: ProfileService,
-              private actions: Actions) {
-      this.errorMessage = this.actions.pipe(ofType(GET_POST_FAIL), map((action: GetPostsFail) => action.payload));
+              private actions: Actions, private authService: AuthService) {
+    this.errorMessage = this.actions.pipe(ofType(GET_POST_FAIL), map((action: GetPostsFail) => action.payload));
   }
 
   ngOnInit(): void {
@@ -50,7 +52,7 @@ export class AllPostPageComponent implements OnInit {
     } else {
       this.postsListObs = this.postsService.getAllPostByCreatorId(this.idProfileToShow);
     }
-
+    this.isAdmin = this.authService.isAdmin();
   }
 
   addNew() {
@@ -69,17 +71,25 @@ export class AllPostPageComponent implements OnInit {
 
   }
 
+  resolvePost(id: string) {
+    this.postsService.resolvePost(id)
+    setTimeout(() => {
+      this.refreshPosts();
+    }, 500)
+  }
+
   filterType(type: PostType) {
     this.currentFilterType = type;
     this.refreshPosts();
   }
 
   applyCarFilter(params: Map<string, string>) {
-    this.currentCarFilter=params;
+    this.currentCarFilter = params;
     this.refreshPosts();
   }
+
   clearCarFilter() {
-    this.currentCarFilter=null;
+    this.currentCarFilter = null;
     this.refreshPosts();
   }
 
@@ -87,7 +97,8 @@ export class AllPostPageComponent implements OnInit {
     if (!this.postsForProfile) {
       this.postsListObs = this.postsService.getAllPosts(this.currentFilterType, this.currentCarFilter);
     } else {
-      this.postsListObs = this.postsService.getAllPostByCreatorId(this.idProfileToShow,this.currentFilterType, this.currentCarFilter);
+      this.postsListObs = this.postsService.getAllPostByCreatorId(this.idProfileToShow, this.currentFilterType, this.currentCarFilter);
     }
   }
+
 }

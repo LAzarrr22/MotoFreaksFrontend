@@ -12,8 +12,12 @@ export class PostsListComponent implements OnInit {
   postsList: PostModel[];
   @Input()
   myId: string;
+  @Input()
+  isAdmin: boolean;
   @Output()
   deletePostEvent = new EventEmitter<string>();
+  @Output()
+  resolvePostEvent = new EventEmitter<string>();
 
   constructor() {
   }
@@ -26,4 +30,7 @@ export class PostsListComponent implements OnInit {
     this.deletePostEvent.emit(id);
   }
 
+  resolvePost(id: string) {
+    this.resolvePostEvent.emit(id);
+  }
 }

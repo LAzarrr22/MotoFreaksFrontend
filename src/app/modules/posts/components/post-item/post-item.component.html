@@ -1,28 +1,56 @@
 <div class="context">
   <div class="border mat-elevation-z18">
 
-    <div class="row pb-1 pl-3 pt-2 type">
-      <div class="col-md-11">
-        <ng-container *ngIf="post.type=='ADVICE'">
-          <mat-icon>question_answer</mat-icon>
-        </ng-container>
-        <ng-container *ngIf="post.type=='INFO'">
-          <mat-icon>info</mat-icon>
-        </ng-container>
-        <ng-container *ngIf="post.type=='BORROW'">
-          <mat-icon>compare_arrows</mat-icon>
-        </ng-container>
-        <ng-container *ngIf="post.type=='ROAD_HELP'">
-          <mat-icon>handyman</mat-icon>
-        </ng-container>
+    <ng-container *ngIf="post.creatorId==myId || isAdmin">
+    <div class="row pt-1 pr-5 pr-md-0 type">
+        <div class="col-md-1 pl-4 offset-11  align-items-end">
+          <ng-container *ngIf="isOpen()">
+            <mat-icon class="click color-blue" (click)="resolvePost()" matTooltip="Set as resolved" matTooltipPosition="left">
+              done
+            </mat-icon>
+          </ng-container>
+          <ng-container *ngIf="!isOpen()">
 
-        {{post.type}}: <i>{{post.title}}</i>
-      </div>
-      <ng-container *ngIf="post.creatorId==myId">
-        <div class="col-md-1">
-          <mat-icon class="delete-icon" (click)="deletePost()">delete</mat-icon>
+            <mat-icon class="delete-icon" (click)="deletePost()" matTooltip="Delete post" matTooltipPosition="left">
+              delete
+            </mat-icon>
+          </ng-container>
         </div>
-      </ng-container>
+
+    </div>
+    </ng-container>
+
+
+    <div class="row pb-1 pl-3 pb-4 type">
+      <div class="col-2 not-validated" [ngClass]="{'color-green': isOpen()}">
+        {{post.state}}
+      </div>
+
+      <div class="col-md-8 pt- 2 ">
+        <div class="row text-center">
+          <ng-container *ngIf="post.type=='ADVICE'">
+            <mat-icon>question_answer</mat-icon>
+          </ng-container>
+          <ng-container *ngIf="post.type=='INFO'">
+            <mat-icon>info</mat-icon>
+          </ng-container>
+          <ng-container *ngIf="post.type=='BORROW'">
+            <mat-icon>compare_arrows</mat-icon>
+          </ng-container>
+          <ng-container *ngIf="post.type=='ROAD_HELP'">
+            <mat-icon>handyman</mat-icon>
+          </ng-container>
+
+          {{post.type}}
+        </div>
+        <div class="row pt-2">
+          <i>{{post.title}}</i>
+        </div>
+
+      </div>
+
+
+
     </div>
 
 
@@ -56,7 +84,7 @@
 
     <div class="row pb-4 pl-4 click" (click)="goToProfile()">
       <div>
-        <div class="col">
+        <div class="col body-context">
           {{post.body}}
         </div>
       </div>

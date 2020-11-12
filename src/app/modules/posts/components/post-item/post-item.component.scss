@@ -8,7 +8,7 @@
 }
 
 .header {
-  font-size: $font-size-medium;
+  font-size: $font-size-small+2;
   min-width: 150px;
 }
 
@@ -24,6 +24,13 @@
 }
 
 .type {
-  font-size: $font-size-medium+2;
+  font-size: $font-size-medium;
+}
+
+.body-context{
+  font-size: $font-size-small+4;
+}
+.text-center{
+  text-align: center;
 }
 

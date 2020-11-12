@@ -3,6 +3,7 @@ import {PostModel} from "../../logic/dto/model/post.model";
 import {Router} from "@angular/router";
 import {AppPath} from "../../../../shared/enums/app-path.enum";
 import {UsersService} from "../../../users/logic/services/users.service";
+import {PostState} from "../../logic/enums/post-state.enum";
 
 @Component({
   selector: 'app-post-item',
@@ -15,10 +16,15 @@ export class PostItemComponent implements OnInit {
   post: PostModel;
   @Input()
   myId: string;
+  @Input()
+  isAdmin:boolean=false;
   @Output()
   deletePostEvent = new EventEmitter<string>();
+  @Output()
+  resolvePostEvent = new EventEmitter<string>();
   authorName: string;
   authorLastName: string;
+
 
 
   constructor(private router: Router, private userService: UsersService) {
@@ -48,4 +54,13 @@ export class PostItemComponent implements OnInit {
   deletePost() {
     this.deletePostEvent.emit(this.post.id);
   }
+
+  resolvePost() {
+    this.resolvePostEvent.emit(this.post.id);
+  }
+
+  isOpen() {
+    return this.post.state==PostState.OPEN;
+  }
+
 }
