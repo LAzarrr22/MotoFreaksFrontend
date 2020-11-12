@@ -12,7 +12,7 @@ import {
   CREATE_CHALLENGE,
   CreateChallenge,
   CreateChallengeFail,
-  CreateChallengeSuccess,
+  CreateChallengeSuccess, DELETE_CHALLENGE, DeleteChallenge, DeleteChallengeFail, DeleteChallengeSuccess,
   GET_ALL_CHALLENGES,
   GET_ALL_CHALLENGES_BY_CAR,
   GET_ALL_CHALLENGES_BY_USER, GET_ALL_CHALLENGES_GENERAL,
@@ -154,6 +154,23 @@ export class ChallengesEffects {
       ]),
       catchError((error, caught) => {
         this.store$.dispatch(new AddCompetitorFail(error.error.message));
+        this.errorService.error(error);
+        return caught;
+      })
+    )
+
+  @Effect()
+  deleteChallenge$: Observable<Action> = this.actions$
+    .pipe(ofType(DELETE_CHALLENGE),
+      switchMap((action: DeleteChallenge) => {
+        return this.challengesApiService.deleteChallengeApi(action.challengeId);
+      }),
+      switchMap((response: string) => [
+        new DeleteChallengeSuccess(response),
+        new GetAllChallenges()
+      ]),
+      catchError((error, caught) => {
+        this.store$.dispatch(new DeleteChallengeFail(error.error.message));
         this.errorService.error(error);
         return caught;
       })

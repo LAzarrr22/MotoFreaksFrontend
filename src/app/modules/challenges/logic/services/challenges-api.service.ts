@@ -26,6 +26,10 @@ export class ChallengesApiService {
     return this.httpClient.post(`${environment.apiUrl}/challenge/id/${challengeId}/add/competitor/points/${points}`, {})
   }
 
+   deleteChallengeApi(challengeId: string) {
+    return this.httpClient.delete(`${environment.apiUrl}/challenge/delete/${challengeId}`)
+  }
+
   getAllChallengesApi(): Observable<ChallengeDtoModel[]> {
     return this.httpClient.get<ChallengeDtoModel[]>(`${environment.apiUrl}/challenge/get/all`)
   }

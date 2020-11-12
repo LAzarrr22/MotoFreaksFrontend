@@ -7,7 +7,7 @@ import {Store} from "@ngrx/store";
 import {ChallengesState, getAllChallenges, getSelectedQuestions} from "../reducers/challenges.reducers";
 import {
   AddCompetitor,
-  CreateChallenge,
+  CreateChallenge, DeleteChallenge,
   GetAllChallenges,
   GetAllChallengesByCar,
   GetAllChallengesByUser, GetAllChallengesGeneral,
@@ -29,6 +29,13 @@ export class ChallengesService {
 
   addCompetitor(challengeId: string, obtainPoints:number) {
     this.store.dispatch(new AddCompetitor(challengeId,obtainPoints));
+    setTimeout(() => {
+      this.store.dispatch(new GetAllChallenges());
+    }, 0);
+  }
+
+  deleteChallenge(challengeId: string) {
+    this.store.dispatch(new DeleteChallenge(challengeId));
     setTimeout(() => {
       this.store.dispatch(new GetAllChallenges());
     }, 0);

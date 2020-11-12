@@ -11,6 +11,10 @@ export const ADD_COMPETITOR = '[Challenge] ADD_COMPETITOR'
 export const ADD_COMPETITOR_SUCCESS = '[Challenge] ADD_COMPETITOR_SUCCESS'
 export const ADD_COMPETITOR_FAIL = '[Challenge] ADD_COMPETITOR_FAIL'
 
+export const DELETE_CHALLENGE = '[Challenge] DELETE_CHALLENGE'
+export const DELETE_CHALLENGE_SUCCESS = '[Challenge] DELETE_CHALLENGE_SUCCESS'
+export const DELETE_CHALLENGE_FAIL = '[Challenge] DELETE_CHALLENGE_FAIL'
+
 export const GET_ALL_CHALLENGES = '[Challenge] GET_ALL_CHALLENGES'
 export const GET_ALL_CHALLENGES_SUCCESS = '[Challenge] GET_ALL_CHALLENGES_SUCCESS'
 export const GET_ALL_CHALLENGES_FAIL = '[Challenge] GET_ALL_CHALLENGES_FAIL'
@@ -68,6 +72,27 @@ export class AddCompetitorSuccess implements Action {
 
 export class AddCompetitorFail implements Action {
   readonly type = ADD_COMPETITOR_FAIL;
+
+  constructor(public payload: string) {
+  }
+}
+
+export class DeleteChallenge implements Action {
+  readonly type = DELETE_CHALLENGE;
+
+  constructor(public challengeId: string) {
+  }
+}
+
+export class DeleteChallengeSuccess implements Action {
+  readonly type = DELETE_CHALLENGE_SUCCESS;
+
+  constructor(public payload: string) {
+  }
+}
+
+export class DeleteChallengeFail implements Action {
+  readonly type = DELETE_CHALLENGE_FAIL;
 
   constructor(public payload: string) {
   }
