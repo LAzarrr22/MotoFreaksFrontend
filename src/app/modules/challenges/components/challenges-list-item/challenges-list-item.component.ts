@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ChallengeDtoModel} from "../../logic/dto/response/challenge-dto.model";
 import {Router} from "@angular/router";
 import {AppPath} from "../../../../shared/enums/app-path.enum";
@@ -18,6 +18,10 @@ export class ChallengesListItemComponent implements OnInit {
   creatorLastName: string;
   @Input()
   myId: string
+  @Input()
+  isAdmin: boolean;
+  @Output()
+  deleteEvent=new EventEmitter<string>();
 
 
   constructor(private router: Router) {
@@ -36,5 +40,9 @@ export class ChallengesListItemComponent implements OnInit {
 
   startChallenge() {
     this.router.navigate([AppPath.CHALLENGES_DO_PATH, {id: this.challenge.id}])
+  }
+
+  deleteChallenge() {
+this.deleteEvent.emit(this.challenge.id)
   }
 }

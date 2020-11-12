@@ -53,6 +53,7 @@ export class AllPostPageComponent implements OnInit {
       this.postsListObs = this.postsService.getAllPostByCreatorId(this.idProfileToShow);
     }
     this.isAdmin = this.authService.isAdmin();
+    window.scrollTo(0, 0)
   }
 
   addNew() {

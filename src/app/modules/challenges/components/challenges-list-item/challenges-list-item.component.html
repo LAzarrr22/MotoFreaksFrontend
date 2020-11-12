@@ -1,7 +1,13 @@
 <div class="context-min">
   <div class="border mat-elevation-z18">
 
-    <div class="row pt-3 pr-2 pl-1 sub-text-already" *ngIf="challenge.alreadyFilled">
+    <div class="row pt-3 pr-2 pl-1" *ngIf="isAdmin">
+      <div class="col-md-1 pl-4 offset-11  align-items-end">
+        <mat-icon class="delete-icon" (click)="deleteChallenge()" >delete</mat-icon>
+      </div>
+    </div>
+
+   <div class="row pt-3 pr-2 pl-1 sub-text-already" *ngIf="challenge.alreadyFilled">
       <div class="col">
         <mat-icon>done</mat-icon>
         You have already filled this challenge -  {{challenge.obtainPoints}} points

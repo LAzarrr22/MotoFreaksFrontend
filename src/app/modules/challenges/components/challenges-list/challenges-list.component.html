@@ -1,8 +1,9 @@
 <ng-container *ngFor="let challenge of challengesList">
-  <app-challenges-list-item [challenge]="challenge"
+  <app-challenges-list-item [challenge]="challenge" [isAdmin]="isAdmin"
                             [creatorName]="getCreatorName(challenge.creatorId)"
                             [creatorLastName]="getCreatorLastName(challenge.creatorId)"
-                            [myId]="myId">
+                            [myId]="myId"
+                              (deleteEvent)="deleteChallenge($event)">
   </app-challenges-list-item>
 </ng-container>
 

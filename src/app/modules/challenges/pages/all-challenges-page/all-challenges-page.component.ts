@@ -25,6 +25,7 @@ export class AllChallengesPageComponent implements OnInit {
   myId: string;
   errorMessageObs: Observable<string>;
   isModerator: boolean = false;
+  isAdmin: boolean = false;
   formGeneral: FormGroup;
 
   constructor(private challengesService: ChallengesService, private menuService: MenuService,
@@ -41,6 +42,7 @@ export class AllChallengesPageComponent implements OnInit {
     this.formGeneral = this.formBuilder.group({
       general: new FormControl('')
     })
+    this.isAdmin = this.authService.isAdmin();
     window.scrollTo(0, 0)
   }
 
@@ -70,5 +72,9 @@ export class AllChallengesPageComponent implements OnInit {
 
   isGeneral() {
     return this.formGeneral.controls.general.value;
+  }
+
+  deleteChallenge(id:string){
+    this.challengesService.deleteChallenge(id);
   }
 }

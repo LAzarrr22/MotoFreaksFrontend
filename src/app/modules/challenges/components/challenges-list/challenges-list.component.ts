@@ -1,6 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ChallengeDtoModel} from "../../logic/dto/response/challenge-dto.model";
 import {UsersService} from "../../../users/logic/services/users.service";
+import {$e} from "codelyzer/angular/styles/chars";
 
 @Component({
   selector: 'app-challenges-list',
@@ -12,7 +13,11 @@ export class ChallengesListComponent implements OnInit {
   @Input()
   challengesList: ChallengeDtoModel[];
   @Input()
+  isAdmin: boolean;
+  @Input()
   myId: string;
+  @Output()
+  deleteEvent=new EventEmitter<string>();
 
 
   constructor(private usersService: UsersService) {
@@ -29,4 +34,7 @@ export class ChallengesListComponent implements OnInit {
     return this.usersService.getLastName(id);
   }
 
+  deleteChallenge($event: string) {
+    this.deleteEvent.emit($event)
+  }
 }
