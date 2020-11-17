@@ -1,10 +1,10 @@
 import {PostModel} from "../dto/model/post.model";
 import {
+  FAIL_ACTION,
   GET_ALL_POST,
   GET_ALL_POST_BY_ID,
   GET_ALL_POST_BY_ID_SUCCESS,
   GET_ALL_POST_SUCCESS,
-  GET_POST_FAIL
 } from "../action/posts.action";
 import {createFeatureSelector, createSelector} from "@ngrx/store";
 
@@ -35,7 +35,7 @@ switch(action.type){
       loading: false
     }
 
-  case GET_POST_FAIL:
+  case FAIL_ACTION:
     return INITIAL_STATE;
 
   default:

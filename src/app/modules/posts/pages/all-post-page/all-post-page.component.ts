@@ -10,8 +10,8 @@ import {PostType} from "../../logic/enums/post-type.enum";
 import {ProfileService} from "../../../profiles/logic/services/profile.service";
 import {Actions, ofType} from "@ngrx/effects";
 import {map} from "rxjs/operators";
-import {GET_POST_FAIL, GetPostsFail} from "../../logic/action/posts.action";
 import {AuthService} from "../../../authentication/logic/services/auth.service";
+import {FAIL_ACTION, FailAction} from "../../logic/action/posts.action";
 
 @Component({
   selector: 'app-all-post-page',
@@ -38,7 +38,7 @@ export class AllPostPageComponent implements OnInit {
   constructor(private router: Router, private menuService: MenuService,
               private postsService: PostsService, private profileService: ProfileService,
               private actions: Actions, private authService: AuthService) {
-    this.errorMessage = this.actions.pipe(ofType(GET_POST_FAIL), map((action: GetPostsFail) => action.payload));
+    this.errorMessage = this.actions.pipe(ofType(FAIL_ACTION), map((action: FailAction) => action.payload));
   }
 
   ngOnInit(): void {

@@ -8,19 +8,14 @@ import {PostModel} from "../dto/model/post.model";
 import {
   ADD_POST,
   AddPost,
-  AddPostFail,
-  AddPostSuccess,
   DELETE_POST,
-  DeletePost,
-  DeletePostFail,
-  DeletePostSuccess,
+  DeletePost, FailAction,
   GET_ALL_POST,
   GET_ALL_POST_BY_ID,
   GetAllPostByUserId,
   GetAllPostByUserIdSuccess,
   GetAllPosts,
-  GetAllPostsSuccess,
-  GetPostsFail, RESOLVE_POST, ResolvePost, ResolvePostFail, ResolvePostSuccess
+  GetAllPostsSuccess, RESOLVE_POST, ResolvePost, SuccessActionString
 } from "../action/posts.action";
 import {catchError, switchMap} from "rxjs/operators";
 
@@ -37,11 +32,11 @@ export class PostsEffects {
         return this.postsApiService.getAllPosts(action.typeOfPosts,action.paramMap);
       }),
       switchMap((posts: PostModel[]) => [
-        new GetPostsFail(''),
+        new SuccessActionString(''),
         new GetAllPostsSuccess(posts)
       ]),
       catchError((error, caught) => {
-        this.store$.dispatch(new GetPostsFail(error.error.message));
+        this.store$.dispatch(new FailAction(error.error.message));
         this.errorService.error(error);
         return caught;
       })
@@ -54,11 +49,11 @@ export class PostsEffects {
         return this.postsApiService.getAllPostsByCreatorId(action.userId,action.typeOfPosts,action.paramMap);
       }),
       switchMap((posts: PostModel[]) => [
-        new GetPostsFail(''),
+        new SuccessActionString(''),
         new GetAllPostByUserIdSuccess(posts),
       ]),
       catchError((error, caught) => {
-        this.store$.dispatch(new GetPostsFail(error.error.message));
+        this.store$.dispatch(new FailAction(error.error.message));
         this.errorService.error(error);
         return caught;
       })
@@ -71,11 +66,11 @@ export class PostsEffects {
         return this.postsApiService.addPost(action.newPost);
       }),
       switchMap((response: string) => [
-        new AddPostSuccess(response),
+        new SuccessActionString(response),
         new GetAllPosts()
       ]),
       catchError((error, caught) => {
-        this.store$.dispatch(new AddPostFail(error.error.message));
+        this.store$.dispatch(new FailAction(error.error.message));
         this.errorService.error(error);
         return caught;
       })
@@ -88,10 +83,10 @@ export class PostsEffects {
         return this.postsApiService.resolvePost(action.id);
       }),
       switchMap((response: string) => [
-        new ResolvePostSuccess(response)
+        new SuccessActionString(response)
       ]),
       catchError((error, caught) => {
-        this.store$.dispatch(new ResolvePostFail(error.error.message));
+        this.store$.dispatch(new FailAction(error.error.message));
         this.errorService.error(error);
         return caught;
       })
@@ -104,10 +99,10 @@ export class PostsEffects {
         return this.postsApiService.deletePost(action.id);
       }),
       switchMap((response: string) => [
-        new DeletePostSuccess(response)
+        new SuccessActionString(response)
       ]),
       catchError((error, caught) => {
-        this.store$.dispatch(new DeletePostFail(error.error.message));
+        this.store$.dispatch(new FailAction(error.error.message));
         this.errorService.error(error);
         return caught;
       })

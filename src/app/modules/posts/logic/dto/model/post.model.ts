@@ -2,6 +2,7 @@ import {PostType} from "../../enums/post-type.enum";
 import {AddressModel} from "../../../../profiles/logic/dto/models/address.model";
 import {CarModel} from "../../../../profiles/logic/dto/models/car.model";
 import {PostState} from "../../enums/post-state.enum";
+import {CommentModel} from "./comment.model";
 
 export class PostModel {
 
@@ -15,9 +16,10 @@ export class PostModel {
   userIdLikes: string[];
   location: AddressModel;
   car: CarModel;
+  comments:CommentModel[];
 
 
-  constructor(id: string, type: PostType, title: string, body: string, createdDate: Date, creatorId: string, state: PostState, userIdLikes: string[], location: AddressModel, car: CarModel) {
+  constructor(id: string, type: PostType, title: string, body: string, createdDate: Date, creatorId: string, state: PostState, userIdLikes: string[], location: AddressModel, car: CarModel, comments: CommentModel[]) {
     this.id = id;
     this.type = type;
     this.title = title;
@@ -28,6 +30,7 @@ export class PostModel {
     this.userIdLikes = userIdLikes;
     this.location = location;
     this.car = car;
+    this.comments = comments;
   }
 }
 
