@@ -1,30 +1,55 @@
 <div class="context">
   <div class="border mat-elevation-z18">
 
-    <ng-container *ngIf="post.creatorId==myId || isAdmin">
-    <div class="row pt-1 pr-5 pr-md-0 type">
-        <div class="col-md-1 pl-4 offset-11  align-items-end">
-          <ng-container *ngIf="isOpen()">
-            <mat-icon class="click color-blue" (click)="resolvePost()" matTooltip="Set as resolved" matTooltipPosition="left">
-              done
-            </mat-icon>
-          </ng-container>
-          <ng-container *ngIf="!isOpen()">
 
-            <mat-icon class="delete-icon" (click)="deletePost()" matTooltip="Delete post" matTooltipPosition="left">
-              delete
-            </mat-icon>
-          </ng-container>
-        </div>
+    <div class="row pl-3 pb-3 pt-2 header">
+
+      <div class="col-md-1 size-medium not-validated" [ngClass]="{'color-green': isOpen()}">
+        CLOSED
+      </div>
+
+      <div class="col-md-4">
+        <mat-icon>location_on</mat-icon>
+        {{post.location.country}}, {{post.location.city}}, {{post.location.street}}
+      </div>
+
+      <div class="col-md-3">
+        <mat-icon>directions_car</mat-icon>
+        {{post.car.company}}, {{post.car.model}}, {{post.car.generation}}
+      </div>
+
+      <div class="col-md-3">
+        <mat-icon>calendar_today</mat-icon>
+        {{post.createdDate | date: 'medium'}}
+      </div>
+
+      <ng-container *ngIf="post.creatorId==myId || isAdmin">
+
+          <div class="col-md-1 align-items-end">
+            <ng-container *ngIf="isOpen()">
+              <mat-icon class="click color-blue" (click)="resolvePost()" matTooltip="Set as resolved" matTooltipPosition="left">
+                done
+              </mat-icon>
+            </ng-container>
+            <ng-container *ngIf="!isOpen()">
+
+              <mat-icon class="delete-icon" (click)="deletePost()" matTooltip="Delete post" matTooltipPosition="left">
+                delete
+              </mat-icon>
+            </ng-container>
+          </div>
+
+      </ng-container>
 
     </div>
-    </ng-container>
 
+    <div class="row pt-2 pb-3 pl-4 user-names click" (click)="goToProfile()">
+      <div class="col">
+        {{authorName}} {{authorLastName}}
+      </div>
+    </div>
 
     <div class="row  pt-2 pl-3 pb-4 type">
-      <div class="col-2 not-validated" [ngClass]="{'color-green': isOpen()}">
-        {{post.state}}
-      </div>
 
       <div class="col-md-8 pt- 2 ">
         <div class="row text-center">
@@ -49,40 +74,9 @@
 
       </div>
 
-
-
     </div>
 
-
-    <div class="row pl-3 pb-1 header">
-      <div class="col">
-        <mat-icon>calendar_today</mat-icon>
-        {{post.createdDate | date: 'medium'}}
-      </div>
-    </div>
-
-    <div class="row pl-3 pb-1 header">
-      <div class="col">
-        <mat-icon>location_on</mat-icon>
-        {{post.location.country}}, {{post.location.city}}, {{post.location.street}}
-      </div>
-    </div>
-
-    <div class="row pl-3 pb-1 header">
-      <div class="col">
-        <mat-icon>directions_car</mat-icon>
-        {{post.car.company}}, {{post.car.model}}, {{post.car.generation}}
-      </div>
-    </div>
-
-    <div class="row pt-2 pb-3 pl-4 user-names click" (click)="goToProfile()">
-      <div class="col">
-        {{authorName}} {{authorLastName}}
-      </div>
-    </div>
-
-
-    <div class="row pb-4 pl-4 click" (click)="goToProfile()">
+    <div class="row pb-4 pl-5">
       <div>
         <div class="col body-context">
           {{post.body}}
@@ -90,6 +84,19 @@
       </div>
     </div>
 
+
+    <div class="row pl-3 click">
+      <div class="col" (click)="openHideComments()">
+        <mat-icon>message</mat-icon>
+        Comments: {{post.comments.length}}
+        <mat-icon *ngIf="!openComments">keyboard_arrow_down</mat-icon>
+        <mat-icon *ngIf="openComments">keyboard_arrow_up</mat-icon>
+      </div>
+    </div>
+
+    <ng-container *ngIf="openComments">
+    <app-comments-list [comments]="post.comments"></app-comments-list>
+    </ng-container>
 
   </div>
 </div>

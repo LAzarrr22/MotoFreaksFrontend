@@ -24,6 +24,7 @@ export class PostItemComponent implements OnInit {
   resolvePostEvent = new EventEmitter<string>();
   authorName: string;
   authorLastName: string;
+  openComments:boolean=false;
 
 
 
@@ -63,4 +64,7 @@ export class PostItemComponent implements OnInit {
     return this.post.state==PostState.OPEN;
   }
 
+  openHideComments() {
+    this.openComments=!this.openComments
+  }
 }
