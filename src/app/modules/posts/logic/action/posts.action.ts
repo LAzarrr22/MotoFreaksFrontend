@@ -10,13 +10,15 @@ export const GET_ALL_POST_BY_ID = '[Posts] GET_ALL_POST_BY_ID'
 export const GET_ALL_POST_BY_ID_SUCCESS = '[Posts] GET_ALL_POST_BY_ID_SUCCESS'
 
 export const RESOLVE_POST = '[Posts] RESOLVE_POST'
-
 export const DELETE_POST = '[Posts] DELETE_POST'
-
 export const ADD_POST = '[Posts] ADD_POST'
+export const ADD_COMMENT = '[Posts] ADD_COMMENT'
+export const DELETE_COMMENT = '[Posts] DELETE_COMMENT'
+export const APPROVE_COMMENT = '[Posts] ADD_COMMENT'
+export const REJECT_COMMENT = '[Posts] ADD_COMMENT'
 
-export const SUCCESS_ACTION_STRING= '[Posts] SUCCESS_ACTION_STRING'
-export const FAIL_ACTION= '[Posts] FAIL_ACTION'
+export const SUCCESS_ACTION_STRING = '[Posts] SUCCESS_ACTION_STRING'
+export const FAIL_ACTION = '[Posts] FAIL_ACTION'
 
 export class GetAllPosts implements Action {
   readonly type = GET_ALL_POST;
@@ -67,6 +69,35 @@ export class AddPost implements Action {
   }
 }
 
+export class AddComment implements Action {
+  readonly type = ADD_COMMENT;
+
+  constructor(public postId: string, public context: string) {
+  }
+}
+
+export class DeleteComment implements Action {
+  readonly type = DELETE_COMMENT;
+
+  constructor(public postId: string, public commentId: string) {
+  }
+}
+
+export class ApproveComment implements Action {
+  readonly type = APPROVE_COMMENT;
+
+  constructor(public postId: string, public commentId: string) {
+  }
+}
+
+
+export class RejectComment implements Action {
+  readonly type = REJECT_COMMENT;
+
+  constructor(public postId: string, public commentId: string) {
+  }
+}
+
 export class SuccessActionString implements Action {
   readonly type = SUCCESS_ACTION_STRING;
 
@@ -88,5 +119,9 @@ export type Actions =
   | GetAllPostsSuccess
   | DeletePost
   | AddPost
+  | AddComment
+  | DeleteComment
+  | ApproveComment
+  | RejectComment
   | SuccessActionString
   | FailAction
