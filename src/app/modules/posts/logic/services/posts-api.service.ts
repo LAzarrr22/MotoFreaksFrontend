@@ -55,4 +55,20 @@ export class PostsApiService {
     }
   }
 
+  addComment(postId: string, context:string) {
+    return this.httpClient.post(`${environment.apiUrl}/posts/${postId}/add/comment`, {context})
+  }
+
+  deleteComment(postId: string, commentId:string) {
+    return this.httpClient.delete(`${environment.apiUrl}/posts/${postId}/delete/comment/${commentId}`)
+  }
+
+  approveComment(postId: string, commentId:string) {
+    return this.httpClient.post(`${environment.apiUrl}/posts/${postId}/approve/comment/${commentId}`,{})
+  }
+
+  rejectComment(postId: string, commentId:string) {
+    return this.httpClient.post(`${environment.apiUrl}/posts/${postId}/reject/comment/${commentId}`,{})
+  }
+
 }
