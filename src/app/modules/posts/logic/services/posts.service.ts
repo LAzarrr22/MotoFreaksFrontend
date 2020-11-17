@@ -2,8 +2,16 @@ import {Injectable} from "@angular/core";
 import {Store} from "@ngrx/store";
 import {Observable} from "rxjs";
 import {PostModel} from "../dto/model/post.model";
-import {DeletePost, GetAllPostByUserId, GetAllPosts, ResolvePost} from "../action/posts.action";
+import {
+  AddComment, ApproveComment,
+  DeleteComment,
+  DeletePost,
+  GetAllPostByUserId,
+  GetAllPosts, RejectComment,
+  ResolvePost
+} from "../action/posts.action";
 import {getPosts} from "../reducers/posts.reducers";
+import {environment} from "../../../../../environments/environment";
 
 @Injectable()
 export class PostsService {
@@ -31,5 +39,24 @@ export class PostsService {
     return this.store.select(getPosts);
   }
 
+  addComment(postId: string, context:string) {
+    this.store.dispatch(new AddComment(postId,context))
+    return this.store.select(getPosts);
+  }
+
+  deleteComment(postId: string, commentId:string) {
+    this.store.dispatch(new DeleteComment(postId,commentId))
+    return this.store.select(getPosts);
+  }
+
+  approveComment(postId: string, commentId:string) {
+    this.store.dispatch(new ApproveComment(postId,commentId))
+    return this.store.select(getPosts);
+  }
+
+  rejectComment(postId: string, commentId:string) {
+    this.store.dispatch(new RejectComment(postId,commentId))
+    return this.store.select(getPosts);
+  }
 
 }

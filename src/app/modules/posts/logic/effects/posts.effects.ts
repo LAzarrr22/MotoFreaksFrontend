@@ -6,16 +6,26 @@ import {PostsApiService} from "../services/posts-api.service";
 import {Observable} from "rxjs";
 import {PostModel} from "../dto/model/post.model";
 import {
+  ADD_COMMENT,
   ADD_POST,
+  AddComment,
   AddPost,
+  APPROVE_COMMENT,
+  ApproveComment,
+  DELETE_COMMENT,
   DELETE_POST,
-  DeletePost, FailAction,
+  DeleteComment,
+  DeletePost,
+  FailAction,
   GET_ALL_POST,
   GET_ALL_POST_BY_ID,
   GetAllPostByUserId,
   GetAllPostByUserIdSuccess,
   GetAllPosts,
-  GetAllPostsSuccess, RESOLVE_POST, ResolvePost, SuccessActionString
+  GetAllPostsSuccess, REJECT_COMMENT, RejectComment,
+  RESOLVE_POST,
+  ResolvePost,
+  SuccessActionString
 } from "../action/posts.action";
 import {catchError, switchMap} from "rxjs/operators";
 
@@ -100,6 +110,74 @@ export class PostsEffects {
       }),
       switchMap((response: string) => [
         new SuccessActionString(response)
+      ]),
+      catchError((error, caught) => {
+        this.store$.dispatch(new FailAction(error.error.message));
+        this.errorService.error(error);
+        return caught;
+      })
+    )
+
+  @Effect()
+  addComment: Observable<Action> = this.action$
+    .pipe(ofType(ADD_COMMENT),
+      switchMap((action: AddComment) => {
+        return this.postsApiService.addComment(action.postId,action.context);
+      }),
+      switchMap((response: string) => [
+        new SuccessActionString(response),
+        new GetAllPosts()
+      ]),
+      catchError((error, caught) => {
+        this.store$.dispatch(new FailAction(error.error.message));
+        this.errorService.error(error);
+        return caught;
+      })
+    )
+
+  @Effect()
+  deleteComment: Observable<Action> = this.action$
+    .pipe(ofType(DELETE_COMMENT),
+      switchMap((action: DeleteComment) => {
+        return this.postsApiService.deleteComment(action.postId,action.commentId);
+      }),
+      switchMap((response: string) => [
+        new SuccessActionString(response),
+        new GetAllPosts()
+      ]),
+      catchError((error, caught) => {
+        this.store$.dispatch(new FailAction(error.error.message));
+        this.errorService.error(error);
+        return caught;
+      })
+    )
+
+  @Effect()
+  approveComment: Observable<Action> = this.action$
+    .pipe(ofType(APPROVE_COMMENT),
+      switchMap((action: ApproveComment) => {
+        return this.postsApiService.approveComment(action.postId,action.commentId);
+      }),
+      switchMap((response: string) => [
+        new SuccessActionString(response),
+        new GetAllPosts()
+      ]),
+      catchError((error, caught) => {
+        this.store$.dispatch(new FailAction(error.error.message));
+        this.errorService.error(error);
+        return caught;
+      })
+    )
+
+  @Effect()
+  rejectComment: Observable<Action> = this.action$
+    .pipe(ofType(REJECT_COMMENT),
+      switchMap((action: RejectComment) => {
+        return this.postsApiService.rejectComment(action.postId,action.commentId);
+      }),
+      switchMap((response: string) => [
+        new SuccessActionString(response),
+        new GetAllPosts()
       ]),
       catchError((error, caught) => {
         this.store$.dispatch(new FailAction(error.error.message));
