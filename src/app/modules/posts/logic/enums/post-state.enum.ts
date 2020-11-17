@@ -1,4 +1,4 @@
 export enum PostState {
 OPEN='OPEN',
-RESOLVED='RESOLVED'
+CLOSED='CLOSED'
 }
