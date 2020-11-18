@@ -5,7 +5,7 @@
     <div class="row pl-3 pb-3 pt-2 header">
 
       <div class="col-md-1 size-medium not-validated" [ngClass]="{'color-green': isOpen()}">
-        CLOSED
+        {{post.state}}
       </div>
 
       <div class="col-md-4">
@@ -76,7 +76,7 @@
 
     </div>
 
-    <div class="row pb-4 pl-5">
+    <div class="row pb-2 pl-5">
       <div>
         <div class="col body-context">
           {{post.body}}
@@ -84,19 +84,17 @@
       </div>
     </div>
 
-
-    <div class="row pl-3 click">
-      <div class="col" (click)="openHideComments()">
+<mat-divider></mat-divider>
+    <div class="row pl-3">
+      <div class="col" >
         <mat-icon>message</mat-icon>
         Comments: {{post.comments.length}}
-        <mat-icon *ngIf="!openComments">keyboard_arrow_down</mat-icon>
-        <mat-icon *ngIf="openComments">keyboard_arrow_up</mat-icon>
       </div>
     </div>
+    <app-comments-list (refreshPostsEvent)="refreshPosts()"
+                       [comments]="post.comments" [postId]="post.id"
+                       [myId]="myId" [state]="post.state"></app-comments-list>
 
-    <ng-container *ngIf="openComments">
-    <app-comments-list [comments]="post.comments"></app-comments-list>
-    </ng-container>
 
   </div>
 </div>

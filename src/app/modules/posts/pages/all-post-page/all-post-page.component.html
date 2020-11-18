@@ -26,4 +26,5 @@
 </div>
 
 <app-posts-list [postsList]="postsListObs| async" [myId]="myId" [isAdmin]="isAdmin"
-                (deletePostEvent)="deletePost($event)" (resolvePostEvent)="resolvePost($event)"></app-posts-list>
+                (deletePostEvent)="deletePost($event)" (resolvePostEvent)="resolvePost($event)"
+                (refreshPostsEvent)="refreshPosts()"></app-posts-list>

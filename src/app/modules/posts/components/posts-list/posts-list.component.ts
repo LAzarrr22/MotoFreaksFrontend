@@ -18,6 +18,8 @@ export class PostsListComponent implements OnInit {
   deletePostEvent = new EventEmitter<string>();
   @Output()
   resolvePostEvent = new EventEmitter<string>();
+  @Output()
+  refreshPostsEvent = new EventEmitter();
 
   constructor() {
   }
@@ -32,5 +34,9 @@ export class PostsListComponent implements OnInit {
 
   resolvePost(id: string) {
     this.resolvePostEvent.emit(id);
+  }
+
+  refreshPosts(){
+    this.refreshPostsEvent.emit()
   }
 }

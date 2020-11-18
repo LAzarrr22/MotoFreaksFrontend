@@ -95,6 +95,7 @@ export class AllPostPageComponent implements OnInit {
   }
 
   refreshPosts() {
+    console.log('test-resgref33333')
     if (!this.postsForProfile) {
       this.postsListObs = this.postsService.getAllPosts(this.currentFilterType, this.currentCarFilter);
     } else {

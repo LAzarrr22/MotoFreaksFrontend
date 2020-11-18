@@ -1,5 +1,6 @@
 <ng-container *ngFor="let post of postsList">
   <app-post-item [post]="post" [myId]="myId" [isAdmin]="isAdmin"
                  (deletePostEvent)="deletePost($event)" (resolvePostEvent)="resolvePost($event)"
+                 (refreshPostsEvent)="refreshPosts()"
   ></app-post-item>
 </ng-container>
