@@ -55,8 +55,8 @@ export class PostsApiService {
     }
   }
 
-  addComment(postId: string, context:string) {
-    return this.httpClient.post(`${environment.apiUrl}/posts/${postId}/add/comment`, {context})
+  addComment(postId: string, content:string) {
+    return this.httpClient.post(`${environment.apiUrl}/posts/${postId}/add/comment`, {content})
   }
 
   deleteComment(postId: string, commentId:string) {
