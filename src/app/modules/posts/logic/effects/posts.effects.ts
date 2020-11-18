@@ -143,7 +143,6 @@ export class PostsEffects {
       }),
       switchMap((response: string) => [
         new SuccessActionString(response),
-        new GetAllPosts()
       ]),
       catchError((error, caught) => {
         this.store$.dispatch(new FailAction(error.error.message));
@@ -159,8 +158,7 @@ export class PostsEffects {
         return this.postsApiService.approveComment(action.postId,action.commentId);
       }),
       switchMap((response: string) => [
-        new SuccessActionString(response),
-        new GetAllPosts()
+        new SuccessActionString(response)
       ]),
       catchError((error, caught) => {
         this.store$.dispatch(new FailAction(error.error.message));
@@ -176,8 +174,7 @@ export class PostsEffects {
         return this.postsApiService.rejectComment(action.postId,action.commentId);
       }),
       switchMap((response: string) => [
-        new SuccessActionString(response),
-        new GetAllPosts()
+        new SuccessActionString(response)
       ]),
       catchError((error, caught) => {
         this.store$.dispatch(new FailAction(error.error.message));

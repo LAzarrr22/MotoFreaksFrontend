@@ -16,10 +16,13 @@ import {AppCommonModule} from "../common/common.module";
 import {FilterPostsComponent} from "./components/filter-posts/filter-posts.component";
 import {AngularMaterialModule} from "../../shared/angular-material.module";
 import {SharedSectionCarModule} from "../profiles/components/profile-sections/section-cars/shared-section-car.module";
+import { CommentsListComponent } from './components/comments-list/comments-list.component';
+import { CommentsListItemComponent } from './components/comments-list-item/comments-list-item.component';
+import { AddCommentComponent } from './components/add-comment/add-comment.component';
 
 
 @NgModule({
-  declarations: [PostsListComponent, PostItemComponent, CreatePostComponent, CreatePostPageComponent, AllPostPageComponent, FilterPostsComponent],
+  declarations: [PostsListComponent, PostItemComponent, CreatePostComponent, CreatePostPageComponent, AllPostPageComponent, FilterPostsComponent, CommentsListComponent, CommentsListItemComponent, AddCommentComponent],
   imports: [
     CommonModule,
     PostsRoutingModule,
