@@ -1,0 +1,14 @@
+@import "src/app/shared/styles/common-classes";
+@import "~bootstrap";
+
+.comment-form {
+  min-width: 150px;
+  width: 100%;
+}
+
+
+.icon-click {
+  color: $custom-blue;
+  size: $font-size-Xbig;
+  cursor: pointer;
+}

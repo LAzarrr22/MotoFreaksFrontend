@@ -1,0 +1,24 @@
+<div class="pb-2 pt-2 pl-2 pr-3">
+  <div class="row">
+    <div class="col-md-8 offset-md-4">
+      <form class="comment-form" [formGroup]="form" (ngSubmit)="addComment()">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Comment</mat-label>
+          <input matInput #comment maxlength="256" placeholder="Comment" formControlName="comment">
+          <mat-hint align="end">{{comment.value.length}} / 256</mat-hint>
+        </mat-form-field>
+        <error-form [form]="form" [control]="'comment'"></error-form>
+
+        <div class="row">
+          <div class="col offset-md-10">
+            <ng-container *ngIf="getText()">
+              <button type="submit" mat-flat-button color="primary">Send</button>
+            </ng-container>
+
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
