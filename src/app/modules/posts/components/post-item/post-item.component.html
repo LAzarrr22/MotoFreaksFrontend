@@ -27,8 +27,8 @@
 
           <div class="col-md-1 align-items-end">
             <ng-container *ngIf="isOpen()">
-              <mat-icon class="click color-blue" (click)="resolvePost()" matTooltip="Set as resolved" matTooltipPosition="left">
-                done
+              <mat-icon class="size-medium click color-green" (click)="resolvePost()" matTooltip="Set as resolved" matTooltipPosition="left">
+                done_outline
               </mat-icon>
             </ng-container>
             <ng-container *ngIf="!isOpen()">
