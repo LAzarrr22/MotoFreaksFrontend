@@ -1,0 +1,32 @@
+<div class="pb-2 pr-md-5 pl-md-5">
+
+  <ng-container *ngIf="isShowMore">
+    <div class="row">
+      <div class="col-md-4 offset-md-4  col-sm-3 offset-sm-6 center-text click" (click)="loadMore()">
+        Show more
+      </div>
+    </div>
+  </ng-container>
+
+<ng-container *ngIf="currentShowComments.length>=3">
+    <div class="row">
+      <div class="col-md-4 offset-md-4  col-sm-3 offset-sm-6 center-text click" (click)="showStartList()">
+        Show less
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngFor="let c of currentShowComments">
+    <app-comments-list-item [comment]="c" [myId]="myId"
+                            (reviewComment)="reviewComment($event,c.id)" (deleteCommentEvent)="deleteComment(c)"></app-comments-list-item>
+
+  </ng-container>
+  <mat-divider></mat-divider>
+</div>
+
+<ng-container *ngIf="isOpen()">
+    <app-add-comment (addCommentEvent)="addComment($event)"></app-add-comment>
+</ng-container>
+
+
+

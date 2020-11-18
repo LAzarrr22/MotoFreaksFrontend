@@ -1,0 +1,16 @@
+@import "src/app/shared/styles/common-classes";
+@import "~bootstrap";
+
+.user-message {
+  background-color: $custom-blue;
+  font-size: $font-size-small+2;
+  border-radius: 6px;
+  border: 1px solid;
+  color: $custom-white;
+  min-width: 200px;
+}
+
+.comment-header{
+  font-size: $font-size-small+4;
+  margin-right: 2%;
+}

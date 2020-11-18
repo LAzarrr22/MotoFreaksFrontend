@@ -1,0 +1,42 @@
+<div class="row p-2">
+  <div class="col-md-8">
+    <div class="user-message mat-elevation-z10 " matTooltip="{{comment.createdDate | date: 'medium'}}"
+         matTooltipPosition="right">
+      <div class="row pl-1 comment-header">
+        <div class="col-md-9">
+          {{getName()}} {{getLastName()}}
+        </div>
+         <div class="col-md-1">
+           <mat-icon *ngIf="myId==comment.creatorId" class="delete-icon" matTooltip="Delete your comment"
+                     matTooltipPosition="left" (click)="deleteComment()">
+             delete
+           </mat-icon>
+        </div>
+
+         <div class="col-md-1" >
+           <mat-icon class="color-green click" matTooltip="Confirm comment"
+                     matTooltipPosition="right" matBadgePosition="below" matBadge="{{currentApproved.length}}"
+                      (click)="approveComment()">
+             add
+           </mat-icon>
+        </div>
+         <div class="col-md-1">
+           <mat-icon class="delete-icon" matTooltip="Reject comment"
+                     matTooltipPosition="right"  matBadgePosition="below" matBadge="{{currentRejected.length}}"
+                     (click)="rejectComment()">
+             remove
+           </mat-icon>
+        </div>
+
+    </div>
+
+      <div class="row pl-1">
+        <div class="col-9">
+      {{comment.content}}
+        </div>
+    </div>
+
+
+    </div>
+  </div>
+</div>
