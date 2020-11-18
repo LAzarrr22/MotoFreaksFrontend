@@ -52,11 +52,17 @@ export class ConvExpandedComponent implements OnInit {
   }
 
   sliceMessages() {
+    if(this.loadedCount>this.messages.length){
+      this.loadedCount=this.messages.length
+    }
     if (this.messages.length > 6) {
       this.isShowMore = true;
       this.currentShowMessages = this.messages.slice(this.messages.length - this.loadedCount, this.messages.length);
     } else {
       this.currentShowMessages = this.messages;
+    }
+    if(this.messages.length== this.currentShowMessages.length){
+      this.isShowMore = false;
     }
   }
 
