@@ -55,7 +55,7 @@ export class ConvExpandedComponent implements OnInit {
     if(this.loadedCount>this.messages.length){
       this.loadedCount=this.messages.length
     }
-    if (this.messages.length > 6) {
+    if (this.messages.length >= 6) {
       this.isShowMore = true;
       this.currentShowMessages = this.messages.slice(this.messages.length - this.loadedCount, this.messages.length);
     } else {
@@ -67,7 +67,7 @@ export class ConvExpandedComponent implements OnInit {
   }
 
   loadMore() {
-    if (this.messages.length > 6) {
+    if (this.messages.length >= 6) {
       this.loadedCount += 5;
     }
     this.sliceMessages()
