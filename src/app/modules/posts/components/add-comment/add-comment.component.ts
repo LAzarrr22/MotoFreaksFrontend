@@ -22,7 +22,6 @@ export class AddCommentComponent implements OnInit {
   }
 
   addComment() {
-
     if (this.form.valid) {
       this.addCommentEvent.emit(this.getText())
       this.form.controls.comment.setValue('');

@@ -125,8 +125,7 @@ export class PostsEffects {
         return this.postsApiService.addComment(action.postId,action.context);
       }),
       switchMap((response: string) => [
-        new SuccessActionString(response),
-        new GetAllPosts()
+        new SuccessActionString(response)
       ]),
       catchError((error, caught) => {
         this.store$.dispatch(new FailAction(error.error.message));

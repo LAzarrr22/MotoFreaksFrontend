@@ -36,7 +36,10 @@ export class CommentsListComponent implements OnInit {
 
   addComment(context:string){
       this.postsService.addComment(this.postId,context);
-    this.sliceComments()
+      setTimeout(()=>{
+        this.refreshPostsEvent.emit()
+        this.sliceComments()
+      },400)
   }
 
   sliceComments() {
