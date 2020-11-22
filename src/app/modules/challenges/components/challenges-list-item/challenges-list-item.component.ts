@@ -20,8 +20,12 @@ export class ChallengesListItemComponent implements OnInit {
   myId: string
   @Input()
   isAdmin: boolean;
+  @Input()
+  isModerator: boolean;
   @Output()
-  deleteEvent=new EventEmitter<string>();
+  deleteEvent = new EventEmitter<string>();
+  @Output()
+  mergeEvent = new EventEmitter<string>();
 
 
   constructor(private router: Router) {
@@ -43,6 +47,10 @@ export class ChallengesListItemComponent implements OnInit {
   }
 
   deleteChallenge() {
-this.deleteEvent.emit(this.challenge.id)
+    this.deleteEvent.emit(this.challenge.id)
+  }
+
+  mergeChallenge() {
+    this.mergeEvent.emit(this.challenge.id)
   }
 }

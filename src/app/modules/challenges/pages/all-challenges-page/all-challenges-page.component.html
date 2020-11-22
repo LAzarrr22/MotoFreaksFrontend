@@ -31,8 +31,8 @@
     </ng-container>
 
   </ng-container>
-  <app-challenges-list [challengesList]="challengesListObs|async" [myId]="myId" [isAdmin]="isAdmin"
-                        (deleteEvent)="deleteChallenge($event)"></app-challenges-list>
+  <app-challenges-list [challengesList]="challengesListObs|async" [myId]="myId" [isAdmin]="isAdmin" [isModerator]="isModerator"
+                        (deleteEvent)="deleteChallenge($event)" (mergeEvent)="goToMerge($event)"></app-challenges-list>
 
 </div>
 

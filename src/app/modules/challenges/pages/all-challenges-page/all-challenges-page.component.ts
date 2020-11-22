@@ -50,6 +50,10 @@ export class AllChallengesPageComponent implements OnInit {
     this.router.navigate([AppPath.CHALLENGE_CREATE])
   }
 
+  goToMerge(id:string) {
+    this.router.navigate([AppPath.CHALLENGE_MERGE, {id: id}]);
+  }
+
   openFilter() {
     this.filterOpen = !this.filterOpen;
   }

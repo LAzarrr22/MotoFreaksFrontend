@@ -15,9 +15,13 @@ export class ChallengesListComponent implements OnInit {
   @Input()
   isAdmin: boolean;
   @Input()
+  isModerator: boolean;
+  @Input()
   myId: string;
   @Output()
   deleteEvent=new EventEmitter<string>();
+  @Output()
+  mergeEvent=new EventEmitter<string>();
 
 
   constructor(private usersService: UsersService) {
@@ -36,5 +40,9 @@ export class ChallengesListComponent implements OnInit {
 
   deleteChallenge($event: string) {
     this.deleteEvent.emit($event)
+  }
+
+  mergeChallenge($event: string) {
+    this.mergeEvent.emit($event)
   }
 }

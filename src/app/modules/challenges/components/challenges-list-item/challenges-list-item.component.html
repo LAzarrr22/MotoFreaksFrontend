@@ -2,8 +2,14 @@
   <div class="border mat-elevation-z18">
 
     <div class="row pr-2 pl-1" *ngIf="isAdmin">
-      <div class="col-md-1 pl-4 offset-11  align-items-end">
+      <div class="col-md-1 pl-4 offset-md-11  align-items-end">
         <mat-icon class="delete-icon" (click)="deleteChallenge()" >delete</mat-icon>
+      </div>
+    </div>
+
+ <div class="row pr-2 pl-1" *ngIf="isModerator">
+      <div class="col-md-1 pl-4 offset-md-11  align-items-end">
+        <mat-icon class="click color-blue" (click)="mergeChallenge()">edit</mat-icon>
       </div>
     </div>
 
