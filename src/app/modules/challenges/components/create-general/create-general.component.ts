@@ -53,7 +53,10 @@ export class CreateGeneralComponent implements OnInit {
       this.questionsListToMerge.forEach(question => {
         this.currentQuestions = [...this.currentQuestions, new QuestionAnswer(question.question, question.points, question.answers, question.correctAnswer)]
       });
+      this.loadModelsList()
+      this.loadGenerationsList()
     }
+
   }
 
   submitForm(event: EventEmitter<any>) {
