@@ -1,7 +1,6 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {QuestionAnswer} from "../../logic/dto/response/question-answer.model";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {NewChallengeModel} from "../../logic/dto/request/new-challenge.model";
 import {ValidationMessageMap} from "../../../../shared/interfaces/validation-message-map";
 
 @Component({
@@ -13,25 +12,35 @@ export class CreateQuestionComponent implements OnInit {
 
   @Output()
   addQuestion = new EventEmitter<QuestionAnswer>()
+  @Output()
+  mergeQuestionEvent = new EventEmitter<QuestionAnswer>()
   formQuestion: FormGroup;
   currentAnswers: string[] = [];
   correctAnswer: string;
   validationMessages: ValidationMessageMap;
   isAnswersAdded: boolean;
   isCorrectAnswerSelect: boolean;
-
+  @Input()
+  isMerge: boolean = false;
+  @Input()
+  mergeQuestion: QuestionAnswer = null;
 
   constructor(private formBuilder: FormBuilder) {
   }
 
   ngOnInit(): void {
+
     this.formQuestion = this.formBuilder.group({
-      question: new FormControl('', [Validators.required]),
-      points: new FormControl('', [Validators.required, Validators.maxLength(2), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
+      question: new FormControl(this.isMerge ? this.mergeQuestion.question : '', [Validators.required]),
+      points: new FormControl(this.isMerge ? this.mergeQuestion.points : '', [Validators.required, Validators.maxLength(2), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]),
       answer: new FormControl(''),
       correct: new FormControl(false),
     })
-
+    if (this.isMerge) {
+      this.currentAnswers = this.mergeQuestion.answers;
+      this.correctAnswer = this.mergeQuestion.correctAnswer;
+      this.validationAnswers();
+    }
     this.validationMessages = {
       points: {
         pattern: 'Points must contain only number',
@@ -44,6 +53,12 @@ export class CreateQuestionComponent implements OnInit {
     this.validationAnswers();
     if (this.formQuestion.valid && this.correctAnswer && this.currentAnswers.length > 1)
       this.addQuestion.emit(new QuestionAnswer(this.getQuestion(), this.getPoints(), this.currentAnswers, this.correctAnswer))
+  }
+
+  mergeQuestionToChallenge() {
+    this.validationAnswers();
+    if (this.formQuestion.valid && this.correctAnswer && this.currentAnswers.length > 1)
+      this.mergeQuestionEvent.emit(new QuestionAnswer(this.getQuestion(), this.getPoints(), this.currentAnswers, this.correctAnswer))
   }
 
   addOtherAnswer() {

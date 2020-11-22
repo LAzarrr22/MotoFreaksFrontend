@@ -1,5 +1,6 @@
 <div class="pl-5 pr-2 pt-5 pb-3">
-  <form class="login-form" [formGroup]="formQuestion" (ngSubmit)="addQuestionToChallenge()">
+  <form class="login-form" [formGroup]="formQuestion"
+        (ngSubmit)="isMerge? mergeQuestionToChallenge() : addQuestionToChallenge()">
 
     <div class="row">
       <div class="col-md-8 col-lg-8">
@@ -7,7 +8,7 @@
           <mat-label>Question</mat-label>
           <input matInput placeholder="Question" formControlName="question">
         </mat-form-field>
-                <error-form [control]="'question'" [form]="formQuestion"></error-form>
+        <error-form [control]="'question'" [form]="formQuestion"></error-form>
       </div>
     </div>
 
@@ -17,11 +18,11 @@
           <mat-label>Points</mat-label>
           <input matInput placeholder="Points" formControlName="points">
         </mat-form-field>
-                <error-form [control]="'points'" [form]="formQuestion" [allMessages]="validationMessages"></error-form>
+        <error-form [control]="'points'" [form]="formQuestion" [allMessages]="validationMessages"></error-form>
       </div>
     </div>
 
-<div class="row">
+    <div class="row">
 
       <div class="col-sm-3 col-md-3 col-lg-3">
         <mat-form-field appearance="legacy" class="full-width">
@@ -30,16 +31,18 @@
         </mat-form-field>
       </div>
 
-  <ng-container *ngIf="correctAnswer==null">
-  <div class="col-sm-1 col-md-1 col-lg-1">
-    <mat-label class="pr-3">Is correct </mat-label>
-    <input type="checkbox" placeholder="Is correct" formControlName="correct">
-      </div>
-  </ng-container>
+      <ng-container *ngIf="correctAnswer==null">
+        <div class="col-sm-1 col-md-1 col-lg-1">
+          <mat-label class="pr-3">Is correct</mat-label>
+          <input type="checkbox" placeholder="Is correct" formControlName="correct">
+        </div>
+      </ng-container>
 
-  <div class="col-sm-1 col-md-1 col-lg-1 pt-2">
-    <button mat-button color="primary" type="button" (click)="addOtherAnswer()">Add answer</button>
-  </div>
+      <div class="col-sm-1 col-md-1 col-lg-1 pt-2">
+        <button mat-button color="primary" type="button" (click)="addOtherAnswer()">
+          Add answer
+        </button>
+      </div>
     </div>
 
     <div class="pt-2 error-message" *ngIf="!isAnswersAdded"> Question must be contain at least 2 answers</div>
@@ -49,14 +52,18 @@
     <div class="row">
       <div class="col-md-2 col-lg-2 pt-3 align-self-center" *ngFor="let answer of currentAnswers">
         <div [ngClass]="{'color-green': answer==correctAnswer}">
-          {{answer}} <mat-icon class="delete-icon"  (click)="deleteAnswer(answer)">delete</mat-icon>
+          {{answer}}
+          <mat-icon class="delete-icon" (click)="deleteAnswer(answer)">delete</mat-icon>
         </div>
       </div>
     </div>
 
     <div class="row">
       <div class="col-md-2 col-lg-2 pt-3">
-        <button mat-button color="primary" type="submit">Add question to challenge</button>
+        <button mat-button color="primary" type="submit">
+          <ng-container *ngIf="!isMerge"> Add question to challenge</ng-container>
+          <ng-container *ngIf="isMerge"> Merge question to challenge</ng-container>
+        </button>
       </div>
     </div>
 

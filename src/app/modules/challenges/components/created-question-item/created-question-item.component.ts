@@ -9,16 +9,23 @@ import {QuestionAnswer} from "../../logic/dto/response/question-answer.model";
 export class CreatedQuestionItemComponent implements OnInit {
 
   @Input()
-  question:QuestionAnswer;
+  question: QuestionAnswer;
   @Output()
-  deleteQuestionEvn= new EventEmitter();
+  deleteQuestionEvn = new EventEmitter();
+  @Output()
+  mergeQuestionEvn = new EventEmitter();
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
 
   deleteQuestion() {
     this.deleteQuestionEvn.emit()
+  }
+
+  editQuestion() {
+    this.mergeQuestionEvn.emit()
   }
 }
