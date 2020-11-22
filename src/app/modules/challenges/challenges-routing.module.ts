@@ -5,6 +5,7 @@ import {AllChallengesPageComponent} from "./pages/all-challenges-page/all-challe
 import {DoChallengePageComponent} from "./pages/do-challenge-page/do-challenge-page.component";
 import {ModeratorGuard} from "../../shared/guards/moderator-guard.service";
 import {CreateChallengePageComponent} from "./pages/create-challenge-page/create-challenge-page.component";
+import {MergeChallengePageComponent} from "./pages/merge-challenge-page/merge-challenge-page.component";
 
 export const routes: Routes = [
   {
@@ -19,6 +20,11 @@ export const routes: Routes = [
     path: AppRoute.CREATE,
     canActivate: [ModeratorGuard],
     component: CreateChallengePageComponent,
+  },
+  {
+    path: AppRoute.MERGE,
+    canActivate: [ModeratorGuard],
+    component: MergeChallengePageComponent,
   }
 ]
 

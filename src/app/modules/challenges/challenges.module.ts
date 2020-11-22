@@ -21,12 +21,13 @@ import {SummaryFinishChallengeComponent} from './components/summary-finish-chall
 import { CreateGeneralComponent } from './components/create-general/create-general.component';
 import { CreateQuestionComponent } from './components/create-question/create-question.component';
 import { CreatedQuestionItemComponent } from './components/created-question-item/created-question-item.component';
+import { MergeChallengePageComponent } from './pages/merge-challenge-page/merge-challenge-page.component';
 
 
 @NgModule({
   declarations: [AllChallengesPageComponent, ChallengesListComponent, ChallengesListItemComponent,
     DoChallengePageComponent, CreateChallengePageComponent, QuestionsComponent, QuestionItemComponent,
-    QuestionAnswerItemComponent, SummaryFinishChallengeComponent, CreateGeneralComponent, CreateQuestionComponent, CreatedQuestionItemComponent],
+    QuestionAnswerItemComponent, SummaryFinishChallengeComponent, CreateGeneralComponent, CreateQuestionComponent, CreatedQuestionItemComponent, MergeChallengePageComponent],
   imports: [
     CommonModule,
     ChallengesRoutingModule,

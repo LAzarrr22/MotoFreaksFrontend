@@ -1,0 +1,8 @@
+<div class="title-page">
+  Merge challenge '{{challengeToMerge.name}}'
+</div>
+<ng-container *ngIf="questionsToMerge && challengeToMerge">
+<app-create-merge-general (mergeEvn)="mergeChallenge($event)"
+                          [isMerge]="true" [challengeToMerge]="challengeToMerge"
+                          [questionsListToMerge]="questionsToMerge"></app-create-merge-general>
+</ng-container>
