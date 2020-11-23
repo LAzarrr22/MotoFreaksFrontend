@@ -70,7 +70,7 @@ export class AllSentenceListComponent implements OnInit, AfterViewInit {
       data: object
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.dir(result)
+
       if (result) {
         this.mergeSentenceEvent.emit(result)
         this.refreshDataSource();

@@ -2,6 +2,9 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ChallengeDtoModel} from "../../logic/dto/response/challenge-dto.model";
 import {Router} from "@angular/router";
 import {AppPath} from "../../../../shared/enums/app-path.enum";
+import {MatDialog} from "@angular/material/dialog";
+import {AddEditSentenceComponent} from "../../../sentences/components/add-edit-sentence/add-edit-sentence.component";
+import {ConfirmDeleteComponent} from "../confirm-delete/confirm-delete.component";
 
 @Component({
   selector: 'app-challenges-list-item',
@@ -28,7 +31,7 @@ export class ChallengesListItemComponent implements OnInit {
   mergeEvent = new EventEmitter<string>();
 
 
-  constructor(private router: Router) {
+  constructor(private router: Router, public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -47,7 +50,14 @@ export class ChallengesListItemComponent implements OnInit {
   }
 
   deleteChallenge() {
-    this.deleteEvent.emit(this.challenge.id)
+    const dialogRef = this.dialog.open(ConfirmDeleteComponent, {
+      data: String(this.challenge.name)
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === this.challenge.name) {
+        this.deleteEvent.emit(this.challenge.id)
+      }
+    });
   }
 
   mergeChallenge() {

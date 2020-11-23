@@ -18,16 +18,17 @@ import {QuestionsComponent} from './components/questions/questions.component';
 import {QuestionItemComponent} from './components/question-item/question-item.component';
 import {QuestionAnswerItemComponent} from './components/question-answer-item/question-answer-item.component';
 import {SummaryFinishChallengeComponent} from './components/summary-finish-challenge/summary-finish-challenge.component';
-import { CreateGeneralComponent } from './components/create-general/create-general.component';
-import { CreateQuestionComponent } from './components/create-question/create-question.component';
-import { CreatedQuestionItemComponent } from './components/created-question-item/created-question-item.component';
-import { MergeChallengePageComponent } from './pages/merge-challenge-page/merge-challenge-page.component';
+import {CreateGeneralComponent} from './components/create-general/create-general.component';
+import {CreateQuestionComponent} from './components/create-question/create-question.component';
+import {CreatedQuestionItemComponent} from './components/created-question-item/created-question-item.component';
+import {MergeChallengePageComponent} from './pages/merge-challenge-page/merge-challenge-page.component';
+import {ConfirmDeleteComponent} from './components/confirm-delete/confirm-delete.component';
 
 
 @NgModule({
   declarations: [AllChallengesPageComponent, ChallengesListComponent, ChallengesListItemComponent,
     DoChallengePageComponent, CreateChallengePageComponent, QuestionsComponent, QuestionItemComponent,
-    QuestionAnswerItemComponent, SummaryFinishChallengeComponent, CreateGeneralComponent, CreateQuestionComponent, CreatedQuestionItemComponent, MergeChallengePageComponent],
+    QuestionAnswerItemComponent, SummaryFinishChallengeComponent, CreateGeneralComponent, CreateQuestionComponent, CreatedQuestionItemComponent, MergeChallengePageComponent, ConfirmDeleteComponent],
   imports: [
     CommonModule,
     ChallengesRoutingModule,

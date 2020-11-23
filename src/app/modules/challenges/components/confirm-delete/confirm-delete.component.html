@@ -1,0 +1,22 @@
+<h2 mat-dialog-title>Confirm delete challenge</h2>
+<h3 mat-dialog-title>Type '{{data}}' to delete</h3>
+
+<mat-dialog-content class="mat-typography">
+  <form class="login-form" [formGroup]="form">
+    <mat-form-field appearance="legacy" class="full-width">
+      <mat-label>Name</mat-label>
+      <input matInput placeholder="Name" formControlName="name">
+    </mat-form-field>
+    <error-form [control]="'name'" [form]="form" [allMessages]="validationMessages"></error-form>
+
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button [disabled]="!form.valid" mat-button [mat-dialog-close]="getValidFrom()">Delete</button>
+
+</mat-dialog-actions>
+
+
+
+
