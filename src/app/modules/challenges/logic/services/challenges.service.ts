@@ -11,7 +11,7 @@ import {
   GetAllChallenges,
   GetAllChallengesByCar,
   GetAllChallengesByUser, GetAllChallengesGeneral,
-  GetQuestionsById
+  GetQuestionsById, MergeChallenge
 } from "../actions/challenges.actions";
 
 @Injectable()
@@ -27,8 +27,15 @@ export class ChallengesService {
     }, 0);
   }
 
-  addCompetitor(challengeId: string, obtainPoints:number) {
-    this.store.dispatch(new AddCompetitor(challengeId,obtainPoints));
+  mergeChallenge(challengeId: string, newChallenge: NewChallengeModel) {
+    this.store.dispatch(new MergeChallenge(challengeId, newChallenge));
+    setTimeout(() => {
+      this.store.dispatch(new GetAllChallenges());
+    }, 0);
+  }
+
+  addCompetitor(challengeId: string, obtainPoints: number) {
+    this.store.dispatch(new AddCompetitor(challengeId, obtainPoints));
     setTimeout(() => {
       this.store.dispatch(new GetAllChallenges());
     }, 0);

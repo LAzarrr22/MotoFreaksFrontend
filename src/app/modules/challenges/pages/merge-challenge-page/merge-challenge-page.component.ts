@@ -5,6 +5,7 @@ import {NewChallengeModel} from "../../logic/dto/request/new-challenge.model";
 import {ChallengeDtoModel} from "../../logic/dto/response/challenge-dto.model";
 import {Observable} from "rxjs";
 import {QuestionAnswer} from "../../logic/dto/response/question-answer.model";
+import {AppPath} from "../../../../shared/enums/app-path.enum";
 
 @Component({
   selector: 'app-merge-challenge-page',
@@ -30,9 +31,7 @@ export class MergeChallengePageComponent implements OnInit {
   }
 
   mergeChallenge($event: NewChallengeModel) {
-console.log('MERGE CHALLENGE WORKS')
-console.log(this.mergeChallengeId)
-    console.log($event)
-console.log('ACTIONS HERE')
+    this.challengesService.mergeChallenge(this.mergeChallengeId,$event);
+    this.router.navigate([AppPath.CHALLENGES_ALL_PATH])
   }
 }

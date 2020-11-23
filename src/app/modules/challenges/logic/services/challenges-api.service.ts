@@ -14,7 +14,18 @@ export class ChallengesApiService {
   createChallengeApi(newChallenge: NewChallengeModel) {
     return this.httpClient.post(`${environment.apiUrl}/challenge/create`, {
       name: newChallenge.name,
-      general:newChallenge.general,
+      general: newChallenge.general,
+      company: newChallenge.company,
+      model: newChallenge.model,
+      generation: newChallenge.generation,
+      qaList: newChallenge.qaList
+    })
+  }
+
+  mergeChallengeApi(challengeId: string, newChallenge: NewChallengeModel) {
+    return this.httpClient.post(`${environment.apiUrl}/challenge/merge/${challengeId}`, {
+      name: newChallenge.name,
+      general: newChallenge.general,
       company: newChallenge.company,
       model: newChallenge.model,
       generation: newChallenge.generation,
@@ -26,7 +37,7 @@ export class ChallengesApiService {
     return this.httpClient.post(`${environment.apiUrl}/challenge/id/${challengeId}/add/competitor/points/${points}`, {})
   }
 
-   deleteChallengeApi(challengeId: string) {
+  deleteChallengeApi(challengeId: string) {
     return this.httpClient.delete(`${environment.apiUrl}/challenge/delete/${challengeId}`)
   }
 

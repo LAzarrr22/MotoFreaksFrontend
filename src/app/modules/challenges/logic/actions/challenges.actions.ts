@@ -7,6 +7,10 @@ export const CREATE_CHALLENGE = '[Challenge] CHALLENGES_CREATE'
 export const CREATE_CHALLENGE_SUCCESS = '[Challenge] CHALLENGES_CREATE_SUCCESS'
 export const CREATE_CHALLENGE_FAIL = '[Challenge] CHALLENGES_CREATE_FAIL'
 
+export const MERGE_CHALLENGE = '[Challenge] MERGE_CHALLENGE'
+export const MERGE_CHALLENGE_SUCCESS = '[Challenge] MERGE_CHALLENGE_SUCCESS'
+export const MERGE_CHALLENGE_FAIL = '[Challenge] MERGE_CHALLENGE_FAIL'
+
 export const ADD_COMPETITOR = '[Challenge] ADD_COMPETITOR'
 export const ADD_COMPETITOR_SUCCESS = '[Challenge] ADD_COMPETITOR_SUCCESS'
 export const ADD_COMPETITOR_FAIL = '[Challenge] ADD_COMPETITOR_FAIL'
@@ -51,6 +55,27 @@ export class CreateChallengeSuccess implements Action {
 
 export class CreateChallengeFail implements Action {
   readonly type = CREATE_CHALLENGE_FAIL;
+
+  constructor(public payload: string) {
+  }
+}
+
+export class MergeChallenge implements Action {
+  readonly type = MERGE_CHALLENGE;
+
+  constructor(public challengeId: string, public newChallenge: NewChallengeModel) {
+  }
+}
+
+export class MergeChallengeSuccess implements Action {
+  readonly type = MERGE_CHALLENGE_SUCCESS;
+
+  constructor(public payload: string) {
+  }
+}
+
+export class MergeChallengeFail implements Action {
+  readonly type = MERGE_CHALLENGE_FAIL;
 
   constructor(public payload: string) {
   }
@@ -207,6 +232,9 @@ export type Actions =
   | CreateChallenge
   | CreateChallengeSuccess
   | CreateChallengeFail
+  | MergeChallenge
+  | MergeChallengeSuccess
+  | MergeChallengeFail
   | AddCompetitor
   | AddCompetitorSuccess
   | AddCompetitorFail

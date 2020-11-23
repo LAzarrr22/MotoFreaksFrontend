@@ -28,7 +28,7 @@ import {
   GetAllChallengesSuccess,
   GetQuestionsById,
   GetQuestionsByIdFail,
-  GetQuestionsByIdSuccess
+  GetQuestionsByIdSuccess, MERGE_CHALLENGE, MergeChallenge, MergeChallengeFail, MergeChallengeSuccess
 } from "../actions/challenges.actions";
 import {catchError, switchMap} from "rxjs/operators";
 import {ChallengeDtoModel} from "../dto/response/challenge-dto.model";
@@ -59,7 +59,7 @@ export class ChallengesEffects {
       })
     )
 
-   @Effect()
+  @Effect()
   getAllChallengesGeneral$: Observable<Action> = this.actions$
     .pipe(ofType(GET_ALL_CHALLENGES_GENERAL),
       switchMap(() => {
@@ -143,10 +143,27 @@ export class ChallengesEffects {
     )
 
   @Effect()
+  mergeChallenge$: Observable<Action> = this.actions$
+    .pipe(ofType(MERGE_CHALLENGE),
+      switchMap((action: MergeChallenge) => {
+        return this.challengesApiService.mergeChallengeApi(action.challengeId, action.newChallenge);
+      }),
+      switchMap((response: string) => [
+        new MergeChallengeSuccess(response),
+        new GetAllChallenges()
+      ]),
+      catchError((error, caught) => {
+        this.store$.dispatch(new MergeChallengeFail(error.error.message));
+        this.errorService.error(error);
+        return caught;
+      })
+    )
+
+  @Effect()
   addCompetitor$: Observable<Action> = this.actions$
     .pipe(ofType(ADD_COMPETITOR),
       switchMap((action: AddCompetitor) => {
-        return this.challengesApiService.addCompetitorChallengeApi(action.challengeId,action.obtainPoints);
+        return this.challengesApiService.addCompetitorChallengeApi(action.challengeId, action.obtainPoints);
       }),
       switchMap((response: string) => [
         new AddCompetitorSuccess(response),
