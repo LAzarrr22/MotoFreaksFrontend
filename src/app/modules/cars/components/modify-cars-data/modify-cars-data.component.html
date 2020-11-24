@@ -4,7 +4,11 @@
   </div>
 
   <form [formGroup]="formCars" (ngSubmit)="addCars()">
-
+    <div class="row error-message pb-2" *ngIf="errorMessage | async as errorMessage">
+      <div class="col">
+        {{errorMessage}}
+      </div>
+    </div>
     <div class="title-page pl-2">Brands</div>
 
     <div class="row pb-5">
@@ -13,7 +17,7 @@
         <mat-form-field appearance="legacy" class="pl-2 full-width">
           <mat-label>Brand</mat-label>
           <mat-select formControlName="company" (selectionChange)="companySelectionChange()">
-            <mat-option *ngFor="let company of companies" [value]="company">{{company}}</mat-option>
+            <mat-option *ngFor="let company of companies" [value]="company.toLowerCase()">{{company}}</mat-option>
           </mat-select>
         </mat-form-field>
         <mat-icon class="delete-icon" *ngIf="isCompanySelected" (click)="deleteCompany()">delete</mat-icon>
@@ -39,7 +43,7 @@
         <mat-form-field appearance="legacy" class="pl-2 full-width">
           <mat-label>Model</mat-label>
           <mat-select formControlName="model" (selectionChange)="modelSelectionChange()" >
-            <mat-option *ngFor="let model of models" [value]="model">{{model}}</mat-option>
+            <mat-option *ngFor="let model of models" [value]="model.toLowerCase()">{{model}}</mat-option>
           </mat-select>
         </mat-form-field>
 
@@ -67,7 +71,7 @@
         <mat-form-field appearance="legacy" class="pl-2 full-width">
           <mat-label>Generation</mat-label>
           <mat-select formControlName="generation" (selectionChange)="generationSelectionChange()">
-            <mat-option *ngFor="let generation of generations" [value]="generation">{{generation}}</mat-option>
+            <mat-option *ngFor="let generation of generations" [value]="generation.toLowerCase()">{{generation}}</mat-option>
           </mat-select>
         </mat-form-field>
 

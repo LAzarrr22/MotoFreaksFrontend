@@ -100,6 +100,7 @@ export class CarsEffects {
       }),
       switchMap((companies: string[]) => [
         new AddCompanySuccess(companies),
+        new AddItemFail('')
       ]),
       catchError((error, caught) => {
         this.store$.dispatch(new AddItemFail(error.error.message));
@@ -116,6 +117,7 @@ export class CarsEffects {
       }),
       switchMap((models: string[]) => [
         new AddModelSuccess(models),
+        new AddItemFail('')
       ]),
       catchError((error, caught) => {
         this.store$.dispatch(new AddItemFail(error.error.message));
@@ -132,6 +134,7 @@ export class CarsEffects {
       }),
       switchMap((generations: string[]) => [
         new AddGenerationSuccess(generations),
+        new AddItemFail('')
       ]),
       catchError((error, caught) => {
         this.store$.dispatch(new AddItemFail(error.error.message));

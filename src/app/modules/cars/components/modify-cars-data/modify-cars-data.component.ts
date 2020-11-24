@@ -1,6 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {CarsService} from "../../logic/service/cars.service";
+import {Observable} from "rxjs";
+import {Actions, ofType} from "@ngrx/effects";
+import {UserLoginFail} from "../../../authentication/logic/actions/authentication.actions";
+import {map} from "rxjs/operators";
+import {ADD_ITEM_FAIL, AddItemFail} from "../../logic/action/cars.action";
 
 @Component({
   selector: 'app-modify-cars-data',
@@ -16,8 +21,10 @@ export class ModifyCarsDataComponent implements OnInit {
   isCompanySelected:boolean=false;
   isModelSelected:boolean=false;
   isGenerationSelected:boolean=false;
+  errorMessage: Observable<string>
 
-  constructor(private formBuilder: FormBuilder, private carsService: CarsService) {
+  constructor(private formBuilder: FormBuilder, private carsService: CarsService, private actions: Actions) {
+    this.errorMessage = this.actions.pipe(ofType(ADD_ITEM_FAIL), map((action: AddItemFail) => action.payload));
   }
 
   ngOnInit(): void {
@@ -45,14 +52,14 @@ export class ModifyCarsDataComponent implements OnInit {
 
   addCompany(){
     this.carsService.addCompany(this.getNewCompany())
-    this.formCars.controls.company.reset(this.getNewCompany());
+    this.formCars.controls.company.reset(this.getNewCompany().toLowerCase());
     this.formCars.controls.newCompany.reset('');
     this.companySelectionChange()
   }
 
   addModel(){
     this.carsService.addModel(this.getCompany(),this.getNewModel())
-    this.formCars.controls.model.reset(this.getNewModel());
+    this.formCars.controls.model.reset(this.getNewModel().toLowerCase());
     this.formCars.controls.newModel.reset('');
     this.modelSelectionChange();
     this.generations=[];
@@ -60,8 +67,9 @@ export class ModifyCarsDataComponent implements OnInit {
 
   addGeneration(){
     this.carsService.addGeneration(this.getCompany(),this.getModel(),this.getNewGeneration())
-    this.formCars.controls.generation.reset(this.getNewGeneration());
+    this.formCars.controls.generation.reset(this.getNewGeneration().toLowerCase());
     this.formCars.controls.newGeneration.reset('');
+    this.isGenerationSelected=true;
   }
 
   deleteCompany() {
@@ -136,9 +144,12 @@ getNewCompany() {
   }
 
   companySelectionChange() {
-    this.loadModelsList();
-    this.isCompanySelected=true;
-    this.clearModelAndGeneration()
+    if(!!this.errorMessage){
+      this.loadModelsList();
+      this.isCompanySelected=true;
+      this.clearModelAndGeneration()
+    }
+
   }
 
   modelSelectionChange() {
