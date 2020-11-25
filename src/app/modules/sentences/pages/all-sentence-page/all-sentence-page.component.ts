@@ -8,6 +8,7 @@ import {MenuService} from "../../../menu/logic/services/menu.service";
 import {SentenceService} from "../../logic/services/sentence.service";
 import {AuthService} from "../../../authentication/logic/services/auth.service";
 import {NewSentenceModel} from "../../logic/model/new-sentence.model";
+import {AddEditSentenceComponent} from "../../components/add-edit-sentence/add-edit-sentence.component";
 
 @Component({
   selector: 'app-all-sentence-page',

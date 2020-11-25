@@ -1,15 +1,13 @@
-<div class="min-width">
-  <div class="context">
-    <div class="title-page">Dictionary</div>
-    <div *ngIf="isModerator" class="color-blue sub-title pl-md-2 " (click)="openModifyTopUp()">Create new</div>
+<div>
+<div *ngIf="isModerator" class="color-blue sub-title pl-md-2 " (click)="openModifyTopUp()">Create new</div>
 
-    <div class="filter-section">
-      <mat-form-field>
-        <mat-label>Filter</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input>
-      </mat-form-field>
-      <mat-divider></mat-divider>
-    </div>
+<div class="filter-section">
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input>
+  </mat-form-field>
+  <mat-divider></mat-divider>
+</div>
 
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
 
@@ -42,5 +40,5 @@
       </tr>
     </table>
     <mat-paginator [pageSizeOptions]="[15, 30, 50, 100]" [length]="resultsLength" [pageSize]="15"></mat-paginator>
-  </div>
+
 </div>

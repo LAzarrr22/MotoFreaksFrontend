@@ -1,4 +1,17 @@
-<ng-container *ngIf="sentencesObsv |async">
-  <app-all-sentence-list [sentencesList]="sentencesObsv |async " [isModerator]="isModerator"
-                          (mergeSentenceEvent)="mergeSentence($event)" (deleteSentenceEvent)="deleteSentence($event)"></app-all-sentence-list>
-</ng-container>
+<div class="min-width">
+  <div class="context">
+    <div class="title-page">Dictionary</div>
+
+
+    <ng-container *ngIf="sentencesObsv |async; else spinner">
+      <app-all-sentence-list [sentencesList]="sentencesObsv |async " [isModerator]="isModerator"
+                             (mergeSentenceEvent)="mergeSentence($event)" (deleteSentenceEvent)="deleteSentence($event)"></app-all-sentence-list>
+    </ng-container>
+
+  </div>
+</div>
+
+
+<ng-template class="pl-5" #spinner>
+  <mat-spinner></mat-spinner>
+</ng-template>
