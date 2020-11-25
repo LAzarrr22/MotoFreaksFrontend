@@ -36,7 +36,7 @@ switch(action.type){
     }
 
   case FAIL_ACTION:
-    return INITIAL_STATE;
+    return state;
 
   default:
     return state;

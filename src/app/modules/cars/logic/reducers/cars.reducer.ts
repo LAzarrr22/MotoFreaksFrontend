@@ -22,6 +22,7 @@ import {
   GET_MODELS_SUCCESS
 } from "../action/cars.action";
 import {createFeatureSelector, createSelector} from "@ngrx/store";
+import {USER_LOGOUT} from "../../../authentication/logic/actions/authentication.actions";
 
 export interface CarsState {
   companies: string[];
@@ -84,6 +85,9 @@ export function reducer(state: CarsState = INITIAL_STATE, action) {
         ...state,
         loading: false
       };
+
+    case USER_LOGOUT:
+      return INITIAL_STATE;
 
     default:
       return state;

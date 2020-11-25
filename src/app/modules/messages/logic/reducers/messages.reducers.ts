@@ -8,6 +8,7 @@ import {
 } from "../action/messages.action";
 import {createFeatureSelector, createSelector} from "@ngrx/store";
 import {MessageDataModel} from "../dto/response/message-data.model";
+import {USER_LOGOUT} from "../../../authentication/logic/actions/authentication.actions";
 
 export interface MessagesState {
   messages: MessageDataModel[];
@@ -24,12 +25,14 @@ export const INITIAL_STATE: MessagesState = {
 export function reducer(state: MessagesState = INITIAL_STATE, action) {
   switch (action.type) {
     case GET_ALL_MESSAGES:
-    case GET_UNREAD_MESSAGES:
     case SEND_MESSAGE:
       return {
         ...state,
         loading: true
       }
+
+    case GET_UNREAD_MESSAGES:
+      return state;
 
     case GET_ALL_MESSAGES_SUCCESS:
     case SEND_MESSAGE_SUCCESS:
@@ -42,8 +45,7 @@ export function reducer(state: MessagesState = INITIAL_STATE, action) {
     case GET_UNREAD_MESSAGES_SUCCESS:
       return {
         ...state,
-        unread: action.unread,
-        loading: false
+        unread: action.unread
       }
 
     case GET_ALL_MESSAGES_FAIL:
@@ -53,6 +55,8 @@ export function reducer(state: MessagesState = INITIAL_STATE, action) {
         ...state,
         loading: false
       }
+    case USER_LOGOUT:
+      return INITIAL_STATE;
 
     default:
       return state
@@ -61,8 +65,10 @@ export function reducer(state: MessagesState = INITIAL_STATE, action) {
 
 export const allMessages = (state) => state.messages;
 export const unreadCount = (state) => state.unread;
+export const getLoading = (state) => state.loading;
 
 const fromMessagesState = createFeatureSelector<MessagesState>('messages');
 export const getAllMessages = createSelector(fromMessagesState, allMessages);
 export const getUnread = createSelector(fromMessagesState, unreadCount);
+export const isLoading = createSelector(fromMessagesState, getLoading);
 

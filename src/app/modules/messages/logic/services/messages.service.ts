@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Store} from "@ngrx/store";
-import {getAllMessages, getUnread, MessagesState} from "../reducers/messages.reducers";
+import {getAllMessages, getUnread, isLoading, MessagesState} from "../reducers/messages.reducers";
 import {GetAllMessages, GetUnreadMessages, ReadMessages, SendMessage} from "../action/messages.action";
 import {Observable} from "rxjs";
 import {MessageDataModel} from "../dto/response/message-data.model";
@@ -9,6 +9,10 @@ import {MessageDataModel} from "../dto/response/message-data.model";
 export class MessagesService {
 
   constructor(private store: Store<MessagesState>) {
+  }
+
+  isLoading():Observable<boolean>{
+    return this.store.select(isLoading);
   }
 
   getUnreadCount(): Observable<number> {
