@@ -18,6 +18,7 @@ import {
 } from "../actions/challenges.actions";
 import {createFeatureSelector, createSelector} from "@ngrx/store";
 import {QuestionAnswer} from "../dto/response/question-answer.model";
+import {USER_LOGOUT} from "../../../authentication/logic/actions/authentication.actions";
 
 export interface ChallengesState {
   challengesList: ChallengeDtoModel[],
@@ -69,6 +70,9 @@ export function reducer(state: ChallengesState = INITIAL_STATE, action) {
       }
     default:
       return state
+
+    case USER_LOGOUT:
+      return INITIAL_STATE;
 
   }
 }

@@ -31,10 +31,16 @@
     </ng-container>
 
   </ng-container>
-  <app-challenges-list [challengesList]="challengesListObs|async" [myId]="myId" [isAdmin]="isAdmin" [isModerator]="isModerator"
-                        (deleteEvent)="deleteChallenge($event)" (mergeEvent)="goToMerge($event)"></app-challenges-list>
+
+  <ng-container *ngIf="challengesListObs |async; else spinner">
+    <app-challenges-list [challengesList]="challengesListObs|async" [myId]="myId" [isAdmin]="isAdmin" [isModerator]="isModerator"
+                         (deleteEvent)="deleteChallenge($event)" (mergeEvent)="goToMerge($event)"></app-challenges-list>
+  </ng-container>
+
 
 </div>
 
-
+<ng-template class="pl-5" #spinner>
+  <mat-spinner></mat-spinner>
+</ng-template>
 
