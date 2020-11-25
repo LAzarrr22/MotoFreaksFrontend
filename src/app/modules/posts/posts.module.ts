@@ -19,19 +19,20 @@ import {SharedSectionCarModule} from "../profiles/components/profile-sections/se
 import { CommentsListComponent } from './components/comments-list/comments-list.component';
 import { CommentsListItemComponent } from './components/comments-list-item/comments-list-item.component';
 import { AddCommentComponent } from './components/add-comment/add-comment.component';
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 
 @NgModule({
   declarations: [PostsListComponent, PostItemComponent, CreatePostComponent, CreatePostPageComponent, AllPostPageComponent, FilterPostsComponent, CommentsListComponent, CommentsListItemComponent, AddCommentComponent],
-  imports: [
-    CommonModule,
-    PostsRoutingModule,
-    StoreModule.forFeature('posts', reducer),
-    EffectsModule.forFeature([PostsEffects]),
-    AngularMaterialModule,
-    AppCommonModule,
-    SharedSectionCarModule
-  ],
+    imports: [
+        CommonModule,
+        PostsRoutingModule,
+        StoreModule.forFeature('posts', reducer),
+        EffectsModule.forFeature([PostsEffects]),
+        AngularMaterialModule,
+        AppCommonModule,
+        SharedSectionCarModule,
+    ],
   exports: [
     CreatePostComponent,
     CreatePostPageComponent,

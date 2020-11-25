@@ -43,7 +43,8 @@ export class PostsEffects {
       }),
       switchMap((posts: PostModel[]) => [
         new SuccessActionString(''),
-        new GetAllPostsSuccess(posts)
+        new GetAllPostsSuccess(posts),
+        new FailAction('')
       ]),
       catchError((error, caught) => {
         this.store$.dispatch(new FailAction(error.error.message));
@@ -61,6 +62,7 @@ export class PostsEffects {
       switchMap((posts: PostModel[]) => [
         new SuccessActionString(''),
         new GetAllPostByUserIdSuccess(posts),
+        new FailAction('')
       ]),
       catchError((error, caught) => {
         this.store$.dispatch(new FailAction(error.error.message));
@@ -93,7 +95,8 @@ export class PostsEffects {
         return this.postsApiService.resolvePost(action.id);
       }),
       switchMap((response: string) => [
-        new SuccessActionString(response)
+        new SuccessActionString(response),
+        new FailAction('')
       ]),
       catchError((error, caught) => {
         this.store$.dispatch(new FailAction(error.error.message));

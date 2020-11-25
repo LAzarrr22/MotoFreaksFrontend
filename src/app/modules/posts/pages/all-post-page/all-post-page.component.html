@@ -1,5 +1,6 @@
+<div class="context">
 <div class="title-page p-3" *ngIf="!postsForProfile">Posts</div>
-<div class="title-page p-3" *ngIf="postsForProfile">Your posts</div>
+<div class="title-page p-3" *ngIf="postsForProfile">Account's posts</div>
 <div class="row sub-title" *ngIf="myId==idProfileToShow || !postsForProfile">
   <div class="col">
     <div (click)="addNew()">Create new post</div>
@@ -25,8 +26,15 @@
   {{errorMessage | async}}
 </div>
 
-<div class="mb-5">
+<div class="mb-3">
+  <ng-container *ngIf="postsListObs |async; else spinner">
 <app-posts-list [postsList]="postsListObs| async" [myId]="myId" [isAdmin]="isAdmin"
                 (deletePostEvent)="deletePost($event)" (resolvePostEvent)="resolvePost($event)"
                 (refreshPostsEvent)="refreshPosts()"></app-posts-list>
+  </ng-container>
+</div>
+
+<ng-template #spinner>
+  <mat-spinner></mat-spinner>
+</ng-template>
 </div>
