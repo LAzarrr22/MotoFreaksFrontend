@@ -1,7 +1,5 @@
 <div class="min-width">
-<div class="context">
-  <div class="title-page">Users</div>
-
+  <div class="context">
   <div class="filter-section">
     <mat-form-field>
       <mat-label>Filter users</mat-label>
@@ -27,6 +25,7 @@
         </mat-icon>
         <mat-icon *ngIf="element.isYourFriend && element.id!=meId">done</mat-icon>
         <mat-icon *ngIf="element.id==meId">face</mat-icon>
+        <ng-container *ngIf="isShowSpinner && element.id===addedFriend"><mat-spinner></mat-spinner></ng-container>
       </td>
     </ng-container>
 

@@ -29,6 +29,8 @@ export class AllUserListComponent implements OnInit, AfterViewInit {
   resultsLength = 0;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  isShowSpinner:boolean
+  addedFriend:string;
 
   constructor(private router: Router, private usersService: UsersService, private profileService: ProfileService) {
 
@@ -67,9 +69,12 @@ export class AllUserListComponent implements OnInit, AfterViewInit {
   }
 
   addFriend(id: string) {
+    this.isShowSpinner=true;
+    this.addedFriend=id;
     this.usersService.addFriend(id);
     setTimeout(() => {
       this.dataSource = new MatTableDataSource(this.users);
-    }, 1000)
+      this.isShowSpinner=false;
+    }, 1500)
   }
 }
