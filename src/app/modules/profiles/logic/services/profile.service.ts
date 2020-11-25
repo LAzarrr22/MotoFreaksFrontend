@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
 import {MyProfileModel} from "../dto/response/my-profile.model";
 import {Store} from "@ngrx/store";
-import {getMyFriends, getMyProfile, MyProfileState} from "../reducers/my-profile.reducers";
+import {getMyFriends, getMyProfile, isLoading, MyProfileState} from "../reducers/my-profile.reducers";
 import {
   AddMyCar,
   AddPoints,
@@ -19,6 +19,7 @@ import {AddressModel} from "../dto/models/address.model";
 import {ContactModel} from "../dto/models/contact.model";
 import {NewCarModel} from "../dto/request/new-car.model";
 import {FriendUserModel} from "../dto/response/friend-user.model";
+import {first} from "rxjs/operators";
 
 @Injectable()
 export class ProfileService {
@@ -33,7 +34,7 @@ export class ProfileService {
 
   getMyId(): string {
     let id;
-    this.store.select(getMyProfile).subscribe(me => {
+    this.store.select(getMyProfile).pipe(first()).subscribe(me => {
       id = me.id;
     })
     return id;
@@ -88,5 +89,7 @@ export class ProfileService {
 
   }
 
-
+  isLoading() {
+    return this.store.select(isLoading);
+  }
 }

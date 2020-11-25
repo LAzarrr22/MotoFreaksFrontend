@@ -19,6 +19,7 @@ export class UserProfileAllDataComponent implements OnInit {
   currentRoles: RolesEnum[];
   @Input()
   isAdmin: boolean;
+  isSpinnerShow:boolean;
 
   @Output()
   reloadUser = new EventEmitter();
@@ -30,6 +31,7 @@ export class UserProfileAllDataComponent implements OnInit {
   }
 
   addFriend(id: string) {
+    this.isSpinnerShow=true;
     this.usersService.addFriend(id);
     this.reloadUser.emit();
   }

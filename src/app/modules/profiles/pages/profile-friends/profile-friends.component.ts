@@ -38,6 +38,6 @@ export class ProfileFriendsComponent implements OnInit {
   reloadUser(userId: string) {
     setTimeout(() => {
       this.getUser(userId)
-    }, 1000)
+    }, 1500)
   }
 }

@@ -1,13 +1,9 @@
-<div class="context">
-  <div class="row">
-    <div class="title-page">Personal data</div>
-  </div>
-
   <div class="row p-3">
 
     <div class="col-4">
         <ng-container *ngIf="userProfile.isYourFriend==false">
           <button class="button-section" type='submit' (click)="addFriend(userProfile.id)">Add</button>
+          <ng-container *ngIf="isSpinnerShow"><mat-spinner></mat-spinner></ng-container>
         </ng-container>
         <ng-container *ngIf="userProfile.isYourFriend">
           <div class="friend-text">
@@ -36,4 +32,4 @@
   <app-section-cars [cars]="userProfile.carsList"></app-section-cars>
   <mat-divider></mat-divider>
   <app-all-post-page [idProfileToShow]="userProfile.id" [postsForProfile]="true"></app-all-post-page>
-</div>
+

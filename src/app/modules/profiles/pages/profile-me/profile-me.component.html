@@ -1,6 +1,14 @@
-<ng-container *ngIf="profile!=null">
+<div class="context">
+  <div class="title-page">Personal</div>
+
+<ng-container *ngIf="profile |async;else loadingTemp">
 
 <app-my-profile-all-data [profile]="profile |async" [isLoading]="isLoading | async"
                          [friends]="friendsList| async" [myRoles]="myRoles | async"
                          [isValidated]="isValidated|async"></app-my-profile-all-data>
 </ng-container>
+</div>
+
+<ng-template #loadingTemp>
+  <mat-spinner></mat-spinner>
+</ng-template>

@@ -1,2 +1,14 @@
+<div class="context">
+  <div class="row">
+    <div class="title-page">Personal data</div>
+  </div>
+
+  <ng-container *ngIf="user;else loadingTemp">
 <app-user-profile-all-data [userProfile]="user" [isAdmin]="isAdmin"
                            (reloadUser)="reloadUser(user.id)"></app-user-profile-all-data>
+  </ng-container>
+</div>
+
+<ng-template #loadingTemp>
+  <mat-spinner></mat-spinner>
+</ng-template>
