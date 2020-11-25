@@ -37,6 +37,7 @@ export class ConvExpandedComponent implements OnInit {
   currentShowMessages: MessageModel[];
   loadedCount: number = 5;
   isShowMore: boolean;
+  showSpinner:boolean=false;
 
   constructor(private router: Router, private messagesService: MessagesService) {
   }
@@ -52,6 +53,7 @@ export class ConvExpandedComponent implements OnInit {
   }
 
   sliceMessages() {
+    this.showSpinner=true;
     if(this.loadedCount>this.messages.length){
       this.loadedCount=this.messages.length
     }
@@ -64,6 +66,7 @@ export class ConvExpandedComponent implements OnInit {
     if(this.messages.length== this.currentShowMessages.length){
       this.isShowMore = false;
     }
+    this.showSpinner=false;
   }
 
   loadMore() {
@@ -74,6 +77,7 @@ export class ConvExpandedComponent implements OnInit {
   }
 
   sendMessage(content: string) {
+    this.showSpinner=true;
     this.messagesService.sendMessage(this.receiverID, content);
     setTimeout(() => {
       this.loadFirstMessage.emit();

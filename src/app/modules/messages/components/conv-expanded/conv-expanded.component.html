@@ -42,8 +42,13 @@
 
     </ng-container>
   </ng-container>
-
+  <div class="row" *ngIf="showSpinner">
+    <div class="col-md-5  col-sm-10 offset-md-7 pt-3">
+      <mat-spinner></mat-spinner>
+    </div>
+  </div>
   <app-new-message (sendMessageEvent)="sendMessage($event)"></app-new-message>
+
 </div>
 
 <ng-template #notFound>

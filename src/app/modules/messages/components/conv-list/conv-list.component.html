@@ -1,9 +1,19 @@
 <div class="context">
   <div class="title-page">Messages</div>
-  <div class="row">
-
-  </div>
   <mat-divider></mat-divider>
+
+  <ng-container *ngIf="messages==null || messages.length==0">
+    <div class="sub-title pt-4" >
+      Not found any conversation...
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="loading |async">
+    <div class="pt-4" >
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-container>
+
   <div *ngFor="let m of messages">
     <app-conv-item-list [receiverName]="getReceiverName(m.id)" [receiverLastName]="getReceiverLastName(m.id)"
                         [messages]="m.messages" (click)="goToExpandConv(m.id)"></app-conv-item-list>
