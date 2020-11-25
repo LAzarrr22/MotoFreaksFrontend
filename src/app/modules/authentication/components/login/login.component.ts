@@ -6,7 +6,7 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {Observable} from "rxjs";
 import {Actions, ofType} from "@ngrx/effects";
 import {map} from "rxjs/operators";
-import {AuthenticationState} from "../../logic/reducers/authentication.reducers";
+import {AuthenticationState, isLoading, isUserLoggedIn} from "../../logic/reducers/authentication.reducers";
 
 @Component({
   selector: 'app-login',
@@ -20,10 +20,11 @@ export class LoginComponent implements OnInit {
     password: new FormControl('')
   });
   errorMessage: Observable<string>
+  loading: Observable<boolean>
 
   constructor(private readonly store: Store<AuthenticationState>, private actions: Actions) {
     this.errorMessage = this.actions.pipe(ofType(USER_LOGIN_FAIL), map((action: UserLoginFail) => action.payload));
-
+    this.loading=this.store.select(isLoading);
   }
 
   ngOnInit(): void {

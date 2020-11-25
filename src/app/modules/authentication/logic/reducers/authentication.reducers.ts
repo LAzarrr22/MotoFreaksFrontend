@@ -16,13 +16,15 @@ export interface AuthenticationState {
   loggedIn: boolean;
   isValidated:boolean;
   roles: RolesEnum[];
+  loading: boolean;
 }
 
 const INITIAL_STATE: AuthenticationState = {
   token: null,
   loggedIn: false,
   isValidated:false,
-  roles: [RolesEnum.UNKNOWN]
+  roles: [RolesEnum.UNKNOWN],
+  loading:false
 };
 
 export function reducer(state: AuthenticationState = INITIAL_STATE, action) {
@@ -31,11 +33,13 @@ export function reducer(state: AuthenticationState = INITIAL_STATE, action) {
     case GET_ROLES:
     case CHECK_VALIDATION:
       return {
-        ...state
+        ...state,
+        loading:true,
       };
     case USER_LOGIN_SUCCESS:
       return {
         loggedIn: true,
+        loading:false,
         token: action.payload.token,
         roles: action.payload.roles,
         isValidated: action.payload.validated
@@ -68,6 +72,7 @@ export const getToken = (state) => state.token;
 export const isLoggedIn = (state) => state.loggedIn;
 export const roles = (state) => state.roles;
 export const getUserValidation = (state) => state.isValidated;
+export const getLoading = (state) => state.loading;
 
 
 const fromAuthenticationState = createFeatureSelector<AuthenticationState>('authentication');
@@ -76,3 +81,4 @@ export const getAuthToken = createSelector(fromAuthenticationState, getToken);
 export const getRoles = createSelector(fromAuthenticationState, roles);
 export const isUserLoggedIn = createSelector(fromAuthenticationState, isLoggedIn);
 export const isValidated = createSelector(fromAuthenticationState, getUserValidation);
+export const isLoading = createSelector(fromAuthenticationState, getLoading);

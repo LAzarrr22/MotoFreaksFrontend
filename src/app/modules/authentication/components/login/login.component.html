@@ -30,6 +30,9 @@
           <div class="button-section">
             <button class="button-submit" type='submit'>Login</button>
           </div>
+          <div class="row pl-1 pt-2" *ngIf="loading |async">
+            <mat-spinner></mat-spinner>
+          </div>
         </form>
       </div>
     </div>

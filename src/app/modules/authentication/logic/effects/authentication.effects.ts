@@ -68,7 +68,6 @@ export class AuthenticationEffects {
         new UserLoginSuccess(userData),
         new GetMyProfile(),
         new GetAllUsers(),
-        new GetAllMessages(),
       ]),
 
       catchError((error, caught) => {
