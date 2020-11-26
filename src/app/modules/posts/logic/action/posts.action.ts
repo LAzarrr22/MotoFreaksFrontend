@@ -23,7 +23,7 @@ export const FAIL_ACTION = '[Posts] FAIL_ACTION'
 export class GetAllPosts implements Action {
   readonly type = GET_ALL_POST;
 
-  constructor(public typeOfPosts: string = 'ALL', public paramMap: Map<string, string> = null) {
+  constructor(public typeOfPosts: string = 'ALL', public paramMap: Map<string, string> = null, public paramStateMap: Map<string, string> = null) {
   }
 }
 
@@ -37,7 +37,7 @@ export class GetAllPostsSuccess implements Action {
 export class GetAllPostByUserId implements Action {
   readonly type = GET_ALL_POST_BY_ID;
 
-  constructor(public userId: string, public typeOfPosts: string = 'ALL', public paramMap: Map<string, string> = null) {
+  constructor(public userId: string, public typeOfPosts: string = 'ALL', public paramMap: Map<string, string> = null, public paramStateMap: Map<string, string> = null) {
   }
 }
 

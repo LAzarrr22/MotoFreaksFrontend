@@ -19,8 +19,8 @@ export class PostsService {
   constructor(private store: Store) {
   }
 
-  getAllPosts(type: string = 'ALL', paramMap: Map<string, string> = null): Observable<PostModel[]> {
-    this.store.dispatch(new GetAllPosts(type,paramMap))
+  getAllPosts(type: string = 'ALL', paramMap: Map<string, string> = null, paramStateMap: Map<string, string> = null): Observable<PostModel[]> {
+    this.store.dispatch(new GetAllPosts(type,paramMap,paramStateMap))
     return this.store.select(getPosts);
   }
 
@@ -34,8 +34,8 @@ export class PostsService {
     return this.store.select(getPosts);
   }
 
-  getAllPostByCreatorId(id: string, type: string = 'ALL', paramMap: Map<string, string> = null): Observable<PostModel[]> {
-    this.store.dispatch(new GetAllPostByUserId(id,type,paramMap));
+  getAllPostByCreatorId(id: string, type: string = 'ALL', paramMap: Map<string, string> = null, paramStateMap: Map<string, string> = null): Observable<PostModel[]> {
+    this.store.dispatch(new GetAllPostByUserId(id,type,paramMap,paramStateMap));
     return this.store.select(getPosts);
   }
 

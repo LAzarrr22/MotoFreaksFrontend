@@ -39,7 +39,7 @@ export class PostsEffects {
   getAllPosts: Observable<Action> = this.action$
     .pipe(ofType(GET_ALL_POST),
       switchMap((action: GetAllPosts) => {
-        return this.postsApiService.getAllPosts(action.typeOfPosts,action.paramMap);
+        return this.postsApiService.getAllPosts(action.typeOfPosts,action.paramMap,action.paramStateMap);
       }),
       switchMap((posts: PostModel[]) => [
         new SuccessActionString(''),
@@ -57,7 +57,7 @@ export class PostsEffects {
   getAllPostsByCreatorId: Observable<Action> = this.action$
     .pipe(ofType(GET_ALL_POST_BY_ID),
       switchMap((action: GetAllPostByUserId) => {
-        return this.postsApiService.getAllPostsByCreatorId(action.userId,action.typeOfPosts,action.paramMap);
+        return this.postsApiService.getAllPostsByCreatorId(action.userId,action.typeOfPosts,action.paramMap,action.paramStateMap);
       }),
       switchMap((posts: PostModel[]) => [
         new SuccessActionString(''),
