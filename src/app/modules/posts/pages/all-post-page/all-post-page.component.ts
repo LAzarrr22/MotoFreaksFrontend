@@ -12,6 +12,7 @@ import {Actions, ofType} from "@ngrx/effects";
 import {map} from "rxjs/operators";
 import {AuthService} from "../../../authentication/logic/services/auth.service";
 import {FAIL_ACTION, FailAction} from "../../logic/action/posts.action";
+import {PostState} from "../../logic/enums/post-state.enum";
 
 @Component({
   selector: 'app-all-post-page',
@@ -23,10 +24,13 @@ export class AllPostPageComponent implements OnInit {
   postsListObs: Observable<PostModel[]>
   filterOpen: boolean = false;
   postTypes = PostType;
+  postState = PostState;
   postTypeList = [];
+  postStateList = [];
   myId: string;
   currentFilterType: PostType;
   currentCarFilter: Map<string, string>;
+  currentStateParam: Map<string, string>;
   isAdmin: boolean = false;
 
   @Input()
@@ -43,6 +47,7 @@ export class AllPostPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.postTypeList = Object.keys(this.postTypes);
+    this.postStateList = Object.keys(this.postState);
     this.myId = this.profileService.getMyId();
 
     if (!this.postsForProfile) {
@@ -89,17 +94,27 @@ export class AllPostPageComponent implements OnInit {
     this.refreshPosts();
   }
 
+  applyStateFilter(state: PostState) {
+    if(state!=PostState.ALL){
+    let paramMap = new Map<string, string>();
+    paramMap.set('state', state.valueOf());
+    this.currentStateParam = paramMap;
+  }else {
+      this.currentStateParam = null;
+    }
+    this.refreshPosts();
+  }
+
   clearCarFilter() {
     this.currentCarFilter = null;
     this.refreshPosts();
   }
 
   refreshPosts() {
-    console.log('test-resgref33333')
     if (!this.postsForProfile) {
-      this.postsListObs = this.postsService.getAllPosts(this.currentFilterType, this.currentCarFilter);
+      this.postsListObs = this.postsService.getAllPosts(this.currentFilterType, this.currentCarFilter, this.currentStateParam);
     } else {
-      this.postsListObs = this.postsService.getAllPostByCreatorId(this.idProfileToShow, this.currentFilterType, this.currentCarFilter);
+      this.postsListObs = this.postsService.getAllPostByCreatorId(this.idProfileToShow, this.currentFilterType, this.currentCarFilter, this.currentStateParam);
     }
   }
 

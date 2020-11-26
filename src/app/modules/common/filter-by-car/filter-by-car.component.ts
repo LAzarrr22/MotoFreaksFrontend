@@ -1,13 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
-import {Observable} from "rxjs";
 import {CarsService} from "../../cars/logic/service/cars.service";
-import {Actions, ofType} from "@ngrx/effects";
-import {
-  GET_ALL_CHALLENGES_BY_CAR_FAIL,
-  GetAllChallengesByCarFail
-} from "../../challenges/logic/actions/challenges.actions";
-import {map} from "rxjs/operators";
 
 @Component({
   selector: 'app-filter-by-car',
