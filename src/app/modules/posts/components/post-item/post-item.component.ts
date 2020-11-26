@@ -11,6 +11,19 @@ import {PostState} from "../../logic/enums/post-state.enum";
   styleUrls: ['./post-item.component.scss']
 })
 export class PostItemComponent implements OnInit {
+  typeValues = {
+    ALL : 'All',
+    ADVICE : 'Advice',
+    INFO : 'Info',
+    BORROW : 'Borrow',
+    ROAD_HELP : 'Road help',
+  };
+
+  stateValues = {
+    ALL : 'All',
+    OPEN : 'Open',
+    CLOSED : 'Closed',
+  };
 
   @Input()
   post: PostModel;

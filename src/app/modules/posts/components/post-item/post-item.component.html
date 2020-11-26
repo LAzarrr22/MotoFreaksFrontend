@@ -5,7 +5,7 @@
     <div class="row pl-3 pb-3 pt-2 header">
 
       <div class="col-md-1 size-medium not-validated" [ngClass]="{'color-green': isOpen()}">
-        {{post.state}}
+        {{stateValues[post.state]}}
       </div>
 
       <div class="col-md-4">
@@ -66,7 +66,7 @@
             <mat-icon>handyman</mat-icon>
           </ng-container>
 
-          {{post.type}}
+          {{typeValues[post.type]}}
         </div>
         <div class="row pt-2">
           <i>{{post.title}}</i>
