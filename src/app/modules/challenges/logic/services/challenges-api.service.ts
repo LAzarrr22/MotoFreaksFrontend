@@ -41,20 +41,32 @@ export class ChallengesApiService {
     return this.httpClient.delete(`${environment.apiUrl}/challenge/delete/${challengeId}`)
   }
 
-  getAllChallengesApi(): Observable<ChallengeDtoModel[]> {
-    return this.httpClient.get<ChallengeDtoModel[]>(`${environment.apiUrl}/challenge/get/all`)
-  }
-
-  getAllChallengesGeneralApi(): Observable<ChallengeDtoModel[]> {
-    return this.httpClient.get<ChallengeDtoModel[]>(`${environment.apiUrl}/challenge/get/all/general`)
-  }
-
-  getAllChallengesByCarApi(paramMap: Map<string, string>): Observable<ChallengeDtoModel[]> {
+  getAllChallengesApi(paramMap: Map<string, string>, paramStateMap: Map<string, string>): Observable<ChallengeDtoModel[]> {
     let params = new HttpParams();
-    for (let paramMapElement of paramMap) {
-      params = params.set(paramMapElement[0], paramMapElement[1])
+    if(paramMap) {
+      for (let paramMapElement of paramMap) {
+        params = params.set(paramMapElement[0], paramMapElement[1])
+      }}
+    if(paramStateMap) {
+      for (let paramMapElement of paramStateMap) {
+        params = params.set(paramMapElement[0], paramMapElement[1])
+      }
     }
-    return this.httpClient.get<ChallengeDtoModel[]>(`${environment.apiUrl}/challenge/get/findBy/car`, {params})
+    return this.httpClient.get<ChallengeDtoModel[]>(`${environment.apiUrl}/challenge/get/all`,{params})
+  }
+
+  getAllChallengesGeneralApi(paramMap: Map<string, string>, paramStateMap: Map<string, string>): Observable<ChallengeDtoModel[]> {
+    let params = new HttpParams();
+    if(paramMap) {
+      for (let paramMapElement of paramMap) {
+        params = params.set(paramMapElement[0], paramMapElement[1])
+      }}
+    if(paramStateMap) {
+      for (let paramMapElement of paramStateMap) {
+        params = params.set(paramMapElement[0], paramMapElement[1])
+      }
+    }
+    return this.httpClient.get<ChallengeDtoModel[]>(`${environment.apiUrl}/challenge/get/all/general`,{params})
   }
 
   getAllChallengesByUserApi(id: string): Observable<ChallengeDtoModel[]> {

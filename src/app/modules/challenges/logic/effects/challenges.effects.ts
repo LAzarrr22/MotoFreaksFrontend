@@ -12,23 +12,31 @@ import {
   CREATE_CHALLENGE,
   CreateChallenge,
   CreateChallengeFail,
-  CreateChallengeSuccess, DELETE_CHALLENGE, DeleteChallenge, DeleteChallengeFail, DeleteChallengeSuccess,
+  CreateChallengeSuccess,
+  DELETE_CHALLENGE,
+  DeleteChallenge,
+  DeleteChallengeFail,
+  DeleteChallengeSuccess,
   GET_ALL_CHALLENGES,
-  GET_ALL_CHALLENGES_BY_CAR,
-  GET_ALL_CHALLENGES_BY_USER, GET_ALL_CHALLENGES_GENERAL,
+  GET_ALL_CHALLENGES_BY_USER,
+  GET_ALL_CHALLENGES_GENERAL,
   GET_QUESTIONS_BY_ID,
   GetAllChallenges,
-  GetAllChallengesByCar,
-  GetAllChallengesByCarFail,
-  GetAllChallengesByCarSuccess,
   GetAllChallengesByUser,
   GetAllChallengesByUserFail,
   GetAllChallengesByUserSuccess,
-  GetAllChallengesFail, GetAllChallengesGeneral, GetAllChallengesGeneralFail, GetAllChallengesGeneralSuccess,
+  GetAllChallengesFail,
+  GetAllChallengesGeneral,
+  GetAllChallengesGeneralFail,
+  GetAllChallengesGeneralSuccess,
   GetAllChallengesSuccess,
   GetQuestionsById,
   GetQuestionsByIdFail,
-  GetQuestionsByIdSuccess, MERGE_CHALLENGE, MergeChallenge, MergeChallengeFail, MergeChallengeSuccess
+  GetQuestionsByIdSuccess,
+  MERGE_CHALLENGE,
+  MergeChallenge,
+  MergeChallengeFail,
+  MergeChallengeSuccess
 } from "../actions/challenges.actions";
 import {catchError, switchMap} from "rxjs/operators";
 import {ChallengeDtoModel} from "../dto/response/challenge-dto.model";
@@ -45,8 +53,8 @@ export class ChallengesEffects {
   @Effect()
   getAllChallenges$: Observable<Action> = this.actions$
     .pipe(ofType(GET_ALL_CHALLENGES),
-      switchMap(() => {
-        return this.challengesApiService.getAllChallengesApi();
+      switchMap((action: GetAllChallenges) => {
+        return this.challengesApiService.getAllChallengesApi(action.paramMap,action.paramStateMap);
       }),
       switchMap((challenges: ChallengeDtoModel[]) => [
         new GetAllChallengesSuccess(challenges),
@@ -62,8 +70,8 @@ export class ChallengesEffects {
   @Effect()
   getAllChallengesGeneral$: Observable<Action> = this.actions$
     .pipe(ofType(GET_ALL_CHALLENGES_GENERAL),
-      switchMap(() => {
-        return this.challengesApiService.getAllChallengesGeneralApi();
+      switchMap((action: GetAllChallengesGeneral) => {
+        return this.challengesApiService.getAllChallengesGeneralApi(action.paramMap,action.paramStateMap);
       }),
       switchMap((challenges: ChallengeDtoModel[]) => [
         new GetAllChallengesGeneralSuccess(challenges),
@@ -71,23 +79,6 @@ export class ChallengesEffects {
       ]),
       catchError((error, caught) => {
         this.store$.dispatch(new GetAllChallengesGeneralFail(error.error.message));
-        this.errorService.error(error);
-        return caught;
-      })
-    )
-
-  @Effect()
-  getAllChallengesByCar$: Observable<Action> = this.actions$
-    .pipe(ofType(GET_ALL_CHALLENGES_BY_CAR),
-      switchMap((action: GetAllChallengesByCar) => {
-        return this.challengesApiService.getAllChallengesByCarApi(action.paramMap);
-      }),
-      switchMap((challenges: ChallengeDtoModel[]) => [
-        new GetAllChallengesByCarSuccess(challenges),
-        new GetAllChallengesByCarFail('')
-      ]),
-      catchError((error, caught) => {
-        this.store$.dispatch(new GetAllChallengesByCarFail(error.error.message));
         this.errorService.error(error);
         return caught;
       })

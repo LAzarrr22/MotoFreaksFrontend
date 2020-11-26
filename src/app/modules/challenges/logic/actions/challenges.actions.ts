@@ -27,10 +27,6 @@ export const GET_ALL_CHALLENGES_GENERAL = '[Challenge] GET_ALL_CHALLENGES_GENERA
 export const GET_ALL_CHALLENGES_GENERAL_SUCCESS = '[Challenge] GET_ALL_CHALLENGES_GENERAL_SUCCESS'
 export const GET_ALL_CHALLENGES_GENERAL_FAIL = '[Challenge] GET_ALL_CHALLENGES_GENERAL_FAIL'
 
-export const GET_ALL_CHALLENGES_BY_CAR = '[Challenge] GET_ALL_CHALLENGES_BY_CAR'
-export const GET_ALL_CHALLENGES_BY_CAR_SUCCESS = '[Challenge] GET_ALL_CHALLENGES_BY_CAR_SUCCESS'
-export const GET_ALL_CHALLENGES_BY_CAR_FAIL = '[Challenge] GET_ALL_CHALLENGES_BY_CAR_FAIL'
-
 export const GET_ALL_CHALLENGES_BY_USER = '[Challenge] GET_ALL_CHALLENGES_BY_USER'
 export const GET_ALL_CHALLENGES_BY_USER_SUCCESS = '[Challenge] GET_ALL_CHALLENGES_BY_USER_SUCCESS'
 export const GET_ALL_CHALLENGES_BY_USER_FAIL = '[Challenge] GET_ALL_CHALLENGES_BY_USER_FAIL'
@@ -126,7 +122,7 @@ export class DeleteChallengeFail implements Action {
 export class GetAllChallenges implements Action {
   readonly type = GET_ALL_CHALLENGES;
 
-  constructor() {
+  constructor(public paramMap: Map<string, string> = null, public paramStateMap: Map<string, string> = null) {
   }
 }
 
@@ -147,7 +143,7 @@ export class GetAllChallengesFail implements Action {
 export class GetAllChallengesGeneral implements Action {
   readonly type = GET_ALL_CHALLENGES_GENERAL;
 
-  constructor() {
+  constructor(public paramMap: Map<string, string> = null, public paramStateMap: Map<string, string> = null) {
   }
 }
 
@@ -160,27 +156,6 @@ export class GetAllChallengesGeneralSuccess implements Action {
 
 export class GetAllChallengesGeneralFail implements Action {
   readonly type = GET_ALL_CHALLENGES_GENERAL_FAIL;
-
-  constructor(public payload: string) {
-  }
-}
-
-export class GetAllChallengesByCar implements Action {
-  readonly type = GET_ALL_CHALLENGES_BY_CAR;
-
-  constructor(public paramMap: Map<string, string>) {
-  }
-}
-
-export class GetAllChallengesByCarSuccess implements Action {
-  readonly type = GET_ALL_CHALLENGES_BY_CAR_SUCCESS;
-
-  constructor(public challenges: ChallengeDtoModel[]) {
-  }
-}
-
-export class GetAllChallengesByCarFail implements Action {
-  readonly type = GET_ALL_CHALLENGES_BY_CAR_FAIL;
 
   constructor(public payload: string) {
   }
@@ -241,9 +216,6 @@ export type Actions =
   | GetAllChallenges
   | GetAllChallengesSuccess
   | GetAllChallengesFail
-  | GetAllChallengesByCar
-  | GetAllChallengesByCarSuccess
-  | GetAllChallengesByCarFail
   | GetQuestionsById
   | GetQuestionsByIdSuccess
   | GetQuestionsByIdFail

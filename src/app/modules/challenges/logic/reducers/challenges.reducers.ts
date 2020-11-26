@@ -1,9 +1,6 @@
 import {ChallengeDtoModel} from "../dto/response/challenge-dto.model";
 import {
   GET_ALL_CHALLENGES,
-  GET_ALL_CHALLENGES_BY_CAR,
-  GET_ALL_CHALLENGES_BY_CAR_FAIL,
-  GET_ALL_CHALLENGES_BY_CAR_SUCCESS,
   GET_ALL_CHALLENGES_BY_USER,
   GET_ALL_CHALLENGES_BY_USER_FAIL,
   GET_ALL_CHALLENGES_BY_USER_SUCCESS,
@@ -34,7 +31,7 @@ export const INITIAL_STATE: ChallengesState = {
 
 export function reducer(state: ChallengesState = INITIAL_STATE, action) {
   switch (action.type) {
-    case GET_ALL_CHALLENGES_BY_CAR:
+
     case GET_ALL_CHALLENGES_BY_USER:
     case GET_ALL_CHALLENGES:
     case GET_ALL_CHALLENGES_GENERAL:
@@ -43,7 +40,6 @@ export function reducer(state: ChallengesState = INITIAL_STATE, action) {
         ...state,
         loading: true
       }
-    case GET_ALL_CHALLENGES_BY_CAR_SUCCESS:
     case GET_ALL_CHALLENGES_BY_USER_SUCCESS:
     case GET_ALL_CHALLENGES_SUCCESS:
     case GET_ALL_CHALLENGES_GENERAL_SUCCESS:
@@ -59,7 +55,6 @@ export function reducer(state: ChallengesState = INITIAL_STATE, action) {
         selectedQuestions: action.questions,
         loading: false
       }
-    case GET_ALL_CHALLENGES_BY_CAR_FAIL:
     case GET_ALL_CHALLENGES_BY_USER_FAIL:
     case GET_ALL_CHALLENGES_FAIL:
     case GET_QUESTIONS_BY_ID_FAIL:
