@@ -19,9 +19,18 @@
   </div>
   <ng-container *ngIf="filterOpen">
     <div class="row pb-3">
-      <form [formGroup]="formGeneral">
+      <form [formGroup]="form">
+
+        <mat-form-field appearance="legacy" class="full-width">
+          <mat-label>State</mat-label>
+          <mat-select formControlName="state" (selectionChange)="filledChange()">
+            <mat-option *ngFor="let state of challengeStateList" [value]="state">{{challengeStateShows[state]}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
         <mat-label class="general-text pl-5 pr-3">General Challenge</mat-label>
-        <input type="checkbox" placeholder="General" formControlName="general" (ngModelChange)="onChangeGeneral()">
+        <input type="checkbox" placeholder="General" formControlName="general" (ngModelChange)="refreshChallenges()">
+
       </form>
     </div>
 
