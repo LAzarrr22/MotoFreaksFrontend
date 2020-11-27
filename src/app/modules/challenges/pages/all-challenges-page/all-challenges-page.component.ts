@@ -5,14 +5,12 @@ import {MenuService} from "../../../menu/logic/services/menu.service";
 import {Observable} from "rxjs";
 import {ChallengeDtoModel} from "../../logic/dto/response/challenge-dto.model";
 import {ProfileService} from "../../../profiles/logic/services/profile.service";
-import {Actions, ofType} from "@ngrx/effects";
-import {map} from "rxjs/operators";
+import {Actions} from "@ngrx/effects";
 import {Router} from "@angular/router";
 import {AppPath} from "../../../../shared/enums/app-path.enum";
 import {AuthService} from "../../../authentication/logic/services/auth.service";
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
-import {ChallengeStateEnum} from "../../logic/challenge-state.enum";
-import {PostState} from "../../../posts/logic/enums/post-state.enum";
+import {ChallengeStateEnum} from "../../logic/enums/challenge-state.enum";
 
 @Component({
   selector: 'app-all-challenges-page',
