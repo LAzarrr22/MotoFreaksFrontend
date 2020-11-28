@@ -28,7 +28,8 @@
 </div>
 
 <div class="mb-3">
-  <ng-container *ngIf="postsListObs |async; else spinner">
+
+  <ng-container *ngIf="!(isLoading |async); else spinner">
 <app-posts-list [postsList]="postsListObs| async" [myId]="myId" [isAdmin]="isAdmin"
                 (deletePostEvent)="deletePost($event)" (resolvePostEvent)="resolvePost($event)"
                 (refreshPostsEvent)="refreshPosts()"></app-posts-list>

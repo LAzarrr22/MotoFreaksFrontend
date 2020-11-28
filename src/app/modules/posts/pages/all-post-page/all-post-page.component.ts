@@ -32,12 +32,13 @@ export class AllPostPageComponent implements OnInit {
   currentCarFilter: Map<string, string>;
   currentStateParam: Map<string, string>;
   isAdmin: boolean = false;
-
+  errorMessage: Observable<string>;
+  isLoading: Observable<boolean>;
   @Input()
   postsForProfile: boolean = false;
   @Input()
   idProfileToShow: string;
-  errorMessage: Observable<string>;
+
 
   constructor(private router: Router, private menuService: MenuService,
               private postsService: PostsService, private profileService: ProfileService,
@@ -46,6 +47,7 @@ export class AllPostPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isLoading=this.postsService.isLoading();
     this.postTypeList = Object.keys(this.postTypes);
     this.postStateList = Object.keys(this.postState);
     this.myId = this.profileService.getMyId();

@@ -10,13 +10,17 @@ import {
   GetAllPosts, RejectComment,
   ResolvePost
 } from "../action/posts.action";
-import {getPosts} from "../reducers/posts.reducers";
+import {getPosts, isLoading} from "../reducers/posts.reducers";
 import {environment} from "../../../../../environments/environment";
 
 @Injectable()
 export class PostsService {
 
   constructor(private store: Store) {
+  }
+
+  isLoading(){
+    return this.store.select(isLoading);
   }
 
   getAllPosts(type: string = 'ALL', paramMap: Map<string, string> = null, paramStateMap: Map<string, string> = null): Observable<PostModel[]> {
