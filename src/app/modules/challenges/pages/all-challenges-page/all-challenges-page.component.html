@@ -21,7 +21,7 @@
     <div class="row pb-3">
       <form [formGroup]="form">
 
-        <mat-form-field appearance="legacy" class="full-width">
+        <mat-form-field appearance="legacy" class="pl-5 pr-3">
           <mat-label>State</mat-label>
           <mat-select formControlName="state" (selectionChange)="filledChange()">
             <mat-option *ngFor="let state of challengeStateList" [value]="state">{{challengeStateShows[state]}}</mat-option>
@@ -36,12 +36,15 @@
 
     <ng-container *ngIf="!isGeneral()">
       <app-filter-by-car (applyFilterEvent)="applyCarFilter($event)"
-                         (clearFilterEvent)="clearFilter()" [errorMessage]="errorMessageObs |async"></app-filter-by-car>
+                         (clearFilterEvent)="clearFilter()"></app-filter-by-car>
     </ng-container>
-
   </ng-container>
 
-  <ng-container *ngIf="challengesListObs |async; else spinner">
+  <div class="not-found">
+    {{errorMessageObs | async}}
+  </div>
+
+  <ng-container *ngIf="!(challengeIsLoading |async); else spinner">
     <app-challenges-list [challengesList]="challengesListObs|async" [myId]="myId" [isAdmin]="isAdmin" [isModerator]="isModerator"
                          (deleteEvent)="deleteChallenge($event)" (mergeEvent)="goToMerge($event)"></app-challenges-list>
   </ng-container>

@@ -5,12 +5,14 @@ import {MenuService} from "../../../menu/logic/services/menu.service";
 import {Observable} from "rxjs";
 import {ChallengeDtoModel} from "../../logic/dto/response/challenge-dto.model";
 import {ProfileService} from "../../../profiles/logic/services/profile.service";
-import {Actions} from "@ngrx/effects";
+import {Actions, ofType} from "@ngrx/effects";
 import {Router} from "@angular/router";
 import {AppPath} from "../../../../shared/enums/app-path.enum";
 import {AuthService} from "../../../authentication/logic/services/auth.service";
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {ChallengeStateEnum} from "../../logic/enums/challenge-state.enum";
+import {map} from "rxjs/operators";
+import {ChallengeLoadFail, CHALLENGES_LOAD_FAIL} from "../../logic/actions/challenges.actions";
 
 @Component({
   selector: 'app-all-challenges-page',
@@ -35,13 +37,16 @@ export class AllChallengesPageComponent implements OnInit {
   currentStateFilter: Map<string, string>;
   challengeStates=ChallengeStateEnum;
   challengeStateList:string[];
+  challengeIsLoading: Observable<boolean>
 
   constructor(private challengesService: ChallengesService, private menuService: MenuService,
               private profileService: ProfileService, private actions: Actions,
               private router: Router, private authService: AuthService, private formBuilder: FormBuilder) {
+    this.errorMessageObs= this.actions.pipe(ofType(CHALLENGES_LOAD_FAIL), map((action: ChallengeLoadFail) => action.payload));
   }
 
   ngOnInit(): void {
+    this.challengeIsLoading=this.challengesService.isLoading();
     this.challengeStateList= Object.keys(this.challengeStates)
     this.menuService.activeRoute.next(ActiveRoute.CHALLENGE)
     this.myId = this.profileService.getMyId();
@@ -97,7 +102,6 @@ export class AllChallengesPageComponent implements OnInit {
   }
 
   refreshChallenges(){
-    console.dir(this.currentStateFilter)
     if (this.isGeneral()) {
       this.challengesListObs = this.challengesService.getAllGeneralChallenges(this.currentCarFilter, this.currentStateFilter)
     }else{
