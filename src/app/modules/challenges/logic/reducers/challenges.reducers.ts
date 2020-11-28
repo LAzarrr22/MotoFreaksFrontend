@@ -1,12 +1,10 @@
 import {ChallengeDtoModel} from "../dto/response/challenge-dto.model";
 import {
+  CHALLENGES_LOAD_FAIL,
   GET_ALL_CHALLENGES,
   GET_ALL_CHALLENGES_BY_USER,
-  GET_ALL_CHALLENGES_BY_USER_FAIL,
   GET_ALL_CHALLENGES_BY_USER_SUCCESS,
-  GET_ALL_CHALLENGES_FAIL,
   GET_ALL_CHALLENGES_GENERAL,
-  GET_ALL_CHALLENGES_GENERAL_FAIL,
   GET_ALL_CHALLENGES_GENERAL_SUCCESS,
   GET_ALL_CHALLENGES_SUCCESS,
   GET_QUESTIONS_BY_ID,
@@ -55,13 +53,11 @@ export function reducer(state: ChallengesState = INITIAL_STATE, action) {
         selectedQuestions: action.questions,
         loading: false
       }
-    case GET_ALL_CHALLENGES_BY_USER_FAIL:
-    case GET_ALL_CHALLENGES_FAIL:
     case GET_QUESTIONS_BY_ID_FAIL:
-    case GET_ALL_CHALLENGES_GENERAL_FAIL:
+    case CHALLENGES_LOAD_FAIL:
       return {
         ...state,
-        loading: true
+        loading: false
       }
     default:
       return state
@@ -74,8 +70,10 @@ export function reducer(state: ChallengesState = INITIAL_STATE, action) {
 
 export const challengesList = (state) => state.challengesList;
 export const selectedQuestions = (state) => state.selectedQuestions;
+export const getLoading = (state) => state.loading;
 
 const fromChallengeState = createFeatureSelector<ChallengesState>('challenge-store');
 export const getAllChallenges = createSelector(fromChallengeState, challengesList);
 export const getSelectedQuestions = createSelector(fromChallengeState, selectedQuestions);
+export const isLoading = createSelector(fromChallengeState, getLoading);
 

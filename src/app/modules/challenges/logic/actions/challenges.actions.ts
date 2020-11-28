@@ -21,19 +21,19 @@ export const DELETE_CHALLENGE_FAIL = '[Challenge] DELETE_CHALLENGE_FAIL'
 
 export const GET_ALL_CHALLENGES = '[Challenge] GET_ALL_CHALLENGES'
 export const GET_ALL_CHALLENGES_SUCCESS = '[Challenge] GET_ALL_CHALLENGES_SUCCESS'
-export const GET_ALL_CHALLENGES_FAIL = '[Challenge] GET_ALL_CHALLENGES_FAIL'
 
 export const GET_ALL_CHALLENGES_GENERAL = '[Challenge] GET_ALL_CHALLENGES_GENERAL'
 export const GET_ALL_CHALLENGES_GENERAL_SUCCESS = '[Challenge] GET_ALL_CHALLENGES_GENERAL_SUCCESS'
-export const GET_ALL_CHALLENGES_GENERAL_FAIL = '[Challenge] GET_ALL_CHALLENGES_GENERAL_FAIL'
 
 export const GET_ALL_CHALLENGES_BY_USER = '[Challenge] GET_ALL_CHALLENGES_BY_USER'
 export const GET_ALL_CHALLENGES_BY_USER_SUCCESS = '[Challenge] GET_ALL_CHALLENGES_BY_USER_SUCCESS'
-export const GET_ALL_CHALLENGES_BY_USER_FAIL = '[Challenge] GET_ALL_CHALLENGES_BY_USER_FAIL'
 
 export const GET_QUESTIONS_BY_ID = '[Challenge] GET_QUESTIONS_BY_ID'
 export const GET_QUESTIONS_BY_ID_SUCCESS = '[Challenge] GET_QUESTIONS_BY_ID_SUCCESS'
 export const GET_QUESTIONS_BY_ID_FAIL = '[Challenge] GET_QUESTIONS_BY_ID_FAIL'
+
+export const CHALLENGES_LOAD_FAIL = '[Challenge] CHALLENGES_LOAD_FAIL'
+
 
 export class CreateChallenge implements Action {
   readonly type = CREATE_CHALLENGE;
@@ -133,13 +133,6 @@ export class GetAllChallengesSuccess implements Action {
   }
 }
 
-export class GetAllChallengesFail implements Action {
-  readonly type = GET_ALL_CHALLENGES_FAIL;
-
-  constructor(public payload: string) {
-  }
-}
-
 export class GetAllChallengesGeneral implements Action {
   readonly type = GET_ALL_CHALLENGES_GENERAL;
 
@@ -151,13 +144,6 @@ export class GetAllChallengesGeneralSuccess implements Action {
   readonly type = GET_ALL_CHALLENGES_GENERAL_SUCCESS;
 
   constructor(public challenges: ChallengeDtoModel[]) {
-  }
-}
-
-export class GetAllChallengesGeneralFail implements Action {
-  readonly type = GET_ALL_CHALLENGES_GENERAL_FAIL;
-
-  constructor(public payload: string) {
   }
 }
 
@@ -196,8 +182,8 @@ export class GetAllChallengesByUserSuccess implements Action {
   }
 }
 
-export class GetAllChallengesByUserFail implements Action {
-  readonly type = GET_ALL_CHALLENGES_BY_USER_FAIL;
+export class ChallengeLoadFail implements Action {
+  readonly type = CHALLENGES_LOAD_FAIL;
 
   constructor(public payload: string) {
   }
@@ -215,10 +201,9 @@ export type Actions =
   | AddCompetitorFail
   | GetAllChallenges
   | GetAllChallengesSuccess
-  | GetAllChallengesFail
   | GetQuestionsById
   | GetQuestionsByIdSuccess
   | GetQuestionsByIdFail
   | GetAllChallengesByUser
   | GetAllChallengesByUserSuccess
-  | GetAllChallengesByUserFail
+  | ChallengeLoadFail

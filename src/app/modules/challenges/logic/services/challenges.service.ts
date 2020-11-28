@@ -4,7 +4,7 @@ import {Observable} from "rxjs";
 import {ChallengeDtoModel} from "../dto/response/challenge-dto.model";
 import {QuestionAnswer} from "../dto/response/question-answer.model";
 import {Store} from "@ngrx/store";
-import {ChallengesState, getAllChallenges, getSelectedQuestions} from "../reducers/challenges.reducers";
+import {ChallengesState, getAllChallenges, getSelectedQuestions, isLoading} from "../reducers/challenges.reducers";
 import {
   AddCompetitor,
   CreateChallenge,
@@ -25,7 +25,9 @@ export class ChallengesService {
     this.store.dispatch(new GetAllChallenges(paramMap, paramStateMap));
     return this.store.select(getAllChallenges);
   }
-
+isLoading(){
+    return this.store.select(isLoading);
+}
   getAllGeneralChallenges(paramMap: Map<string, string> = null, paramStateMap: Map<string, string> = null) {
     this.store.dispatch(new GetAllChallengesGeneral(paramMap, paramStateMap));
     return this.store.select(getAllChallenges);

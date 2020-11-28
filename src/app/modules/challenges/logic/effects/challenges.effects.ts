@@ -8,7 +8,7 @@ import {
   ADD_COMPETITOR,
   AddCompetitor,
   AddCompetitorFail,
-  AddCompetitorSuccess,
+  AddCompetitorSuccess, ChallengeLoadFail,
   CREATE_CHALLENGE,
   CreateChallenge,
   CreateChallengeFail,
@@ -23,11 +23,8 @@ import {
   GET_QUESTIONS_BY_ID,
   GetAllChallenges,
   GetAllChallengesByUser,
-  GetAllChallengesByUserFail,
   GetAllChallengesByUserSuccess,
-  GetAllChallengesFail,
   GetAllChallengesGeneral,
-  GetAllChallengesGeneralFail,
   GetAllChallengesGeneralSuccess,
   GetAllChallengesSuccess,
   GetQuestionsById,
@@ -58,10 +55,10 @@ export class ChallengesEffects {
       }),
       switchMap((challenges: ChallengeDtoModel[]) => [
         new GetAllChallengesSuccess(challenges),
-        new GetAllChallengesFail('')
+        new ChallengeLoadFail('')
       ]),
       catchError((error, caught) => {
-        this.store$.dispatch(new GetAllChallengesFail(error.error.message));
+        this.store$.dispatch(new ChallengeLoadFail(error.error.message));
         this.errorService.error(error);
         return caught;
       })
@@ -75,10 +72,10 @@ export class ChallengesEffects {
       }),
       switchMap((challenges: ChallengeDtoModel[]) => [
         new GetAllChallengesGeneralSuccess(challenges),
-        new GetAllChallengesFail('')
+        new ChallengeLoadFail('')
       ]),
       catchError((error, caught) => {
-        this.store$.dispatch(new GetAllChallengesGeneralFail(error.error.message));
+        this.store$.dispatch(new ChallengeLoadFail(error.error.message));
         this.errorService.error(error);
         return caught;
       })
@@ -91,10 +88,11 @@ export class ChallengesEffects {
         return this.challengesApiService.getAllChallengesByUserApi(action.userId);
       }),
       switchMap((challenges: ChallengeDtoModel[]) => [
-        new GetAllChallengesByUserSuccess(challenges)
+        new GetAllChallengesByUserSuccess(challenges),
+        new ChallengeLoadFail('')
       ]),
       catchError((error, caught) => {
-        this.store$.dispatch(new GetAllChallengesByUserFail(error.error.message));
+        this.store$.dispatch(new ChallengeLoadFail(error.error.message));
         this.errorService.error(error);
         return caught;
       })
