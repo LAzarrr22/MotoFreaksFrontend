@@ -19,7 +19,7 @@ export class MyMessagesComponent implements OnInit {
 
   ngOnInit(): void {
     this.menuService.activeRoute.next('')
-    this.messages = this.messageService.getAllMessages();
+    this.messages = this.messageService.getAllChats();
     window.scrollTo(0, 0)
   }
 

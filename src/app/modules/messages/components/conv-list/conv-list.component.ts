@@ -23,7 +23,6 @@ export class ConvListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.dir(this.messages)
   }
 
   getReceiverName(id: string): string {

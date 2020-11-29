@@ -4,6 +4,7 @@ import {MAT_TOOLTIP_DEFAULT_OPTIONS, MatTooltipDefaultOptions} from "@angular/ma
 import {Router} from "@angular/router";
 import {AppPath} from "../../../../shared/enums/app-path.enum";
 import {MessagesService} from "../../logic/services/messages.service";
+import {RouterUpgradeInitializer} from "@angular/router/upgrade";
 
 
 export const myCustomTooltipDefaults: MatTooltipDefaultOptions = {
@@ -23,71 +24,34 @@ export const myCustomTooltipDefaults: MatTooltipDefaultOptions = {
 export class ConvExpandedComponent implements OnInit {
 
   @Input()
-  messages: MessageModel[];
+  currentShowMessages: MessageModel[];
   @Input()
-  receiverName: string;
+  receiverCalled: string;
   @Input()
-  receiverLastName: string;
+  isShowMore: boolean;
   @Input()
-  receiverID: string
+  showSpinner: boolean;
 
   @Output()
-  loadFirstMessage = new EventEmitter();
+  loadMoreEvent = new EventEmitter();
+  @Output()
+  sendMessageEvent = new EventEmitter<string>();
 
-  currentShowMessages: MessageModel[];
-  loadedCount: number = 5;
-  isShowMore: boolean;
-  showSpinner:boolean=false;
-
-  constructor(private router: Router, private messagesService: MessagesService) {
+  constructor(private router: Router) {
   }
 
   ngOnInit(): void {
-    if (this.messages != undefined) {
-      this.sliceMessages();
-    }
   }
 
   goToConvList() {
     this.router.navigate([AppPath.MESSAGE_ALL])
   }
 
-  sliceMessages() {
-    this.showSpinner=true;
-    if(this.loadedCount>this.messages.length){
-      this.loadedCount=this.messages.length
-    }
-    if (this.messages.length >= 6) {
-      this.isShowMore = true;
-      this.currentShowMessages = this.messages.slice(this.messages.length - this.loadedCount, this.messages.length);
-    } else {
-      this.currentShowMessages = this.messages;
-    }
-    if(this.messages.length== this.currentShowMessages.length){
-      this.isShowMore = false;
-    }
-    this.showSpinner=false;
-  }
-
   loadMore() {
-    if (this.messages.length >= 6) {
-      this.loadedCount += 5;
-    }
-    this.sliceMessages()
+    this.loadMoreEvent.emit();
   }
 
   sendMessage(content: string) {
-    this.showSpinner=true;
-    this.messagesService.sendMessage(this.receiverID, content);
-    setTimeout(() => {
-      this.loadFirstMessage.emit();
-    }, 1200)
-    setTimeout(() => {
-      if (this.messages.length > 6) {
-        this.loadedCount += 1;
-      }
-      this.sliceMessages()
-    }, 1500)
-
+    this.sendMessageEvent.emit(content);
   }
 }

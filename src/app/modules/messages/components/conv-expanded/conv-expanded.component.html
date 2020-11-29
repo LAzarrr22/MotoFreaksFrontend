@@ -3,7 +3,7 @@
     <mat-icon matTooltip="Back" matTooltipPosition="right">keyboard_backspace</mat-icon>
   </div>
 
-  <div class="personal-title">{{receiverName}} {{receiverLastName}}</div>
+  <div class="personal-title">{{receiverCalled}}</div>
   <mat-divider></mat-divider>
   <ng-container *ngIf="currentShowMessages; else notFound">
 
@@ -33,7 +33,7 @@
           <div class="col-4">
             <div class="user-message mat-elevation-z10 " matTooltip="{{m.createdDate | date: 'medium'}}"
                  matTooltipPosition="right">
-              {{receiverName}}: {{m.messageContent}}
+              {{m.messageContent}}
             </div>
 
           </div>
