@@ -4,7 +4,9 @@ import {Actions, Effect, ofType} from '@ngrx/effects';
 import {AuthenticationService} from '../services/authentication.service';
 import {Action, Store} from '@ngrx/store';
 import {
-  CHECK_VALIDATION, CheckValidation, CheckValidationFail, CheckValidationSuccess,
+  CHECK_VALIDATION,
+  CheckValidationFail,
+  CheckValidationSuccess,
   GET_ROLES,
   GetRoles,
   GetRolesFail,
@@ -34,10 +36,8 @@ import {Router} from "@angular/router";
 import {CommonComponentsService} from "../../../common/common.service";
 import {GetAllUsers} from "../../../users/logic/action/user.action";
 import {RolesEnum} from "../enums/roles.enum";
-import {GetAllMessages} from "../../../messages/logic/action/messages.action";
 import {GetMyProfile} from "../../../profiles/logic/action/my-profile.action";
 import {AuthenticationState} from "../reducers/authentication.reducers";
-import {GetAllSentences} from "../../../sentences/logic/action/sentence.actions";
 
 @Injectable()
 export class AuthenticationEffects {

@@ -3,6 +3,7 @@ import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
 import {environment} from "../../../../../environments/environment";
 import {MessageDataModel} from "../dto/response/message-data.model";
+import {MessageModel} from "../dto/model/message.model";
 
 @Injectable()
 export class MessageApiService {
@@ -14,8 +15,12 @@ export class MessageApiService {
     return this.httpClient.get<number>(`${environment.apiUrl}/message/unread/count`);
   }
 
-  getAllMyMessages(): Observable<MessageDataModel[]> {
-    return this.httpClient.get<MessageDataModel[]>(`${environment.apiUrl}/message/get`);
+  getAllMyChats(): Observable<MessageDataModel[]> {
+    return this.httpClient.get<MessageDataModel[]>(`${environment.apiUrl}/message/get/chats`);
+  }
+
+  getMessages(id:string): Observable<MessageModel[]> {
+    return this.httpClient.get<MessageModel[]>(`${environment.apiUrl}/message/get/${id}`);
   }
 
   sendMessage(id: string, content: string): Observable<any> {
