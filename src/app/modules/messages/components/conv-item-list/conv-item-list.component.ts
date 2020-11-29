@@ -13,7 +13,7 @@ export class ConvItemListComponent implements OnInit {
   @Input()
   receiverLastName: string;
   @Input()
-  messages: MessageModel[];
+  message: MessageModel;
 
   constructor() {
   }

@@ -23,6 +23,7 @@ export class ConvListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.dir(this.messages)
   }
 
   getReceiverName(id: string): string {
@@ -37,7 +38,4 @@ export class ConvListComponent implements OnInit {
     this.router.navigate([AppPath.MESSAGE_CONVERSATION, {id: id}])
   }
 
-  tset() {
-    console.dir(this.messages)
-  }
 }
