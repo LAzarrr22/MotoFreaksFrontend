@@ -43,7 +43,7 @@ export class MessagesConversationComponent implements OnInit, OnDestroy {
   }
 
   loadMessages() {
-    return this.messageSubs = timer(0, 5000)
+    return this.messageSubs = timer(0, 10000)
       .pipe(switchMap(() => this.messageService.getAllMessagesByUser(this.receiverUserId)))
       .subscribe(messagesList => {
           this.setMessageFromSubs(messagesList)
