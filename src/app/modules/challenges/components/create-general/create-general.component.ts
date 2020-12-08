@@ -6,6 +6,8 @@ import {AppPath} from "../../../../shared/enums/app-path.enum";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {CarsService} from "../../../cars/logic/service/cars.service";
 import {ChallengeDtoModel} from "../../logic/dto/response/challenge-dto.model";
+import {ChallengesApiService} from "../../logic/services/challenges-api.service";
+import {first} from "rxjs/operators";
 
 @Component({
   selector: 'app-create-merge-general',
@@ -32,11 +34,12 @@ export class CreateGeneralComponent implements OnInit {
   generations: string[];
   isAddQuestion: boolean = false;
   isMergeSelectedQuestion: boolean;
+  showNameError: boolean = false;
   questionToMerge: QuestionAnswer;
 
 
   constructor(private router: Router, private formBuilder: FormBuilder,
-              private carsService: CarsService) {
+              private carsService: CarsService, private challengesApiService: ChallengesApiService) {
   }
 
   ngOnInit(): void {
@@ -60,7 +63,7 @@ export class CreateGeneralComponent implements OnInit {
   }
 
   submitForm(event: EventEmitter<any>) {
-    if (this.formBasic.valid && this.currentQuestions.length > 0) {
+    if (!this.checkName() && this.formBasic.valid && this.currentQuestions.length > 0) {
       if (this.isGeneral()) {
         event.emit(new NewChallengeModel(this.getName(), this.isGeneral(), null, null,
           null, this.currentQuestions))
@@ -68,8 +71,12 @@ export class CreateGeneralComponent implements OnInit {
         event.emit(new NewChallengeModel(this.getName(), this.isGeneral(), this.getCompany(), this.getModel(),
           this.getGeneration(), this.currentQuestions))
       }
-
     }
+  }
+
+  checkName(){
+    this.challengesApiService.getValidationNameApi(this.getName()).pipe().subscribe(response=>this.showNameError=response);
+    return this.showNameError
   }
 
   addQuestion(question: QuestionAnswer) {

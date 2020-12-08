@@ -5,6 +5,7 @@ import {ChallengeDtoModel} from "../dto/response/challenge-dto.model";
 import {environment} from "../../../../../environments/environment";
 import {QuestionAnswer} from "../dto/response/question-answer.model";
 import {NewChallengeModel} from "../dto/request/new-challenge.model";
+import {map} from "rxjs/operators";
 
 @Injectable()
 export class ChallengesApiService {
@@ -75,5 +76,9 @@ export class ChallengesApiService {
 
   getQuestionsApi(id: string): Observable<QuestionAnswer[]> {
     return this.httpClient.get<QuestionAnswer[]>(`${environment.apiUrl}/challenge/${id}/questions`)
+  }
+
+  getValidationNameApi(name: string): Observable<boolean> {
+   return  this.httpClient.get<boolean>(`${environment.apiUrl}/challenge/exists/${name}`);
   }
 }
