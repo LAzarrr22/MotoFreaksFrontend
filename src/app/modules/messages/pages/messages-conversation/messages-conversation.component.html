@@ -1,6 +1,6 @@
 <ng-container *ngIf="messagesList">
   <app-conv-expanded [currentShowMessages]="currentShowMessages" [receiverCalled]="getReceiver()"
-                     [isShowMore]="isShowMore" [showSpinner]="showSpinnerNewMessage"
+                     [isShowMore]="isShowMore" [showSpinner]="showSpinnerNewMessage" [receiverName]="getReceiverName()"
                      (loadMoreEvent)="loadMore()" (sendMessageEvent)="sendMessage($event)"></app-conv-expanded>
 </ng-container>
 

@@ -28,15 +28,17 @@
   background-color: $custom-blue;
   border-radius: 6px;
   border: 1px solid;
-  min-width: 200px;
-  padding-left: 2px;
+  width: fit-content;
+  padding-right: 4px;
+  padding-left: 4px;
 }
 
 .user-message {
   background-color: $custom-grey;
   border-radius: 6px;
   border: 1px solid;
-  color: $custom-white-dark;
-  min-width: 200px;
-  padding-left: 2px;
+  color: $custom-white;
+  width: fit-content;
+  padding-right: 4px;
+  padding-left: 4px;
 }

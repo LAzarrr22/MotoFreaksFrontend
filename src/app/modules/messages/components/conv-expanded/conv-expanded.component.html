@@ -21,7 +21,7 @@
           <div class="col offset-md-8">
             <div class="my-message mat-elevation-z10" matTooltip="{{m.createdDate | date: 'medium'}}"
                  matTooltipPosition="left">
-              Me: {{m.messageContent}}
+              <b>Me:</b> {{m.messageContent}}
             </div>
 
           </div>
@@ -30,10 +30,10 @@
 
       <ng-container *ngIf="m.received">
         <div class="row p-2">
-          <div class="col-4">
+          <div class="col-4 offset-md-1">
             <div class="user-message mat-elevation-z10 " matTooltip="{{m.createdDate | date: 'medium'}}"
                  matTooltipPosition="right">
-              {{m.messageContent}}
+            <b>{{receiverName}}:</b> {{m.messageContent}}
             </div>
 
           </div>
@@ -47,6 +47,7 @@
       <mat-spinner></mat-spinner>
     </div>
   </div>
+
   <app-new-message (sendMessageEvent)="sendMessage($event)"></app-new-message>
 
 </div>

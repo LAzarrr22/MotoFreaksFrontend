@@ -42,6 +42,10 @@ export class MessagesConversationComponent implements OnInit, OnDestroy {
     return this.userService.getName(this.receiverUserId) + ' ' + this.userService.getLastName(this.receiverUserId);
   }
 
+  getReceiverName() {
+    return this.userService.getName(this.receiverUserId);
+  }
+
   loadMessages() {
     return this.messageSubs = timer(0, 10000)
       .pipe(switchMap(() => this.messageService.getAllMessagesByUser(this.receiverUserId)))

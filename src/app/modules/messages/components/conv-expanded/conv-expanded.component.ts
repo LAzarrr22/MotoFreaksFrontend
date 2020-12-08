@@ -28,6 +28,8 @@ export class ConvExpandedComponent implements OnInit {
   @Input()
   receiverCalled: string;
   @Input()
+  receiverName: string;
+  @Input()
   isShowMore: boolean;
   @Input()
   showSpinner: boolean;
