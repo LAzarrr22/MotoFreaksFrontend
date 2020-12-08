@@ -13,7 +13,7 @@ export class PostsApiService {
   }
 
   addPost(newPost: NewPostModel) {
-    return this.httpClient.post(`${environment.apiUrl}/posts/add`, {
+    return this.httpClient.put(`${environment.apiUrl}/posts`, {
       type: newPost.type,
       title: newPost.title,
       body: newPost.body,
@@ -27,7 +27,7 @@ export class PostsApiService {
   }
 
   deletePost(id: string) {
-    return this.httpClient.delete(`${environment.apiUrl}/posts/delete/${id}`);
+    return this.httpClient.delete(`${environment.apiUrl}/posts/${id}`);
   }
 
   getAllPosts(type: string, paramMap: Map<string, string>, paramStateMap: Map<string, string>): Observable<PostModel[]> {
@@ -41,7 +41,7 @@ export class PostsApiService {
           params = params.set(paramMapElement[0], paramMapElement[1])
         }
       }
-      return this.httpClient.get<PostModel[]>(`${environment.apiUrl}/posts/get/${type}`,{params})
+      return this.httpClient.get<PostModel[]>(`${environment.apiUrl}/posts/${type}`,{params})
   }
 
   getAllPostsByCreatorId(id: string, type: string, paramMap: Map<string, string>, paramStateMap: Map<string, string>): Observable<PostModel[]> {
@@ -55,15 +55,15 @@ export class PostsApiService {
           params = params.set(paramMapElement[0], paramMapElement[1])
         }
       }
-      return this.httpClient.get<PostModel[]>(`${environment.apiUrl}/posts/creator/id/${id}/get/${type}`, {params})
+      return this.httpClient.get<PostModel[]>(`${environment.apiUrl}/posts/byUser/${id}/${type}`, {params})
   }
 
   addComment(postId: string, content:string) {
-    return this.httpClient.post(`${environment.apiUrl}/posts/${postId}/add/comment`, {content})
+    return this.httpClient.put(`${environment.apiUrl}/posts/${postId}/comment`, {content})
   }
 
   deleteComment(postId: string, commentId:string) {
-    return this.httpClient.delete(`${environment.apiUrl}/posts/${postId}/delete/comment/${commentId}`)
+    return this.httpClient.delete(`${environment.apiUrl}/posts/${postId}/comment/${commentId}`)
   }
 
   approveComment(postId: string, commentId:string) {

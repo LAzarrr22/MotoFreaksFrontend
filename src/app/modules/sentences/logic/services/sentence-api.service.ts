@@ -14,11 +14,11 @@ export class SentenceApiService {
   }
 
   getAll():Observable<SentenceModel[]>{
-    return this.httpClient.get<SentenceModel[]>(`${environment.apiUrl}/sentence/get/all`)
+    return this.httpClient.get<SentenceModel[]>(`${environment.apiUrl}/sentence`)
   }
 
   mergeSentence(newSentence : NewSentenceModel):Observable<SentenceModel[]>{
-    return this.httpClient.post<SentenceModel[]>(`${environment.apiUrl}/sentence/modify/merge`,{
+    return this.httpClient.post<SentenceModel[]>(`${environment.apiUrl}/sentence/merge`,{
       id: newSentence.id,
       name: newSentence.name,
       translation: newSentence.translation
@@ -26,6 +26,6 @@ export class SentenceApiService {
   }
 
   deleteSentence(id:string):Observable<SentenceModel[]>{
-    return this.httpClient.delete<SentenceModel[]>(`${environment.apiUrl}/sentence/modify/delete/${id}`)
+    return this.httpClient.delete<SentenceModel[]>(`${environment.apiUrl}/sentence/${id}`)
   }
 }

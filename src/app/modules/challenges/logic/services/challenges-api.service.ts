@@ -12,7 +12,7 @@ export class ChallengesApiService {
   }
 
   createChallengeApi(newChallenge: NewChallengeModel) {
-    return this.httpClient.post(`${environment.apiUrl}/challenge/create`, {
+    return this.httpClient.put(`${environment.apiUrl}/challenge`, {
       name: newChallenge.name,
       general: newChallenge.general,
       company: newChallenge.company,
@@ -23,7 +23,7 @@ export class ChallengesApiService {
   }
 
   mergeChallengeApi(challengeId: string, newChallenge: NewChallengeModel) {
-    return this.httpClient.post(`${environment.apiUrl}/challenge/merge/${challengeId}`, {
+    return this.httpClient.post(`${environment.apiUrl}/challenge/${challengeId}`, {
       name: newChallenge.name,
       general: newChallenge.general,
       company: newChallenge.company,
@@ -34,11 +34,11 @@ export class ChallengesApiService {
   }
 
   addCompetitorChallengeApi(challengeId: string, points: number) {
-    return this.httpClient.post(`${environment.apiUrl}/challenge/id/${challengeId}/add/competitor/points/${points}`, {})
+    return this.httpClient.post(`${environment.apiUrl}/challenge/${challengeId}/competitor/points/${points}`, {})
   }
 
   deleteChallengeApi(challengeId: string) {
-    return this.httpClient.delete(`${environment.apiUrl}/challenge/delete/${challengeId}`)
+    return this.httpClient.delete(`${environment.apiUrl}/challenge/${challengeId}`)
   }
 
   getAllChallengesApi(paramMap: Map<string, string>, paramStateMap: Map<string, string>): Observable<ChallengeDtoModel[]> {
@@ -52,7 +52,7 @@ export class ChallengesApiService {
         params = params.set(paramMapElement[0], paramMapElement[1])
       }
     }
-    return this.httpClient.get<ChallengeDtoModel[]>(`${environment.apiUrl}/challenge/get/all`,{params})
+    return this.httpClient.get<ChallengeDtoModel[]>(`${environment.apiUrl}/challenge`,{params})
   }
 
   getAllChallengesGeneralApi(paramMap: Map<string, string>, paramStateMap: Map<string, string>): Observable<ChallengeDtoModel[]> {
@@ -66,14 +66,14 @@ export class ChallengesApiService {
         params = params.set(paramMapElement[0], paramMapElement[1])
       }
     }
-    return this.httpClient.get<ChallengeDtoModel[]>(`${environment.apiUrl}/challenge/get/all/general`,{params})
+    return this.httpClient.get<ChallengeDtoModel[]>(`${environment.apiUrl}/challenge/general`,{params})
   }
 
   getAllChallengesByUserApi(id: string): Observable<ChallengeDtoModel[]> {
-    return this.httpClient.get<ChallengeDtoModel[]>(`${environment.apiUrl}/challenge/get/findBy/user/id/${id}`)
+    return this.httpClient.get<ChallengeDtoModel[]>(`${environment.apiUrl}/challenge/byUser/${id}`)
   }
 
   getQuestionsApi(id: string): Observable<QuestionAnswer[]> {
-    return this.httpClient.get<QuestionAnswer[]>(`${environment.apiUrl}/challenge/get/questions/id/${id}`)
+    return this.httpClient.get<QuestionAnswer[]>(`${environment.apiUrl}/challenge/${id}/questions`)
   }
 }

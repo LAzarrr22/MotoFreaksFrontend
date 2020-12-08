@@ -16,7 +16,7 @@ export class MyProfileApiService {
   }
 
   getMyProfile(): Observable<MyProfileModel> {
-    return this.httpClient.get<MyProfileModel>(`${environment.apiUrl}/user/show/profile`)
+    return this.httpClient.get<MyProfileModel>(`${environment.apiUrl}/user/profile`)
       .pipe(map(data => new MyProfileModel(data.id, data.username, data.name, data.lastName, data.gender, data.enabled, data.createdDate,
         data.updatedDate, data.loginsHistory, data.carsList, data.contact, data.address, data.points)))
   }
@@ -33,7 +33,7 @@ export class MyProfileApiService {
   }
 
   mergeMyAddress(mergeAddress: AddressModel): Observable<any> {
-    return this.httpClient.post(`${environment.apiUrl}/user/merge/address`,
+    return this.httpClient.post(`${environment.apiUrl}/user/address`,
       {
         city: mergeAddress.city,
         country: mergeAddress.country,
@@ -43,7 +43,7 @@ export class MyProfileApiService {
   }
 
   mergeMyContact(mergeContact: ContactModel): Observable<any> {
-    return this.httpClient.post(`${environment.apiUrl}/user/merge/contact`,
+    return this.httpClient.post(`${environment.apiUrl}/user/contact`,
       {
         email: mergeContact.email,
         phone: mergeContact.phone,
@@ -56,7 +56,7 @@ export class MyProfileApiService {
   }
 
   addCar(newCar: NewCarModel): Observable<any> {
-    return this.httpClient.post(`${environment.apiUrl}/user/add/car`,
+    return this.httpClient.put(`${environment.apiUrl}/user/car`,
       {
         name: newCar.name,
         company: newCar.company,
@@ -72,7 +72,7 @@ export class MyProfileApiService {
   }
 
   mergeCar(newCar: NewCarModel, id: string): Observable<any> {
-    return this.httpClient.post(`${environment.apiUrl}/user/merge/car/${id}`,
+    return this.httpClient.post(`${environment.apiUrl}/user/car/${id}`,
       {
         name: newCar.name,
         company: newCar.company,
@@ -88,15 +88,15 @@ export class MyProfileApiService {
   }
 
   removeCar(id: string) {
-    return this.httpClient.delete(`${environment.apiUrl}/user/remove/car/${id}`);
+    return this.httpClient.delete(`${environment.apiUrl}/user/car/${id}`);
   }
 
   getMyFriends(): Observable<FriendUserModel[]> {
-    return this.httpClient.get<FriendUserModel[]>(`${environment.apiUrl}/user/get/friends`)
+    return this.httpClient.get<FriendUserModel[]>(`${environment.apiUrl}/user/friends`)
       .pipe(map(friends => friends.map(friend => new FriendUserModel(friend.id, friend.name, friend.lastName, friend.gender))))
   }
 
   addPoints(points: number) {
-    return this.httpClient.post(`${environment.apiUrl}/user/add/points/${points}`, {})
+    return this.httpClient.post(`${environment.apiUrl}/user/points/${points}`, {})
   }
 }

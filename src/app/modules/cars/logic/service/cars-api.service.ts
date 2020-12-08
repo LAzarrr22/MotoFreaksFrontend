@@ -10,39 +10,39 @@ export class CarsApiService {
   }
 
   getCompanies(): Observable<string[]> {
-    return this.httpClient.get<string[]>(`${environment.apiUrl}/cars/all/companies`)
+    return this.httpClient.get<string[]>(`${environment.apiUrl}/cars/company`)
   }
 
   getModels(company: string): Observable<string[]> {
-    return this.httpClient.get<string[]>(`${environment.apiUrl}/cars/all/models/${company}`)
+    return this.httpClient.get<string[]>(`${environment.apiUrl}/cars/model/${company}`)
   }
 
   getGenerations(company: string, model: string): Observable<string[]> {
-    return this.httpClient.get<string[]>(`${environment.apiUrl}/cars/all/generations/${company}/${model}`)
+    return this.httpClient.get<string[]>(`${environment.apiUrl}/cars/generation/${company}/${model}`)
   }
 
   addCompany(company: string): Observable<string[]> {
-    return this.httpClient.post<string[]>(`${environment.apiUrl}/cars/add/company/${company}`,{})
+    return this.httpClient.put<string[]>(`${environment.apiUrl}/cars/company/${company}`,{})
   }
 
   addModel(company: string, model: string): Observable<string[]> {
-    return this.httpClient.post<string[]>(`${environment.apiUrl}/cars/add/model/${company}/${model}`,{})
+    return this.httpClient.put<string[]>(`${environment.apiUrl}/cars/model/${company}/${model}`,{})
   }
 
   addGeneration(company: string, model: string, generation: string): Observable<string[]> {
-    return this.httpClient.post<string[]>(`${environment.apiUrl}/cars/add/generation/${company}/${model}/${generation}`,{})
+    return this.httpClient.put<string[]>(`${environment.apiUrl}/cars/generation/${company}/${model}/${generation}`,{})
   }
 
 deleteCompany(company: string): Observable<string[]> {
-    return this.httpClient.delete<string[]>(`${environment.apiUrl}/cars/delete/company/${company}`)
+    return this.httpClient.delete<string[]>(`${environment.apiUrl}/cars/company/${company}`)
   }
 
   deleteModel(company: string, model: string): Observable<string[]> {
-    return this.httpClient.delete<string[]>(`${environment.apiUrl}/cars/delete/model/${company}/${model}`)
+    return this.httpClient.delete<string[]>(`${environment.apiUrl}/cars/model/${company}/${model}`)
   }
 
   deleteGeneration(company: string, model: string, generation: string): Observable<string[]> {
-    return this.httpClient.delete<string[]>(`${environment.apiUrl}/cars/delete/generation/${company}/${model}/${generation}`)
+    return this.httpClient.delete<string[]>(`${environment.apiUrl}/cars/generation/${company}/${model}/${generation}`)
   }
 
 

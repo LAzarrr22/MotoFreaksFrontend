@@ -14,7 +14,7 @@ export class AuthenticationService {
   }
 
   login(login: LoginModel): Observable<LoginSuccessfulDto> {
-    return this.httpClient.post<LoginSuccessfulDto>(`${environment.apiUrl}/api/auth/login`, {
+    return this.httpClient.post<LoginSuccessfulDto>(`${environment.apiUrl}/auth/login`, {
       username: login.username,
       password: login.password
     })
@@ -22,7 +22,7 @@ export class AuthenticationService {
   }
 
   register(register: RegisterModel): Observable<any> {
-    return this.httpClient.post(`${environment.apiUrl}/api/auth/register`,
+    return this.httpClient.put(`${environment.apiUrl}/auth/register`,
       {
         username: register.username,
         password: register.password,
@@ -33,17 +33,17 @@ export class AuthenticationService {
   }
 
   setModerator(id: string): Observable<any> {
-    return this.httpClient.post(`${environment.apiUrl}/api/auth/set-role/moderator/${id}`, {})
+    return this.httpClient.post(`${environment.apiUrl}/auth/set/moderator/${id}`, {})
   }
 
   setAdmin(id: string): Observable<any> {
-    return this.httpClient.post(`${environment.apiUrl}/api/auth/set-role/admin/${id}`, {})
+    return this.httpClient.post(`${environment.apiUrl}/auth/set/admin/${id}`, {})
   }
 
   getRoles(): Observable<RolesEnum[]> {
-    return this.httpClient.get<RolesEnum[]>(`${environment.apiUrl}/api/auth/roles`)
+    return this.httpClient.get<RolesEnum[]>(`${environment.apiUrl}/auth/roles`)
   }
 checkUserValidation():Observable<boolean>{
-  return this.httpClient.get<boolean>(`${environment.apiUrl}/api/auth/check/validation`)
+  return this.httpClient.get<boolean>(`${environment.apiUrl}/auth/validation`)
 }
 }
