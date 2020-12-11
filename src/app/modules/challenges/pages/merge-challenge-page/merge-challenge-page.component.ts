@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {ChallengesService} from "../../logic/services/challenges.service";
 import {NewChallengeModel} from "../../logic/dto/request/new-challenge.model";
 import {ChallengeDtoModel} from "../../logic/dto/response/challenge-dto.model";
-import {Observable} from "rxjs";
 import {QuestionAnswer} from "../../logic/dto/response/question-answer.model";
 import {AppPath} from "../../../../shared/enums/app-path.enum";
 

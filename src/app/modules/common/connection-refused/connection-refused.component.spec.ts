@@ -1,6 +1,8 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ConnectionRefusedComponent} from './connection-refused.component';
+import {ReactiveFormsModule} from "@angular/forms";
+import {RouterTestingModule} from "@angular/router/testing";
 
 describe('ConnectionRefusedComponent', () => {
   let component: ConnectionRefusedComponent;
@@ -8,7 +10,8 @@ describe('ConnectionRefusedComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ConnectionRefusedComponent]
+      declarations: [ConnectionRefusedComponent],
+      imports:[RouterTestingModule]
     })
       .compileComponents();
   }));

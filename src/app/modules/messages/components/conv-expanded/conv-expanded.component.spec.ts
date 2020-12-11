@@ -1,6 +1,7 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ConvExpandedComponent} from './conv-expanded.component';
+import {RouterTestingModule} from "@angular/router/testing";
 
 describe('ConvExpandedComponent', () => {
   let component: ConvExpandedComponent;
@@ -8,7 +9,8 @@ describe('ConvExpandedComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ConvExpandedComponent]
+      declarations: [ConvExpandedComponent],
+      imports:[RouterTestingModule]
     })
       .compileComponents();
   }));

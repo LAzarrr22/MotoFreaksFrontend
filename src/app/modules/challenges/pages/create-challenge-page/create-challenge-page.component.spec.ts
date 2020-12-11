@@ -4,7 +4,6 @@ import {CreateChallengePageComponent} from './create-challenge-page.component';
 import {RouterTestingModule} from "@angular/router/testing";
 import {RouterModule} from "@angular/router";
 import {ChallengesService} from "../../logic/services/challenges.service";
-import {AuthService} from "../../../authentication/logic/services/auth.service";
 import {Actions} from "@ngrx/effects";
 import {provideMockStore} from "@ngrx/store/testing";
 import {isLoading} from "../../logic/reducers/challenges.reducers";
