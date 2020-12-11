@@ -1,6 +1,7 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {SummaryFinishChallengeComponent} from './summary-finish-challenge.component';
+import {RouterTestingModule} from "@angular/router/testing";
 
 describe('SummaryFinishChallengeComponent', () => {
   let component: SummaryFinishChallengeComponent;
@@ -8,7 +9,8 @@ describe('SummaryFinishChallengeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [SummaryFinishChallengeComponent]
+      declarations: [SummaryFinishChallengeComponent],
+      imports:[RouterTestingModule]
     })
       .compileComponents();
   }));

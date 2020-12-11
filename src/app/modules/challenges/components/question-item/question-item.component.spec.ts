@@ -1,6 +1,7 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {QuestionItemComponent} from './question-item.component';
+import {QuestionAnswer} from "../../logic/dto/response/question-answer.model";
 
 describe('QuestionItemComponent', () => {
   let component: QuestionItemComponent;
@@ -16,6 +17,7 @@ describe('QuestionItemComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(QuestionItemComponent);
     component = fixture.componentInstance;
+    component.question=new QuestionAnswer('question',55,['ans1'],'ans1')
     fixture.detectChanges();
   });
 
