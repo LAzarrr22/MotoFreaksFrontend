@@ -33,11 +33,12 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
         AppCommonModule,
         SharedSectionCarModule,
     ],
-  exports: [
-    CreatePostComponent,
-    CreatePostPageComponent,
-    AllPostPageComponent
-  ],
+    exports: [
+        CreatePostComponent,
+        CreatePostPageComponent,
+        AllPostPageComponent,
+        PostItemComponent
+    ],
   providers: [
     PostsApiService,
     PostsService,

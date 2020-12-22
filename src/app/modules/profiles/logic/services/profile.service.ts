@@ -48,6 +48,10 @@ export class ProfileService {
     return name;
   }
 
+ getNameSubs() {
+    return this.store.select(getMyProfile);
+  }
+
   getMyLastName(): string {
     let lastName;
     this.store.select(getMyProfile).subscribe(me => {

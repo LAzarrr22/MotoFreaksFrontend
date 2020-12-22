@@ -6,6 +6,11 @@ import {Router} from "@angular/router";
 import {AppPath} from "../../../../shared/enums/app-path.enum";
 import {MatDialog} from "@angular/material/dialog";
 import {NotValidateDialogComponent} from "../../components/not-validate-dialog/not-validate-dialog.component";
+import {Observable} from "rxjs";
+import {PostModel} from "../../../posts/logic/dto/model/post.model";
+import {ChallengeDtoModel} from "../../../challenges/logic/dto/response/challenge-dto.model";
+import {PostsService} from "../../../posts/logic/services/posts.service";
+import {ChallengesService} from "../../../challenges/logic/services/challenges.service";
 
 @Component({
   selector: 'app-home-page',
@@ -14,12 +19,17 @@ import {NotValidateDialogComponent} from "../../components/not-validate-dialog/n
 })
 export class HomePageComponent implements OnInit {
 
+  postsListObs: Observable<PostModel[]>
+
+
   constructor(private menuService: MenuService, private authService: AuthService,
-              private router:Router, public dialog: MatDialog) {
+              private router:Router, public dialog: MatDialog,
+              private postsService:PostsService) {
 
   }
 
   ngOnInit(): void {
+    this.postsListObs = this.postsService.getAllPosts();
     this.menuService.activeRoute.next(ActiveRoute.HOME);
     this.authService.isValidatedUser().subscribe(validation=>{
       if(!validation && this.authService.isLoggedUser()){

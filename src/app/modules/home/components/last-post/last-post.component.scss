@@ -1,0 +1,11 @@
+@import "~bootstrap";
+@import "src/app/shared/styles/common-classes";
+
+.last-post {
+  color: $custom-blue;
+  font-size: $font-size-medium;
+  font-style: italic;
+  cursor: pointer;
+  width: fit-content;
+  padding-top: 30px;
+}

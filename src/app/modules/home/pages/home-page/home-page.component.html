@@ -1,4 +1,12 @@
-<p>
-  HOME</p>
+<div class="context">
+  <div class="title-page padding pb-4">Welcome!</div>
+
+<ng-container *ngIf="postsListObs |async">
+  <app-last-post [postsList]="postsListObs | async"></app-last-post>
+</ng-container>
+
+</div>
+
+
 
 <!--<google-map></google-map>-->

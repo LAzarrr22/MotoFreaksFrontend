@@ -28,6 +28,8 @@ export class PostItemComponent implements OnInit {
   @Input()
   post: PostModel;
   @Input()
+  isHome:boolean=false;
+  @Input()
   myId: string;
   @Input()
   isAdmin:boolean=false;

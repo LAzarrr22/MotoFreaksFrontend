@@ -23,7 +23,7 @@
         {{post.createdDate | date: 'medium'}}
       </div>
 
-      <ng-container *ngIf="post.creatorId==myId || isAdmin">
+      <ng-container *ngIf="(post.creatorId==myId || isAdmin) && !isHome">
 
           <div class="col-md-1 align-items-end">
             <ng-container *ngIf="isOpen()">
@@ -84,6 +84,7 @@
       </div>
     </div>
 
+    <ng-container *ngIf="!isHome">
 <mat-divider></mat-divider>
     <div class="row pl-3">
       <div class="col" >
@@ -95,7 +96,7 @@
                        [comments]="post.comments" [postId]="post.id"
                        [myId]="myId" [state]="post.state"></app-comments-list>
 
-
+    </ng-container>
   </div>
 </div>
 
